@@ -63,10 +63,10 @@ Project Organization
 ----
 
 == References
-https://drivendata.github.io/cookiecutter-data-science
-https://www.sphinx-doc.org/en/master/index.html
-https://python-packaging.readthedocs.io/en/latest/index.html
+- https://drivendata.github.io/cookiecutter-data-science
+- https://www.sphinx-doc.org/en/master/index.html
+- https://python-packaging.readthedocs.io/en/latest/index.html
 
-https://docs.readthedocs.io/en/stable/index.html
-https://www.docslikecode.com/articles/github-pages-python-sphinx/
-https://github.com/sphinx-doc/sphinx/issues/3382#issuecomment-395744908
+- https://docs.readthedocs.io/en/stable/index.html
+- https://www.docslikecode.com/articles/github-pages-python-sphinx/
+- https://github.com/sphinx-doc/sphinx/issues/3382#issuecomment-395744908
