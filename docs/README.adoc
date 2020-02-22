@@ -6,8 +6,6 @@
 :toc:
 :toc-placement!:
 
-Powerful data manipulation
-
 toc::[]
 
 == Customization
