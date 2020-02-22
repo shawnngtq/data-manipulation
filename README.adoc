@@ -64,3 +64,6 @@ Project Organization
 == References
 - https://drivendata.github.io/cookiecutter-data-science
 - https://python-packaging.readthedocs.io/en/latest/index.html
+
+- https://www.internalpointers.com/post/modules-and-packages-create-python-project
+- https://dev.to/codemouse92/dead-simple-python-project-structure-and-imports-38c6
