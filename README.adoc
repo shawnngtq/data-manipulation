@@ -4,9 +4,7 @@
 :lang: en
 :layout: docs
 :toc:
-:toclevels: 6
 :toc-placement!:
-:nofooter:
 
 Powerful data manipulation
 
@@ -14,6 +12,7 @@ toc::[]
 
 == Directory structure
 
+[source]
 ----
 Project Organization
     ├── LICENSE
