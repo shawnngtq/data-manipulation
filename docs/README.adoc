@@ -1,0 +1,36 @@
+= Documentation
+
+:encoding: utf-8
+:lang: en
+:layout: docs
+:toc:
+:toc-placement!:
+
+Powerful data manipulation
+
+toc::[]
+
+== Customization
+
+To make Sphinx documentation work in Github:
+
+. create `.nojeykll`
+. create `index.html` to redirect index page to right path
+. update `conf.py` extensions and theme
+
+== Setup
+
+[source,bash]
+----
+# Cleanup
+make clean
+
+# Generate html
+make html
+----
+
+== References
+- https://www.sphinx-doc.org/en/master/index.html
+- https://docs.readthedocs.io/en/stable/index.html
+- https://www.docslikecode.com/articles/github-pages-python-sphinx/
+- https://github.com/sphinx-doc/sphinx/issues/3382#issuecomment-395744908
