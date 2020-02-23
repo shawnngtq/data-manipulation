@@ -409,6 +409,9 @@ def print_dataframe_overview(dataframe, stats=False):
     None
         Print output in console
     """
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("Argument must be a Pandas dataframe ...")
+
     for column in dataframe.columns:
         print("=" * 30)
         print(column)
@@ -422,6 +425,29 @@ def print_dataframe_overview(dataframe, stats=False):
             display(series_count(dataframe[column]).head(20))
         except:
             print(f"Unable to get value_counts of {column} ...\n")
+
+
+def useless_columns(dataframe):
+    """
+    Return useless columns
+
+    Parameters
+    ----------
+    dataframe: pandas.core.frame.DataFrame
+
+    Returns
+    -------
+    tuple
+        (empty_columns, single_columns)
+    """
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("Argument must be a Pandas dataframe ...")
+
+    empty_columns = dataframe.nunique().where(lambda x: x == 0).dropna().index.values.tolist()
+    single_columns = dataframe.nunique().where(lambda x: x == 1).dropna().index.values.tolist()
+    print(f"Empty columns: {empty_columns}")
+    print(f"Single value columns: {single_columns}")
+    return empty_columns, single_columns
 
 
 if __name__ == "__main__":
