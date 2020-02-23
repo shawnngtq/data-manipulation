@@ -1,4 +1,4 @@
-name: datamani
+name: data_manipulation
 channels:
   - conda-forge
   - defaults

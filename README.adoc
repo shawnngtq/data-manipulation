@@ -1,4 +1,4 @@
-= DataMani
+= Data Manipulation
 
 :encoding: utf-8
 :lang: en

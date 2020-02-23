@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# datamani documentation build configuration file, created by
+# data_manipulation documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'datamani'
+project = u'data_manipulation'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -164,7 +164,7 @@ html_static_path = []
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'datamanidoc'
+htmlhelp_basename = 'data_manipulationdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -184,8 +184,8 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
     ('index',
-     'datamani.tex',
-     u'datamani Documentation',
+     'data_manipulation.tex',
+     u'data_manipulation Documentation',
      u"Shawn Ng", 'manual'),
 ]
 
@@ -215,7 +215,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'datamani', u'datamani Documentation',
+    ('index', 'data_manipulation', u'data_manipulation Documentation',
      [u"Shawn Ng"], 1)
 ]
 
@@ -229,8 +229,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'datamani', u'datamani Documentation',
-     u"Shawn Ng", 'datamani',
+    ('index', 'data_manipulation', u'data_manipulation Documentation',
+     u"Shawn Ng", 'data_manipulation',
      'Powerful data manipulation', 'Miscellaneous'),
 ]
 
