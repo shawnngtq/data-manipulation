@@ -1,10 +1,9 @@
-.. data_manipulation documentation master file, created by
-   sphinx-quickstart.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Data Manipulation documentation
+===============================
 
-data_manipulation documentation!
-==============================================
+Data Manipulation is a Python library for making it easier to manipulate data using popular libraries such as Pandas & PySpark.
+
+The examples in this documentation should work for Python 3.x+
 
 Contents:
 
@@ -14,7 +13,16 @@ Contents:
    getting-started
    commands
 
+Packages
+========
+.. toctree::
+   :maxdepth: 2
 
+   data_manipulation
+   data_manipulation.data_types
+   data_manipulation.pandas
+   data_manipulation.psycopg2
+   data_manipulation.pyspark
 
 Indices and tables
 ==================
