@@ -128,6 +128,7 @@ dependencies:
   - wheel=0.34.2=py38_0
   - whichcraft=0.6.1=py_0
   - widgetsnbextension=3.5.1=py38_0
+  - xlsxwriter=1.2.7=py_0
   - xz=5.2.4=h14c3975_4
   - zeromq=4.3.1=he6710b0_3
   - zipp=2.2.0=py_0
