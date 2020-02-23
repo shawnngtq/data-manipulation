@@ -114,11 +114,11 @@ def string_to_dict_list(string):
     >>> string_to_dict_list(input)
     ['1', '2', '3']
 
-    >>> input = "{'a':1, 'b': 2}"
+    >>> input = "{'a': 1, 'b': 2}"
     >>> string_to_dict_list(input)
     {'a': 1, 'b': 2}
 
-    >>> input = "{'a':'1', 'b':'2'}"
+    >>> input = "{'a': '1', 'b': '2'}"
     >>> string_to_dict_list(input)
     {'a': '1', 'b': '2'}
 
