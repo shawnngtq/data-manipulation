@@ -124,7 +124,7 @@ def columns_to_dictionary(dataframe):
     if not isinstance(dataframe, (pd.DataFrame)):
         raise TypeError("Argument must be a Pandas dataframe ...")
     if len(dataframe) == 0:
-        raise ValueError("Argument can't be empty Pandas dataframe ...")
+        raise ValueError("Argument can't be a empty Pandas dataframe ...")
 
     dtype_dict = {}
     for index, value in dataframe.loc[0].iteritems():
@@ -274,10 +274,10 @@ def to_excel_keep_url_string(filepath, dataframe):
         Pandas dataframe => excel
     """
     if not isinstance(filepath, (str)):
-        raise TypeError("Argument 1 must be non-empty string ...")
+        raise TypeError("Argument 1 must be a non-empty string ...")
 
     if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument 2 must be Pandas dataframe ...")
+        raise TypeError("Argument 2 must be a Pandas dataframe ...")
 
     writer = pd.ExcelWriter(filepath, engine="xlsxwriter", options={"strings_to_urls": False})
     dataframe.to_excel(writer, index=False)
@@ -301,7 +301,7 @@ def compare_dataframes(dataframe, dataframe2):
         Print output comparison between 2 Pandas dataframes
     """
     if not all(isinstance(x, (pd.DataFrame)) for x in [dataframe, dataframe2]):
-        raise TypeError("Arguments 1 & 2 must be pandas dataframe ...")
+        raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
 
     print("=" * len("Pandas dataframe length"))
     print("Pandas dataframe length")
@@ -364,7 +364,7 @@ def series_count(series):
     pandas.core.frame.DataFrame
     """
     if not isinstance(series, (pd.Series)):
-        raise TypeError("Argument should be Pandas series ...")
+        raise TypeError("Argument must be a Pandas series ...")
 
     result = series.value_counts().to_frame(name="count")
     total = result.sum()["count"]
