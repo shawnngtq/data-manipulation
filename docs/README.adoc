@@ -33,3 +33,4 @@ make html
 - https://docs.readthedocs.io/en/stable/index.html
 - https://www.docslikecode.com/articles/github-pages-python-sphinx/
 - https://github.com/sphinx-doc/sphinx/issues/3382#issuecomment-395744908
+- https://medium.com/@eikonomega/getting-started-with-sphinx-autodoc-part-1-2cebbbca5365
