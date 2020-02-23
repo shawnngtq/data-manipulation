@@ -47,3 +47,9 @@ def query_to_pandas(query, connection):
     """
     import pandas as pd
     return pd.io.sql.read_sql_query(query, connection)
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()
