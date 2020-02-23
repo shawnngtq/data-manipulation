@@ -29,6 +29,7 @@ make html
 
 == References
 - https://www.sphinx-doc.org/en/master/index.html
+- https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
 - https://docs.readthedocs.io/en/stable/index.html
 - https://www.docslikecode.com/articles/github-pages-python-sphinx/
 - https://github.com/sphinx-doc/sphinx/issues/3382#issuecomment-395744908
