@@ -1,10 +1,22 @@
-data_manipulation.pyspark
-=========================
+data\_manipulation.pyspark package
+==================================
 
-This package mainly uses PySpark library
+Submodules
+----------
 
-Package content
+data\_manipulation.pyspark.pyspark\_ module
+-------------------------------------------
+
+.. automodule:: data_manipulation.pyspark.pyspark_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
 ---------------
+
 .. automodule:: data_manipulation.pyspark
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:
