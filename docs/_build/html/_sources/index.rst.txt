@@ -19,10 +19,6 @@ Packages
    :maxdepth: 2
 
    data_manipulation
-   data_manipulation.data_types
-   data_manipulation.pandas
-   data_manipulation.psycopg2
-   data_manipulation.pyspark
 
 Indices and tables
 ==================

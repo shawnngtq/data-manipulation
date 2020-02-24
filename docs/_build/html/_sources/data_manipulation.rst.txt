@@ -1,18 +1,23 @@
-data_manipulation
-=================
+data\_manipulation package
+==========================
 
 Subpackages
 -----------
-.. toctree::
-   :maxdepth: 2
 
+.. toctree::
+
+   data_manipulation.data
    data_manipulation.data_types
+   data_manipulation.features
+   data_manipulation.models
    data_manipulation.pandas
    data_manipulation.psycopg2
-   data_manipulation.pyspark
+   data_manipulation.visualization
 
-Contents
---------
+Module contents
+---------------
+
 .. automodule:: data_manipulation
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:

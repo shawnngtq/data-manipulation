@@ -1,10 +1,22 @@
-data_manipulation.psycopg2
-==========================
+data\_manipulation.psycopg2 package
+===================================
 
-This package mainly uses psycopg2 library
+Submodules
+----------
 
-Package content
+data\_manipulation.psycopg2.psycopg2\_ module
+---------------------------------------------
+
+.. automodule:: data_manipulation.psycopg2.psycopg2_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
 ---------------
+
 .. automodule:: data_manipulation.psycopg2
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:

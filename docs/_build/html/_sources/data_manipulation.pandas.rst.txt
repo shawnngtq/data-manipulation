@@ -1,10 +1,22 @@
-data_manipulation.pandas
-========================
+data\_manipulation.pandas package
+=================================
 
-This package mainly uses Pandas library
+Submodules
+----------
 
-Package content
+data\_manipulation.pandas.pandas\_ module
+-----------------------------------------
+
+.. automodule:: data_manipulation.pandas.pandas_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
 ---------------
+
 .. automodule:: data_manipulation.pandas
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:

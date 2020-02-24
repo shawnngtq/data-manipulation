@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.data_types &#8212; data_manipulation 0.1 documentation</title>
+    <title>data_manipulation.data_types package &#8212; data_manipulation 0.1 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,8 +14,8 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="data_manipulation.pandas" href="data_manipulation.pandas.html" />
-    <link rel="prev" title="data_manipulation" href="data_manipulation.html" /> 
+    <link rel="next" title="data_manipulation.features package" href="data_manipulation.features.html" />
+    <link rel="prev" title="data_manipulation.data package" href="data_manipulation.data.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,13 +27,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.pandas.html" title="data_manipulation.pandas"
+          <a href="data_manipulation.features.html" title="data_manipulation.features package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.html" title="data_manipulation"
+          <a href="data_manipulation.data.html" title="data_manipulation.data package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -42,11 +42,160 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="data-manipulation-data-types">
-<h1>data_manipulation.data_types<a class="headerlink" href="#data-manipulation-data-types" title="Permalink to this headline">¶</a></h1>
-<p>This package uses vanilla Python</p>
+  <div class="section" id="data-manipulation-data-types-package">
+<h1>data_manipulation.data_types package<a class="headerlink" href="#data-manipulation-data-types-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-data_manipulation.data_types.string_">
+<span id="data-manipulation-data-types-string-module"></span><h2>data_manipulation.data_types.string_ module<a class="headerlink" href="#module-data_manipulation.data_types.string_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="data_manipulation.data_types.string_.clean_string_representation">
+<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">clean_string_representation</code><span class="sig-paren">(</span><em class="sig-param">string</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.data_types.string_.clean_string_representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert string representation of string to string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">&#39;&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&#39;test&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;&quot;test&quot;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="data_manipulation.data_types.string_.string_boolean_to_int">
+<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">string_boolean_to_int</code><span class="sig-paren">(</span><em class="sig-param">string</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.data_types.string_.string_boolean_to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert string boolean to int
+<a class="reference external" href="https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool">https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Do not use eval() as it’s unsafe</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>0 or 1</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="data_manipulation.data_types.string_.string_to_dict_list">
+<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">string_to_dict_list</code><span class="sig-paren">(</span><em class="sig-param">string</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.data_types.string_.string_to_dict_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert string representation of dictionary/list to dictionary/list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">SyntaxError</span>: <span class="n">unexpected EOF while parsing</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[1, 2, 3]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">{&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="go">{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict / list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-data_manipulation.data_types">
-<span id="package-content"></span><h2>Package content<a class="headerlink" href="#module-data_manipulation.data_types" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_manipulation.data_types" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -58,18 +207,20 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">data_manipulation.data_types</a><ul>
-<li><a class="reference internal" href="#module-data_manipulation.data_types">Package content</a></li>
+<li><a class="reference internal" href="#">data_manipulation.data_types package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.data_types.string_">data_manipulation.data_types.string_ module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.data_types">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="data_manipulation.html"
-                        title="previous chapter">data_manipulation</a></p>
+  <p class="topless"><a href="data_manipulation.data.html"
+                        title="previous chapter">data_manipulation.data package</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="data_manipulation.pandas.html"
-                        title="next chapter">data_manipulation.pandas</a></p>
+  <p class="topless"><a href="data_manipulation.features.html"
+                        title="next chapter">data_manipulation.features package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -101,13 +252,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.pandas.html" title="data_manipulation.pandas"
+          <a href="data_manipulation.features.html" title="data_manipulation.features package"
              >next</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.html" title="data_manipulation"
+          <a href="data_manipulation.data.html" title="data_manipulation.data package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

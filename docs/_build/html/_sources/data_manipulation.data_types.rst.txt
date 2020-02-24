@@ -1,10 +1,22 @@
-data_manipulation.data_types
-============================
+data\_manipulation.data\_types package
+======================================
 
-This package uses vanilla Python
+Submodules
+----------
 
-Package content
+data\_manipulation.data\_types.string\_ module
+----------------------------------------------
+
+.. automodule:: data_manipulation.data_types.string_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
 ---------------
+
 .. automodule:: data_manipulation.data_types
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
+   :show-inheritance:
