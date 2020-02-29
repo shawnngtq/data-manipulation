@@ -1,10 +1,38 @@
 from setuptools import find_packages, setup
 
+import versioneer
+
+LONG_DESCRIPTION = """
+Data Manipulation is a Python library for making it easier to manipulate data using popular libraries such as Pandas & PySpark.
+"""
+
+CLASSIFIERS = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Cython",
+    "Topic :: Scientific/Engineering",
+]
+
 setup(
-    name='data_manipulation',
-    packages=find_packages(),
-    version='0.1.0',
-    description='Powerful data manipulation',
-    author='Shawn Ng',
-    license='BSD-3',
+    author="Shawn Ng",
+    author_email="shawn.coding.acc@gmail.com",
+    classifiers=CLASSIFIERS,
+    cmdclass=versioneer.get_cmdclass(),
+    description="Powerful data manipulation functions",
+    license="BSD-3",
+    long_description=LONG_DESCRIPTION,
+    name="data_manipulation",
+    packages=find_packages(include=["data_manipulation"]),
+    platforms="any",
+    test_suite='nose.collector',
+    tests_require=['nose'],
+    url="https://github.com/shawnngtq/data-manipulation",
+    version=versioneer.get_version(),
 )
