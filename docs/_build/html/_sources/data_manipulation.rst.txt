@@ -6,10 +6,8 @@ Subpackages
 
 .. toctree::
 
-   data_manipulation.data
    data_manipulation.data_types
-   data_manipulation.features
-   data_manipulation.models
+   data_manipulation.geopandas
    data_manipulation.pandas
    data_manipulation.psycopg2
    data_manipulation.visualization

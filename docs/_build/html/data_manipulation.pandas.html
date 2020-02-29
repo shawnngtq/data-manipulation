@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="data_manipulation.psycopg2 package" href="data_manipulation.psycopg2.html" />
-    <link rel="prev" title="data_manipulation.models package" href="data_manipulation.models.html" /> 
+    <link rel="prev" title="data_manipulation.geopandas package" href="data_manipulation.geopandas.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,7 +30,7 @@
           <a href="data_manipulation.psycopg2.html" title="data_manipulation.psycopg2 package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.models.html" title="data_manipulation.models package"
+          <a href="data_manipulation.geopandas.html" title="data_manipulation.geopandas package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li> 
@@ -55,7 +55,7 @@
 <dd><p>Returns Pandas dataframe where each columns has their type column right next to it</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – </p>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – Dataframe to add type columns</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -69,7 +69,7 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>For every column, add another one with stating the data type</p>
+<dd class="field-odd"><p>For each dataframe’s column, add a column with it’s dtype next to it</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>pandas.core.frame.DataFrame</p>
@@ -78,16 +78,78 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="data_manipulation.pandas.pandas_.columns_to_dictionary">
-<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">columns_to_dictionary</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.columns_to_dictionary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a dictionary {dtype: [column1, column2 …]} from Pandas dataframe</p>
+<dt id="data_manipulation.pandas.pandas_.chunking_dataframe">
+<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">chunking_dataframe</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em>, <em class="sig-param">chunk_size</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.chunking_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split Pandas dataframe into dataframes with specific chunk_size</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – </p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – The chunk size of each smaller dataframes</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">columns_to_dictionary</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chunking_dataframe</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[Empty DataFrame</span>
+<span class="go">Columns: []</span>
+<span class="go">Index: []]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chunking_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">[   test</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+<span class="go">3     4</span>
+<span class="go">4     5,    test</span>
+<span class="go">5     6</span>
+<span class="go">6     7</span>
+<span class="go">7     8</span>
+<span class="go">8     9</span>
+<span class="go">9    10, Empty DataFrame</span>
+<span class="go">Columns: [test]</span>
+<span class="go">Index: []]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chunking_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">[   test</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+<span class="go">3     4,    test</span>
+<span class="go">4     5</span>
+<span class="go">5     6</span>
+<span class="go">6     7</span>
+<span class="go">7     8,    test</span>
+<span class="go">8     9</span>
+<span class="go">9    10]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[dataframe, dataframe2, …]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="data_manipulation.pandas.pandas_.columns_dictionary">
+<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">columns_dictionary</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.columns_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dictionary {dtype: [column1, column2 …]} from Pandas dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – Base dataframe</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">columns_dictionary</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">ValueError</span>: <span class="n">Argument can&#39;t be empty Pandas dataframe ...</span>
@@ -96,13 +158,13 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{},</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int_&quot;</span><span class="p">,</span> <span class="s2">&quot;str_&quot;</span><span class="p">,</span> <span class="s2">&quot;list_&quot;</span><span class="p">,</span> <span class="s2">&quot;set_&quot;</span><span class="p">,</span> <span class="s2">&quot;none_&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">columns_to_dictionary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">columns_dictionary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="go">{&lt;class &#39;numpy.int64&#39;&gt;: [&#39;int_&#39;], &lt;class &#39;str&#39;&gt;: [&#39;str_&#39;, &#39;_&#39;], &lt;class &#39;list&#39;&gt;: [&#39;list_&#39;], &lt;class &#39;dict&#39;&gt;: [&#39;set_&#39;], &lt;class &#39;NoneType&#39;&gt;: [&#39;none_&#39;]}</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>{dtype: [column1, column2, …]}</p>
+<dd class="field-odd"><p>{str: [column1, column2, …], int: [column5, …], …}</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>dict</p>
@@ -116,7 +178,7 @@
 <dd><p>Get dataframe with every combination of 2 list items</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>list_</strong> (<em>list</em>) – </p>
+<dd class="field-odd"><p><strong>list_</strong> (<em>list</em>) – A Python list</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -140,7 +202,7 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>Each row represent 1 of all combinations</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>pandas.core.frame.DataFrame</p>
@@ -176,17 +238,37 @@
 
 <dl class="function">
 <dt id="data_manipulation.pandas.pandas_.head_tail">
-<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">head_tail</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.head_tail" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">head_tail</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em>, <em class="sig-param">n=5</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.head_tail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the Pandas dataframe first n head and last n tail</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – One Pandas dataframe</p>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – Base dataframe</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">head_tail</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">   test</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+<span class="go">3     4</span>
+<span class="go">4     5</span>
+<span class="go">5     6</span>
+<span class="go">6     7</span>
+<span class="go">7     8</span>
+<span class="go">8     9</span>
+<span class="go">9    10</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dataframe containing n head and tail of base dataframe</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pandas.core.frame.DataFrame</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.core.frame.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -223,7 +305,7 @@
 <dd><p>Print the value_counts() of each column in dataframe</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – </p>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – Base dataframe</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -267,7 +349,7 @@
 <dd><p>Enhanced Pandas series.value_counts()</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>series</strong> (<em>pd.Series</em>) – </p>
+<dd class="field-odd"><p><strong>series</strong> (<em>pd.Series</em>) – The series to get value_counts()</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -283,7 +365,7 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>Enhanced value_counts() in dataframe</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>pandas.core.frame.DataFrame</p>
@@ -292,70 +374,57 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="data_manipulation.pandas.pandas_.split_pandas_dataframe">
-<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">split_pandas_dataframe</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em>, <em class="sig-param">chunk_size</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.split_pandas_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Split Pandas dataframe into dataframes with specific chunk_size</p>
+<dt id="data_manipulation.pandas.pandas_.split_left_merged_dataframe">
+<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">split_left_merged_dataframe</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em>, <em class="sig-param">dataframe2</em>, <em class="sig-param">columns</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.split_left_merged_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split left merged dataframe into dataframes (“both”, “left_only”)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – </p></li>
-<li><p><strong>chunk_size</strong> (<em>int</em>) – The chunk size of each smaller dataframes</p></li>
+<li><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – Based dataframe</p></li>
+<li><p><strong>dataframe2</strong> (<em>pandas.core.frame.DataFrame</em>) – Dataframe to merged with</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – Columns to join on</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_pandas_dataframe</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">[Empty DataFrame</span>
-<span class="go">Columns: []</span>
-<span class="go">Index: []]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">split_pandas_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="go">[   test</span>
-<span class="go">0     1</span>
-<span class="go">1     2</span>
-<span class="go">2     3</span>
-<span class="go">3     4</span>
-<span class="go">4     5,    test</span>
-<span class="go">5     6</span>
-<span class="go">6     7</span>
-<span class="go">7     8</span>
-<span class="go">8     9</span>
-<span class="go">9    10, Empty DataFrame</span>
-<span class="go">Columns: [test]</span>
-<span class="go">Index: []]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_pandas_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="go">[   test</span>
-<span class="go">0     1</span>
-<span class="go">1     2</span>
-<span class="go">2     3</span>
-<span class="go">3     4,    test</span>
-<span class="go">4     5</span>
-<span class="go">5     6</span>
-<span class="go">6     7</span>
-<span class="go">7     8,    test</span>
-<span class="go">8     9</span>
-<span class="go">9    10]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_both</span><span class="p">,</span> <span class="n">df_left</span> <span class="o">=</span> <span class="n">split_left_merged_dataframe</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">])</span>
+<span class="go">            count  percent</span>
+<span class="go">both            6    100.0</span>
+<span class="go">right_only      0      0.0</span>
+<span class="go">left_only       0      0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_both</span>
+<span class="go">   key  value  value_y _merge</span>
+<span class="go">0  foo      1        5   both</span>
+<span class="go">1  foo      1        8   both</span>
+<span class="go">2  bar      2        6   both</span>
+<span class="go">3  baz      3        7   both</span>
+<span class="go">4  foo      5        5   both</span>
+<span class="go">5  foo      5        8   both</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_left</span>
+<span class="go">Empty DataFrame</span>
+<span class="go">Columns: [key, value, value_y, _merge]</span>
+<span class="go">Index: []</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>[dataframe1, dataframe2, …]</p>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>Dataframe with merged keys on both input dataframes</p></li>
+<li><p>Dataframe whose merge keys only appear in left / base dataframe</p></li>
+</ul>
+</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>list</p>
+<dd class="field-even"><p>2 dataframes</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
-<dt id="data_manipulation.pandas.pandas_.to_excel_keep_url_string">
-<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">to_excel_keep_url_string</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.to_excel_keep_url_string" title="Permalink to this definition">¶</a></dt>
+<dt id="data_manipulation.pandas.pandas_.to_excel_keep_url">
+<code class="sig-prename descclassname">data_manipulation.pandas.pandas_.</code><code class="sig-name descname">to_excel_keep_url</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">dataframe</em><span class="sig-paren">)</span><a class="headerlink" href="#data_manipulation.pandas.pandas_.to_excel_keep_url" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Save Pandas dataframe as excel, without converting string to urls.</dt><dd><ul class="simple">
 <li><p>Excel auto converts string to urls</p></li>
@@ -376,12 +445,12 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">to_excel_keep_url_string</span><span class="p">(</span><span class="s2">&quot;./tmp.xlsx&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_excel_keep_url</span><span class="p">(</span><span class="s2">&quot;./tmp.xlsx&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Pandas dataframe =&gt; excel</p>
+<dd class="field-odd"><p>Pandas dataframe =&gt; excel with url as url instead of string</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>None</p>
@@ -395,7 +464,7 @@
 <dd><p>Return useless columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – </p>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.core.frame.DataFrame</em>) – Base dataframe</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>(empty_columns, single_columns)</p>
@@ -429,8 +498,8 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="data_manipulation.models.html"
-                        title="previous chapter">data_manipulation.models package</a></p>
+  <p class="topless"><a href="data_manipulation.geopandas.html"
+                        title="previous chapter">data_manipulation.geopandas package</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="data_manipulation.psycopg2.html"
                         title="next chapter">data_manipulation.psycopg2 package</a></p>
@@ -468,7 +537,7 @@
           <a href="data_manipulation.psycopg2.html" title="data_manipulation.psycopg2 package"
              >next</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.models.html" title="data_manipulation.models package"
+          <a href="data_manipulation.geopandas.html" title="data_manipulation.geopandas package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li> 
