@@ -22,6 +22,7 @@ def add_type_columns(dataframe):
     Parameters
     ----------
     dataframe: pandas.core.frame.DataFrame
+        Dataframe to add type columns
 
     Examples
     --------
@@ -35,7 +36,7 @@ def add_type_columns(dataframe):
     Returns
     -------
     pandas.core.frame.DataFrame
-        For every column, add another one with stating the data type
+        For each dataframe's column, add a column with it's dtype next to it
     """
     if not isinstance(dataframe, (pd.DataFrame)):
         raise TypeError("Argument must be a Pandas dataframe ...")
@@ -59,6 +60,7 @@ def compare_all_list_items(list_):
     Parameters
     ----------
     list_: list
+        A Python list
 
     Examples
     --------
@@ -81,6 +83,7 @@ def compare_all_list_items(list_):
     Returns
     -------
     pandas.core.frame.DataFrame
+        Each row represent 1 of all combinations
     """
     if not isinstance(list_, (list)):
         raise TypeError("Argument must be a list ...")
@@ -95,17 +98,18 @@ def compare_all_list_items(list_):
     return df
 
 
-def columns_to_dictionary(dataframe):
+def columns_dictionary(dataframe):
     """
     Create a dictionary {dtype: [column1, column2 ...]} from Pandas dataframe
 
     Parameters
     ----------
     dataframe: pandas.core.frame.DataFrame
+        Base dataframe
 
     Examples
     --------
-    >>> columns_to_dictionary(pd.DataFrame())
+    >>> columns_dictionary(pd.DataFrame())
     Traceback (most recent call last):
       ...
     ValueError: Argument can't be empty Pandas dataframe ...
@@ -113,13 +117,13 @@ def columns_to_dictionary(dataframe):
     >>> values = [[0, '0', [], {}, None, ""]]
     >>> cols = ["int_", "str_", "list_", "set_", "none_", "_"]
     >>> df = pd.DataFrame(values, columns=cols)
-    >>> columns_to_dictionary(df)
+    >>> columns_dictionary(df)
     {<class 'numpy.int64'>: ['int_'], <class 'str'>: ['str_', '_'], <class 'list'>: ['list_'], <class 'dict'>: ['set_'], <class 'NoneType'>: ['none_']}
 
     Returns
     -------
     dict
-        {dtype: [column1, column2, ...]}
+        {str: [column1, column2, ...], int: [column5, ...], ...}
     """
     if not isinstance(dataframe, (pd.DataFrame)):
         raise TypeError("Argument must be a Pandas dataframe ...")
@@ -137,23 +141,42 @@ def columns_to_dictionary(dataframe):
     return dtype_dict
 
 
-def head_tail(dataframe):
+def head_tail(dataframe, n=5):
     """
     Print the Pandas dataframe first n head and last n tail
 
     Parameters
     ----------
     dataframe: pandas.core.frame.DataFrame
-        One Pandas dataframe
+        Base dataframe
+
+    Examples
+    --------
+    >>> values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    >>> cols = ["test"]
+    >>> df = pd.DataFrame(values, columns=cols)
+    >>> head_tail(df)
+       test
+    0     1
+    1     2
+    2     3
+    3     4
+    4     5
+    5     6
+    6     7
+    7     8
+    8     9
+    9    10
 
     Returns
     -------
     pandas.core.frame.DataFrame
+        A dataframe containing n head and tail of base dataframe
     """
     if not isinstance(dataframe, (pd.DataFrame)):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
-    result = dataframe.head().append(dataframe.tail())
+    result = dataframe.head(n).append(dataframe.tail(n))
     return result
 
 
@@ -184,7 +207,7 @@ def index_marks(n_rows, chunk_size):
     return result
 
 
-def split_pandas_dataframe(dataframe, chunk_size):
+def chunking_dataframe(dataframe, chunk_size):
     """
     Split Pandas dataframe into dataframes with specific chunk_size
 
@@ -197,7 +220,7 @@ def split_pandas_dataframe(dataframe, chunk_size):
 
     Examples
     --------
-    >>> split_pandas_dataframe(pd.DataFrame(), 2)
+    >>> chunking_dataframe(pd.DataFrame(), 2)
     [Empty DataFrame
     Columns: []
     Index: []]
@@ -205,7 +228,7 @@ def split_pandas_dataframe(dataframe, chunk_size):
     >>> values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     >>> cols = ["test"]
     >>> df = pd.DataFrame(values, columns=cols)
-    >>> split_pandas_dataframe(df, 5)
+    >>> chunking_dataframe(df, 5)
     [   test
     0     1
     1     2
@@ -220,7 +243,7 @@ def split_pandas_dataframe(dataframe, chunk_size):
     Columns: [test]
     Index: []]
 
-    >>> split_pandas_dataframe(df, 4)
+    >>> chunking_dataframe(df, 4)
     [   test
     0     1
     1     2
@@ -236,18 +259,20 @@ def split_pandas_dataframe(dataframe, chunk_size):
     Returns
     -------
     list
-        [dataframe1, dataframe2, ...]
+        [dataframe, dataframe2, ...]
     """
     result = None
     if not isinstance(dataframe, (pd.DataFrame)):
         raise TypeError("Argument must be a Pandas dataframe ...")
+    if not isinstance(chunk_size, (int)):
+        raise TypeError("Argument must be a int ...")
 
     indices = index_marks(dataframe.shape[0], chunk_size)
     result = np.split(dataframe, indices)
     return result
 
 
-def to_excel_keep_url_string(filepath, dataframe):
+def to_excel_keep_url(filepath, dataframe):
     """
     Save Pandas dataframe as excel, without converting string to urls.
         - Excel auto converts string to urls
@@ -266,12 +291,12 @@ def to_excel_keep_url_string(filepath, dataframe):
     >>> values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     >>> cols = ["test"]
     >>> df = pd.DataFrame(values, columns=cols)
-    >>> to_excel_keep_url_string("./tmp.xlsx", df)
+    >>> to_excel_keep_url("./tmp.xlsx", df)
 
     Returns
     -------
     None
-        Pandas dataframe => excel
+        Pandas dataframe => excel with url as url instead of string
     """
     if not isinstance(filepath, (str)):
         raise TypeError("Argument 1 must be a non-empty string ...")
@@ -347,6 +372,7 @@ def series_count(series):
     Parameters
     ----------
     series: pd.Series
+        The series to get value_counts()
 
     Examples
     --------
@@ -362,6 +388,7 @@ def series_count(series):
     Returns
     -------
     pandas.core.frame.DataFrame
+        Enhanced value_counts() in dataframe
     """
     if not isinstance(series, (pd.Series)):
         raise TypeError("Argument must be a Pandas series ...")
@@ -379,6 +406,7 @@ def print_dataframe_overview(dataframe, stats=False):
     Parameters
     ----------
     dataframe: pandas.core.frame.DataFrame
+        Base dataframe
 
     Examples
     --------
@@ -434,6 +462,7 @@ def useless_columns(dataframe):
     Parameters
     ----------
     dataframe: pandas.core.frame.DataFrame
+        Base dataframe
 
     Returns
     -------
@@ -448,6 +477,59 @@ def useless_columns(dataframe):
     print(f"Empty columns: {empty_columns}")
     print(f"Single value columns: {single_columns}")
     return empty_columns, single_columns
+
+
+def split_left_merged_dataframe(dataframe, dataframe2, columns):
+    """
+    Split left merged dataframe into dataframes ("both", "left_only")
+
+    Parameters
+    ----------
+    dataframe: pandas.core.frame.DataFrame
+        Based dataframe
+    dataframe2: pandas.core.frame.DataFrame
+        Dataframe to merged with
+    columns: list
+        Columns to join on
+
+    Examples
+    --------
+    >>> df1 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'], 'value': [1, 2, 3, 5]})
+    >>> df2 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'], 'value': [5, 6, 7, 8]})
+    >>> df_both, df_left = split_left_merged_dataframe(df1, df2, ["key"])
+                count  percent
+    both            6    100.0
+    right_only      0      0.0
+    left_only       0      0.0
+    >>> df_both
+       key  value  value_y _merge
+    0  foo      1        5   both
+    1  foo      1        8   both
+    2  bar      2        6   both
+    3  baz      3        7   both
+    4  foo      5        5   both
+    5  foo      5        8   both
+    >>> df_left
+    Empty DataFrame
+    Columns: [key, value, value_y, _merge]
+    Index: []
+
+    Returns
+    -------
+    2 dataframes
+        - Dataframe with merged keys on both input dataframes
+        - Dataframe whose merge keys only appear in left / base dataframe
+    """
+    if not all(isinstance(x, (pd.DataFrame)) for x in [dataframe, dataframe2]):
+        raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
+    if not isinstance(columns, (list)):
+        raise TypeError("Argument must be a list ...")
+
+    df_merged = dataframe.merge(dataframe2, on=columns, how="left", indicator=True, suffixes=("", "_y"))
+    df_both = df_merged[df_merged["_merge"] == "both"].copy()
+    df_left = df_merged[df_merged["_merge"] == "left_only"].copy()
+    display(series_count(df_merged["_merge"]))
+    return df_both, df_left
 
 
 if __name__ == "__main__":
