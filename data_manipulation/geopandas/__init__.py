@@ -1,1 +1,1 @@
-from data_manipulation.geopandas.geopandas_ import *
+from .geopandas_ import *

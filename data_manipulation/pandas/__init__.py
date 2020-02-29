@@ -1,1 +1,1 @@
-from data_manipulation.pandas.pandas_ import *
+from .pandas_ import *

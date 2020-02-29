@@ -1,1 +1,1 @@
-from data_manipulation.psycopg2.psycopg2_ import *
+from .psycopg2_ import *
