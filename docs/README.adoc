@@ -28,6 +28,18 @@ sphinx-apidoc -o . ../data_manipulation/
 
 # Generate html
 make html
+
+# Setup versioneer
+versioneer install
+
+# Build distribution
+python3 setup.py sdist bdist_wheel
+
+# Upload to Test PyPi
+python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+# Upload to PyPi
+twine upload dist/*
 ----
 
 == References
