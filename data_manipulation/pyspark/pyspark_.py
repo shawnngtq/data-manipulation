@@ -27,5 +27,5 @@ def to_pandas(dataframe, n=10):
     if not isinstance(dataframe, (pyspark.sql.dataframe.DataFrame)):
         raise TypeError("Argument must be a Pyspark dataframe ...")
 
-    dataframe_pandas = dataframe.limit(n).toPandas()
-    return dataframe_pandas
+    df_pandas = dataframe.limit(n).toPandas()
+    return df_pandas
