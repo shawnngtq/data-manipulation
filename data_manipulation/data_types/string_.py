@@ -1,10 +1,11 @@
-def clean_string_representation(string):
+def clean_string_representation(string_str_rep):
     """
     Convert string representation of string to string
 
     Parameters
     ----------
-    string: str
+    string_str_rep: str
+        "'str'"
 
     Examples
     --------
@@ -30,21 +31,23 @@ def clean_string_representation(string):
     Returns
     -------
     str
+        String instead of string representation
     """
-    result = None
-    if isinstance(string, (str)):
-        result = string.strip("'\"")
-    return result
+    string = None
+    if isinstance(string_str_rep, (str)):
+        string = string_str_rep.strip("'\"")
+    return string
 
 
-def string_boolean_to_int(string):
+def string_boolean_to_int(boolean_str_rep):
     """
     Convert string boolean to int
     https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool
 
     Parameters
     ----------
-    string: str
+    boolean_str_rep: str
+        "True"
 
     Notes
     -----
@@ -67,22 +70,23 @@ def string_boolean_to_int(string):
     Returns
     -------
     int
-        0 or 1
+        0 or 1 instead of "0" or "1"
     """
-    result = None
-    if isinstance(string, (str)):
+    boolean = None
+    if isinstance(boolean_str_rep, (str)):
         from distutils.util import strtobool
-        result = strtobool(clean_string_representation(string))
-    return result
+        boolean = strtobool(clean_string_representation(boolean_str_rep))
+    return boolean
 
 
-def string_to_dict_list(string):
+def string_to_dict_list(dictionary_str_rep):
     """
     Convert string representation of dictionary/list to dictionary/list
 
     Parameters
     ----------
-    string: str
+    dictionary_str_rep: str
+        '[]'
 
     Examples
     --------
@@ -125,12 +129,53 @@ def string_to_dict_list(string):
     Returns
     -------
     dict / list
+        Dictionary / List instead of string representation
     """
-    result = None
-    if isinstance(string, (str)):
+    dict_list = None
+    if isinstance(dictionary_str_rep, (str)):
         from ast import literal_eval
-        result = literal_eval(string)
-    return result
+        dict_list = literal_eval(dictionary_str_rep)
+    return dict_list
+
+
+def parameterize(string_to_clean, separator="-"):
+    """
+    Convert string to url
+    https://coderwall.com/p/nmu4bg/python-parameterize-equivalent-to-rails-parameterize
+
+    Parameters
+    ----------
+    string_to_clean: str
+        String to clean
+    separator: str
+        Separator
+
+    Examples
+    --------
+    >>> parameterize("")
+    ''
+    >>> parameterize(" ")
+    ''
+    >>> parameterize(" Shawn Ng @ 123")
+    'shawn-ng-123'
+
+    Returns
+    -------
+    str
+        Cleaned string
+    """
+    import re
+    import unicodedata
+
+    string_to_clean = string_to_clean.strip().lower()
+    parameterized_string = unicodedata.normalize("NFKD", string_to_clean).encode("ASCII", "ignore").decode()
+    parameterized_string = re.sub("[^a-zA-Z0-9\-_]+", separator, parameterized_string)
+
+    if separator and separator != "":
+        parameterized_string = re.sub("/#{re_separator}{2,}", separator, parameterized_string)
+        parameterized_string = re.sub("^#{re_separator}|#{re_separator}$", separator, parameterized_string, re.I)
+
+    return parameterized_string
 
 
 if __name__ == "__main__":
