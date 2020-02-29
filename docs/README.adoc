@@ -23,11 +23,11 @@ To make Sphinx documentation work in Github:
 # Cleanup
 make clean
 
-# Generate html
-make html
-
 # Generate rst
 sphinx-apidoc -o . ../data_manipulation/
+
+# Generate html
+make html
 ----
 
 == References
