@@ -29,7 +29,7 @@ setup(
     license="BSD-3",
     long_description=LONG_DESCRIPTION,
     name="data_manipulation",
-    packages=find_packages(include=["data_manipulation"]),
+    packages=find_packages(include=["data_manipulation", "data_manipulation.*"]),
     platforms="any",
     test_suite='nose.collector',
     tests_require=['nose'],
