@@ -33,7 +33,7 @@ make html
 versioneer install
 
 # Build distribution
-python3 setup.py sdist bdist_wheel
+python setup.py sdist bdist_wheel
 
 # Upload to Test PyPi
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
