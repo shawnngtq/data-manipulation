@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>data_manipulation.data_types.string_ &#8212; data_manipulation 0.7 documentation</title>
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for data_manipulation.data_types.string_</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="clean_string_representation"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.clean_string_representation">[docs]</a><span></span><span class="k">def</span> <span class="nf">clean_string_representation</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert string representation of string to string</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    string_str_rep: str</span>
+<span class="sd">        &quot;&#39;str&#39;&quot;</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; input = 1</span>
+<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &#39;&#39;</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &#39;test&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &#39;test&#39;</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;&#39;test&#39;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &#39;test&#39;</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &#39;&quot;test&quot;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &#39;test&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        String instead of string representation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string_str_rep</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">string</span></div>
+
+
+<div class="viewcode-block" id="string_boolean_to_int"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.string_boolean_to_int">[docs]</a><span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert string boolean to int</span>
+<span class="sd">    https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    boolean_str_rep: str</span>
+<span class="sd">        &quot;True&quot;</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Do not use eval() as it&#39;s unsafe</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; input = &quot;true&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; input = &quot;True&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; input = &quot;1&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; input = 1</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        0 or 1 instead of &quot;0&quot; or &quot;1&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">boolean</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="kn">from</span> <span class="nn">distutils.util</span> <span class="kn">import</span> <span class="n">strtobool</span>
+        <span class="n">boolean</span> <span class="o">=</span> <span class="n">strtobool</span><span class="p">(</span><span class="n">clean_string_representation</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">boolean</span></div>
+
+
+<div class="viewcode-block" id="string_to_dict_list"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.string_to_dict_list">[docs]</a><span class="k">def</span> <span class="nf">string_to_dict_list</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert string representation of dictionary/list to dictionary/list</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dictionary_str_rep: str</span>
+<span class="sd">        &#39;[]&#39;</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; input = &quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">      ...</span>
+<span class="sd">    SyntaxError: unexpected EOF while parsing</span>
+
+<span class="sd">    &gt;&gt;&gt; input = 0</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+
+<span class="sd">    &gt;&gt;&gt; input = []</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+
+<span class="sd">    &gt;&gt;&gt; input = {}</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;[1, 2, 3]&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    [1, 2, 3]</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;[]&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    []</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+
+<span class="sd">    &gt;&gt;&gt; input = &quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span>
+<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict / list</span>
+<span class="sd">        Dictionary / List instead of string representation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_list</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+        <span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
+        <span class="n">dict_list</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dict_list</span></div>
+
+
+<div class="viewcode-block" id="parameterize"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.parameterize">[docs]</a><span class="k">def</span> <span class="nf">parameterize</span><span class="p">(</span><span class="n">string_to_clean</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert string to url</span>
+<span class="sd">    https://coderwall.com/p/nmu4bg/python-parameterize-equivalent-to-rails-parameterize</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    string_to_clean: str</span>
+<span class="sd">        String to clean</span>
+<span class="sd">    separator: str</span>
+<span class="sd">        Separator</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; parameterize(&quot;&quot;)</span>
+<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; parameterize(&quot; &quot;)</span>
+<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; parameterize(&quot; Shawn Ng @ 123&quot;)</span>
+<span class="sd">    &#39;shawn-ng-123&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Cleaned string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="kn">import</span> <span class="nn">unicodedata</span>
+
+    <span class="n">string_to_clean</span> <span class="o">=</span> <span class="n">string_to_clean</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFKD&quot;</span><span class="p">,</span> <span class="n">string_to_clean</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ASCII&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9\-_]+&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">separator</span> <span class="ow">and</span> <span class="n">separator</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/#</span><span class="si">{re_separator}</span><span class="s2">{2,}&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">)</span>
+        <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^#</span><span class="si">{re_separator}</span><span class="s2">|#</span><span class="si">{re_separator}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">parameterized_string</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+    </div>
+  </body>
+</html>
