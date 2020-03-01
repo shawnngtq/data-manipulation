@@ -46,6 +46,17 @@ twine upload dist/*
 ----
 
 == References
+=== Main
+- https://drivendata.github.io/cookiecutter-data-science
+- https://python-packaging.readthedocs.io/en/latest/index.html
+
+- https://www.internalpointers.com/post/modules-and-packages-create-python-project
+- https://dev.to/codemouse92/dead-simple-python-project-structure-and-imports-38c6
+- https://towardsdatascience.com/whats-init-for-me-d70a312da583
+
+- https://docs.python.org/3/library/doctest.html
+
+=== Sphinx
 - https://www.sphinx-doc.org/en/master/index.html
 - https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
 - https://docs.readthedocs.io/en/stable/index.html
