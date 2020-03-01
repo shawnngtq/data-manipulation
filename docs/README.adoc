@@ -32,11 +32,11 @@ make html
 # Setup versioneer
 versioneer install
 
-# Build distribution
-python setup.py sdist bdist_wheel
-
 # Git tag
 git tag 0.4
+
+# Build distribution
+python setup.py sdist bdist_wheel
 
 # Upload to Test PyPi
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
