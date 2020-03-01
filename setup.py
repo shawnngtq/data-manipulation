@@ -3,7 +3,8 @@ from setuptools import find_packages, setup
 import versioneer
 
 LONG_DESCRIPTION = """
-Data Manipulation is a Python library for making it easier to manipulate data using popular libraries such as Pandas & PySpark.
+Data Manipulation is a Python package providing powerful utility functions. 
+It contains many subpackages with utility functions built for popular packages such as Pandas, PySpark and many more.
 """
 
 CLASSIFIERS = [
@@ -29,7 +30,7 @@ setup(
     author_email="shawn.coding.acc@gmail.com",
     classifiers=CLASSIFIERS,
     cmdclass=versioneer.get_cmdclass(),
-    description="Powerful data manipulation functions",
+    description="Powerful data manipulation",
     install_requires=DEPENDENCIES,
     license="BSD-3",
     long_description=LONG_DESCRIPTION,
