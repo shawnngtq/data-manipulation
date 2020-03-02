@@ -196,6 +196,12 @@
 <span class="sd">    &gt;&gt;&gt; parameterize(&quot; Shawn Ng @ 123&quot;)</span>
 <span class="sd">    &#39;shawn-ng-123&#39;</span>
 
+<span class="sd">    &gt;&gt;&gt; parameterize(&quot;# Shawn Ng @ 123&quot;)</span>
+<span class="sd">    &#39;shawn-ng-123&#39;</span>
+
+<span class="sd">    &gt;&gt;&gt; parameterize(&quot;# @ Shawn Ng @ 123&quot;)</span>
+<span class="sd">    &#39;shawn-ng-123&#39;</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
@@ -211,6 +217,9 @@
     <span class="k">if</span> <span class="n">separator</span> <span class="ow">and</span> <span class="n">separator</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
         <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/#</span><span class="si">{re_separator}</span><span class="s2">{2,}&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">)</span>
         <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^#</span><span class="si">{re_separator}</span><span class="s2">|#</span><span class="si">{re_separator}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+
+    <span class="sd">&#39;&#39;&#39;handle case where symbol is the 1st character&#39;&#39;&#39;</span>
+    <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">parameterized_string</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">parameterized_string</span></div>
 

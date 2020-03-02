@@ -10,6 +10,7 @@ Subpackages
    data_manipulation.geopandas
    data_manipulation.pandas
    data_manipulation.psycopg2
+   data_manipulation.pyspark
    data_manipulation.visualization
 
 Module contents
