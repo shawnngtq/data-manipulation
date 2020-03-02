@@ -159,6 +159,12 @@ def parameterize(string_to_clean, separator="-"):
     >>> parameterize(" Shawn Ng @ 123")
     'shawn-ng-123'
 
+    >>> parameterize("# Shawn Ng @ 123")
+    'shawn-ng-123'
+
+    >>> parameterize("# @ Shawn Ng @ 123")
+    'shawn-ng-123'
+
     Returns
     -------
     str
@@ -174,6 +180,9 @@ def parameterize(string_to_clean, separator="-"):
     if separator and separator != "":
         parameterized_string = re.sub("/#{re_separator}{2,}", separator, parameterized_string)
         parameterized_string = re.sub("^#{re_separator}|#{re_separator}$", separator, parameterized_string, re.I)
+
+    '''handle case where symbol is the 1st character'''
+    parameterized_string = parameterized_string.lstrip(separator)
 
     return parameterized_string
 
