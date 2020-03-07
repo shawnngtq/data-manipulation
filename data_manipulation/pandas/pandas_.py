@@ -21,7 +21,7 @@ def add_type_columns(dataframe):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Dataframe to add type columns
 
     Examples
@@ -35,7 +35,7 @@ def add_type_columns(dataframe):
 
     Returns
     -------
-    pandas.core.frame.DataFrame
+    pandas.DataFrame
         For each dataframe's column, add a column with it's dtype next to it
     """
     if not isinstance(dataframe, (pd.DataFrame)):
@@ -82,7 +82,7 @@ def compare_all_list_items(list_):
 
     Returns
     -------
-    pandas.core.frame.DataFrame
+    pandas.DataFrame
         Each row represent 1 of all combinations
     """
     if not isinstance(list_, (list)):
@@ -98,26 +98,26 @@ def compare_all_list_items(list_):
     return df
 
 
-def columns_dictionary(dataframe):
+def dtypes_dictionary(dataframe):
     """
     Create a dictionary {dtype: [column1, column2 ...]} from Pandas dataframe
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Base dataframe
 
     Examples
     --------
-    >>> columns_dictionary(pd.DataFrame())
+    >>> dtypes_dictionary(pd.DataFrame())
     Traceback (most recent call last):
       ...
-    ValueError: Argument can't be empty Pandas dataframe ...
+    ValueError: Argument can't be a empty Pandas dataframe ...
 
     >>> values = [[0, '0', [], {}, None, ""]]
     >>> cols = ["int_", "str_", "list_", "set_", "none_", "_"]
     >>> df = pd.DataFrame(values, columns=cols)
-    >>> columns_dictionary(df)
+    >>> dtypes_dictionary(df)
     {<class 'numpy.int64'>: ['int_'], <class 'str'>: ['str_', '_'], <class 'list'>: ['list_'], <class 'dict'>: ['set_'], <class 'NoneType'>: ['none_']}
 
     Returns
@@ -147,7 +147,7 @@ def head_tail(dataframe, n=5):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Base dataframe
 
     Examples
@@ -170,7 +170,7 @@ def head_tail(dataframe, n=5):
 
     Returns
     -------
-    pandas.core.frame.DataFrame
+    pandas.DataFrame
         A dataframe containing n head and tail of base dataframe
     """
     if not isinstance(dataframe, (pd.DataFrame)):
@@ -213,7 +213,7 @@ def chunking_dataframe(dataframe, chunk_size):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
 
     chunk_size: int
         The chunk size of each smaller dataframes
@@ -283,7 +283,7 @@ def to_excel_keep_url(filepath, dataframe):
     ----------
     filepath: str
         Filepath
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Dataframe to export into excel
 
     Examples
@@ -315,9 +315,9 @@ def compare_dataframes(dataframe, dataframe2):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         The Pandas dataframe before DT
-    dataframe2: pandas.core.frame.DataFrame
+    dataframe2: pandas.DataFrame
         The Pandas dataframe after DT
 
     Returns
@@ -387,7 +387,7 @@ def series_count(series):
 
     Returns
     -------
-    pandas.core.frame.DataFrame
+    pandas.DataFrame
         Enhanced value_counts() in dataframe
     """
     if not isinstance(series, (pd.Series)):
@@ -405,7 +405,7 @@ def print_dataframe_overview(dataframe, stats=False):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Base dataframe
 
     Examples
@@ -461,7 +461,7 @@ def useless_columns(dataframe):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Base dataframe
 
     Returns
@@ -485,9 +485,9 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
 
     Parameters
     ----------
-    dataframe: pandas.core.frame.DataFrame
+    dataframe: pandas.DataFrame
         Based dataframe
-    dataframe2: pandas.core.frame.DataFrame
+    dataframe2: pandas.DataFrame
         Dataframe to merged with
     columns: list
         Columns to join on
@@ -530,6 +530,38 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
     df_left = df_merged[df_merged["_merge"] == "left_only"].copy()
     display(series_count(df_merged["_merge"]))
     return df_both, df_left
+
+
+def series_to_columns(dataframe, column):
+    """
+    Convert a pandas dictionary column to pandas column(s)
+
+    Parameters
+    ----------
+    dataframe: pandas.DataFrame
+        Pandas dataframe
+    column: pd.Series
+        Pandas series with dict dtype
+
+    Examples
+    --------
+    >>> values = [[1, {'a':1, 'b':2}]]
+    >>> cols = ["c1", "c2"]
+    >>> df = pd.DataFrame(values, columns=cols)
+    >>> df
+       c1                c2
+    0   1  {'a': 1, 'b': 2}
+    >>> series_to_columns(df, "c2")
+       c1  a  b
+    0   1  1  2
+
+    Returns
+    -------
+    pandas.DataFrame
+        A Pandas dataframe with dictionary column converted to column(s)
+    """
+    df = pd.concat([dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1)
+    return df
 
 
 if __name__ == "__main__":
