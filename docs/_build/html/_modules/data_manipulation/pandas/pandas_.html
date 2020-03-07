@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.pandas.pandas_ &#8212; data_manipulation 0.7 documentation</title>
+    <title>data_manipulation.pandas.pandas_ &#8212; data_manipulation 0.8 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -58,7 +58,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Dataframe to add type columns</span>
 
 <span class="sd">    Examples</span>
@@ -72,7 +72,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    pandas.core.frame.DataFrame</span>
+<span class="sd">    pandas.DataFrame</span>
 <span class="sd">        For each dataframe&#39;s column, add a column with it&#39;s dtype next to it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
@@ -119,7 +119,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    pandas.core.frame.DataFrame</span>
+<span class="sd">    pandas.DataFrame</span>
 <span class="sd">        Each row represent 1 of all combinations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">)):</span>
@@ -135,26 +135,26 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="columns_dictionary"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.columns_dictionary">[docs]</a><span class="k">def</span> <span class="nf">columns_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+<div class="viewcode-block" id="dtypes_dictionary"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.dtypes_dictionary">[docs]</a><span class="k">def</span> <span class="nf">dtypes_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a dictionary {dtype: [column1, column2 ...]} from Pandas dataframe</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Base dataframe</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; columns_dictionary(pd.DataFrame())</span>
+<span class="sd">    &gt;&gt;&gt; dtypes_dictionary(pd.DataFrame())</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">      ...</span>
-<span class="sd">    ValueError: Argument can&#39;t be empty Pandas dataframe ...</span>
+<span class="sd">    ValueError: Argument can&#39;t be a empty Pandas dataframe ...</span>
 
 <span class="sd">    &gt;&gt;&gt; values = [[0, &#39;0&#39;, [], {}, None, &quot;&quot;]]</span>
 <span class="sd">    &gt;&gt;&gt; cols = [&quot;int_&quot;, &quot;str_&quot;, &quot;list_&quot;, &quot;set_&quot;, &quot;none_&quot;, &quot;_&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(values, columns=cols)</span>
-<span class="sd">    &gt;&gt;&gt; columns_dictionary(df)</span>
+<span class="sd">    &gt;&gt;&gt; dtypes_dictionary(df)</span>
 <span class="sd">    {&lt;class &#39;numpy.int64&#39;&gt;: [&#39;int_&#39;], &lt;class &#39;str&#39;&gt;: [&#39;str_&#39;, &#39;_&#39;], &lt;class &#39;list&#39;&gt;: [&#39;list_&#39;], &lt;class &#39;dict&#39;&gt;: [&#39;set_&#39;], &lt;class &#39;NoneType&#39;&gt;: [&#39;none_&#39;]}</span>
 
 <span class="sd">    Returns</span>
@@ -184,7 +184,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Base dataframe</span>
 
 <span class="sd">    Examples</span>
@@ -207,7 +207,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    pandas.core.frame.DataFrame</span>
+<span class="sd">    pandas.DataFrame</span>
 <span class="sd">        A dataframe containing n head and tail of base dataframe</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
@@ -250,7 +250,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 
 <span class="sd">    chunk_size: int</span>
 <span class="sd">        The chunk size of each smaller dataframes</span>
@@ -320,7 +320,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filepath: str</span>
 <span class="sd">        Filepath</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Dataframe to export into excel</span>
 
 <span class="sd">    Examples</span>
@@ -352,9 +352,9 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        The Pandas dataframe before DT</span>
-<span class="sd">    dataframe2: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe2: pandas.DataFrame</span>
 <span class="sd">        The Pandas dataframe after DT</span>
 
 <span class="sd">    Returns</span>
@@ -424,7 +424,7 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    pandas.core.frame.DataFrame</span>
+<span class="sd">    pandas.DataFrame</span>
 <span class="sd">        Enhanced value_counts() in dataframe</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)):</span>
@@ -442,7 +442,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Base dataframe</span>
 
 <span class="sd">    Examples</span>
@@ -498,7 +498,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Base dataframe</span>
 
 <span class="sd">    Returns</span>
@@ -522,9 +522,9 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dataframe: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Based dataframe</span>
-<span class="sd">    dataframe2: pandas.core.frame.DataFrame</span>
+<span class="sd">    dataframe2: pandas.DataFrame</span>
 <span class="sd">        Dataframe to merged with</span>
 <span class="sd">    columns: list</span>
 <span class="sd">        Columns to join on</span>
@@ -569,6 +569,38 @@
     <span class="k">return</span> <span class="n">df_both</span><span class="p">,</span> <span class="n">df_left</span></div>
 
 
+<div class="viewcode-block" id="series_to_columns"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.series_to_columns">[docs]</a><span class="k">def</span> <span class="nf">series_to_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a pandas dictionary column to pandas column(s)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataframe: pandas.DataFrame</span>
+<span class="sd">        Pandas dataframe</span>
+<span class="sd">    column: pd.Series</span>
+<span class="sd">        Pandas series with dict dtype</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; values = [[1, {&#39;a&#39;:1, &#39;b&#39;:2}]]</span>
+<span class="sd">    &gt;&gt;&gt; cols = [&quot;c1&quot;, &quot;c2&quot;]</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(values, columns=cols)</span>
+<span class="sd">    &gt;&gt;&gt; df</span>
+<span class="sd">       c1                c2</span>
+<span class="sd">    0   1  {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+<span class="sd">    &gt;&gt;&gt; series_to_columns(df, &quot;c2&quot;)</span>
+<span class="sd">       c1  a  b</span>
+<span class="sd">    0   1  1  2</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A Pandas dataframe with dictionary column converted to column(s)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dataframe</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">column</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dataframe</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
 
@@ -603,7 +635,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

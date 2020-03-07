@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.data_types.string_ &#8212; data_manipulation 0.7 documentation</title>
+    <title>data_manipulation.data_types.string_ &#8212; data_manipulation 0.8 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -175,53 +175,36 @@
     <span class="k">return</span> <span class="n">dict_list</span></div>
 
 
-<div class="viewcode-block" id="parameterize"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.parameterize">[docs]</a><span class="k">def</span> <span class="nf">parameterize</span><span class="p">(</span><span class="n">string_to_clean</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="get_latest_file"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.get_latest_file">[docs]</a><span class="k">def</span> <span class="nf">get_latest_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert string to url</span>
-<span class="sd">    https://coderwall.com/p/nmu4bg/python-parameterize-equivalent-to-rails-parameterize</span>
+<span class="sd">    Given path and keywords, return latest file</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    string_to_clean: str</span>
-<span class="sd">        String to clean</span>
-<span class="sd">    separator: str</span>
-<span class="sd">        Separator</span>
+<span class="sd">    path: str</span>
+<span class="sd">        Directory path</span>
+<span class="sd">    keywords: list</span>
+<span class="sd">        List of keywords</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; parameterize(&quot;&quot;)</span>
-<span class="sd">    &#39;&#39;</span>
-<span class="sd">    &gt;&gt;&gt; parameterize(&quot; &quot;)</span>
-<span class="sd">    &#39;&#39;</span>
-<span class="sd">    &gt;&gt;&gt; parameterize(&quot; Shawn Ng @ 123&quot;)</span>
-<span class="sd">    &#39;shawn-ng-123&#39;</span>
-
-<span class="sd">    &gt;&gt;&gt; parameterize(&quot;# Shawn Ng @ 123&quot;)</span>
-<span class="sd">    &#39;shawn-ng-123&#39;</span>
-
-<span class="sd">    &gt;&gt;&gt; parameterize(&quot;# @ Shawn Ng @ 123&quot;)</span>
-<span class="sd">    &#39;shawn-ng-123&#39;</span>
+<span class="sd">    &gt;&gt;&gt; get_latest_file(&quot;data_manipulation/data_types&quot;, [&quot;py&quot;])</span>
+<span class="sd">    List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;string_.py&#39;]</span>
+<span class="sd">    &#39;string_.py&#39;</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
-<span class="sd">        Cleaned string</span>
+<span class="sd">        Latest file name in directory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">re</span>
-    <span class="kn">import</span> <span class="nn">unicodedata</span>
+    <span class="kn">import</span> <span class="nn">os</span>
 
-    <span class="n">string_to_clean</span> <span class="o">=</span> <span class="n">string_to_clean</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFKD&quot;</span><span class="p">,</span> <span class="n">string_to_clean</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ASCII&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-    <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^a-zA-Z0-9\-_]+&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">separator</span> <span class="ow">and</span> <span class="n">separator</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-        <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;/#</span><span class="si">{re_separator}</span><span class="s2">{2,}&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">)</span>
-        <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^#</span><span class="si">{re_separator}</span><span class="s2">|#</span><span class="si">{re_separator}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">parameterized_string</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
-
-    <span class="sd">&#39;&#39;&#39;handle case where symbol is the 1st character&#39;&#39;&#39;</span>
-    <span class="n">parameterized_string</span> <span class="o">=</span> <span class="n">parameterized_string</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">parameterized_string</span></div>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
+            <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of files: {sorted(files)}&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">files</span><span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -258,7 +241,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

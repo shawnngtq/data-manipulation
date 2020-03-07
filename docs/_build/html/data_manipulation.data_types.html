@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.data_types package &#8212; data_manipulation 0.7 documentation</title>
+    <title>data_manipulation.data_types package &#8212; data_manipulation 0.8 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li> 
       </ul>
     </div>  
@@ -94,38 +94,26 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="data_manipulation.data_types.string_.parameterize">
-<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">parameterize</code><span class="sig-paren">(</span><em class="sig-param">string_to_clean</em>, <em class="sig-param">separator='-'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/data_types/string_.html#parameterize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.data_types.string_.parameterize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert string to url
-<a class="reference external" href="https://coderwall.com/p/nmu4bg/python-parameterize-equivalent-to-rails-parameterize">https://coderwall.com/p/nmu4bg/python-parameterize-equivalent-to-rails-parameterize</a></p>
+<dt id="data_manipulation.data_types.string_.get_latest_file">
+<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">get_latest_file</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">keywords</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/data_types/string_.html#get_latest_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.data_types.string_.get_latest_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given path and keywords, return latest file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>string_to_clean</strong> (<em>str</em>) – String to clean</p></li>
-<li><p><strong>separator</strong> (<em>str</em>) – Separator</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Directory path</p></li>
+<li><p><strong>keywords</strong> (<em>list</em>) – List of keywords</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parameterize</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="go">&#39;&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parameterize</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-<span class="go">&#39;&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parameterize</span><span class="p">(</span><span class="s2">&quot; Shawn Ng @ 123&quot;</span><span class="p">)</span>
-<span class="go">&#39;shawn-ng-123&#39;</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parameterize</span><span class="p">(</span><span class="s2">&quot;# Shawn Ng @ 123&quot;</span><span class="p">)</span>
-<span class="go">&#39;shawn-ng-123&#39;</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parameterize</span><span class="p">(</span><span class="s2">&quot;# @ Shawn Ng @ 123&quot;</span><span class="p">)</span>
-<span class="go">&#39;shawn-ng-123&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_latest_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/data_types&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
+<span class="go">List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;string_.py&#39;]</span>
+<span class="go">&#39;string_.py&#39;</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Cleaned string</p>
+<dd class="field-odd"><p>Latest file name in directory</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>str</p>
@@ -297,7 +285,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li> 
       </ul>
     </div>
