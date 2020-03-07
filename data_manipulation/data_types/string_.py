@@ -138,53 +138,36 @@ def string_to_dict_list(dictionary_str_rep):
     return dict_list
 
 
-def parameterize(string_to_clean, separator="-"):
+def get_latest_file(path, keywords):
     """
-    Convert string to url
-    https://coderwall.com/p/nmu4bg/python-parameterize-equivalent-to-rails-parameterize
+    Given path and keywords, return latest file
 
     Parameters
     ----------
-    string_to_clean: str
-        String to clean
-    separator: str
-        Separator
+    path: str
+        Directory path
+    keywords: list
+        List of keywords
 
     Examples
     --------
-    >>> parameterize("")
-    ''
-    >>> parameterize(" ")
-    ''
-    >>> parameterize(" Shawn Ng @ 123")
-    'shawn-ng-123'
-
-    >>> parameterize("# Shawn Ng @ 123")
-    'shawn-ng-123'
-
-    >>> parameterize("# @ Shawn Ng @ 123")
-    'shawn-ng-123'
+    >>> get_latest_file("data_manipulation/data_types", ["py"])
+    List of files: ['__init__.py', '__pycache__', 'string_.py']
+    'string_.py'
 
     Returns
     -------
     str
-        Cleaned string
+        Latest file name in directory
     """
-    import re
-    import unicodedata
+    import os
 
-    string_to_clean = string_to_clean.strip().lower()
-    parameterized_string = unicodedata.normalize("NFKD", string_to_clean).encode("ASCII", "ignore").decode()
-    parameterized_string = re.sub("[^a-zA-Z0-9\-_]+", separator, parameterized_string)
-
-    if separator and separator != "":
-        parameterized_string = re.sub("/#{re_separator}{2,}", separator, parameterized_string)
-        parameterized_string = re.sub("^#{re_separator}|#{re_separator}$", separator, parameterized_string, re.I)
-
-    '''handle case where symbol is the 1st character'''
-    parameterized_string = parameterized_string.lstrip(separator)
-
-    return parameterized_string
+    files = []
+    for file in sorted(os.listdir(path)):
+        if all(word in file for word in keywords):
+            files.append(file)
+    print(f"List of files: {sorted(files)}")
+    return max(files)
 
 
 if __name__ == "__main__":
