@@ -1,3 +1,4 @@
+from . import beautifulsoup
 from . import data_types
 from . import geopandas
 from . import pandas
