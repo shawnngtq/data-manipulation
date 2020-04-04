@@ -21,7 +21,7 @@ def psy_pg_connect(host, database, username, password):
     tuple
         (connection, cursor)
     """
-    connection_string = f"host={host} port=5432 dbname={database} username={username} password={password}"
+    connection_string = f"host={host} port=5432 dbname={database} user={username} password={password}"
     connection = psycopg2.connect(connection_string)
     print("PostgreSQL database connected ...")
 
