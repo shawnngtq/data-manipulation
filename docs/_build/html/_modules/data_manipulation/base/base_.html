@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.data_types.string_ &#8212; data_manipulation 0.10 documentation</title>
+    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.12 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -34,8 +34,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for data_manipulation.data_types.string_</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="clean_string_representation"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.clean_string_representation">[docs]</a><span></span><span class="k">def</span> <span class="nf">clean_string_representation</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">):</span>
+  <h1>Source code for data_manipulation.base.base_</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="clean_string_representation"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.clean_string_representation">[docs]</a><span></span><span class="k">def</span> <span class="nf">clean_string_representation</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert string representation of string to string</span>
 
@@ -76,7 +76,7 @@
     <span class="k">return</span> <span class="n">string</span></div>
 
 
-<div class="viewcode-block" id="string_boolean_to_int"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.string_boolean_to_int">[docs]</a><span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">):</span>
+<div class="viewcode-block" id="string_boolean_to_int"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.string_boolean_to_int">[docs]</a><span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert string boolean to int</span>
 <span class="sd">    https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</span>
@@ -116,7 +116,7 @@
     <span class="k">return</span> <span class="n">boolean</span></div>
 
 
-<div class="viewcode-block" id="string_to_dict_list"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.string_to_dict_list">[docs]</a><span class="k">def</span> <span class="nf">string_to_dict_list</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">):</span>
+<div class="viewcode-block" id="string_to_dict_list"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.string_to_dict_list">[docs]</a><span class="k">def</span> <span class="nf">string_to_dict_list</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert string representation of dictionary/list to dictionary/list</span>
 
@@ -175,7 +175,7 @@
     <span class="k">return</span> <span class="n">dict_list</span></div>
 
 
-<div class="viewcode-block" id="get_latest_file"><a class="viewcode-back" href="../../../data_manipulation.data_types.html#data_manipulation.data_types.string_.get_latest_file">[docs]</a><span class="k">def</span> <span class="nf">get_latest_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
+<div class="viewcode-block" id="get_latest_file"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_latest_file">[docs]</a><span class="k">def</span> <span class="nf">get_latest_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given path and keywords, return latest file</span>
 
@@ -188,9 +188,9 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_latest_file(&quot;data_manipulation/data_types&quot;, [&quot;py&quot;])</span>
-<span class="sd">    List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;string_.py&#39;]</span>
-<span class="sd">    &#39;string_.py&#39;</span>
+<span class="sd">    &gt;&gt;&gt; get_latest_file(&quot;data_manipulation/base&quot;, [&quot;py&quot;])</span>
+<span class="sd">    List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
+<span class="sd">    &#39;base_.py&#39;</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -203,8 +203,56 @@
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
             <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of files: {sorted(files)}&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of files: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">files</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_none_variation"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_none_variation">[docs]</a><span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get all none variation</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_none_variation()</span>
+<span class="sd">    [None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List of None variation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">variations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;null&quot;</span><span class="p">,</span> <span class="s2">&quot;Null&quot;</span><span class="p">,</span> <span class="s2">&quot;NULL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;na&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nil&quot;</span><span class="p">,</span> <span class="s2">&quot;Nil&quot;</span><span class="p">,</span> <span class="s2">&quot;NIL&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">variations</span></div>
+
+
+<div class="viewcode-block" id="clean_list"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.clean_list">[docs]</a><span class="k">def</span> <span class="nf">clean_list</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clean a given list</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    list_: list</span>
+<span class="sd">        [anyvalue, anytype, anylength]</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; clean_list([&quot;a&quot;, &quot;none&quot;])</span>
+<span class="sd">    [&#39;a&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; clean_list(get_none_variation())</span>
+<span class="sd">    []</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    List without None variation</span>
+<span class="sd">        [anyvalue, anytype, anylength]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">none_variations</span> <span class="o">=</span> <span class="n">get_none_variation</span><span class="p">()</span>
+    <span class="n">cleaned_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">cleaned_list</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -241,13 +289,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
     </div>
   </body>
 </html>

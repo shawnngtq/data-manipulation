@@ -1,5 +1,4 @@
 = Documentation
-
 :encoding: utf-8
 :lang: en
 :layout: docs

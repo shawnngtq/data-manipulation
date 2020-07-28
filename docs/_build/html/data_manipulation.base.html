@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.data_types package &#8212; data_manipulation 0.10 documentation</title>
+    <title>data_manipulation.base package &#8212; data_manipulation 0.12 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="data_manipulation.geopandas package" href="data_manipulation.geopandas.html" />
+    <link rel="next" title="data_manipulation.beautifulsoup package" href="data_manipulation.beautifulsoup.html" />
     <link rel="prev" title="data_manipulation package" href="data_manipulation.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,12 +27,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.geopandas.html" title="data_manipulation.geopandas package"
+          <a href="data_manipulation.beautifulsoup.html" title="data_manipulation.beautifulsoup package"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li> 
       </ul>
     </div>  
@@ -42,16 +42,42 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="data-manipulation-data-types-package">
-<h1>data_manipulation.data_types package<a class="headerlink" href="#data-manipulation-data-types-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="data-manipulation-base-package">
+<h1>data_manipulation.base package<a class="headerlink" href="#data-manipulation-base-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-data_manipulation.data_types.string_">
-<span id="data-manipulation-data-types-string-module"></span><h2>data_manipulation.data_types.string_ module<a class="headerlink" href="#module-data_manipulation.data_types.string_" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="data_manipulation.data_types.string_.clean_string_representation">
-<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">clean_string_representation</code><span class="sig-paren">(</span><em class="sig-param">string_str_rep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/data_types/string_.html#clean_string_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.data_types.string_.clean_string_representation" title="Permalink to this definition">¶</a></dt>
+<div class="section" id="module-data_manipulation.base.base_">
+<span id="data-manipulation-base-base-module"></span><h2>data_manipulation.base.base_ module<a class="headerlink" href="#module-data_manipulation.base.base_" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="data_manipulation.base.base_.clean_list">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">clean_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#clean_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.clean_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean a given list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_</strong> (<em>list</em>) – [anyvalue, anytype, anylength]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">(</span><span class="n">get_none_variation</span><span class="p">())</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[anyvalue, anytype, anylength]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List without None variation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="data_manipulation.base.base_.clean_string_representation">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">clean_string_representation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#clean_string_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.clean_string_representation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert string representation of string to string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -93,9 +119,9 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="data_manipulation.data_types.string_.get_latest_file">
-<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">get_latest_file</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">keywords</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/data_types/string_.html#get_latest_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.data_types.string_.get_latest_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="data_manipulation.base.base_.get_latest_file">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">get_latest_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">keywords</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#get_latest_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.get_latest_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given path and keywords, return latest file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -106,9 +132,9 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_latest_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/data_types&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
-<span class="go">List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;string_.py&#39;]</span>
-<span class="go">&#39;string_.py&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_latest_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
+<span class="go">List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
+<span class="go">&#39;base_.py&#39;</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -121,9 +147,28 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="data_manipulation.data_types.string_.string_boolean_to_int">
-<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">string_boolean_to_int</code><span class="sig-paren">(</span><em class="sig-param">boolean_str_rep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/data_types/string_.html#string_boolean_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.data_types.string_.string_boolean_to_int" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="data_manipulation.base.base_.get_none_variation">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">get_none_variation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#get_none_variation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.get_none_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all none variation</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_none_variation</span><span class="p">()</span>
+<span class="go">[None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List of None variation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="data_manipulation.base.base_.string_boolean_to_int">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">string_boolean_to_int</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boolean_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#string_boolean_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.string_boolean_to_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert string boolean to int
 <a class="reference external" href="https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool">https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</a></p>
 <dl class="field-list simple">
@@ -157,9 +202,9 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="data_manipulation.data_types.string_.string_to_dict_list">
-<code class="sig-prename descclassname">data_manipulation.data_types.string_.</code><code class="sig-name descname">string_to_dict_list</code><span class="sig-paren">(</span><em class="sig-param">dictionary_str_rep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/data_types/string_.html#string_to_dict_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.data_types.string_.string_to_dict_list" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="data_manipulation.base.base_.string_to_dict_list">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">string_to_dict_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#string_to_dict_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.string_to_dict_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert string representation of dictionary/list to dictionary/list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -222,8 +267,8 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-data_manipulation.data_types">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_manipulation.data_types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-data_manipulation.base">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_manipulation.base" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -235,10 +280,10 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">data_manipulation.data_types package</a><ul>
+<li><a class="reference internal" href="#">data_manipulation.base package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-data_manipulation.data_types.string_">data_manipulation.data_types.string_ module</a></li>
-<li><a class="reference internal" href="#module-data_manipulation.data_types">Module contents</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.base.base_">data_manipulation.base.base_ module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.base">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -247,12 +292,12 @@
   <p class="topless"><a href="data_manipulation.html"
                         title="previous chapter">data_manipulation package</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="data_manipulation.geopandas.html"
-                        title="next chapter">data_manipulation.geopandas package</a></p>
+  <p class="topless"><a href="data_manipulation.beautifulsoup.html"
+                        title="next chapter">data_manipulation.beautifulsoup package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/data_manipulation.data_types.rst.txt"
+      <li><a href="_sources/data_manipulation.base.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -280,18 +325,18 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.geopandas.html" title="data_manipulation.geopandas package"
+          <a href="data_manipulation.beautifulsoup.html" title="data_manipulation.beautifulsoup package"
              >next</a> |</li>
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.10 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
     </div>
   </body>
 </html>
