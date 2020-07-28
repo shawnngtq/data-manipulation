@@ -11,6 +11,8 @@ certifi==2020.6.20
 cffi==1.14.0
 chardet==3.0.4
 click==7.1.2
+cmarkgfm==0.4.2
+colorama==0.4.3
 cookiecutter==1.7.2
 cryptography==2.9.2
 cycler==0.10.0
@@ -18,6 +20,7 @@ decorator==4.4.2
 defusedxml==0.6.0
 docutils==0.16
 entrypoints==0.3
+future==0.18.2
 idna==2.9
 imagesize==1.2.0
 importlib-metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1591451756227/work
@@ -26,12 +29,14 @@ ipython @ file:///home/conda/feedstock_root/build_artifacts/ipython_159079690618
 ipython-genutils==0.2.0
 ipywidgets==7.5.1
 jedi==0.17.0
+jeepney==0.4.3
 Jinja2==2.11.2
 jinja2-time==0.2.0
 jsonschema==3.2.0
 jupyter-client==6.1.3
 jupyter-console==6.1.0
 jupyter-core==4.6.3
+keyring @ file:///home/conda/feedstock_root/build_artifacts/keyring_1588433932455/work
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 matplotlib==3.2.1
@@ -47,6 +52,7 @@ parso==0.7.0
 patsy==0.5.1
 pexpect==4.8.0
 pickleshare==0.7.5
+pkginfo==1.5.0.1
 poyo==0.5.0
 prometheus-client @ file:///home/conda/feedstock_root/build_artifacts/prometheus_client_1590412252446/work
 prompt-toolkit==3.0.5
@@ -70,9 +76,13 @@ pytz==2020.1
 pyzmq==19.0.1
 qtconsole @ file:///home/conda/feedstock_root/build_artifacts/qtconsole_1589392299544/work
 QtPy==1.9.0
+readme-renderer==24.0
 requests==2.23.0
+requests-toolbelt==0.9.1
+rfc3986 @ file:///home/conda/feedstock_root/build_artifacts/rfc3986_1593217945888/work
 scipy==1.4.1
 seaborn==0.10.1
+SecretStorage==3.1.2
 Send2Trash==1.5.0
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1590081179328/work
 snowballstemmer==2.0.0
@@ -91,8 +101,10 @@ text-unidecode==1.3
 tornado==6.0.4
 tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1591181521996/work
 traitlets==4.3.3
+twine @ file:///home/conda/feedstock_root/build_artifacts/twine_1593299842553/work
 Unidecode==1.1.1
 urllib3==1.25.9
+versioneer==0.18
 wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1591117871324/work
 webencodings==0.5.1
 whichcraft==0.6.1
