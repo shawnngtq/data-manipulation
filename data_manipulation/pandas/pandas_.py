@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
-
 from IPython.display import display
+
+from data_manipulation.base.base_ import get_none_variation
 
 
 def config_pandas_display():
@@ -564,7 +565,61 @@ def series_to_columns(dataframe, column):
     return df
 
 
+def clean_none(dataframe):
+    """
+    Replace None variation to None
+
+    Parameters
+    ----------
+    dataframe: pandas.DataFrame
+        Pandas dataframe
+
+    Examples
+    --------
+    >>> df = pd.DataFrame({"c1": get_none_variation()})
+    >>> clean_none(df)
+          c1
+    0   None
+    1   None
+    2   None
+    3   None
+    4   None
+    5   None
+    6   None
+    7   None
+    8   None
+    9   None
+    10  None
+    11  None
+    12  None
+    13  None
+    14  None
+    >>> df = pd.DataFrame({"c1": [""]})
+    >>> clean_none(df)
+         c1
+    0  None
+    >>> df = pd.DataFrame({"c1": ["Nathing"]})
+    >>> clean_none(df)
+            c1
+    0  Nathing
+    >>> df = pd.DataFrame({"c1": ["Na "]})
+    >>> clean_none(df)
+        c1
+    0  Na
+
+    Returns
+    -------
+    pandas.DataFrame
+        A Pandas dataframe with standardized None
+    """
+    dataframe = dataframe.replace(r"^\s*$", np.nan, regex=True)
+    non_variations = get_none_variation()
+    dataframe = dataframe.replace(non_variations, np.nan)
+    dataframe = dataframe.where(pd.notnull(dataframe), None)
+    return dataframe
+
+
 if __name__ == "__main__":
     import doctest
 
-    doctest.testmod()
+    doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)
