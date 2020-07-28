@@ -90,3 +90,6 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# custom
+data_manipulation/pandas/README.md
