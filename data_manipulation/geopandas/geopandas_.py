@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def haversine_np(longitude1, latitude1, longitude2, latitude2):
     """
     Calculate the great circle distance between two points on the earth (specified in decimal degrees)
@@ -26,6 +23,8 @@ def haversine_np(longitude1, latitude1, longitude2, latitude2):
     float
         The distance between 2 pairs of longitude and latitude in kilometers (km)
     """
+    import numpy as np
+
     lon1, lat1, lon2, lat2 = map(np.radians, [longitude1, latitude1, longitude2, latitude2])
 
     dlon = lon2 - lon1

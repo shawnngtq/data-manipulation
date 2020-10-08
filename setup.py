@@ -22,7 +22,7 @@ CLASSIFIERS = [
 ]
 
 DEPENDENCIES = [
-    "numpy", "pandas", "IPython", "psycopg2", "requests", "beautifulsoup4"
+    "numpy", "pandas", "IPython", "requests", "beautifulsoup4", "psycopg2"
 ]
 
 setup(

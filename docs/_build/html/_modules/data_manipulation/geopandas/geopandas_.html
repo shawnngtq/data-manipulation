@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.geopandas.geopandas_ &#8212; data_manipulation 0.12 documentation</title>
+    <title>data_manipulation.geopandas.geopandas_ &#8212; data_manipulation 0.13 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -35,10 +35,7 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.geopandas.geopandas_</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
-<div class="viewcode-block" id="haversine_np"><a class="viewcode-back" href="../../../data_manipulation.geopandas.html#data_manipulation.geopandas.geopandas_.haversine_np">[docs]</a><span class="k">def</span> <span class="nf">haversine_np</span><span class="p">(</span><span class="n">longitude1</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">longitude2</span><span class="p">,</span> <span class="n">latitude2</span><span class="p">):</span>
+<div class="viewcode-block" id="haversine_np"><a class="viewcode-back" href="../../../data_manipulation.geopandas.html#data_manipulation.geopandas.geopandas_.haversine_np">[docs]</a><span></span><span class="k">def</span> <span class="nf">haversine_np</span><span class="p">(</span><span class="n">longitude1</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">longitude2</span><span class="p">,</span> <span class="n">latitude2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the great circle distance between two points on the earth (specified in decimal degrees)</span>
 
@@ -63,6 +60,8 @@
 <span class="sd">    float</span>
 <span class="sd">        The distance between 2 pairs of longitude and latitude in kilometers (km)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
     <span class="n">lon1</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">lat2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">,</span> <span class="p">[</span><span class="n">longitude1</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">longitude2</span><span class="p">,</span> <span class="n">latitude2</span><span class="p">])</span>
 
     <span class="n">dlon</span> <span class="o">=</span> <span class="n">lon2</span> <span class="o">-</span> <span class="n">lon1</span>
@@ -103,7 +102,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

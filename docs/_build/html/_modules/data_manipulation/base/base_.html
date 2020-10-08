@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.12 documentation</title>
+    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.13 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -214,7 +214,7 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; get_none_variation()</span>
-<span class="sd">    [None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
+<span class="sd">    [None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;nA&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -223,7 +223,7 @@
     <span class="n">variations</span> <span class="o">=</span> <span class="p">[</span>
         <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
         <span class="s2">&quot;null&quot;</span><span class="p">,</span> <span class="s2">&quot;Null&quot;</span><span class="p">,</span> <span class="s2">&quot;NULL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;na&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;na&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;nA&quot;</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A.&quot;</span><span class="p">,</span>
         <span class="s2">&quot;nil&quot;</span><span class="p">,</span> <span class="s2">&quot;Nil&quot;</span><span class="p">,</span> <span class="s2">&quot;NIL&quot;</span><span class="p">,</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">variations</span></div>
@@ -244,6 +244,8 @@
 <span class="sd">    [&#39;a&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; clean_list(get_none_variation())</span>
 <span class="sd">    []</span>
+<span class="sd">    &gt;&gt;&gt; clean_list([&quot;a&quot;, &quot;none&quot;, &quot;&quot;])</span>
+<span class="sd">    [&#39;a&#39;]</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -251,8 +253,44 @@
 <span class="sd">        [anyvalue, anytype, anylength]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">none_variations</span> <span class="o">=</span> <span class="n">get_none_variation</span><span class="p">()</span>
-    <span class="n">cleaned_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">]</span>
+    <span class="n">cleaned_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">cleaned_list</span></div>
+
+
+<div class="viewcode-block" id="clean_string"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.clean_string">[docs]</a><span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clean string by striping, uppercase and remove multiple whitespaces</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    string: str</span>
+<span class="sd">        String to clean</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot; sHawn  tesT &quot;)</span>
+<span class="sd">    &#39;SHAWN TEST&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;)</span>
+<span class="sd">    &#39;SHAWN ( TE ST )&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;, remove_parenthesis=True)</span>
+<span class="sd">    &#39;SHAWN&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn [ te  st ]&quot;, remove_brackets=True)</span>
+<span class="sd">    &#39;SHAWN&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Return cleaned string. Note that \t\n\s will be removed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+
+    <span class="k">if</span> <span class="n">remove_parenthesis</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(.*\)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">remove_brackets</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[.*\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+
+    <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">string</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -289,7 +327,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

@@ -1,7 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
-
-
 def build_soup(url):
     """
     Build beautifulsoup with url
@@ -14,6 +10,9 @@ def build_soup(url):
     BS4
         Beautifulsoup object of URL
     """
+    import requests
+    from bs4 import BeautifulSoup
+
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "lxml")

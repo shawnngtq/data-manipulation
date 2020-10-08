@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>data_manipulation.base package &#8212; data_manipulation 0.12 documentation</title>
+    <title>data_manipulation.base package &#8212; data_manipulation 0.13 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li> 
       </ul>
     </div>  
@@ -63,6 +63,8 @@
 <span class="go">[&#39;a&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">(</span><span class="n">get_none_variation</span><span class="p">())</span>
 <span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -73,6 +75,30 @@
 <dd class="field-even"><p>List without None variation</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="data_manipulation.base.base_.clean_string">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">clean_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">remove_parenthesis</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">remove_brackets</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#clean_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.clean_string" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Clean string by striping, uppercase and remove multiple whitespaces</p>
+<dl class="simple">
+<dt>string: str</dt><dd><p>String to clean</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot; sHawn  tesT &quot;</span><span class="p">)</span>
+<span class="go">&#39;SHAWN TEST&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn ( te  st )&quot;</span><span class="p">)</span>
+<span class="go">&#39;SHAWN ( TE ST )&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn ( te  st )&quot;</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;SHAWN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn [ te  st ]&quot;</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;SHAWN&#39;</span>
+</pre></div>
+</div>
+<p>Return cleaned string. Note that</p>
+</div></blockquote>
+<p>s will be removed</p>
 </dd></dl>
 
 <dl class="py function">
@@ -153,7 +179,7 @@
 <dd><p>Get all none variation</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_none_variation</span><span class="p">()</span>
-<span class="go">[None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
+<span class="go">[None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;nA&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -330,7 +356,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.12 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li> 
       </ul>
     </div>

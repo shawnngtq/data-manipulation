@@ -177,7 +177,7 @@ def get_none_variation():
     Examples
     --------
     >>> get_none_variation()
-    [None, 'none', 'None', 'NONE', 'null', 'Null', 'NULL', 'na', 'Na', 'NA', 'N.A', 'N.A.', 'nil', 'Nil', 'NIL']
+    [None, 'none', 'None', 'NONE', 'null', 'Null', 'NULL', 'na', 'Na', 'nA', 'NA', 'N.A', 'N.A.', 'nil', 'Nil', 'NIL']
 
     Returns
     -------
@@ -186,7 +186,7 @@ def get_none_variation():
     variations = [
         None, "none", "None", "NONE",
         "null", "Null", "NULL",
-        "na", "Na", "NA", "N.A", "N.A.",
+        "na", "Na", "nA", "NA", "N.A", "N.A.",
         "nil", "Nil", "NIL",
     ]
     return variations
@@ -207,6 +207,8 @@ def clean_list(list_):
     ['a']
     >>> clean_list(get_none_variation())
     []
+    >>> clean_list(["a", "none", ""])
+    ['a']
 
     Returns
     -------
@@ -214,8 +216,44 @@ def clean_list(list_):
         [anyvalue, anytype, anylength]
     """
     none_variations = get_none_variation()
-    cleaned_list = [item for item in list_ if item not in none_variations]
+    cleaned_list = [item for item in list_ if item and item not in none_variations]
     return cleaned_list
+
+
+def clean_string(string, remove_parenthesis=False, remove_brackets=False):
+    """
+    Clean string by striping, uppercase and remove multiple whitespaces
+
+    Parameters
+    ----------
+    string: str
+        String to clean
+
+    Examples
+    --------
+    >>> clean_string(" sHawn  tesT ")
+    'SHAWN TEST'
+    >>> clean_string("shawn ( te  st )")
+    'SHAWN ( TE ST )'
+    >>> clean_string("shawn ( te  st )", remove_parenthesis=True)
+    'SHAWN'
+    >>> clean_string("shawn [ te  st ]", remove_brackets=True)
+    'SHAWN'
+
+    Returns
+    -------
+    Return cleaned string. Note that \t\n\s will be removed
+    """
+    import re
+
+    if remove_parenthesis:
+        string = re.sub(r"\(.*\)", "", string)
+    if remove_brackets:
+        string = re.sub(r"\[.*\]", "", string)
+
+    string = string.strip().upper()
+    string = " ".join(string.split())
+    return string
 
 
 if __name__ == "__main__":
