@@ -32,8 +32,9 @@ make html
 versioneer install
 
 # Git tag
-git tag 0.13
+git commit -m "something"
 git push
+git tag 0.15
 
 # Build distribution
 python setup.py sdist bdist_wheel
@@ -46,7 +47,9 @@ twine upload dist/*
 ----
 
 == References
+
 === Main
+
 - https://drivendata.github.io/cookiecutter-data-science
 - https://python-packaging.readthedocs.io/en/latest/index.html
 
@@ -57,6 +60,7 @@ twine upload dist/*
 - https://docs.python.org/3/library/doctest.html
 
 === Sphinx
+
 - https://www.sphinx-doc.org/en/master/index.html
 - https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
 - https://docs.readthedocs.io/en/stable/index.html
