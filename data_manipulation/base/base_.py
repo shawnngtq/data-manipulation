@@ -11,19 +11,15 @@ def clean_string_representation(string_str_rep):
     --------
     >>> input = 1
     >>> clean_string_representation(input)
-
     >>> input = ""
     >>> clean_string_representation(input)
     ''
-
     >>> input = 'test'
     >>> clean_string_representation(input)
     'test'
-
     >>> input = "'test'"
     >>> clean_string_representation(input)
     'test'
-
     >>> input = '"test"'
     >>> clean_string_representation(input)
     'test'
@@ -95,33 +91,24 @@ def string_to_dict_list(dictionary_str_rep):
     Traceback (most recent call last):
       ...
     SyntaxError: unexpected EOF while parsing
-
     >>> input = 0
     >>> string_to_dict_list(input)
-
     >>> input = []
     >>> string_to_dict_list(input)
-
     >>> input = {}
     >>> string_to_dict_list(input)
-
-
     >>> input = "[1, 2, 3]"
     >>> string_to_dict_list(input)
     [1, 2, 3]
-
     >>> input = "[]"
     >>> string_to_dict_list(input)
     []
-
     >>> input = "['1', '2', '3']"
     >>> string_to_dict_list(input)
     ['1', '2', '3']
-
     >>> input = "{'a': 1, 'b': 2}"
     >>> string_to_dict_list(input)
     {'a': 1, 'b': 2}
-
     >>> input = "{'a': '1', 'b': '2'}"
     >>> string_to_dict_list(input)
     {'a': '1', 'b': '2'}
@@ -152,7 +139,7 @@ def get_latest_file(path, keywords):
     Examples
     --------
     >>> get_latest_file("data_manipulation/base", ["py"])
-    List of files: ['__init__.py', 'base_.py']
+    List of files: ['__init__.py', '__pycache__', 'base_.py']
     'base_.py'
 
     Returns

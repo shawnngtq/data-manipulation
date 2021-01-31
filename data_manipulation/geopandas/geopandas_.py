@@ -35,3 +35,9 @@ def haversine_np(longitude1, latitude1, longitude2, latitude2):
     c = 2 * np.arcsin(np.sqrt(a))
     km = 6371 * c
     return km
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()

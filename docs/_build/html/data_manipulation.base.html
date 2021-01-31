@@ -4,14 +4,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>data_manipulation.base package &#8212; data_manipulation 0.14 documentation</title>
-    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="data_manipulation.beautifulsoup package" href="data_manipulation.beautifulsoup.html" />
@@ -33,7 +33,8 @@
           <a href="data_manipulation.html" title="data_manipulation package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.14 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.base package</a></li> 
       </ul>
     </div>  
 
@@ -55,7 +56,7 @@
 <dd><p>Clean a given list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>list_</strong> (<em>list</em>) – [anyvalue, anytype, anylength]</p>
+<dd class="field-odd"><p><strong>list</strong> (<em>list</em>) – [anyvalue, anytype, anylength]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -113,24 +114,16 @@
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">&#39;&#39;</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">&#39;test&#39;</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&#39;test&#39;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&#39;test&#39;&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">&#39;test&#39;</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;&quot;test&quot;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;&quot;test&quot;&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">&#39;test&#39;</span>
 </pre></div>
@@ -159,7 +152,7 @@
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_latest_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
-<span class="go">List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
+<span class="go">List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;base_.py&#39;]</span>
 <span class="go">&#39;base_.py&#39;</span>
 </pre></div>
 </div>
@@ -243,41 +236,25 @@
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">SyntaxError</span>: <span class="n">unexpected EOF while parsing</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[1, 2, 3]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[1, 2, 3]&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">[1, 2, 3]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[]&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">[]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">{&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="go">{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
 </pre></div>
@@ -299,6 +276,7 @@
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -357,12 +335,13 @@
           <a href="data_manipulation.html" title="data_manipulation package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.14 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.base package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
     </div>
   </body>
 </html>

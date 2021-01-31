@@ -273,3 +273,9 @@ def add_dummy_columns(dataframe, columns, value):
         df = df.withColumn(column, F.lit(value))
 
     return df
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()

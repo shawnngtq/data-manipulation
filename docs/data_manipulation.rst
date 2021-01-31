@@ -9,6 +9,7 @@ Subpackages
    data_manipulation.base
    data_manipulation.beautifulsoup
    data_manipulation.geopandas
+   data_manipulation.django
    data_manipulation.pandas
    data_manipulation.psycopg2
    data_manipulation.pyspark

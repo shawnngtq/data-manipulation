@@ -19,3 +19,9 @@ def build_soup(url):
         return soup
     else:
         print(f"response status code: {response.status_code}")
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()

@@ -17,12 +17,13 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
     "Programming Language :: Cython",
     "Topic :: Scientific/Engineering",
 ]
 
 DEPENDENCIES = [
-    "numpy", "pandas", "IPython", "requests", "beautifulsoup4", "psycopg2"
+    "beautifulsoup4", "django", "numpy", "pandas", "IPython", "requests", "psycopg2", "pyspark",
 ]
 
 setup(
