@@ -14,7 +14,7 @@ click==7.1.2
 cmarkgfm==0.4.2
 colorama==0.4.3
 cookiecutter==1.7.2
-cryptography==3.2
+cryptography==3.3.2
 cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
