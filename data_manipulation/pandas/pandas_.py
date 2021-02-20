@@ -1,14 +1,9 @@
-import numpy as np
-import pandas as pd
-from IPython.display import display
-
-from data_manipulation.base.base_ import get_none_variation
-
-
 def config_pandas_display():
     """
     Configure Pandas display
     """
+    import pandas as pd
+
     pd.set_option("display.max_columns", 500)
     # pd.set_option("display.max_colwidth", -1)
     pd.set_option("display.max_colwidth", 500)
@@ -39,19 +34,22 @@ def add_type_columns(dataframe):
     pandas.DataFrame
         For each dataframe's column, add a column with it's dtype next to it
     """
-    if not isinstance(dataframe, (pd.DataFrame)):
+    import pandas as pd
+
+    if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
+    output = dataframe.copy()
     suffix = "_type"
-    for column in dataframe.columns:
+    for column in output.columns:
         # To prevent creating (1) duplicated column (2) column with ever-increasing suffix [xxx_type, xxx_type_type ...]
         new_col = column + suffix
-        if not (new_col in dataframe.columns or column.endswith(suffix)):
-            new_col_loc = dataframe.columns.get_loc(column) + 1
-            new_col_value = dataframe[column].apply(lambda x: type(x))
-            dataframe.insert(new_col_loc, column=new_col, value=new_col_value)
-            # dataframe[new_col] = dataframe[column].apply(lambda x: type(x))
-    return dataframe
+        if not (new_col in output.columns or column.endswith(suffix)):
+            new_col_loc = output.columns.get_loc(column) + 1
+            new_col_value = output[column].apply(lambda x: type(x))
+            output.insert(new_col_loc, column=new_col, value=new_col_value)
+            # output[new_col] = output[column].apply(lambda x: type(x))
+    return output
 
 
 def compare_all_list_items(list_):
@@ -65,14 +63,12 @@ def compare_all_list_items(list_):
 
     Examples
     --------
-    >>> input = []
-    >>> compare_all_list_items(input)
+    >>> compare_all_list_items([])
     Empty DataFrame
     Columns: [item1, item2, item1_eq_item2]
     Index: []
 
-    >>> input = [1, 1, 2, 3]
-    >>> compare_all_list_items(input)
+    >>> compare_all_list_items([1, 1, 2, 3])
       item1 item2  item1_eq_item2
     0     1     1            True
     1     1     2           False
@@ -86,17 +82,19 @@ def compare_all_list_items(list_):
     pandas.DataFrame
         Each row represent 1 of all combinations
     """
-    if not isinstance(list_, (list)):
+    import pandas as pd
+    from itertools import combinations
+
+    if not isinstance(list_, list):
         raise TypeError("Argument must be a list ...")
 
-    from itertools import combinations
     result = []
     for a, b in combinations(list_, 2):
         row = {"item1": repr(a), "item2": repr(b), "item1_eq_item2": a == b}
         result.append(row)
 
-    df = pd.DataFrame(result, columns=["item1", "item2", "item1_eq_item2"])
-    return df
+    output = pd.DataFrame(result, columns=["item1", "item2", "item1_eq_item2"])
+    return output
 
 
 def dtypes_dictionary(dataframe):
@@ -126,20 +124,22 @@ def dtypes_dictionary(dataframe):
     dict
         {str: [column1, column2, ...], int: [column5, ...], ...}
     """
-    if not isinstance(dataframe, (pd.DataFrame)):
+    import pandas as pd
+
+    if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
     if len(dataframe) == 0:
         raise ValueError("Argument can't be a empty Pandas dataframe ...")
 
-    dtype_dict = {}
+    output = {}
     for index, value in dataframe.loc[0].iteritems():
         dtype = type(value)
-        if dtype not in dtype_dict:
-            dtype_dict[dtype] = [index]
+        if dtype not in output:
+            output[dtype] = [index]
         else:
-            dtype_dict[dtype].append(index)
+            output[dtype].append(index)
 
-    return dtype_dict
+    return output
 
 
 def head_tail(dataframe, n=5):
@@ -150,6 +150,8 @@ def head_tail(dataframe, n=5):
     ----------
     dataframe: pandas.DataFrame
         Base dataframe
+    n: int
+        Number of rows
 
     Examples
     --------
@@ -174,11 +176,13 @@ def head_tail(dataframe, n=5):
     pandas.DataFrame
         A dataframe containing n head and tail of base dataframe
     """
-    if not isinstance(dataframe, (pd.DataFrame)):
+    import pandas as pd
+
+    if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
-    result = dataframe.head(n).append(dataframe.tail(n))
-    return result
+    output = dataframe.head(n).append(dataframe.tail(n))
+    return output
 
 
 def index_marks(n_rows, chunk_size):
@@ -198,14 +202,14 @@ def index_marks(n_rows, chunk_size):
     -------
     Python range
     """
-    if not all(isinstance(x, (int)) for x in [n_rows, chunk_size]):
+    if not all(isinstance(x, int) for x in [n_rows, chunk_size]):
         raise TypeError("Arguments 1 & 2 must be int ...")
 
     p1 = 1 * chunk_size
     p2 = (n_rows // chunk_size + 1) * chunk_size
     p3 = chunk_size
-    result = range(p1, p2, p3)
-    return result
+    output = range(p1, p2, p3)
+    return output
 
 
 def chunking_dataframe(dataframe, chunk_size):
@@ -262,15 +266,18 @@ def chunking_dataframe(dataframe, chunk_size):
     list
         [dataframe, dataframe2, ...]
     """
-    result = None
-    if not isinstance(dataframe, (pd.DataFrame)):
+    import numpy as np
+    import pandas as pd
+
+    output = None
+    if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
-    if not isinstance(chunk_size, (int)):
+    if not isinstance(chunk_size, int):
         raise TypeError("Argument must be a int ...")
 
     indices = index_marks(dataframe.shape[0], chunk_size)
-    result = np.split(dataframe, indices)
-    return result
+    output = np.split(dataframe, indices)
+    return output
 
 
 def to_excel_keep_url(filepath, dataframe):
@@ -299,7 +306,9 @@ def to_excel_keep_url(filepath, dataframe):
     None
         Pandas dataframe => excel with url as url instead of string
     """
-    if not isinstance(filepath, (str)):
+    import pandas as pd
+
+    if not isinstance(filepath, str):
         raise TypeError("Argument 1 must be a non-empty string ...")
 
     if not isinstance(dataframe, pd.DataFrame):
@@ -308,6 +317,7 @@ def to_excel_keep_url(filepath, dataframe):
     writer = pd.ExcelWriter(filepath, engine="xlsxwriter", options={"strings_to_urls": False})
     dataframe.to_excel(writer, index=False)
     writer.close()
+    print("Excel exported ...")
 
 
 def compare_dataframes(dataframe, dataframe2):
@@ -326,7 +336,9 @@ def compare_dataframes(dataframe, dataframe2):
     None
         Print output comparison between 2 Pandas dataframes
     """
-    if not all(isinstance(x, (pd.DataFrame)) for x in [dataframe, dataframe2]):
+    import pandas as pd
+
+    if not all(isinstance(x, pd.DataFrame) for x in [dataframe, dataframe2]):
         raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
 
     print("=" * len("Pandas dataframe length"))
@@ -361,9 +373,14 @@ def compare_dataframes(dataframe, dataframe2):
                 string_count = len(dataframe[dataframe[column].isin(strings)])
                 empty_string_count = len(dataframe[dataframe[column].str.len() == 0])
                 non_null_count = len(dataframe) - null_count - string_count - empty_string_count
-                print(
-                    "df1 - null ({null_count}) - string null ({string_count}) - empty string ({empty_string_count}) = {non_null_count} == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}")
-        print()
+                print(f"""
+                df1 
+                - null ({null_count}) 
+                - string null ({string_count}) 
+                - empty string ({empty_string_count}) 
+                = {non_null_count} 
+                == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}
+                """)
 
 
 def series_count(series):
@@ -391,7 +408,9 @@ def series_count(series):
     pandas.DataFrame
         Enhanced value_counts() in dataframe
     """
-    if not isinstance(series, (pd.Series)):
+    import pandas as pd
+
+    if not isinstance(series, pd.Series):
         raise TypeError("Argument must be a Pandas series ...")
 
     result = series.value_counts().to_frame(name="count")
@@ -408,6 +427,8 @@ def print_dataframe_overview(dataframe, stats=False):
     ----------
     dataframe: pandas.DataFrame
         Base dataframe
+    stats: bool
+        Display statistics
 
     Examples
     --------
@@ -438,6 +459,9 @@ def print_dataframe_overview(dataframe, stats=False):
     None
         Print output in console
     """
+    import pandas as pd
+    from IPython.display import display
+
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
@@ -470,6 +494,8 @@ def useless_columns(dataframe):
     tuple
         (empty_columns, single_columns)
     """
+    import pandas as pd
+
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
@@ -521,9 +547,12 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
         - Dataframe with merged keys on both input dataframes
         - Dataframe whose merge keys only appear in left / base dataframe
     """
-    if not all(isinstance(x, (pd.DataFrame)) for x in [dataframe, dataframe2]):
+    import pandas as pd
+    from IPython.display import display
+
+    if not all(isinstance(x, pd.DataFrame) for x in [dataframe, dataframe2]):
         raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
-    if not isinstance(columns, (list)):
+    if not isinstance(columns, list):
         raise TypeError("Argument must be a list ...")
 
     df_merged = dataframe.merge(dataframe2, on=columns, how="left", indicator=True, suffixes=("", "_y"))
@@ -561,6 +590,8 @@ def series_to_columns(dataframe, column):
     pandas.DataFrame
         A Pandas dataframe with dictionary column converted to column(s)
     """
+    import pandas as pd
+
     df = pd.concat([dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1)
     return df
 
@@ -612,6 +643,10 @@ def clean_none(dataframe):
     pandas.DataFrame
         A Pandas dataframe with standardized None
     """
+    import numpy as np
+    import pandas as pd
+    from data_manipulation.base.base_ import get_none_variation
+
     dataframe = dataframe.replace(r"^\s*$", np.nan, regex=True)
     non_variations = get_none_variation()
     dataframe = dataframe.replace(non_variations, np.nan)
@@ -621,5 +656,7 @@ def clean_none(dataframe):
 
 if __name__ == "__main__":
     import doctest
+    import pandas as pd
+    from data_manipulation.base.base_ import get_none_variation
 
     doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)

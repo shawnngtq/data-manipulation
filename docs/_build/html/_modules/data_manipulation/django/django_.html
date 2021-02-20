@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.django.django_ &#8212; data_manipulation 0.14 documentation</title>
+    <title>data_manipulation.django.django_ &#8212; data_manipulation 0.15 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.django.django_</a></li> 
       </ul>
@@ -37,24 +37,34 @@
             
   <h1>Source code for data_manipulation.django.django_</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="init_django"><a class="viewcode-back" href="../../../data_manipulation.django.html#data_manipulation.django.django_.init_django">[docs]</a><span></span><span class="k">def</span> <span class="nf">init_django</span><span class="p">(</span><span class="n">project_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Django for jupyter</span>
+<span class="sd">    https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    project_name: str</span>
+<span class="sd">        Django project name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">django</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="kn">import</span> <span class="nn">sys</span>
 
-    <span class="n">PWD</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PWD&#39;</span><span class="p">)</span>
-    <span class="n">PROJ_MISSING_MSG</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Set an enviroment variable:</span><span class="se">\n</span><span class="s2"></span>
+    <span class="n">present_working_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PWD&#39;</span><span class="p">)</span>
+    <span class="n">project_missing_msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Set an environment variable:</span><span class="se">\n</span><span class="s2"></span>
 <span class="s2">    `DJANGO_PROJECT=your_project_name`</span><span class="se">\n</span><span class="s2"></span>
 <span class="s2">    or call:</span><span class="se">\n</span><span class="s2"></span>
 <span class="s2">    `init_django(your_project_name)`</span>
 <span class="s2">    &quot;&quot;&quot;</span>
 
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">PWD</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">present_working_dir</span><span class="p">)</span>
     <span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DJANGO_PROJECT&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">project_name</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">PROJ_MISSING_MSG</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">project_missing_msg</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PWD&#39;</span><span class="p">))</span>
     <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">project_name</span><span class="si">}</span><span class="s1">.settings&#39;</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DJANGO_ALLOW_ASYNC_UNSAFE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
-    <span class="kn">import</span> <span class="nn">django</span>
     <span class="n">django</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span></div>
 
 
@@ -93,7 +103,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.django.django_</a></li> 
       </ul>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base package &#8212; data_manipulation 0.14 documentation</title>
+    <title>data_manipulation.base package &#8212; data_manipulation 0.15 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base package</a></li> 
       </ul>
@@ -51,40 +51,16 @@
 <div class="section" id="module-data_manipulation.base.base_">
 <span id="data-manipulation-base-base-module"></span><h2>data_manipulation.base.base_ module<a class="headerlink" href="#module-data_manipulation.base.base_" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="data_manipulation.base.base_.clean_list">
-<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">clean_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#clean_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.clean_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Clean a given list</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>list</strong> (<em>list</em>) – [anyvalue, anytype, anylength]</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">])</span>
-<span class="go">[&#39;a&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">(</span><span class="n">get_none_variation</span><span class="p">())</span>
-<span class="go">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_list</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">])</span>
-<span class="go">[&#39;a&#39;]</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>[anyvalue, anytype, anylength]</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>List without None variation</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt id="data_manipulation.base.base_.clean_string">
 <code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">clean_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">remove_parenthesis</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">remove_brackets</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#clean_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.clean_string" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Clean string by striping, uppercase and remove multiple whitespaces</p>
 <dl class="simple">
 <dt>string: str</dt><dd><p>String to clean</p>
+</dd>
+<dt>remove_parenthesis: bool</dt><dd><p>To remove parenthesis</p>
+</dd>
+<dt>remove_brackets: bool</dt><dd><p>To remove brackets</p>
 </dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot; sHawn  tesT &quot;</span><span class="p">)</span>
@@ -100,70 +76,6 @@
 <p>Return cleaned string. Note that</p>
 </div></blockquote>
 <p>s will be removed</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="data_manipulation.base.base_.clean_string_representation">
-<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">clean_string_representation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#clean_string_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.clean_string_representation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert string representation of string to string</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>string_str_rep</strong> (<em>str</em>) – “‘str’”</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="go">&#39;&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="go">&#39;test&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&#39;test&#39;&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="go">&#39;test&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s1">&#39;&quot;test&quot;&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string_representation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="go">&#39;test&#39;</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>String instead of string representation</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="data_manipulation.base.base_.get_latest_file">
-<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">get_latest_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">keywords</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#get_latest_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.get_latest_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given path and keywords, return latest file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em>) – Directory path</p></li>
-<li><p><strong>keywords</strong> (<em>list</em>) – List of keywords</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_latest_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
-<span class="go">List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;base_.py&#39;]</span>
-<span class="go">&#39;base_.py&#39;</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Latest file name in directory</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -186,6 +98,34 @@
 </dd></dl>
 
 <dl class="py function">
+<dt id="data_manipulation.base.base_.get_path_file">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">get_path_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">keywords</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#get_path_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.get_path_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given path and keywords, return latest file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Directory path</p></li>
+<li><p><strong>keywords</strong> (<em>list</em>) – List of keywords</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_path_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
+<span class="go">List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
+<span class="go">&#39;base_.py&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Latest file name in directory</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="data_manipulation.base.base_.string_boolean_to_int">
 <code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">string_boolean_to_int</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boolean_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#string_boolean_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.string_boolean_to_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert string boolean to int
@@ -198,17 +138,13 @@
 <p class="rubric">Notes</p>
 <p>Do not use eval() as it’s unsafe</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -222,49 +158,105 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="data_manipulation.base.base_.string_to_dict_list">
-<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">string_to_dict_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#string_to_dict_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.string_to_dict_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert string representation of dictionary/list to dictionary/list</p>
+<dt id="data_manipulation.base.base_.string_dlt_to_dlt">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">string_dlt_to_dlt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dlt_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#string_dlt_to_dlt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.string_dlt_to_dlt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert string representation of dictionary/list/tuple to dictionary/list/tuple</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dictionary_str_rep</strong> (<em>str</em>) – ‘[]’</p>
+<dd class="field-odd"><p><strong>dlt_str_rep</strong> (<em>str</em>) – ‘[]’</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">SyntaxError</span>: <span class="n">unexpected EOF while parsing</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[1, 2, 3]&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">([])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">({})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[1, 2, 3]&quot;</span><span class="p">)</span>
 <span class="go">[1, 2, 3]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[]&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">)</span>
 <span class="go">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span><span class="p">)</span>
 <span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span><span class="p">)</span>
 <span class="go">{&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_dict_list</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span><span class="p">)</span>
 <span class="go">{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)&quot;</span><span class="p">)</span>
+<span class="go">(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Dictionary / List instead of string representation</p>
+<dd class="field-odd"><p>Dictionary / List / Tuple instead of string representation</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict / list</p>
+<dd class="field-even"><p>dict / list / tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="data_manipulation.base.base_.string_str_to_str">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">string_str_to_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string_str_rep</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#string_str_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.string_str_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert string representation of string to string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string_str_rep</strong> (<em>str</em>) – “‘str’”</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="go">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s2">&quot;&#39;test&#39;&quot;</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s1">&#39;&quot;test&quot;&#39;</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>String instead of string representation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="data_manipulation.base.base_.truthy_list_tuple">
+<code class="sig-prename descclassname">data_manipulation.base.base_.</code><code class="sig-name descname">truthy_list_tuple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_tuple</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base/base_.html#truthy_list_tuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.base.base_.truthy_list_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean a given list / tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_tuple</strong> (<em>list / tuple</em>) – [anyvalue, anytype, anylength]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">truthy_list_tuple</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truthy_list_tuple</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">))</span>
+<span class="go">(&#39;a&#39;,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truthy_list_tuple</span><span class="p">(</span><span class="n">get_none_variation</span><span class="p">())</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truthy_list_tuple</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truthy_list_tuple</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+<span class="go">(&#39;a&#39;,)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[anyvalue, anytype, anylength]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List / Tuple without None variation</p>
 </dd>
 </dl>
 </dd></dl>
@@ -334,7 +326,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base package</a></li> 
       </ul>

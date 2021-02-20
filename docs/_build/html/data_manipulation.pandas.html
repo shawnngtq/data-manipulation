@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pandas package &#8212; data_manipulation 0.14 documentation</title>
+    <title>data_manipulation.pandas package &#8212; data_manipulation 0.15 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="data_manipulation.django.html" title="data_manipulation.django package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas package</a></li> 
       </ul>
@@ -202,15 +202,13 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">compare_all_list_items</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compare_all_list_items</span><span class="p">([])</span>
 <span class="go">Empty DataFrame</span>
 <span class="go">Columns: [item1, item2, item1_eq_item2]</span>
 <span class="go">Index: []</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">compare_all_list_items</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compare_all_list_items</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="go">  item1 item2  item1_eq_item2</span>
 <span class="go">0     1     1            True</span>
 <span class="go">1     1     2           False</span>
@@ -295,7 +293,10 @@
 <dd><p>Print the Pandas dataframe first n head and last n tail</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of rows</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -358,7 +359,10 @@
 <dd><p>Print the value_counts() of each column in dataframe</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p></li>
+<li><p><strong>stats</strong> (<em>bool</em>) – Display statistics</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -627,7 +631,7 @@
         <li class="right" >
           <a href="data_manipulation.django.html" title="data_manipulation.django package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas package</a></li> 
       </ul>

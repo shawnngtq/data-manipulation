@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.14 documentation</title>
+    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.15 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base.base_</a></li> 
       </ul>
@@ -36,7 +36,7 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.base.base_</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="clean_string_representation"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.clean_string_representation">[docs]</a><span></span><span class="k">def</span> <span class="nf">clean_string_representation</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">):</span>
+<div class="viewcode-block" id="string_str_to_str"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.string_str_to_str">[docs]</a><span></span><span class="k">def</span> <span class="nf">string_str_to_str</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert string representation of string to string</span>
 
@@ -47,19 +47,14 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; input = 1</span>
-<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;&quot;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(1)</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&quot;&quot;)</span>
 <span class="sd">    &#39;&#39;</span>
-<span class="sd">    &gt;&gt;&gt; input = &#39;test&#39;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&#39;test&#39;)</span>
 <span class="sd">    &#39;test&#39;</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;&#39;test&#39;&quot;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&quot;&#39;test&#39;&quot;)</span>
 <span class="sd">    &#39;test&#39;</span>
-<span class="sd">    &gt;&gt;&gt; input = &#39;&quot;test&quot;&#39;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string_representation(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&#39;&quot;test&quot;&#39;)</span>
 <span class="sd">    &#39;test&#39;</span>
 
 <span class="sd">    Returns</span>
@@ -67,10 +62,10 @@
 <span class="sd">    str</span>
 <span class="sd">        String instead of string representation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">string</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="n">string_str_rep</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">string</span></div>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">string_str_rep</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="string_boolean_to_int"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.string_boolean_to_int">[docs]</a><span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">):</span>
@@ -89,81 +84,70 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;true&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;true&quot;)</span>
 <span class="sd">    1</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;True&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;True&quot;)</span>
 <span class="sd">    1</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;1&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;1&quot;)</span>
 <span class="sd">    1</span>
-<span class="sd">    &gt;&gt;&gt; input = 1</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(1)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    int</span>
 <span class="sd">        0 or 1 instead of &quot;0&quot; or &quot;1&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">boolean</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
         <span class="kn">from</span> <span class="nn">distutils.util</span> <span class="kn">import</span> <span class="n">strtobool</span>
-        <span class="n">boolean</span> <span class="o">=</span> <span class="n">strtobool</span><span class="p">(</span><span class="n">clean_string_representation</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">boolean</span></div>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">strtobool</span><span class="p">(</span><span class="n">string_str_to_str</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
-<div class="viewcode-block" id="string_to_dict_list"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.string_to_dict_list">[docs]</a><span class="k">def</span> <span class="nf">string_to_dict_list</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">):</span>
+<div class="viewcode-block" id="string_dlt_to_dlt"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.string_dlt_to_dlt">[docs]</a><span class="k">def</span> <span class="nf">string_dlt_to_dlt</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert string representation of dictionary/list to dictionary/list</span>
+<span class="sd">    Convert string representation of dictionary/list/tuple to dictionary/list/tuple</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    dictionary_str_rep: str</span>
+<span class="sd">    dlt_str_rep: str</span>
 <span class="sd">        &#39;[]&#39;</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;&quot;)</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">      ...</span>
 <span class="sd">    SyntaxError: unexpected EOF while parsing</span>
-<span class="sd">    &gt;&gt;&gt; input = 0</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
-<span class="sd">    &gt;&gt;&gt; input = []</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
-<span class="sd">    &gt;&gt;&gt; input = {}</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;[1, 2, 3]&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(0)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt([])</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt({})</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[1, 2, 3]&quot;)</span>
 <span class="sd">    [1, 2, 3]</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;[]&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[]&quot;)</span>
 <span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;)</span>
 <span class="sd">    [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;)</span>
 <span class="sd">    {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
-<span class="sd">    &gt;&gt;&gt; input = &quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span>
-<span class="sd">    &gt;&gt;&gt; string_to_dict_list(input)</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;)</span>
 <span class="sd">    {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)&quot;)</span>
+<span class="sd">    (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    dict / list</span>
-<span class="sd">        Dictionary / List instead of string representation</span>
+<span class="sd">    dict / list / tuple</span>
+<span class="sd">        Dictionary / List / Tuple instead of string representation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dict_list</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
         <span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
-        <span class="n">dict_list</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">dictionary_str_rep</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dict_list</span></div>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
-<div class="viewcode-block" id="get_latest_file"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_latest_file">[docs]</a><span class="k">def</span> <span class="nf">get_latest_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
+<div class="viewcode-block" id="get_path_file"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_path_file">[docs]</a><span class="k">def</span> <span class="nf">get_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given path and keywords, return latest file</span>
 
@@ -176,8 +160,8 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_latest_file(&quot;data_manipulation/base&quot;, [&quot;py&quot;])</span>
-<span class="sd">    List of files: [&#39;__init__.py&#39;, &#39;__pycache__&#39;, &#39;base_.py&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; get_path_file(&quot;data_manipulation/base&quot;, [&quot;py&quot;])</span>
+<span class="sd">    List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
 <span class="sd">    &#39;base_.py&#39;</span>
 
 <span class="sd">    Returns</span>
@@ -187,12 +171,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">os</span>
 
-    <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
-            <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of files: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">files</span><span class="p">)</span></div>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of files: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_none_variation"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_none_variation">[docs]</a><span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">():</span>
@@ -217,32 +201,40 @@
     <span class="k">return</span> <span class="n">variations</span></div>
 
 
-<div class="viewcode-block" id="clean_list"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.clean_list">[docs]</a><span class="k">def</span> <span class="nf">clean_list</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
+<div class="viewcode-block" id="truthy_list_tuple"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.truthy_list_tuple">[docs]</a><span class="k">def</span> <span class="nf">truthy_list_tuple</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Clean a given list</span>
+<span class="sd">    Clean a given list / tuple</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    list_: list</span>
+<span class="sd">    list_tuple: list / tuple</span>
 <span class="sd">        [anyvalue, anytype, anylength]</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; clean_list([&quot;a&quot;, &quot;none&quot;])</span>
+<span class="sd">    &gt;&gt;&gt; truthy_list_tuple([&quot;a&quot;, &quot;none&quot;])</span>
 <span class="sd">    [&#39;a&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; clean_list(get_none_variation())</span>
+<span class="sd">    &gt;&gt;&gt; truthy_list_tuple((&quot;a&quot;, &quot;none&quot;))</span>
+<span class="sd">    (&#39;a&#39;,)</span>
+<span class="sd">    &gt;&gt;&gt; truthy_list_tuple(get_none_variation())</span>
 <span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; clean_list([&quot;a&quot;, &quot;none&quot;, &quot;&quot;])</span>
+<span class="sd">    &gt;&gt;&gt; truthy_list_tuple([&quot;a&quot;, &quot;none&quot;, &quot;&quot;])</span>
 <span class="sd">    [&#39;a&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; truthy_list_tuple((&quot;a&quot;, &quot;none&quot;, &quot;&quot;))</span>
+<span class="sd">    (&#39;a&#39;,)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    List without None variation</span>
+<span class="sd">    List / Tuple without None variation</span>
 <span class="sd">        [anyvalue, anytype, anylength]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">none_variations</span> <span class="o">=</span> <span class="n">get_none_variation</span><span class="p">()</span>
-    <span class="n">cleaned_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">cleaned_list</span></div>
+    <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_tuple</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_tuple</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="clean_string"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.clean_string">[docs]</a><span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -253,6 +245,10 @@
 <span class="sd">    ----------</span>
 <span class="sd">    string: str</span>
 <span class="sd">        String to clean</span>
+<span class="sd">    remove_parenthesis: bool</span>
+<span class="sd">        To remove parenthesis</span>
+<span class="sd">    remove_brackets: bool</span>
+<span class="sd">        To remove brackets</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -316,7 +312,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base.base_</a></li> 
       </ul>

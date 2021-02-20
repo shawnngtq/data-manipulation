@@ -1,6 +1,3 @@
-import psycopg2
-
-
 def psy_pg_connect(host, database, username, password):
     """
     Set up a connection to the postgres server
@@ -21,6 +18,8 @@ def psy_pg_connect(host, database, username, password):
     tuple
         (connection, cursor)
     """
+    import psycopg2
+
     connection_string = f"host={host} port=5432 dbname={database} user={username} password={password}"
     connection = psycopg2.connect(connection_string)
     print("PostgreSQL database connected ...")
@@ -51,6 +50,7 @@ def query_to_pandas(sql_query, connection):
         SQL results in Pandas dataframe
     """
     import pandas as pd
+
     return pd.io.sql.read_sql_query(sql_query, connection)
 
 

@@ -1,4 +1,4 @@
-def clean_string_representation(string_str_rep):
+def string_str_to_str(string_str_rep):
     """
     Convert string representation of string to string
 
@@ -9,19 +9,14 @@ def clean_string_representation(string_str_rep):
 
     Examples
     --------
-    >>> input = 1
-    >>> clean_string_representation(input)
-    >>> input = ""
-    >>> clean_string_representation(input)
+    >>> string_str_to_str(1)
+    >>> string_str_to_str("")
     ''
-    >>> input = 'test'
-    >>> clean_string_representation(input)
+    >>> string_str_to_str('test')
     'test'
-    >>> input = "'test'"
-    >>> clean_string_representation(input)
+    >>> string_str_to_str("'test'")
     'test'
-    >>> input = '"test"'
-    >>> clean_string_representation(input)
+    >>> string_str_to_str('"test"')
     'test'
 
     Returns
@@ -29,10 +24,10 @@ def clean_string_representation(string_str_rep):
     str
         String instead of string representation
     """
-    string = None
+    output = None
     if isinstance(string_str_rep, (str)):
-        string = string_str_rep.strip("'\"")
-    return string
+        output = string_str_rep.strip("'\"")
+    return output
 
 
 def string_boolean_to_int(boolean_str_rep):
@@ -51,81 +46,70 @@ def string_boolean_to_int(boolean_str_rep):
 
     Examples
     --------
-    >>> input = "true"
-    >>> string_boolean_to_int(input)
+    >>> string_boolean_to_int("true")
     1
-    >>> input = "True"
-    >>> string_boolean_to_int(input)
+    >>> string_boolean_to_int("True")
     1
-    >>> input = "1"
-    >>> string_boolean_to_int(input)
+    >>> string_boolean_to_int("1")
     1
-    >>> input = 1
-    >>> string_boolean_to_int(input)
+    >>> string_boolean_to_int(1)
 
     Returns
     -------
     int
         0 or 1 instead of "0" or "1"
     """
-    boolean = None
+    output = None
     if isinstance(boolean_str_rep, (str)):
         from distutils.util import strtobool
-        boolean = strtobool(clean_string_representation(boolean_str_rep))
-    return boolean
+        output = strtobool(string_str_to_str(boolean_str_rep))
+    return output
 
 
-def string_to_dict_list(dictionary_str_rep):
+def string_dlt_to_dlt(dlt_str_rep):
     """
-    Convert string representation of dictionary/list to dictionary/list
+    Convert string representation of dictionary/list/tuple to dictionary/list/tuple
 
     Parameters
     ----------
-    dictionary_str_rep: str
+    dlt_str_rep: str
         '[]'
 
     Examples
     --------
-    >>> input = ""
-    >>> string_to_dict_list(input)
+    >>> string_dlt_to_dlt("")
     Traceback (most recent call last):
       ...
     SyntaxError: unexpected EOF while parsing
-    >>> input = 0
-    >>> string_to_dict_list(input)
-    >>> input = []
-    >>> string_to_dict_list(input)
-    >>> input = {}
-    >>> string_to_dict_list(input)
-    >>> input = "[1, 2, 3]"
-    >>> string_to_dict_list(input)
+    >>> string_dlt_to_dlt(0)
+    >>> string_dlt_to_dlt([])
+    >>> string_dlt_to_dlt({})
+    >>> string_dlt_to_dlt("[1, 2, 3]")
     [1, 2, 3]
-    >>> input = "[]"
-    >>> string_to_dict_list(input)
+    >>> string_dlt_to_dlt("[]")
     []
-    >>> input = "['1', '2', '3']"
-    >>> string_to_dict_list(input)
+    >>> string_dlt_to_dlt("['1', '2', '3']")
     ['1', '2', '3']
-    >>> input = "{'a': 1, 'b': 2}"
-    >>> string_to_dict_list(input)
+    >>> string_dlt_to_dlt("{'a': 1, 'b': 2}")
     {'a': 1, 'b': 2}
-    >>> input = "{'a': '1', 'b': '2'}"
-    >>> string_to_dict_list(input)
+    >>> string_dlt_to_dlt("{'a': '1', 'b': '2'}")
     {'a': '1', 'b': '2'}
+    >>> string_dlt_to_dlt("('1', '2', '3')")
+    ('1', '2', '3')
 
     Returns
     -------
-    dict / list
-        Dictionary / List instead of string representation
+    dict / list / tuple
+        Dictionary / List / Tuple instead of string representation
     """
-    dict_list = None
-    if isinstance(dictionary_str_rep, (str)):
+    output = None
+    if isinstance(dlt_str_rep, (str)):
         from ast import literal_eval
-        dict_list = literal_eval(dictionary_str_rep)
-    return dict_list
+        output = literal_eval(dlt_str_rep)
+    return output
 
 
-def get_latest_file(path, keywords):
+def get_path_file(path, keywords):
     """
     Given path and keywords, return latest file
 
@@ -138,8 +122,8 @@ def get_latest_file(path, keywords):
 
     Examples
     --------
-    >>> get_latest_file("data_manipulation/base", ["py"])
-    List of files: ['__init__.py', '__pycache__', 'base_.py']
+    >>> get_path_file("data_manipulation/base", ["py"])
+    List of files: ['__init__.py', 'base_.py']
     'base_.py'
 
     Returns
@@ -149,12 +133,12 @@ def get_latest_file(path, keywords):
     """
     import os
 
-    files = []
+    output = []
     for file in sorted(os.listdir(path)):
         if all(word in file for word in keywords):
-            files.append(file)
-    print(f"List of files: {sorted(files)}")
-    return max(files)
+            output.append(file)
+    print(f"List of files: {sorted(output)}")
+    return max(output)
 
 
 def get_none_variation():
@@ -179,32 +163,40 @@ def get_none_variation():
     return variations
 
 
-def clean_list(list_):
+def truthy_list_tuple(list_tuple):
     """
-    Clean a given list
+    Clean a given list / tuple
 
     Parameters
     ----------
-    list_: list
+    list_tuple: list / tuple
         [anyvalue, anytype, anylength]
 
     Examples
     --------
-    >>> clean_list(["a", "none"])
+    >>> truthy_list_tuple(["a", "none"])
     ['a']
-    >>> clean_list(get_none_variation())
+    >>> truthy_list_tuple(("a", "none"))
+    ('a',)
+    >>> truthy_list_tuple(get_none_variation())
     []
-    >>> clean_list(["a", "none", ""])
+    >>> truthy_list_tuple(["a", "none", ""])
     ['a']
+    >>> truthy_list_tuple(("a", "none", ""))
+    ('a',)
 
     Returns
     -------
-    List without None variation
+    List / Tuple without None variation
         [anyvalue, anytype, anylength]
     """
     none_variations = get_none_variation()
-    cleaned_list = [item for item in list_ if item and item not in none_variations]
-    return cleaned_list
+    output = None
+    if isinstance(list_tuple, list):
+        output = [item for item in list_tuple if item and item not in none_variations]
+    elif isinstance(list_tuple, tuple):
+        output = tuple(item for item in list_tuple if item and item not in none_variations)
+    return output
 
 
 def clean_string(string, remove_parenthesis=False, remove_brackets=False):
@@ -215,6 +207,10 @@ def clean_string(string, remove_parenthesis=False, remove_brackets=False):
     ----------
     string: str
         String to clean
+    remove_parenthesis: bool
+        To remove parenthesis
+    remove_brackets: bool
+        To remove brackets
 
     Examples
     --------

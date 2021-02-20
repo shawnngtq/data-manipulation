@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pandas.pandas_ &#8212; data_manipulation 0.14 documentation</title>
+    <title>data_manipulation.pandas.pandas_ &#8212; data_manipulation 0.15 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas.pandas_</a></li> 
       </ul>
@@ -36,17 +36,12 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.pandas.pandas_</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-
-<span class="kn">from</span> <span class="nn">data_manipulation.base.base_</span> <span class="kn">import</span> <span class="n">get_none_variation</span>
-
-
-<div class="viewcode-block" id="config_pandas_display"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.config_pandas_display">[docs]</a><span class="k">def</span> <span class="nf">config_pandas_display</span><span class="p">():</span>
+<div class="viewcode-block" id="config_pandas_display"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.config_pandas_display">[docs]</a><span></span><span class="k">def</span> <span class="nf">config_pandas_display</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure Pandas display</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_columns&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
     <span class="c1"># pd.set_option(&quot;display.max_colwidth&quot;, -1)</span>
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -77,19 +72,22 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        For each dataframe&#39;s column, add a column with it&#39;s dtype next to it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas dataframe ...&quot;</span><span class="p">)</span>
 
+    <span class="n">output</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">suffix</span> <span class="o">=</span> <span class="s2">&quot;_type&quot;</span>
-    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
         <span class="c1"># To prevent creating (1) duplicated column (2) column with ever-increasing suffix [xxx_type, xxx_type_type ...]</span>
         <span class="n">new_col</span> <span class="o">=</span> <span class="n">column</span> <span class="o">+</span> <span class="n">suffix</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">new_col</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="n">column</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">)):</span>
-            <span class="n">new_col_loc</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">new_col_value</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-            <span class="n">dataframe</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">new_col_loc</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">new_col</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">new_col_value</span><span class="p">)</span>
-            <span class="c1"># dataframe[new_col] = dataframe[column].apply(lambda x: type(x))</span>
-    <span class="k">return</span> <span class="n">dataframe</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">new_col</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="n">column</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">)):</span>
+            <span class="n">new_col_loc</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">new_col_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">new_col_loc</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">new_col</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">new_col_value</span><span class="p">)</span>
+            <span class="c1"># output[new_col] = output[column].apply(lambda x: type(x))</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="compare_all_list_items"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.compare_all_list_items">[docs]</a><span class="k">def</span> <span class="nf">compare_all_list_items</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
@@ -103,14 +101,12 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; input = []</span>
-<span class="sd">    &gt;&gt;&gt; compare_all_list_items(input)</span>
+<span class="sd">    &gt;&gt;&gt; compare_all_list_items([])</span>
 <span class="sd">    Empty DataFrame</span>
 <span class="sd">    Columns: [item1, item2, item1_eq_item2]</span>
 <span class="sd">    Index: []</span>
 
-<span class="sd">    &gt;&gt;&gt; input = [1, 1, 2, 3]</span>
-<span class="sd">    &gt;&gt;&gt; compare_all_list_items(input)</span>
+<span class="sd">    &gt;&gt;&gt; compare_all_list_items([1, 1, 2, 3])</span>
 <span class="sd">      item1 item2  item1_eq_item2</span>
 <span class="sd">    0     1     1            True</span>
 <span class="sd">    1     1     2           False</span>
@@ -124,17 +120,19 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        Each row represent 1 of all combinations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a list ...&quot;</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">list_</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
         <span class="n">row</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;item1&quot;</span><span class="p">:</span> <span class="nb">repr</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="s2">&quot;item2&quot;</span><span class="p">:</span> <span class="nb">repr</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="s2">&quot;item1_eq_item2&quot;</span><span class="p">:</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">}</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;item1&quot;</span><span class="p">,</span> <span class="s2">&quot;item2&quot;</span><span class="p">,</span> <span class="s2">&quot;item1_eq_item2&quot;</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">df</span></div>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;item1&quot;</span><span class="p">,</span> <span class="s2">&quot;item2&quot;</span><span class="p">,</span> <span class="s2">&quot;item1_eq_item2&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="dtypes_dictionary"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.dtypes_dictionary">[docs]</a><span class="k">def</span> <span class="nf">dtypes_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
@@ -164,20 +162,22 @@
 <span class="sd">    dict</span>
 <span class="sd">        {str: [column1, column2, ...], int: [column5, ...], ...}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas dataframe ...&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument can&#39;t be a empty Pandas dataframe ...&quot;</span><span class="p">)</span>
 
-    <span class="n">dtype_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dtype_dict</span><span class="p">:</span>
-            <span class="n">dtype_dict</span><span class="p">[</span><span class="n">dtype</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">dtype</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">dtype_dict</span><span class="p">[</span><span class="n">dtype</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">dtype</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">dtype_dict</span></div>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="head_tail"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.head_tail">[docs]</a><span class="k">def</span> <span class="nf">head_tail</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
@@ -188,6 +188,8 @@
 <span class="sd">    ----------</span>
 <span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Base dataframe</span>
+<span class="sd">    n: int</span>
+<span class="sd">        Number of rows</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -212,11 +214,13 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        A dataframe containing n head and tail of base dataframe</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas dataframe ...&quot;</span><span class="p">)</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="index_marks"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.index_marks">[docs]</a><span class="k">def</span> <span class="nf">index_marks</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
@@ -236,14 +240,14 @@
 <span class="sd">    -------</span>
 <span class="sd">    Python range</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">]):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Arguments 1 &amp; 2 must be int ...&quot;</span><span class="p">)</span>
 
     <span class="n">p1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">chunk_size</span>
     <span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_rows</span> <span class="o">//</span> <span class="n">chunk_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">chunk_size</span>
     <span class="n">p3</span> <span class="o">=</span> <span class="n">chunk_size</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="n">output</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="chunking_dataframe"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.chunking_dataframe">[docs]</a><span class="k">def</span> <span class="nf">chunking_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
@@ -300,15 +304,18 @@
 <span class="sd">    list</span>
 <span class="sd">        [dataframe, dataframe2, ...]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas dataframe ...&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a int ...&quot;</span><span class="p">)</span>
 
     <span class="n">indices</span> <span class="o">=</span> <span class="n">index_marks</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">chunk_size</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="to_excel_keep_url"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.to_excel_keep_url">[docs]</a><span class="k">def</span> <span class="nf">to_excel_keep_url</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">):</span>
@@ -337,7 +344,9 @@
 <span class="sd">    None</span>
 <span class="sd">        Pandas dataframe =&gt; excel with url as url instead of string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 1 must be a non-empty string ...&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
@@ -345,7 +354,8 @@
 
     <span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;xlsxwriter&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;strings_to_urls&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
     <span class="n">dataframe</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+    <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Excel exported ...&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="compare_dataframes"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.compare_dataframes">[docs]</a><span class="k">def</span> <span class="nf">compare_dataframes</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">):</span>
@@ -364,7 +374,9 @@
 <span class="sd">    None</span>
 <span class="sd">        Print output comparison between 2 Pandas dataframes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">]):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">]):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Arguments 1 &amp; 2 must be pandas dataframes ...&quot;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;Pandas dataframe length&quot;</span><span class="p">))</span>
@@ -399,9 +411,14 @@
                 <span class="n">string_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">strings</span><span class="p">)])</span>
                 <span class="n">empty_string_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
                 <span class="n">non_null_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span> <span class="o">-</span> <span class="n">null_count</span> <span class="o">-</span> <span class="n">string_count</span> <span class="o">-</span> <span class="n">empty_string_count</span>
-                <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;df1 - null (</span><span class="si">{null_count}</span><span class="s2">) - string null (</span><span class="si">{string_count}</span><span class="s2">) - empty string (</span><span class="si">{empty_string_count}</span><span class="s2">) = </span><span class="si">{non_null_count}</span><span class="s2"> == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">()</span></div>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                df1 </span>
+<span class="s2">                - null (</span><span class="si">{</span><span class="n">null_count</span><span class="si">}</span><span class="s2">) </span>
+<span class="s2">                - string null (</span><span class="si">{</span><span class="n">string_count</span><span class="si">}</span><span class="s2">) </span>
+<span class="s2">                - empty string (</span><span class="si">{</span><span class="n">empty_string_count</span><span class="si">}</span><span class="s2">) </span>
+<span class="s2">                = </span><span class="si">{</span><span class="n">non_null_count</span><span class="si">}</span><span class="s2"> </span>
+<span class="s2">                == df2 (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pd_df2</span><span class="p">)</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">non_null_count</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd_df2</span><span class="p">)</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">                &quot;&quot;&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="series_count"><a class="viewcode-back" href="../../../data_manipulation.pandas.html#data_manipulation.pandas.pandas_.series_count">[docs]</a><span class="k">def</span> <span class="nf">series_count</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
@@ -429,7 +446,9 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        Enhanced value_counts() in dataframe</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas series ...&quot;</span><span class="p">)</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
@@ -446,6 +465,8 @@
 <span class="sd">    ----------</span>
 <span class="sd">    dataframe: pandas.DataFrame</span>
 <span class="sd">        Base dataframe</span>
+<span class="sd">    stats: bool</span>
+<span class="sd">        Display statistics</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -476,6 +497,9 @@
 <span class="sd">    None</span>
 <span class="sd">        Print output in console</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas dataframe ...&quot;</span><span class="p">)</span>
 
@@ -508,6 +532,8 @@
 <span class="sd">    tuple</span>
 <span class="sd">        (empty_columns, single_columns)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pandas dataframe ...&quot;</span><span class="p">)</span>
 
@@ -559,9 +585,12 @@
 <span class="sd">        - Dataframe with merged keys on both input dataframes</span>
 <span class="sd">        - Dataframe whose merge keys only appear in left / base dataframe</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">]):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">]):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Arguments 1 &amp; 2 must be pandas dataframes ...&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a list ...&quot;</span><span class="p">)</span>
 
     <span class="n">df_merged</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dataframe2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;_y&quot;</span><span class="p">))</span>
@@ -599,6 +628,8 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        A Pandas dataframe with dictionary column converted to column(s)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dataframe</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">column</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dataframe</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span></div>
 
@@ -650,6 +681,10 @@
 <span class="sd">    pandas.DataFrame</span>
 <span class="sd">        A Pandas dataframe with standardized None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">from</span> <span class="nn">data_manipulation.base.base_</span> <span class="kn">import</span> <span class="n">get_none_variation</span>
+
     <span class="n">dataframe</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*$&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">non_variations</span> <span class="o">=</span> <span class="n">get_none_variation</span><span class="p">()</span>
     <span class="n">dataframe</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">non_variations</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
@@ -659,6 +694,8 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">from</span> <span class="nn">data_manipulation.base.base_</span> <span class="kn">import</span> <span class="n">get_none_variation</span>
 
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">NORMALIZE_WHITESPACE</span><span class="p">)</span>
 </pre></div>
@@ -692,7 +729,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.14 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas.pandas_</a></li> 
       </ul>
