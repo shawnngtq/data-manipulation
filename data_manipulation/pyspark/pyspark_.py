@@ -8,7 +8,7 @@ def config_spark():
 
 def to_pandas(dataframe, n=10):
     """
-    Returns a Pandas dataframe
+    Create pandas dataframe from spark's
 
     Parameters
     ----------
@@ -20,24 +20,23 @@ def to_pandas(dataframe, n=10):
     Examples
     --------
     >>> data = {'int_': [1, 2, 3], 'float_': [-1.0, 0.5, 2.7], 'int_array': [[1, 2], [3, 4, 5], [6, 7, 8, 9]], 'str_array': [[], ['a'], ['a','b']], 'str_rep_array': "[[], ['a'], ['a','b']]", 'str_rep_array2': '"[[], [a], [a,b]]"', 'str_': ['null', '', None]}
-    >>> import pandas as pd
-    >>> import pyspark
-    >>> spark = pyspark.sql.SparkSession.builder.master("local").getOrCreate()
-    >>> df_pd = pd.DataFrame(data)
-    >>> df = spark.createDataFrame(df_pd)
+    >>> df = spark.createDataFrame(pd.DataFrame(data))
+    >>> df_pd = to_pandas(df)
+    >>> type(df_pd)
+    <class 'pandas.core.frame.DataFrame'>
 
     Returns
     -------
     pandas.core.frame.DataFrame
-        With default of 10 rows
+        Return pandas dataframe with default 10 rows
     """
     import pyspark
 
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
 
-    df_pandas = dataframe.limit(n).toPandas()
-    return df_pandas
+    output = dataframe.limit(n).toPandas()
+    return output
 
 
 def group_count(dataframe, columns, n=10):
@@ -53,6 +52,20 @@ def group_count(dataframe, columns, n=10):
     n: int / float
         Top n rows
 
+    Examples
+    --------
+    >>> data = {'id': [1,2,3,1,2,3,1,2], 'value': [5,2,123,2135,124390,213,2314,96]}
+    >>> df = spark.createDataFrame(pd.DataFrame(data))
+    >>> group_count(df, ["id"]).show()
+    +---+-----+-------+
+    | id|count|percent|
+    +---+-----+-------+
+    |  1|    3|   37.5|
+    |  2|    3|   37.5|
+    |  3|    2|   25.0|
+    +---+-----+-------+
+    <BLANKLINE>
+
     Returns
     -------
     Spark dataframe
@@ -66,14 +79,14 @@ def group_count(dataframe, columns, n=10):
     if not isinstance(columns, list):
         raise TypeError("Argument must be a list ...")
 
-    df = dataframe.groupBy(columns).count().orderBy("count", ascending=False)
+    output = dataframe.groupBy(columns).count().orderBy("count", ascending=False)
     row_count = dataframe.count()
-    df = df.withColumn("percent", F.round(F.udf(lambda x: x * 100 / row_count)("count"), 3))
+    output = output.withColumn("percent", F.round(F.udf(lambda x: x * 100 / row_count)("count"), 3))
 
     if n != float("inf"):
-        df = df.limit(n)
+        output = output.limit(n)
 
-    return df
+    return output
 
 
 def describe(dataframe):
@@ -294,5 +307,9 @@ def add_dummy_columns(dataframe, columns, value):
 
 if __name__ == "__main__":
     import doctest
+    import pandas as pd
+    import pyspark
+
+    spark = pyspark.sql.SparkSession.builder.master("local").getOrCreate()
 
     doctest.testmod()

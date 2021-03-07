@@ -32,6 +32,7 @@ make html
 versioneer install
 
 # Git tag
+git add .
 git commit -m "something"
 git push
 git tag 0.15

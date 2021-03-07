@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pyspark.pyspark_ &#8212; data_manipulation 0.15 documentation</title>
+    <title>data_manipulation.pyspark.pyspark_ &#8212; data_manipulation 0.16 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark.pyspark_</a></li> 
       </ul>
@@ -46,7 +46,7 @@
 
 <div class="viewcode-block" id="to_pandas"><a class="viewcode-back" href="../../../data_manipulation.pyspark.html#data_manipulation.pyspark.pyspark_.to_pandas">[docs]</a><span class="k">def</span> <span class="nf">to_pandas</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a Pandas dataframe</span>
+<span class="sd">    Create pandas dataframe from spark&#39;s</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -58,24 +58,23 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; data = {&#39;int_&#39;: [1, 2, 3], &#39;float_&#39;: [-1.0, 0.5, 2.7], &#39;int_array&#39;: [[1, 2], [3, 4, 5], [6, 7, 8, 9]], &#39;str_array&#39;: [[], [&#39;a&#39;], [&#39;a&#39;,&#39;b&#39;]], &#39;str_rep_array&#39;: &quot;[[], [&#39;a&#39;], [&#39;a&#39;,&#39;b&#39;]]&quot;, &#39;str_rep_array2&#39;: &#39;&quot;[[], [a], [a,b]]&quot;&#39;, &#39;str_&#39;: [&#39;null&#39;, &#39;&#39;, None]}</span>
-<span class="sd">    &gt;&gt;&gt; import pandas as pd</span>
-<span class="sd">    &gt;&gt;&gt; import pyspark</span>
-<span class="sd">    &gt;&gt;&gt; spark = pyspark.sql.SparkSession.builder.master(&quot;local&quot;).getOrCreate()</span>
-<span class="sd">    &gt;&gt;&gt; df_pd = pd.DataFrame(data)</span>
-<span class="sd">    &gt;&gt;&gt; df = spark.createDataFrame(df_pd)</span>
+<span class="sd">    &gt;&gt;&gt; df = spark.createDataFrame(pd.DataFrame(data))</span>
+<span class="sd">    &gt;&gt;&gt; df_pd = to_pandas(df)</span>
+<span class="sd">    &gt;&gt;&gt; type(df_pd)</span>
+<span class="sd">    &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pandas.core.frame.DataFrame</span>
-<span class="sd">        With default of 10 rows</span>
+<span class="sd">        Return pandas dataframe with default 10 rows</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">pyspark</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
 
-    <span class="n">df_pandas</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">df_pandas</span></div>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="group_count"><a class="viewcode-back" href="../../../data_manipulation.pyspark.html#data_manipulation.pyspark.pyspark_.group_count">[docs]</a><span class="k">def</span> <span class="nf">group_count</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -91,6 +90,20 @@
 <span class="sd">    n: int / float</span>
 <span class="sd">        Top n rows</span>
 
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; data = {&#39;id&#39;: [1,2,3,1,2,3,1,2], &#39;value&#39;: [5,2,123,2135,124390,213,2314,96]}</span>
+<span class="sd">    &gt;&gt;&gt; df = spark.createDataFrame(pd.DataFrame(data))</span>
+<span class="sd">    &gt;&gt;&gt; group_count(df, [&quot;id&quot;]).show()</span>
+<span class="sd">    +---+-----+-------+</span>
+<span class="sd">    | id|count|percent|</span>
+<span class="sd">    +---+-----+-------+</span>
+<span class="sd">    |  1|    3|   37.5|</span>
+<span class="sd">    |  2|    3|   37.5|</span>
+<span class="sd">    |  3|    2|   25.0|</span>
+<span class="sd">    +---+-----+-------+</span>
+<span class="sd">    &lt;BLANKLINE&gt;</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Spark dataframe</span>
@@ -104,14 +117,14 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a list ...&quot;</span><span class="p">)</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">row_count</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">row_count</span><span class="p">)(</span><span class="s2">&quot;count&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">row_count</span><span class="p">)(</span><span class="s2">&quot;count&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">):</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">df</span></div>
+    <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="describe"><a class="viewcode-back" href="../../../data_manipulation.pyspark.html#data_manipulation.pyspark.pyspark_.describe">[docs]</a><span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
@@ -332,6 +345,10 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">pyspark</span>
+
+    <span class="n">spark</span> <span class="o">=</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
 
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
 </pre></div>
@@ -365,7 +382,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark.pyspark_</a></li> 
       </ul>

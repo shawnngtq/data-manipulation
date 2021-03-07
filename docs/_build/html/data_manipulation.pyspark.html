@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pyspark package &#8212; data_manipulation 0.15 documentation</title>
+    <title>data_manipulation.pyspark package &#8212; data_manipulation 0.16 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="data_manipulation.psycopg2.html" title="data_manipulation.psycopg2 package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark package</a></li> 
       </ul>
@@ -186,11 +186,26 @@
 <li><p><strong>n</strong> (<em>int / float</em>) – Top n rows</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The groupby result</p>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">2135</span><span class="p">,</span><span class="mi">124390</span><span class="p">,</span><span class="mi">213</span><span class="p">,</span><span class="mi">2314</span><span class="p">,</span><span class="mi">96</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">+---+-----+-------+</span>
+<span class="go">| id|count|percent|</span>
+<span class="go">+---+-----+-------+</span>
+<span class="go">|  1|    3|   37.5|</span>
+<span class="go">|  2|    3|   37.5|</span>
+<span class="go">|  3|    2|   25.0|</span>
+<span class="go">+---+-----+-------+</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The groupby result</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Spark dataframe</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Spark dataframe</p>
 </dd>
 </dl>
 </dd></dl>
@@ -218,7 +233,7 @@
 <dl class="py function">
 <dt id="data_manipulation.pyspark.pyspark_.to_pandas">
 <code class="sig-prename descclassname">data_manipulation.pyspark.pyspark_.</code><code class="sig-name descname">to_pandas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataframe</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark/pyspark_.html#to_pandas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_manipulation.pyspark.pyspark_.to_pandas" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a Pandas dataframe</p>
+<dd><p>Create pandas dataframe from spark’s</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -229,16 +244,15 @@
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;int_&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;float_&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">],</span> <span class="s1">&#39;int_array&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="s1">&#39;str_array&#39;</span><span class="p">:</span> <span class="p">[[],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]],</span> <span class="s1">&#39;str_rep_array&#39;</span><span class="p">:</span> <span class="s2">&quot;[[], [&#39;a&#39;], [&#39;a&#39;,&#39;b&#39;]]&quot;</span><span class="p">,</span> <span class="s1">&#39;str_rep_array2&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;[[], [a], [a,b]]&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;str_&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyspark</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">spark</span> <span class="o">=</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df_pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">df_pd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_pd</span> <span class="o">=</span> <span class="n">to_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">df_pd</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>With default of 10 rows</p>
+<dd class="field-odd"><p>Return pandas dataframe with default 10 rows</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>pandas.core.frame.DataFrame</p>
@@ -311,7 +325,7 @@
         <li class="right" >
           <a href="data_manipulation.psycopg2.html" title="data_manipulation.psycopg2 package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark package</a></li> 
       </ul>

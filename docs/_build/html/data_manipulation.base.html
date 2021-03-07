@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base package &#8212; data_manipulation 0.15 documentation</title>
+    <title>data_manipulation.base package &#8212; data_manipulation 0.16 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" accesskey="U">data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base package</a></li> 
       </ul>
@@ -56,11 +56,11 @@
 <dd><blockquote>
 <div><p>Clean string by striping, uppercase and remove multiple whitespaces</p>
 <dl class="simple">
-<dt>string: str</dt><dd><p>String to clean</p>
+<dt>string<span class="classifier">str</span></dt><dd><p>String to clean</p>
 </dd>
-<dt>remove_parenthesis: bool</dt><dd><p>To remove parenthesis</p>
+<dt>remove_parenthesis<span class="classifier">bool, optional</span></dt><dd><p>To remove parenthesis</p>
 </dd>
-<dt>remove_brackets: bool</dt><dd><p>To remove brackets</p>
+<dt>remove_brackets<span class="classifier">bool, optional</span></dt><dd><p>To remove brackets</p>
 </dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot; sHawn  tesT &quot;</span><span class="p">)</span>
@@ -73,7 +73,10 @@
 <span class="go">&#39;SHAWN&#39;</span>
 </pre></div>
 </div>
-<p>Return cleaned string. Note that</p>
+<dl class="simple">
+<dt>string<span class="classifier">str</span></dt><dd><p>Return cleaned string. Note that</p>
+</dd>
+</dl>
 </div></blockquote>
 <p>s will be removed</p>
 </dd></dl>
@@ -89,10 +92,10 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p><strong>variation</strong> – List of None variation</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>List of None variation</p>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -110,14 +113,14 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_path_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;py&quot;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_path_file</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;.py&quot;</span><span class="p">])</span>
 <span class="go">List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
 <span class="go">&#39;base_.py&#39;</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Latest file name in directory</p>
+<dd class="field-odd"><p><strong>str_</strong> – Latest file name in directory</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>str</p>
@@ -144,12 +147,11 @@
 <span class="go">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>0 or 1 instead of “0” or “1”</p>
+<dd class="field-odd"><p><strong>int_</strong> – 0 or 1 instead of “0” or “1”</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>int</p>
@@ -171,9 +173,6 @@
 <span class="gt">Traceback (most recent call last):</span>
   <span class="c">...</span>
 <span class="gr">SyntaxError</span>: <span class="n">unexpected EOF while parsing</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">([])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">({})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[1, 2, 3]&quot;</span><span class="p">)</span>
 <span class="go">[1, 2, 3]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">)</span>
@@ -190,10 +189,10 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Dictionary / List / Tuple instead of string representation</p>
+<dd class="field-odd"><p><strong>dlt</strong> – Dictionary or List or Tuple instead of string representation</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict / list / tuple</p>
+<dd class="field-even"><p>dict or list or tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -208,8 +207,7 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="go">&#39;&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
 <span class="go">&#39;test&#39;</span>
@@ -221,7 +219,7 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>String instead of string representation</p>
+<dd class="field-odd"><p><strong>str_</strong> – String instead of string representation</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>str</p>
@@ -235,7 +233,7 @@
 <dd><p>Clean a given list / tuple</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>list_tuple</strong> (<em>list / tuple</em>) – [anyvalue, anytype, anylength]</p>
+<dd class="field-odd"><p><strong>list_tuple</strong> (<em>list</em><em> or </em><em>tuple</em>) – [anyvalue, anytype, anylength]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -253,10 +251,10 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>[anyvalue, anytype, anylength]</p>
+<dd class="field-odd"><p><strong>lt</strong> – [anyvalue, anytype, anylength] without None variation</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>List / Tuple without None variation</p>
+<dd class="field-even"><p>List or Tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -326,7 +324,7 @@
         <li class="right" >
           <a href="data_manipulation.html" title="data_manipulation package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="data_manipulation.html" >data_manipulation package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base package</a></li> 
       </ul>

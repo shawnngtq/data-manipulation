@@ -17,7 +17,7 @@ def add_type_columns(dataframe):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Dataframe to add type columns
 
     Examples
@@ -31,7 +31,7 @@ def add_type_columns(dataframe):
 
     Returns
     -------
-    pandas.DataFrame
+    df : pandas.DataFrame
         For each dataframe's column, add a column with it's dtype next to it
     """
     import pandas as pd
@@ -39,17 +39,17 @@ def add_type_columns(dataframe):
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
-    output = dataframe.copy()
+    df = dataframe.copy()
     suffix = "_type"
-    for column in output.columns:
+    for column in df.columns:
         # To prevent creating (1) duplicated column (2) column with ever-increasing suffix [xxx_type, xxx_type_type ...]
         new_col = column + suffix
-        if not (new_col in output.columns or column.endswith(suffix)):
-            new_col_loc = output.columns.get_loc(column) + 1
-            new_col_value = output[column].apply(lambda x: type(x))
-            output.insert(new_col_loc, column=new_col, value=new_col_value)
-            # output[new_col] = output[column].apply(lambda x: type(x))
-    return output
+        if not (new_col in df.columns or column.endswith(suffix)):
+            new_col_loc = df.columns.get_loc(column) + 1
+            new_col_value = df[column].apply(lambda x: type(x))
+            df.insert(new_col_loc, column=new_col, value=new_col_value)
+            # df[new_col] = df[column].apply(lambda x: type(x))
+    return df
 
 
 def compare_all_list_items(list_):
@@ -58,7 +58,7 @@ def compare_all_list_items(list_):
 
     Parameters
     ----------
-    list_: list
+    list_ : list
         A Python list
 
     Examples
@@ -79,7 +79,7 @@ def compare_all_list_items(list_):
 
     Returns
     -------
-    pandas.DataFrame
+    df : pandas.DataFrame
         Each row represent 1 of all combinations
     """
     import pandas as pd
@@ -88,13 +88,13 @@ def compare_all_list_items(list_):
     if not isinstance(list_, list):
         raise TypeError("Argument must be a list ...")
 
-    result = []
+    df = []
     for a, b in combinations(list_, 2):
         row = {"item1": repr(a), "item2": repr(b), "item1_eq_item2": a == b}
-        result.append(row)
+        df.append(row)
 
-    output = pd.DataFrame(result, columns=["item1", "item2", "item1_eq_item2"])
-    return output
+    df = pd.DataFrame(df, columns=["item1", "item2", "item1_eq_item2"])
+    return df
 
 
 def dtypes_dictionary(dataframe):
@@ -103,7 +103,7 @@ def dtypes_dictionary(dataframe):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Base dataframe
 
     Examples
@@ -121,7 +121,7 @@ def dtypes_dictionary(dataframe):
 
     Returns
     -------
-    dict
+    dict_ : dict
         {str: [column1, column2, ...], int: [column5, ...], ...}
     """
     import pandas as pd
@@ -131,15 +131,15 @@ def dtypes_dictionary(dataframe):
     if len(dataframe) == 0:
         raise ValueError("Argument can't be a empty Pandas dataframe ...")
 
-    output = {}
+    dict_ = {}
     for index, value in dataframe.loc[0].iteritems():
         dtype = type(value)
-        if dtype not in output:
-            output[dtype] = [index]
+        if dtype not in dict_:
+            dict_[dtype] = [index]
         else:
-            output[dtype].append(index)
+            dict_[dtype].append(index)
 
-    return output
+    return dict_
 
 
 def head_tail(dataframe, n=5):
@@ -148,9 +148,9 @@ def head_tail(dataframe, n=5):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Base dataframe
-    n: int
+    n : int, optional
         Number of rows
 
     Examples
@@ -173,7 +173,7 @@ def head_tail(dataframe, n=5):
 
     Returns
     -------
-    pandas.DataFrame
+    df : pandas.DataFrame
         A dataframe containing n head and tail of base dataframe
     """
     import pandas as pd
@@ -181,8 +181,8 @@ def head_tail(dataframe, n=5):
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
 
-    output = dataframe.head(n).append(dataframe.tail(n))
-    return output
+    df = dataframe.head(n).append(dataframe.tail(n))
+    return df
 
 
 def index_marks(n_rows, chunk_size):
@@ -193,14 +193,22 @@ def index_marks(n_rows, chunk_size):
 
     Parameters
     ----------
-    n_rows: int
+    n_rows : int
         The number of rows
-    chunk_size: int
+    chunk_size : int
         The desire chunk size
+
+    Examples
+    --------
+    >>> index_marks(10, 3)
+    range(3, 12, 3)
+    >>> list(index_marks(10, 3))
+    [3, 6, 9]
 
     Returns
     -------
-    Python range
+    range_ : range
+        Python range
     """
     if not all(isinstance(x, int) for x in [n_rows, chunk_size]):
         raise TypeError("Arguments 1 & 2 must be int ...")
@@ -208,8 +216,8 @@ def index_marks(n_rows, chunk_size):
     p1 = 1 * chunk_size
     p2 = (n_rows // chunk_size + 1) * chunk_size
     p3 = chunk_size
-    output = range(p1, p2, p3)
-    return output
+    range_ = range(p1, p2, p3)
+    return range_
 
 
 def chunking_dataframe(dataframe, chunk_size):
@@ -218,9 +226,9 @@ def chunking_dataframe(dataframe, chunk_size):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
-
-    chunk_size: int
+    dataframe : pandas.DataFrame
+        Original dataframe
+    chunk_size : int
         The chunk size of each smaller dataframes
 
     Examples
@@ -263,21 +271,21 @@ def chunking_dataframe(dataframe, chunk_size):
 
     Returns
     -------
-    list
+    list_ : list
         [dataframe, dataframe2, ...]
     """
     import numpy as np
     import pandas as pd
 
-    output = None
+    list_ = None
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a Pandas dataframe ...")
     if not isinstance(chunk_size, int):
         raise TypeError("Argument must be a int ...")
 
     indices = index_marks(dataframe.shape[0], chunk_size)
-    output = np.split(dataframe, indices)
-    return output
+    list_ = np.split(dataframe, indices)
+    return list_
 
 
 def to_excel_keep_url(filepath, dataframe):
@@ -289,17 +297,18 @@ def to_excel_keep_url(filepath, dataframe):
 
     Parameters
     ----------
-    filepath: str
+    filepath : str
         Filepath
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Dataframe to export into excel
 
     Examples
     --------
-    >>> values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    >>> cols = ["test"]
+    >>> values = ["https://www.shawnngtq.com"]
+    >>> cols = ["url"]
     >>> df = pd.DataFrame(values, columns=cols)
     >>> to_excel_keep_url("./tmp.xlsx", df)
+    Excel exported ...
 
     Returns
     -------
@@ -326,10 +335,41 @@ def compare_dataframes(dataframe, dataframe2):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         The Pandas dataframe before DT
-    dataframe2: pandas.DataFrame
+    dataframe2 : pandas.DataFrame
         The Pandas dataframe after DT
+
+    Examples
+    --------
+    >>> df1 = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
+    >>> df1
+       a  b
+    0  1  3
+    1  2  4
+    >>> df2 = df1.copy()
+    >>> df2["a"] = df2["a"].apply(lambda x: x*2)
+    >>> df2
+       a  b
+    0  2  3
+    1  4  4
+    >>> compare_dataframes(df1, df2)
+    =======================
+    Pandas dataframe length
+    =======================
+    df1 (input df)  length: 2
+    df2 (output df) length: 2
+    dataframe length change: True
+    <BLANKLINE>
+    ----------------
+    COMPARE COLUMNS
+    ----------------
+    df1 non-null a: 2
+    df2 non-null a: 2
+    df1 & df2 has the same length
+    df1 non-null b: 2
+    df2 non-null b: 2
+    df1 & df2 has the same length
 
     Returns
     -------
@@ -389,23 +429,23 @@ def series_count(series):
 
     Parameters
     ----------
-    series: pd.Series
+    series : pd.Series
         The series to get value_counts()
 
     Examples
     --------
-    >>> values = [1, 1, 2, 3]
+    >>> values = [1, 1, 1, 2, 2, 3]
     >>> cols = ["test"]
     >>> df = pd.DataFrame(values, columns=cols)
     >>> series_count(df["test"])
-       count  percent
-    1      2     50.0
-    3      1     25.0
-    2      1     25.0
+       count    percent
+    1      3  50.000000
+    2      2  33.333333
+    3      1  16.666667
 
     Returns
     -------
-    pandas.DataFrame
+    df : pandas.DataFrame
         Enhanced value_counts() in dataframe
     """
     import pandas as pd
@@ -413,10 +453,10 @@ def series_count(series):
     if not isinstance(series, pd.Series):
         raise TypeError("Argument must be a Pandas series ...")
 
-    result = series.value_counts().to_frame(name="count")
-    total = result.sum()["count"]
-    result["percent"] = result["count"] / total * 100
-    return result
+    df = series.value_counts().to_frame(name="count")
+    total = df.sum()["count"]
+    df["percent"] = df["count"] / total * 100
+    return df
 
 
 def print_dataframe_overview(dataframe, stats=False):
@@ -425,9 +465,9 @@ def print_dataframe_overview(dataframe, stats=False):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Base dataframe
-    stats: bool
+    stats : bool, optional
         Display statistics
 
     Examples
@@ -486,13 +526,17 @@ def useless_columns(dataframe):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Base dataframe
 
     Returns
     -------
-    tuple
-        (empty_columns, single_columns)
+    empty_columns : list
+        List of empty columns
+    single_columns : list
+        List of single value columns
+
+    (empty_columns, single_columns)
     """
     import pandas as pd
 
@@ -512,40 +556,43 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Based dataframe
-    dataframe2: pandas.DataFrame
+    dataframe2 : pandas.DataFrame
         Dataframe to merged with
-    columns: list
+    columns : list
         Columns to join on
 
     Examples
     --------
-    >>> df1 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'], 'value': [1, 2, 3, 5]})
+    >>> df1 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo', "zen"], 'value': [1, 2, 3, 5, 9]})
     >>> df2 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'], 'value': [5, 6, 7, 8]})
     >>> df_both, df_left = split_left_merged_dataframe(df1, df2, ["key"])
-                count  percent
-    both            6    100.0
-    right_only      0      0.0
-    left_only       0      0.0
+                count    percent
+    both            6  85.714286
+    left_only       1  14.285714
+    right_only      0   0.000000
     >>> df_both
        key  value  value_y _merge
-    0  foo      1        5   both
-    1  foo      1        8   both
-    2  bar      2        6   both
-    3  baz      3        7   both
-    4  foo      5        5   both
-    5  foo      5        8   both
+    0  foo      1      5.0   both
+    1  foo      1      8.0   both
+    2  bar      2      6.0   both
+    3  baz      3      7.0   both
+    4  foo      5      5.0   both
+    5  foo      5      8.0   both
     >>> df_left
-    Empty DataFrame
-    Columns: [key, value, value_y, _merge]
-    Index: []
+       key  value  value_y     _merge
+    6  zen      9      NaN  left_only
+
 
     Returns
     -------
-    2 dataframes
-        - Dataframe with merged keys on both input dataframes
-        - Dataframe whose merge keys only appear in left / base dataframe
+    df_both : pandas.DataFrame
+        Dataframe with merged keys on both input dataframes
+    df_left : pandas.DataFrame
+        Dataframe whose merge keys only appear in left / base dataframe
+
+    (df_both, df_left)
     """
     import pandas as pd
     from IPython.display import display
@@ -568,9 +615,9 @@ def series_to_columns(dataframe, column):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Pandas dataframe
-    column: pd.Series
+    column : pd.Series
         Pandas series with dict dtype
 
     Examples
@@ -587,7 +634,7 @@ def series_to_columns(dataframe, column):
 
     Returns
     -------
-    pandas.DataFrame
+    df : pandas.DataFrame
         A Pandas dataframe with dictionary column converted to column(s)
     """
     import pandas as pd
@@ -602,11 +649,12 @@ def clean_none(dataframe):
 
     Parameters
     ----------
-    dataframe: pandas.DataFrame
+    dataframe : pandas.DataFrame
         Pandas dataframe
 
     Examples
     --------
+    >>> from data_manipulation.base.base_ import get_none_variation
     >>> df = pd.DataFrame({"c1": get_none_variation()})
     >>> clean_none(df)
           c1
@@ -640,23 +688,76 @@ def clean_none(dataframe):
 
     Returns
     -------
-    pandas.DataFrame
+    df : pandas.DataFrame
         A Pandas dataframe with standardized None
     """
     import numpy as np
     import pandas as pd
     from data_manipulation.base.base_ import get_none_variation
 
-    dataframe = dataframe.replace(r"^\s*$", np.nan, regex=True)
+    df = dataframe.copy()
+    df = df.replace(r"^\s*$", np.nan, regex=True)
     non_variations = get_none_variation()
-    dataframe = dataframe.replace(non_variations, np.nan)
-    dataframe = dataframe.where(pd.notnull(dataframe), None)
-    return dataframe
+    df = df.replace(non_variations, np.nan)
+    df = df.where(pd.notnull(df), None)
+    return df
+
+
+def split_dataframe(dataframe, uuid, columns):
+    """
+    Split specific dataframe columns into new dataframe, both dataframes link by uuid
+
+    Parameters
+    ----------
+    dataframe : pandas.DataFrame
+        Original dataframe
+    uuid : str
+        The uuid that can join the splited dataframes
+    columns : list
+        The list of columns to split from original dataframe
+
+    Examples
+    --------
+    >>> df = pd.DataFrame({"a": [1, 2], "b": [2, 3], "uuid": ["abc123", "efg456"]})
+    >>> df1, df2 = split_dataframe(df, "uuid", ["b"])
+    >>> df1
+       a    uuid
+    0  1  abc123
+    1  2  efg456
+    >>> df2
+       b    uuid
+    0  2  abc123
+    1  3  efg456
+    >>> df
+       a  b    uuid
+    0  1  2  abc123
+    1  2  3  efg456
+
+    Returns
+    -------
+    df1: pandas.DataFrame
+        Dataframe without the specific columns
+    df2: pandas.DataFrame
+        Datafrane with specific columns and uuid
+
+    (df1, df2)
+    """
+    import pandas as pd
+
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("Argument 1 must be pandas.DataFrame ...")
+    if not isinstance(uuid, str):
+        raise TypeError("Argument 2 must be str ...")
+    if not isinstance(columns, list):
+        raise TypeError("Argument 3 must be list ...")
+
+    df1 = dataframe[dataframe.columns[~dataframe.columns.isin(columns)]].copy()
+    df2 = dataframe[columns + [uuid]].copy()
+    return df1, df2
 
 
 if __name__ == "__main__":
     import doctest
     import pandas as pd
-    from data_manipulation.base.base_ import get_none_variation
 
     doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)

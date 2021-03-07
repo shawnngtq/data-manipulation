@@ -4,12 +4,11 @@ def string_str_to_str(string_str_rep):
 
     Parameters
     ----------
-    string_str_rep: str
+    string_str_rep : str
         "'str'"
 
     Examples
     --------
-    >>> string_str_to_str(1)
     >>> string_str_to_str("")
     ''
     >>> string_str_to_str('test')
@@ -21,13 +20,13 @@ def string_str_to_str(string_str_rep):
 
     Returns
     -------
-    str
+    str_ : str
         String instead of string representation
     """
-    output = None
-    if isinstance(string_str_rep, (str)):
-        output = string_str_rep.strip("'\"")
-    return output
+    if not isinstance(string_str_rep, str):
+        raise TypeError("Argument must be str ...")
+    str_ = string_str_rep.strip("'\"")
+    return str_
 
 
 def string_boolean_to_int(boolean_str_rep):
@@ -37,7 +36,7 @@ def string_boolean_to_int(boolean_str_rep):
 
     Parameters
     ----------
-    boolean_str_rep: str
+    boolean_str_rep : str
         "True"
 
     Notes
@@ -52,18 +51,18 @@ def string_boolean_to_int(boolean_str_rep):
     1
     >>> string_boolean_to_int("1")
     1
-    >>> string_boolean_to_int(1)
 
     Returns
     -------
-    int
+    int_ : int
         0 or 1 instead of "0" or "1"
     """
-    output = None
-    if isinstance(boolean_str_rep, (str)):
-        from distutils.util import strtobool
-        output = strtobool(string_str_to_str(boolean_str_rep))
-    return output
+    from distutils.util import strtobool
+
+    if not isinstance(boolean_str_rep, str):
+        raise TypeError("Argument must be str ...")
+    int_ = strtobool(string_str_to_str(boolean_str_rep))
+    return int_
 
 
 def string_dlt_to_dlt(dlt_str_rep):
@@ -72,7 +71,7 @@ def string_dlt_to_dlt(dlt_str_rep):
 
     Parameters
     ----------
-    dlt_str_rep: str
+    dlt_str_rep : str
         '[]'
 
     Examples
@@ -81,9 +80,6 @@ def string_dlt_to_dlt(dlt_str_rep):
     Traceback (most recent call last):
       ...
     SyntaxError: unexpected EOF while parsing
-    >>> string_dlt_to_dlt(0)
-    >>> string_dlt_to_dlt([])
-    >>> string_dlt_to_dlt({})
     >>> string_dlt_to_dlt("[1, 2, 3]")
     [1, 2, 3]
     >>> string_dlt_to_dlt("[]")
@@ -99,14 +95,15 @@ def string_dlt_to_dlt(dlt_str_rep):
 
     Returns
     -------
-    dict / list / tuple
-        Dictionary / List / Tuple instead of string representation
+    dlt : dict or list or tuple
+        Dictionary or List or Tuple instead of string representation
     """
-    output = None
-    if isinstance(dlt_str_rep, (str)):
-        from ast import literal_eval
-        output = literal_eval(dlt_str_rep)
-    return output
+    from ast import literal_eval
+
+    if not isinstance(dlt_str_rep, str):
+        raise TypeError("Argument must be str ...")
+    dlt = literal_eval(dlt_str_rep)
+    return dlt
 
 
 def get_path_file(path, keywords):
@@ -115,30 +112,35 @@ def get_path_file(path, keywords):
 
     Parameters
     ----------
-    path: str
+    path : str
         Directory path
-    keywords: list
+    keywords : list
         List of keywords
 
     Examples
     --------
-    >>> get_path_file("data_manipulation/base", ["py"])
+    >>> get_path_file("data_manipulation/base", [".py"])
     List of files: ['__init__.py', 'base_.py']
     'base_.py'
 
     Returns
     -------
-    str
+    str_ : str
         Latest file name in directory
     """
     import os
 
-    output = []
+    if not isinstance(path, str):
+        raise TypeError("Argument 1 must be str ...")
+    if not isinstance(keywords, list):
+        raise TypeError("Argument 2 must be list ...")
+
+    str_ = []
     for file in sorted(os.listdir(path)):
         if all(word in file for word in keywords):
-            output.append(file)
-    print(f"List of files: {sorted(output)}")
-    return max(output)
+            str_.append(file)
+    print(f"List of files: {sorted(str_)}")
+    return max(str_)
 
 
 def get_none_variation():
@@ -152,7 +154,8 @@ def get_none_variation():
 
     Returns
     -------
-    List of None variation
+    variation : list
+        List of None variation
     """
     variations = [
         None, "none", "None", "NONE",
@@ -169,7 +172,7 @@ def truthy_list_tuple(list_tuple):
 
     Parameters
     ----------
-    list_tuple: list / tuple
+    list_tuple : list or tuple
         [anyvalue, anytype, anylength]
 
     Examples
@@ -187,16 +190,17 @@ def truthy_list_tuple(list_tuple):
 
     Returns
     -------
-    List / Tuple without None variation
-        [anyvalue, anytype, anylength]
+    lt : List or Tuple
+        [anyvalue, anytype, anylength] without None variation
     """
     none_variations = get_none_variation()
-    output = None
     if isinstance(list_tuple, list):
-        output = [item for item in list_tuple if item and item not in none_variations]
+        lt = [item for item in list_tuple if item and item not in none_variations]
     elif isinstance(list_tuple, tuple):
-        output = tuple(item for item in list_tuple if item and item not in none_variations)
-    return output
+        lt = tuple(item for item in list_tuple if item and item not in none_variations)
+    else:
+        raise TypeError("Argument must be list or tuple ...")
+    return lt
 
 
 def clean_string(string, remove_parenthesis=False, remove_brackets=False):
@@ -205,11 +209,11 @@ def clean_string(string, remove_parenthesis=False, remove_brackets=False):
 
     Parameters
     ----------
-    string: str
+    string : str
         String to clean
-    remove_parenthesis: bool
+    remove_parenthesis : bool, optional
         To remove parenthesis
-    remove_brackets: bool
+    remove_brackets : bool, optional
         To remove brackets
 
     Examples
@@ -225,9 +229,13 @@ def clean_string(string, remove_parenthesis=False, remove_brackets=False):
 
     Returns
     -------
-    Return cleaned string. Note that \t\n\s will be removed
+    string : str
+        Return cleaned string. Note that \t\n\s will be removed
     """
     import re
+
+    if not isinstance(string, str):
+        raise TypeError("Argument 1 must be str ...")
 
     if remove_parenthesis:
         string = re.sub(r"\(.*\)", "", string)
