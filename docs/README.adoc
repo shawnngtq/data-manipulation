@@ -19,6 +19,8 @@ To make Sphinx documentation work in Github:
 
 [source,bash]
 ----
+cd docs
+
 # Cleanup
 make clean
 
@@ -28,6 +30,7 @@ sphinx-apidoc -o . ../data_manipulation/
 # Generate html
 make html
 
+cd ..
 # Setup versioneer
 versioneer install
 

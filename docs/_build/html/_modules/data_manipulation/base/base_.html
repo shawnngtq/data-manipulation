@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.16 documentation</title>
+    <title>data_manipulation.base.base_ &#8212; data_manipulation 0.17 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.17 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base.base_</a></li> 
       </ul>
@@ -144,7 +144,7 @@
     <span class="k">return</span> <span class="n">dlt</span></div>
 
 
-<div class="viewcode-block" id="get_path_file"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_path_file">[docs]</a><span class="k">def</span> <span class="nf">get_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
+<div class="viewcode-block" id="get_path_files"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_path_files">[docs]</a><span class="k">def</span> <span class="nf">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given path and keywords, return latest file</span>
 
@@ -157,14 +157,13 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_path_file(&quot;data_manipulation/base&quot;, [&quot;.py&quot;])</span>
-<span class="sd">    List of files: [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
-<span class="sd">    &#39;base_.py&#39;</span>
+<span class="sd">    &gt;&gt;&gt; get_path_files(&quot;data_manipulation/base&quot;, [&quot;.py&quot;])</span>
+<span class="sd">    [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    str_ : str</span>
-<span class="sd">        Latest file name in directory</span>
+<span class="sd">    list_ : list</span>
+<span class="sd">        List of files in directory</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">os</span>
 
@@ -173,12 +172,44 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 2 must be list ...&quot;</span><span class="p">)</span>
 
-    <span class="n">str_</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">list_</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
-            <span class="n">str_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List of files: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">str_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">str_</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
+            <span class="n">list_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">list_</span></div>
+
+
+<div class="viewcode-block" id="remove_path_file"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.remove_path_file">[docs]</a><span class="k">def</span> <span class="nf">remove_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Keep latest n files of stated keywords</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: str</span>
+<span class="sd">        Directory path</span>
+<span class="sd">    keywords: list</span>
+<span class="sd">        List of file keywords</span>
+<span class="sd">    n: int, optional</span>
+<span class="sd">        Keep latest n files</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">        Remove all files with specified keywords that are not latest n</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 1 must be str ...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 2 must be list ...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 3 must be int ...&quot;</span><span class="p">)</span>
+
+    <span class="n">to_delete</span> <span class="o">=</span> <span class="n">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="n">keywords</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">to_delete</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> deleted ...&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="get_none_variation"><a class="viewcode-back" href="../../../data_manipulation.base.html#data_manipulation.base.base_.get_none_variation">[docs]</a><span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">():</span>
@@ -320,7 +351,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">data_manipulation 0.17 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base.base_</a></li> 
       </ul>

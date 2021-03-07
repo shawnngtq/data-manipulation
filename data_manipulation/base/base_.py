@@ -106,7 +106,7 @@ def string_dlt_to_dlt(dlt_str_rep):
     return dlt
 
 
-def get_path_file(path, keywords):
+def get_path_files(path, keywords):
     """
     Given path and keywords, return latest file
 
@@ -119,14 +119,13 @@ def get_path_file(path, keywords):
 
     Examples
     --------
-    >>> get_path_file("data_manipulation/base", [".py"])
-    List of files: ['__init__.py', 'base_.py']
-    'base_.py'
+    >>> get_path_files("data_manipulation/base", [".py"])
+    ['__init__.py', 'base_.py']
 
     Returns
     -------
-    str_ : str
-        Latest file name in directory
+    list_ : list
+        List of files in directory
     """
     import os
 
@@ -135,12 +134,44 @@ def get_path_file(path, keywords):
     if not isinstance(keywords, list):
         raise TypeError("Argument 2 must be list ...")
 
-    str_ = []
+    list_ = []
     for file in sorted(os.listdir(path)):
-        if all(word in file for word in keywords):
-            str_.append(file)
-    print(f"List of files: {sorted(str_)}")
-    return max(str_)
+        if any(word in file for word in keywords):
+            list_.append(file)
+    return list_
+
+
+def remove_path_file(path, keywords, n=2):
+    """
+    Keep latest n files of stated keywords
+
+    Parameters
+    ----------
+    path: str
+        Directory path
+    keywords: list
+        List of file keywords
+    n: int, optional
+        Keep latest n files
+
+    Returns
+    -------
+    None
+        Remove all files with specified keywords that are not latest n
+    """
+    import os
+
+    if not isinstance(path, str):
+        raise TypeError("Argument 1 must be str ...")
+    if not isinstance(keywords, list):
+        raise TypeError("Argument 2 must be list ...")
+    if not isinstance(n, int):
+        raise TypeError("Argument 3 must be int ...")
+
+    to_delete = get_path_files(path=path, keywords=keywords)
+    for file in to_delete:
+        os.remove(f"{path}/{file}")
+        print(f"{path}/{file} deleted ...")
 
 
 def get_none_variation():
