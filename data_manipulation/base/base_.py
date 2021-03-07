@@ -168,7 +168,7 @@ def remove_path_file(path, keywords, n=2):
     if not isinstance(n, int):
         raise TypeError("Argument 3 must be int ...")
 
-    to_delete = get_path_files(path=path, keywords=keywords)
+    to_delete = get_path_files(path=path, keywords=keywords)[:-len(keywords)*n]
     for file in to_delete:
         os.remove(f"{path}/{file}")
         print(f"{path}/{file} deleted ...")
