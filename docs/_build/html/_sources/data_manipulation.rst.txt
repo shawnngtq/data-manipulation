@@ -1,19 +1,64 @@
 data\_manipulation package
 ==========================
 
-Subpackages
------------
+Submodules
+----------
 
-.. toctree::
+data\_manipulation.base module
+------------------------------
 
-   data_manipulation.base
-   data_manipulation.beautifulsoup
-   data_manipulation.geopandas
-   data_manipulation.django
-   data_manipulation.pandas
-   data_manipulation.psycopg2
-   data_manipulation.pyspark
-   data_manipulation.visualization
+.. automodule:: data_manipulation.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.beautifulsoup module
+---------------------------------------
+
+.. automodule:: data_manipulation.beautifulsoup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.django module
+--------------------------------
+
+.. automodule:: data_manipulation.django
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.geopandas module
+-----------------------------------
+
+.. automodule:: data_manipulation.geopandas
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.pandas module
+--------------------------------
+
+.. automodule:: data_manipulation.pandas
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.psycopg2 module
+----------------------------------
+
+.. automodule:: data_manipulation.psycopg2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.pyspark module
+---------------------------------
+
+.. automodule:: data_manipulation.pyspark
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------

@@ -14,3 +14,4 @@ conda install tqdm
 conda install twine
 conda install versioneer
 conda install xlsxwriter
+conda install django

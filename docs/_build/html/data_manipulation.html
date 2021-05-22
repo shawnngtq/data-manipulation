@@ -4,17 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation package &#8212; data_manipulation 0.19 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>data_manipulation package &#8212; data_manipulation 0.20 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="data_manipulation.base package" href="data_manipulation.base.html" />
     <link rel="prev" title="Commands" href="commands.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,12 +27,9 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.base.html" title="data_manipulation.base package"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
           <a href="commands.html" title="Commands"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.19 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.20 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>  
@@ -42,67 +39,1184 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="data-manipulation-package">
+  <section id="data-manipulation-package">
 <h1>data_manipulation package<a class="headerlink" href="#data-manipulation-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.base.html">data_manipulation.base package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.base.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.base.html#module-data_manipulation.base.base_">data_manipulation.base.base_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.base.html#module-data_manipulation.base">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.beautifulsoup.html">data_manipulation.beautifulsoup package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.beautifulsoup.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.beautifulsoup.html#module-data_manipulation.beautifulsoup.beautifulsoup_">data_manipulation.beautifulsoup.beautifulsoup_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.beautifulsoup.html#module-data_manipulation.beautifulsoup">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.geopandas.html">data_manipulation.geopandas package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.geopandas.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.geopandas.html#module-data_manipulation.geopandas.geopandas_">data_manipulation.geopandas.geopandas_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.geopandas.html#module-data_manipulation.geopandas">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.django.html">data_manipulation.django package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.django.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.django.html#module-data_manipulation.django.django_">data_manipulation.django.django_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.django.html#module-data_manipulation.django">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.pandas.html">data_manipulation.pandas package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.pandas.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.pandas.html#module-data_manipulation.pandas.pandas_">data_manipulation.pandas.pandas_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.pandas.html#module-data_manipulation.pandas">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.psycopg2.html">data_manipulation.psycopg2 package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.psycopg2.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.psycopg2.html#module-data_manipulation.psycopg2.psycopg2_">data_manipulation.psycopg2.psycopg2_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.psycopg2.html#module-data_manipulation.psycopg2">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.pyspark.html">data_manipulation.pyspark package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.pyspark.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.pyspark.html#module-data_manipulation.pyspark.pyspark_">data_manipulation.pyspark.pyspark_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.pyspark.html#module-data_manipulation.pyspark">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data_manipulation.visualization.html">data_manipulation.visualization package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.visualization.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.visualization.html#module-data_manipulation.visualization.visualize_">data_manipulation.visualization.visualize module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.visualization.html#module-data_manipulation.visualization">Module contents</a></li>
-</ul>
-</li>
-</ul>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-data_manipulation.base">
+<span id="data-manipulation-base-module"></span><h2>data_manipulation.base module<a class="headerlink" href="#module-data_manipulation.base" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.clean_string">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">clean_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_parenthesis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_brackets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#clean_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.clean_string" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that</p>
+</div></blockquote>
+<p>s will be removed</p>
+<blockquote>
+<div><dl class="simple">
+<dt>string<span class="classifier">str</span></dt><dd><p>String to clean</p>
+</dd>
+<dt>remove_parenthesis<span class="classifier">bool, optional</span></dt><dd><p>To remove parenthesis</p>
+</dd>
+<dt>remove_brackets<span class="classifier">bool, optional</span></dt><dd><p>To remove brackets</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot; sHawn  tesT &quot;</span><span class="p">)</span>
+<span class="go">&#39;SHAWN TEST&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn ( te  st )&quot;</span><span class="p">)</span>
+<span class="go">&#39;SHAWN ( TE ST )&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn ( te  st )&quot;</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;SHAWN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn [ te  st ]&quot;</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;SHAWN&#39;</span>
+</pre></div>
 </div>
+<p>string : str</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.get_none_variation">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_none_variation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#get_none_variation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_none_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get List of none variation</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_none_variation</span><span class="p">()</span>
+<span class="go">[None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;nA&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
+</pre></div>
 </div>
-<div class="section" id="module-data_manipulation">
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>variations</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.get_path_files">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_path_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#get_path_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_path_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return sorted list of files from given path and keywords</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path</p></li>
+<li><p><strong>keywords</strong> (<em>list</em>) – List of keywords</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_path_files</span><span class="p">(</span><span class="s2">&quot;data_manipulation/base&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;.py&quot;</span><span class="p">])</span>
+<span class="go">[&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>list_</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.list_tuple_without_none">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">list_tuple_without_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tuple</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#list_tuple_without_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.list_tuple_without_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the given list / tuple without None variation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list_tuple</strong> (<em>list</em><em> or </em><em>tuple</em>) – [anyvalue, anytype, anylength]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">list_tuple_without_none</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_tuple_without_none</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">))</span>
+<span class="go">(&#39;a&#39;,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_tuple_without_none</span><span class="p">(</span><span class="n">get_none_variation</span><span class="p">())</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_tuple_without_none</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">])</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_tuple_without_none</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+<span class="go">(&#39;a&#39;,)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>lt</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List or Tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.remove_path_file">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">remove_path_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyword</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#remove_path_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.remove_path_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove (n-2) oldest files from given path and keyword</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Directory path</p></li>
+<li><p><strong>keyword</strong> (<em>str</em>) – Keyword</p></li>
+<li><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – Keep latest n files</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.string_boolean_to_int">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">string_boolean_to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boolean_str_rep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#string_boolean_to_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.string_boolean_to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return integer from given string boolean. 1 instead of “true”/”True”/”1”</p>
+<p><a class="reference external" href="https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool">https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>boolean_str_rep</strong> (<em>str</em>) – “True”</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Do not use eval() as it’s unsafe</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_boolean_to_int</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>int_</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.string_dlt_to_dlt">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">string_dlt_to_dlt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dlt_str_rep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#string_dlt_to_dlt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.string_dlt_to_dlt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dictionary/list/tuple from given string representation of dictionary/list/tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dlt_str_rep</strong> (<em>str</em>) – ‘[]’</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">SyntaxError</span>: <span class="n">unexpected EOF while parsing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[1, 2, 3]&quot;</span><span class="p">)</span>
+<span class="go">[1, 2, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">)</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span><span class="p">)</span>
+<span class="go">{&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;</span><span class="p">)</span>
+<span class="go">{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_dlt_to_dlt</span><span class="p">(</span><span class="s2">&quot;(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)&quot;</span><span class="p">)</span>
+<span class="go">(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>dlt</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict or list or tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.string_str_to_str">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">string_str_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string_str_rep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#string_str_to_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.string_str_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return string from given string representation of string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string_str_rep</strong> (<em>str</em>) – “‘str’”</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="go">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s2">&quot;&#39;test&#39;&quot;</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_str_to_str</span><span class="p">(</span><span class="s1">&#39;&quot;test&quot;&#39;</span><span class="p">)</span>
+<span class="go">&#39;test&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>str_</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.beautifulsoup">
+<span id="data-manipulation-beautifulsoup-module"></span><h2>data_manipulation.beautifulsoup module<a class="headerlink" href="#module-data_manipulation.beautifulsoup" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.beautifulsoup.build_soup">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.beautifulsoup.</span></span><span class="sig-name descname"><span class="pre">build_soup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/beautifulsoup.html#build_soup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.beautifulsoup.build_soup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Beautifulsoup object from given url</p>
+<dl class="simple">
+<dt>url: str</dt><dd><p>URL</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>BS4 or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.django">
+<span id="data-manipulation-django-module"></span><h2>data_manipulation.django module<a class="headerlink" href="#module-data_manipulation.django" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.django.init_django">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.django.</span></span><span class="sig-name descname"><span class="pre">init_django</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/django.html#init_django"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django.init_django" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup Django in Jupyter</p>
+<p><a class="reference external" href="https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe">https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>project_name</strong> (<em>str</em>) – Django project name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.geopandas">
+<span id="data-manipulation-geopandas-module"></span><h2>data_manipulation.geopandas module<a class="headerlink" href="#module-data_manipulation.geopandas" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.geopandas.haversine_np">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.geopandas.</span></span><span class="sig-name descname"><span class="pre">haversine_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/geopandas.html#haversine_np"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.geopandas.haversine_np" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the great circle distance between two points on the earth (specified in decimal degrees)</p>
+<p>All args must be of equal length.</p>
+<p><a class="reference external" href="https://stackoverflow.com/a/4913653">https://stackoverflow.com/a/4913653</a>
+<a class="reference external" href="https://stackoverflow.com/a/29546836">https://stackoverflow.com/a/29546836</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>longitude1</strong> (<em>float</em>) – Base longitude</p></li>
+<li><p><strong>latitude1</strong> (<em>float</em>) – Base latitude</p></li>
+<li><p><strong>longitude2</strong> (<em>float</em>) – Longitude to compare</p></li>
+<li><p><strong>latitude2</strong> (<em>float</em>) – Latitude to compare</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>km</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.pandas">
+<span id="data-manipulation-pandas-module"></span><h2>data_manipulation.pandas module<a class="headerlink" href="#module-data_manipulation.pandas" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.add_type_columns">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">add_type_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#add_type_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.add_type_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dataframe where each columns has their dtype column right next to it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Dataframe to add type columns</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{},</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int_&quot;</span><span class="p">,</span> <span class="s2">&quot;str_&quot;</span><span class="p">,</span> <span class="s2">&quot;list_&quot;</span><span class="p">,</span> <span class="s2">&quot;set_&quot;</span><span class="p">,</span> <span class="s2">&quot;none_&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_type_columns</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">   int_      int__type str_      str__type list_      list__type set_       set__type none_          none__type _         __type</span>
+<span class="go">0     0  &lt;class &#39;int&#39;&gt;    0  &lt;class &#39;str&#39;&gt;    []  &lt;class &#39;list&#39;&gt;   {}  &lt;class &#39;dict&#39;&gt;  None  &lt;class &#39;NoneType&#39;&gt;    &lt;class &#39;str&#39;&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.chunking_dataframe">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">chunking_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#chunking_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.chunking_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of dataframes split from given dataframe and chunk size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Original dataframe</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – The chunk size of each smaller dataframes</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chunking_dataframe</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[Empty DataFrame</span>
+<span class="go">Columns: []</span>
+<span class="go">Index: []]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chunking_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">[   test</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+<span class="go">3     4</span>
+<span class="go">4     5,    test</span>
+<span class="go">5     6</span>
+<span class="go">6     7</span>
+<span class="go">7     8</span>
+<span class="go">8     9</span>
+<span class="go">9    10, Empty DataFrame</span>
+<span class="go">Columns: [test]</span>
+<span class="go">Index: []]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chunking_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">[   test</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+<span class="go">3     4,    test</span>
+<span class="go">4     5</span>
+<span class="go">5     6</span>
+<span class="go">6     7</span>
+<span class="go">7     8,    test</span>
+<span class="go">8     9</span>
+<span class="go">9    10]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>list_</strong> – [dataframe, dataframe2, …]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.clean_none">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">clean_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_variation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#clean_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.clean_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dataframe from given dataframe with standardized None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Dataframe</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">data_manipulation.base.base_</span> <span class="kn">import</span> <span class="n">get_none_variation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;c1&quot;</span><span class="p">:</span> <span class="n">get_none_variation</span><span class="p">()})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_none</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">      c1</span>
+<span class="go">0   None</span>
+<span class="go">1   None</span>
+<span class="go">2   None</span>
+<span class="go">3   None</span>
+<span class="go">4   None</span>
+<span class="go">5   None</span>
+<span class="go">6   None</span>
+<span class="go">7   None</span>
+<span class="go">8   None</span>
+<span class="go">9   None</span>
+<span class="go">10  None</span>
+<span class="go">11  None</span>
+<span class="go">12  None</span>
+<span class="go">13  None</span>
+<span class="go">14  None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;c1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_none</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">     c1</span>
+<span class="go">0  None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;c1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Nathing&quot;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_none</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">        c1</span>
+<span class="go">0  Nathing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;c1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Na &quot;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean_none</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">    c1</span>
+<span class="go">0  Na</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.compare_all_list_items">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">compare_all_list_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#compare_all_list_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.compare_all_list_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataframe of given list’s Cartesian product</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>list</strong> (<em>list</em>) – A Python list</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compare_all_list_items</span><span class="p">([])</span>
+<span class="go">Empty DataFrame</span>
+<span class="go">Columns: [item1, item2, item1_eq_item2]</span>
+<span class="go">Index: []</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">compare_all_list_items</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">  item1 item2  item1_eq_item2</span>
+<span class="go">0     1     1            True</span>
+<span class="go">1     1     2           False</span>
+<span class="go">2     1     3           False</span>
+<span class="go">3     1     2           False</span>
+<span class="go">4     1     3           False</span>
+<span class="go">5     2     3           False</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.compare_dataframes">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">compare_dataframes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#compare_dataframes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.compare_dataframes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the difference between the two given dataframes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – 1st dataframe</p></li>
+<li><p><strong>dataframe2</strong> (<em>pandas.DataFrame</em>) – 2nd dataframe</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span>
+<span class="go">   a  b</span>
+<span class="go">0  1  3</span>
+<span class="go">1  2  4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
+<span class="go">   a  b</span>
+<span class="go">0  2  3</span>
+<span class="go">1  4  4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare_dataframes</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">)</span>
+<span class="go">=======================</span>
+<span class="go">Dataframe length</span>
+<span class="go">=======================</span>
+<span class="go">df1 length: 2</span>
+<span class="go">df2 length: 2</span>
+<span class="go">same df length: True</span>
+
+<span class="go">----------------</span>
+<span class="go">COMPARE COLUMNS</span>
+<span class="go">----------------</span>
+<span class="go">df1 non-null a: 2</span>
+<span class="go">df2 non-null a: 2</span>
+<span class="go">df1 &amp; df2 has the same length</span>
+<span class="go">df1 non-null b: 2</span>
+<span class="go">df2 non-null b: 2</span>
+<span class="go">df1 &amp; df2 has the same length</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.config_pandas_display">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">config_pandas_display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#config_pandas_display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.config_pandas_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure display</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.dtypes_dictionary">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">dtypes_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#dtypes_dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.dtypes_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dictionary of dtypes from given dataframe’s columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dtypes_dictionary</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Argument can&#39;t be a empty dataframe ...</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{},</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int_&quot;</span><span class="p">,</span> <span class="s2">&quot;str_&quot;</span><span class="p">,</span> <span class="s2">&quot;list_&quot;</span><span class="p">,</span> <span class="s2">&quot;set_&quot;</span><span class="p">,</span> <span class="s2">&quot;none_&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dtypes_dictionary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">{&lt;class &#39;numpy.int64&#39;&gt;: [&#39;int_&#39;], &lt;class &#39;str&#39;&gt;: [&#39;str_&#39;, &#39;_&#39;], &lt;class &#39;list&#39;&gt;: [&#39;list_&#39;], &lt;class &#39;dict&#39;&gt;: [&#39;set_&#39;], &lt;class &#39;NoneType&#39;&gt;: [&#39;none_&#39;]}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>dict_</strong> – {str: [column1, column2, …], int: [column5, …], …}</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.head_tail">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">head_tail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#head_tail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.head_tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataframe from given dataframe with n head and tail</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p></li>
+<li><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">head_tail</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">   test</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+<span class="go">3     4</span>
+<span class="go">4     5</span>
+<span class="go">5     6</span>
+<span class="go">6     7</span>
+<span class="go">7     8</span>
+<span class="go">8     9</span>
+<span class="go">9    10</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.index_marks">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">index_marks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#index_marks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.index_marks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Return Python range from given</dt><dd><ol class="arabic simple">
+<li><p>number of rows</p></li>
+<li><p>desired chunk size</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_rows</strong> (<em>int</em>) – The number of rows</p></li>
+<li><p><strong>chunk_size</strong> (<em>int</em>) – The desire chunk size</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index_marks</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">range(3, 12, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">index_marks</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">[3, 6, 9]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>range_</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>range</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.print_dataframe_overview">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">print_dataframe_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#print_dataframe_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.print_dataframe_overview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the given dataframe’s columns’ value_counts() in console</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p></li>
+<li><p><strong>stats</strong> (<em>bool</em><em>, </em><em>optional</em>) – Display statistics</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">print_dataframe_overview</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;int_&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;str_&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_dataframe_overview</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">==============================</span>
+<span class="go">int_</span>
+<span class="go">==============================</span>
+<span class="go">Unique elements: 2</span>
+<span class="go">Null elements: 0</span>
+<span class="go">   count    percent</span>
+<span class="go">1      2  66.666667</span>
+<span class="go">2      1  33.333333</span>
+<span class="go">==============================</span>
+<span class="go">str_</span>
+<span class="go">==============================</span>
+<span class="go">Unique elements: 2</span>
+<span class="go">Null elements: 0</span>
+<span class="go">   count    percent</span>
+<span class="go">b      2  66.666667</span>
+<span class="go">a      1  33.333333</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.series_count">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">series_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#series_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.series_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataframe with enhanced series.value_counts()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>series</strong> (<em>pd.Series</em>) – The series to get value_counts()</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">series_count</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">])</span>
+<span class="go">   count    percent</span>
+<span class="go">1      3  50.000000</span>
+<span class="go">2      2  33.333333</span>
+<span class="go">3      1  16.666667</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.series_to_columns">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">series_to_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#series_to_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.series_to_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dataframe converted from given dataframe’s dtype column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Dataframe</p></li>
+<li><p><strong>column</strong> (<em>pd.Series</em>) – Series with dict dtype</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c1&quot;</span><span class="p">,</span> <span class="s2">&quot;c2&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   c1                c2</span>
+<span class="go">0   1  {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">series_to_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;c2&quot;</span><span class="p">)</span>
+<span class="go">   c1  a  b</span>
+<span class="go">0   1  1  2</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.split_dataframe">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">split_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#split_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.split_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of dataframes from given dataframe, linked by uuid and have different columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Original dataframe</p></li>
+<li><p><strong>uuid</strong> (<em>str</em>) – The uuid that can join the splited dataframes</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – The list of columns to split from original dataframe</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;abc123&quot;</span><span class="p">,</span> <span class="s2">&quot;efg456&quot;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   a  b    uuid</span>
+<span class="go">0  1  2  abc123</span>
+<span class="go">1  2  3  efg456</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span> <span class="o">=</span> <span class="n">split_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span>
+<span class="go">   a    uuid</span>
+<span class="go">0  1  abc123</span>
+<span class="go">1  2  efg456</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
+<span class="go">   b    uuid</span>
+<span class="go">0  2  abc123</span>
+<span class="go">1  3  efg456</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>df1</strong> (<em>pandas.DataFrame</em>) – Dataframe without specific columns</p></li>
+<li><p><strong>df2</strong> (<em>pandas.DataFrame</em>) – Datafrane with specific columns and uuid</p></li>
+<li><p><em>(df1, df2)</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.split_left_merged_dataframe">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">split_left_merged_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#split_left_merged_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.split_left_merged_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of dataframes split by merged_type after left merging two given dataframes at columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Based dataframe</p></li>
+<li><p><strong>dataframe2</strong> (<em>pandas.DataFrame</em>) – Dataframe to merged with</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – Columns to join on</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s2">&quot;zen&quot;</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_both</span><span class="p">,</span> <span class="n">df_left</span> <span class="o">=</span> <span class="n">split_left_merged_dataframe</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">])</span>
+<span class="go">            count    percent</span>
+<span class="go">both            6  85.714286</span>
+<span class="go">left_only       1  14.285714</span>
+<span class="go">right_only      0   0.000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_both</span>
+<span class="go">   key  value  value_y _merge</span>
+<span class="go">0  foo      1      5.0   both</span>
+<span class="go">1  foo      1      8.0   both</span>
+<span class="go">2  bar      2      6.0   both</span>
+<span class="go">3  baz      3      7.0   both</span>
+<span class="go">4  foo      5      5.0   both</span>
+<span class="go">5  foo      5      8.0   both</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_left</span>
+<span class="go">   key  value  value_y     _merge</span>
+<span class="go">6  zen      9      NaN  left_only</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>df_both</strong> (<em>pandas.DataFrame</em>) – Dataframe with merged keys on both input dataframes</p></li>
+<li><p><strong>df_left</strong> (<em>pandas.DataFrame</em>) – Dataframe whose merge keys only appear in left / base dataframe</p></li>
+<li><p><em>(df_both, df_left)</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.to_excel_keep_url">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">to_excel_keep_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#to_excel_keep_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.to_excel_keep_url" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Save dataframe as excel, without converting urls to strings.</dt><dd><ul class="simple">
+<li><p>Excel auto converts string to urls</p></li>
+<li><p>Excel limit of 65,530 urls per worksheet</p></li>
+<li><p>Excel does not keep url &gt; 255 characters</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – Filepath</p></li>
+<li><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Dataframe to export into excel</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://www.shawnngtq.com&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_excel_keep_url</span><span class="p">(</span><span class="s2">&quot;./tmp.xlsx&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="go">Excel exported ...</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas.useless_columns">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas.</span></span><span class="sig-name descname"><span class="pre">useless_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas.html#useless_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas.useless_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of empty columns and single columns from given dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pandas.DataFrame</em>) – Base dataframe</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>empty_columns</strong> (<em>list</em>) – List of empty columns</p></li>
+<li><p><strong>single_columns</strong> (<em>list</em>) – List of single value columns</p></li>
+<li><p><em>(empty_columns, single_columns)</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.psycopg2">
+<span id="data-manipulation-psycopg2-module"></span><h2>data_manipulation.psycopg2 module<a class="headerlink" href="#module-data_manipulation.psycopg2" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.psycopg2.psy_pg_connect">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2.</span></span><span class="sig-name descname"><span class="pre">psy_pg_connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2.html#psy_pg_connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2.psy_pg_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return connection and cursor of psycopg2 postgres server connection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – Hostname</p></li>
+<li><p><strong>database</strong> (<em>str</em>) – Database name</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Username</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(connection, cursor)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.psycopg2.query_to_pandas">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2.</span></span><span class="sig-name descname"><span class="pre">query_to_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sql_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2.html#query_to_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2.query_to_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Pandas dataframe from result of given SQL query</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query</p></li>
+<li><p><strong>connection</strong> (<em>str</em>) – Connection return by psycopg2</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sql_query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;SELECT * FROM users;&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.core.frame.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.pyspark">
+<span id="data-manipulation-pyspark-module"></span><h2>data_manipulation.pyspark module<a class="headerlink" href="#module-data_manipulation.pyspark" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.add_dummy_columns">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">add_dummy_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#add_dummy_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.add_dummy_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataframe with additional given dummy column(s) and value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – List of column(s)</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – Default value of the new column(s)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Spark dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.column_into_list">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">column_into_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#column_into_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.column_into_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list from given dataframe’s column, with possible duplicates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p></li>
+<li><p><strong>column</strong> (<em>str</em>) – Column in dataframe</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.column_into_set">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">column_into_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#column_into_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.column_into_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return normal set without duplicates from given dataframe’s column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p></li>
+<li><p><strong>column</strong> (<em>str</em>) – Column in dataframe</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>{}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.columns_prefix">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">columns_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#columns_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.columns_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataframe with renamed columns with given prefix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – Prefix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pyspark.sql.dataframe.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.columns_statistics">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">columns_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#columns_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.columns_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display Spark dataframe columns’ statistics and return tuple of empty columns and single columns from given dataframe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p></li>
+<li><p><strong>n</strong> (<em>int / float</em>) – Top n rows</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>([empty columns], [single columns]). empty list &lt;= single list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.config_spark">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">config_spark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#config_spark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.config_spark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure Spark</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.describe">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#describe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display dataframe information similar to Pandas dataframe describe()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.group_count">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">group_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#group_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.group_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe group by column(s), sort in descending order, calculate count and percent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – Spark dataframe</p></li>
+<li><p><strong>columns</strong> (<em>str / list</em>) – List of column(s) to groupby</p></li>
+<li><p><strong>n</strong> (<em>int / float</em>) – Top n rows</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">2135</span><span class="p">,</span><span class="mi">124390</span><span class="p">,</span><span class="mi">213</span><span class="p">,</span><span class="mi">2314</span><span class="p">,</span><span class="mi">96</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">+---+-----+-------+</span>
+<span class="go">| id|count|percent|</span>
+<span class="go">+---+-----+-------+</span>
+<span class="go">|  1|    3|   37.5|</span>
+<span class="go">|  2|    3|   37.5|</span>
+<span class="go">|  3|    2|   25.0|</span>
+<span class="go">+---+-----+-------+</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pyspark.sql.dataframe.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.rename">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#rename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataframe with new renamed column(s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – One Spark dataframe</p></li>
+<li><p><strong>columns</strong> (<em>dict</em>) – A dictionary {oldName: newName} of columns to rename</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pyspark.sql.dataframe.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pyspark.to_pandas">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pyspark.</span></span><span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pyspark.html#to_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pyspark.to_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return pandas dataframe from dataframe with n rows</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pyspark.sql.dataframe.DataFrame</em>) – PySpark dataframe to convert</p></li>
+<li><p><strong>n</strong> (<em>int / float</em>) – Top n rows</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;int_&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;float_&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">],</span> <span class="s1">&#39;int_array&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="s1">&#39;str_array&#39;</span><span class="p">:</span> <span class="p">[[],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]],</span> <span class="s1">&#39;str_rep_array&#39;</span><span class="p">:</span> <span class="s2">&quot;[[], [&#39;a&#39;], [&#39;a&#39;,&#39;b&#39;]]&quot;</span><span class="p">,</span> <span class="s1">&#39;str_rep_array2&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;[[], [a], [a,b]]&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;str_&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_pd</span> <span class="o">=</span> <span class="n">to_pandas</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">df_pd</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.core.frame.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_manipulation" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -114,7 +1228,14 @@
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">data_manipulation package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.base">data_manipulation.base module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.beautifulsoup">data_manipulation.beautifulsoup module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.django">data_manipulation.django module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.geopandas">data_manipulation.geopandas module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.pandas">data_manipulation.pandas module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.psycopg2">data_manipulation.psycopg2 module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.pyspark">data_manipulation.pyspark module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation">Module contents</a></li>
 </ul>
 </li>
@@ -123,9 +1244,6 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="commands.html"
                         title="previous chapter">Commands</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="data_manipulation.base.html"
-                        title="next chapter">data_manipulation.base package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -157,18 +1275,15 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="data_manipulation.base.html" title="data_manipulation.base package"
-             >next</a> |</li>
-        <li class="right" >
           <a href="commands.html" title="Commands"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.19 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.20 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
     </div>
   </body>
 </html>

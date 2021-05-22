@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>data_manipulation.base &#8212; data_manipulation 0.20 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.20 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for data_manipulation.base</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="string_str_to_str"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_str_to_str">[docs]</a><span></span><span class="k">def</span> <span class="nf">string_str_to_str</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return string from given string representation of string</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    string_str_rep : str</span>
+<span class="sd">        &quot;&#39;str&#39;&quot;</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&quot;&quot;)</span>
+<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&#39;test&#39;)</span>
+<span class="sd">    &#39;test&#39;</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&quot;&#39;test&#39;&quot;)</span>
+<span class="sd">    &#39;test&#39;</span>
+<span class="sd">    &gt;&gt;&gt; string_str_to_str(&#39;&quot;test&quot;&#39;)</span>
+<span class="sd">    &#39;test&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str_ : str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be str ...&quot;</span><span class="p">)</span>
+    <span class="n">str_</span> <span class="o">=</span> <span class="n">string_str_rep</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">str_</span></div>
+
+
+<div class="viewcode-block" id="string_boolean_to_int"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_boolean_to_int">[docs]</a><span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return integer from given string boolean. 1 instead of &quot;true&quot;/&quot;True&quot;/&quot;1&quot;</span>
+
+<span class="sd">    https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    boolean_str_rep : str</span>
+<span class="sd">        &quot;True&quot;</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Do not use eval() as it&#39;s unsafe</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;true&quot;)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;True&quot;)</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;1&quot;)</span>
+<span class="sd">    1</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int_ : int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">distutils.util</span> <span class="kn">import</span> <span class="n">strtobool</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be str ...&quot;</span><span class="p">)</span>
+    <span class="n">int_</span> <span class="o">=</span> <span class="n">strtobool</span><span class="p">(</span><span class="n">string_str_to_str</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">int_</span></div>
+
+
+<div class="viewcode-block" id="string_dlt_to_dlt"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_dlt_to_dlt">[docs]</a><span class="k">def</span> <span class="nf">string_dlt_to_dlt</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return dictionary/list/tuple from given string representation of dictionary/list/tuple</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dlt_str_rep : str</span>
+<span class="sd">        &#39;[]&#39;</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;&quot;)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">      ...</span>
+<span class="sd">    SyntaxError: unexpected EOF while parsing</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[1, 2, 3]&quot;)</span>
+<span class="sd">    [1, 2, 3]</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[]&quot;)</span>
+<span class="sd">    []</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;)</span>
+<span class="sd">    [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;)</span>
+<span class="sd">    {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;)</span>
+<span class="sd">    {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)&quot;)</span>
+<span class="sd">    (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dlt : dict or list or tuple</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be str ...&quot;</span><span class="p">)</span>
+    <span class="n">dlt</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dlt</span></div>
+
+
+<div class="viewcode-block" id="get_path_files"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_path_files">[docs]</a><span class="k">def</span> <span class="nf">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return sorted list of files from given path and keywords</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        Path</span>
+<span class="sd">    keywords : list</span>
+<span class="sd">        List of keywords</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_path_files(&quot;data_manipulation/base&quot;, [&quot;.py&quot;])</span>
+<span class="sd">    [&#39;__init__.py&#39;, &#39;base_.py&#39;]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list_ : list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 1 must be str ...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 2 must be list ...&quot;</span><span class="p">)</span>
+
+    <span class="n">list_</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">file</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">):</span>
+            <span class="n">list_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">list_</span></div>
+
+
+<div class="viewcode-block" id="remove_path_file"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.remove_path_file">[docs]</a><span class="k">def</span> <span class="nf">remove_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove (n-2) oldest files from given path and keyword</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: str</span>
+<span class="sd">        Directory path</span>
+<span class="sd">    keyword: str</span>
+<span class="sd">        Keyword</span>
+<span class="sd">    n: int, optional</span>
+<span class="sd">        Keep latest n files</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 1 must be str ...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 2 must be str ...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 3 must be int ...&quot;</span><span class="p">)</span>
+
+    <span class="n">to_delete</span> <span class="o">=</span> <span class="n">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="p">[</span><span class="n">keyword</span><span class="p">])[:</span><span class="o">-</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">to_delete</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> deleted ...&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_none_variation"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_none_variation">[docs]</a><span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get List of none variation</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; get_none_variation()</span>
+<span class="sd">    [None, &#39;none&#39;, &#39;None&#39;, &#39;NONE&#39;, &#39;null&#39;, &#39;Null&#39;, &#39;NULL&#39;, &#39;na&#39;, &#39;Na&#39;, &#39;nA&#39;, &#39;NA&#39;, &#39;N.A&#39;, &#39;N.A.&#39;, &#39;nil&#39;, &#39;Nil&#39;, &#39;NIL&#39;]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    variations : list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">variations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;null&quot;</span><span class="p">,</span> <span class="s2">&quot;Null&quot;</span><span class="p">,</span> <span class="s2">&quot;NULL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;na&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;nA&quot;</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nil&quot;</span><span class="p">,</span> <span class="s2">&quot;Nil&quot;</span><span class="p">,</span> <span class="s2">&quot;NIL&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">variations</span></div>
+
+
+<div class="viewcode-block" id="list_tuple_without_none"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_tuple_without_none">[docs]</a><span class="k">def</span> <span class="nf">list_tuple_without_none</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the given list / tuple without None variation</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    list_tuple : list or tuple</span>
+<span class="sd">        [anyvalue, anytype, anylength]</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; list_tuple_without_none([&quot;a&quot;, &quot;none&quot;])</span>
+<span class="sd">    [&#39;a&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; list_tuple_without_none((&quot;a&quot;, &quot;none&quot;))</span>
+<span class="sd">    (&#39;a&#39;,)</span>
+<span class="sd">    &gt;&gt;&gt; list_tuple_without_none(get_none_variation())</span>
+<span class="sd">    []</span>
+<span class="sd">    &gt;&gt;&gt; list_tuple_without_none([&quot;a&quot;, &quot;none&quot;, &quot;&quot;])</span>
+<span class="sd">    [&#39;a&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; list_tuple_without_none((&quot;a&quot;, &quot;none&quot;, &quot;&quot;))</span>
+<span class="sd">    (&#39;a&#39;,)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    lt : List or Tuple</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">none_variations</span> <span class="o">=</span> <span class="n">get_none_variation</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">lt</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_tuple</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">lt</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_tuple</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">none_variations</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be list or tuple ...&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lt</span></div>
+
+
+<div class="viewcode-block" id="clean_string"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.clean_string">[docs]</a><span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that \t\n\s will be removed</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    string : str</span>
+<span class="sd">        String to clean</span>
+<span class="sd">    remove_parenthesis : bool, optional</span>
+<span class="sd">        To remove parenthesis</span>
+<span class="sd">    remove_brackets : bool, optional</span>
+<span class="sd">        To remove brackets</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot; sHawn  tesT &quot;)</span>
+<span class="sd">    &#39;SHAWN TEST&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;)</span>
+<span class="sd">    &#39;SHAWN ( TE ST )&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;, remove_parenthesis=True)</span>
+<span class="sd">    &#39;SHAWN&#39;</span>
+<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn [ te  st ]&quot;, remove_brackets=True)</span>
+<span class="sd">    &#39;SHAWN&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string : str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument 1 must be str ...&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remove_parenthesis</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(.*\)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">remove_brackets</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[.*\]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+
+    <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">string</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.20 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+    </div>
+  </body>
+</html>
