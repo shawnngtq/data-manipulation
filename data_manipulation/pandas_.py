@@ -708,7 +708,7 @@ def clean_none(dataframe, clean_variation=True):
     """
     import numpy as np
     import pandas as pd
-    from base import get_none_variation
+    from data_manipulation.base import get_none_variation
 
     df = dataframe.copy()
     df = df.replace(r"^\s*$", np.nan, regex=True)
