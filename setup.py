@@ -23,7 +23,13 @@ CLASSIFIERS = [
 ]
 
 DEPENDENCIES = [
-    "beautifulsoup4", "django", "numpy", "pandas", "IPython", "requests", "psycopg2", "pyspark",
+    "beautifulsoup4", "lxml",
+    "django",
+    "numpy",
+    "pandas",
+    "IPython", "requests",
+    "psycopg2",
+    "pyspark",
 ]
 
 setup(

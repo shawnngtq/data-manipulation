@@ -12,50 +12,50 @@ data\_manipulation.base module
    :undoc-members:
    :show-inheritance:
 
-data\_manipulation.beautifulsoup module
----------------------------------------
+data\_manipulation.beautifulsoup\_ module
+-----------------------------------------
 
-.. automodule:: data_manipulation.beautifulsoup
+.. automodule:: data_manipulation.beautifulsoup_
    :members:
    :undoc-members:
    :show-inheritance:
 
-data\_manipulation.django module
---------------------------------
-
-.. automodule:: data_manipulation.django
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-data\_manipulation.geopandas module
------------------------------------
-
-.. automodule:: data_manipulation.geopandas
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-data\_manipulation.pandas module
---------------------------------
-
-.. automodule:: data_manipulation.pandas
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-data\_manipulation.psycopg2 module
+data\_manipulation.django\_ module
 ----------------------------------
 
-.. automodule:: data_manipulation.psycopg2
+.. automodule:: data_manipulation.django_
    :members:
    :undoc-members:
    :show-inheritance:
 
-data\_manipulation.pyspark module
----------------------------------
+data\_manipulation.geopandas\_ module
+-------------------------------------
 
-.. automodule:: data_manipulation.pyspark
+.. automodule:: data_manipulation.geopandas_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.pandas\_ module
+----------------------------------
+
+.. automodule:: data_manipulation.pandas_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.psycopg2\_ module
+------------------------------------
+
+.. automodule:: data_manipulation.psycopg2_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.pyspark\_ module
+-----------------------------------
+
+.. automodule:: data_manipulation.pyspark_
    :members:
    :undoc-members:
    :show-inheritance:

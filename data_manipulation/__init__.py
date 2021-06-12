@@ -1,5 +1,5 @@
 from data_manipulation import (
-    base, beautifulsoup, django, geopandas, pandas, psycopg2, pyspark,
+    base, beautifulsoup_, django_, geopandas_, pandas_, psycopg2_, pyspark_,
 )
 
 from ._version import get_versions

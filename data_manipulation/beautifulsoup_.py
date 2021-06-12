@@ -2,8 +2,16 @@ def build_soup(url):
     """
     Return Beautifulsoup object from given url
 
+    Parameters
+    ----------
     url: str
         URL
+
+    Examples
+    --------
+    >>> a = build_soup("https://google.com")
+    >>> type(a)
+    <class 'bs4.BeautifulSoup'>
 
     Returns
     -------

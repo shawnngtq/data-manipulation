@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pandas &#8212; data_manipulation 0.21 documentation</title>
+    <title>data_manipulation.pandas_ &#8212; data_manipulation 0.22 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -24,9 +24,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.21 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.22 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas</a></li> 
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas_</a></li> 
       </ul>
     </div>  
 
@@ -35,8 +35,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for data_manipulation.pandas</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="config_pandas_display"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.config_pandas_display">[docs]</a><span></span><span class="k">def</span> <span class="nf">config_pandas_display</span><span class="p">():</span>
+  <h1>Source code for data_manipulation.pandas_</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="config_pandas_display"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.config_pandas_display">[docs]</a><span></span><span class="k">def</span> <span class="nf">config_pandas_display</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Configure display</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -49,7 +49,7 @@
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.expand_frame_repr&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="add_type_columns"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.add_type_columns">[docs]</a><span class="k">def</span> <span class="nf">add_type_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+<div class="viewcode-block" id="add_type_columns"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.add_type_columns">[docs]</a><span class="k">def</span> <span class="nf">add_type_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns dataframe where each columns has their dtype column right next to it</span>
 
@@ -63,6 +63,9 @@
 <span class="sd">    &gt;&gt;&gt; values = [[0, &#39;0&#39;, [], {}, None, &quot;&quot;]]</span>
 <span class="sd">    &gt;&gt;&gt; cols = [&quot;int_&quot;, &quot;str_&quot;, &quot;list_&quot;, &quot;set_&quot;, &quot;none_&quot;, &quot;_&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(values, columns=cols)</span>
+<span class="sd">    &gt;&gt;&gt; df</span>
+<span class="sd">       int_ str_ list_ set_ none_ _</span>
+<span class="sd">    0     0    0    []   {}  None</span>
 <span class="sd">    &gt;&gt;&gt; add_type_columns(df)</span>
 <span class="sd">       int_      int__type str_      str__type list_      list__type set_       set__type none_          none__type _         __type</span>
 <span class="sd">    0     0  &lt;class &#39;int&#39;&gt;    0  &lt;class &#39;str&#39;&gt;    []  &lt;class &#39;list&#39;&gt;   {}  &lt;class &#39;dict&#39;&gt;  None  &lt;class &#39;NoneType&#39;&gt;    &lt;class &#39;str&#39;&gt;</span>
@@ -89,7 +92,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="compare_all_list_items"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.compare_all_list_items">[docs]</a><span class="k">def</span> <span class="nf">compare_all_list_items</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
+<div class="viewcode-block" id="compare_all_list_items"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.compare_all_list_items">[docs]</a><span class="k">def</span> <span class="nf">compare_all_list_items</span><span class="p">(</span><span class="n">list_</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return dataframe of given list&#39;s Cartesian product</span>
 
@@ -133,7 +136,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="dtypes_dictionary"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.dtypes_dictionary">[docs]</a><span class="k">def</span> <span class="nf">dtypes_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+<div class="viewcode-block" id="dtypes_dictionary"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.dtypes_dictionary">[docs]</a><span class="k">def</span> <span class="nf">dtypes_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return dictionary of dtypes from given dataframe&#39;s columns</span>
 
@@ -152,6 +155,9 @@
 <span class="sd">    &gt;&gt;&gt; values = [[0, &#39;0&#39;, [], {}, None, &quot;&quot;]]</span>
 <span class="sd">    &gt;&gt;&gt; cols = [&quot;int_&quot;, &quot;str_&quot;, &quot;list_&quot;, &quot;set_&quot;, &quot;none_&quot;, &quot;_&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(values, columns=cols)</span>
+<span class="sd">    &gt;&gt;&gt; df</span>
+<span class="sd">       int_ str_ list_ set_ none_ _</span>
+<span class="sd">    0     0    0    []   {}  None</span>
 <span class="sd">    &gt;&gt;&gt; dtypes_dictionary(df)</span>
 <span class="sd">    {&lt;class &#39;numpy.int64&#39;&gt;: [&#39;int_&#39;], &lt;class &#39;str&#39;&gt;: [&#39;str_&#39;, &#39;_&#39;], &lt;class &#39;list&#39;&gt;: [&#39;list_&#39;], &lt;class &#39;dict&#39;&gt;: [&#39;set_&#39;], &lt;class &#39;NoneType&#39;&gt;: [&#39;none_&#39;]}</span>
 
@@ -178,7 +184,7 @@
     <span class="k">return</span> <span class="n">dict_</span></div>
 
 
-<div class="viewcode-block" id="head_tail"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.head_tail">[docs]</a><span class="k">def</span> <span class="nf">head_tail</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="head_tail"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.head_tail">[docs]</a><span class="k">def</span> <span class="nf">head_tail</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return dataframe from given dataframe with n head and tail</span>
 
@@ -220,7 +226,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="index_marks"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.index_marks">[docs]</a><span class="k">def</span> <span class="nf">index_marks</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
+<div class="viewcode-block" id="index_marks"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.index_marks">[docs]</a><span class="k">def</span> <span class="nf">index_marks</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return Python range from given</span>
 <span class="sd">        1. number of rows</span>
@@ -254,7 +260,7 @@
     <span class="k">return</span> <span class="n">range_</span></div>
 
 
-<div class="viewcode-block" id="chunking_dataframe"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.chunking_dataframe">[docs]</a><span class="k">def</span> <span class="nf">chunking_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
+<div class="viewcode-block" id="chunking_dataframe"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.chunking_dataframe">[docs]</a><span class="k">def</span> <span class="nf">chunking_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return list of dataframes split from given dataframe and chunk size</span>
 
@@ -322,7 +328,7 @@
     <span class="k">return</span> <span class="n">list_</span></div>
 
 
-<div class="viewcode-block" id="to_excel_keep_url"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.to_excel_keep_url">[docs]</a><span class="k">def</span> <span class="nf">to_excel_keep_url</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">):</span>
+<div class="viewcode-block" id="to_excel_keep_url"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.to_excel_keep_url">[docs]</a><span class="k">def</span> <span class="nf">to_excel_keep_url</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Save dataframe as excel, without converting urls to strings.</span>
 <span class="sd">        - Excel auto converts string to urls</span>
@@ -341,7 +347,7 @@
 <span class="sd">    &gt;&gt;&gt; values = [&quot;https://www.shawnngtq.com&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; cols = [&quot;url&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(values, columns=cols)</span>
-<span class="sd">    &gt;&gt;&gt; to_excel_keep_url(&quot;./tmp.xlsx&quot;, df)</span>
+<span class="sd">    &gt;&gt;&gt; to_excel_keep_url(&quot;test_pandas_folder/tmp.xlsx&quot;, df)</span>
 <span class="sd">    Excel exported ...</span>
 
 <span class="sd">    Returns</span>
@@ -362,7 +368,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Excel exported ...&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="compare_dataframes"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.compare_dataframes">[docs]</a><span class="k">def</span> <span class="nf">compare_dataframes</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">):</span>
+<div class="viewcode-block" id="compare_dataframes"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.compare_dataframes">[docs]</a><span class="k">def</span> <span class="nf">compare_dataframes</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print the difference between the two given dataframes</span>
 
@@ -387,9 +393,9 @@
 <span class="sd">    0  2  3</span>
 <span class="sd">    1  4  4</span>
 <span class="sd">    &gt;&gt;&gt; compare_dataframes(df1, df2)</span>
-<span class="sd">    =======================</span>
+<span class="sd">    ================</span>
 <span class="sd">    Dataframe length</span>
-<span class="sd">    =======================</span>
+<span class="sd">    ================</span>
 <span class="sd">    df1 length: 2</span>
 <span class="sd">    df2 length: 2</span>
 <span class="sd">    same df length: True</span>
@@ -455,7 +461,7 @@
 <span class="s2">                &quot;&quot;&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="series_count"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.series_count">[docs]</a><span class="k">def</span> <span class="nf">series_count</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+<div class="viewcode-block" id="series_count"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.series_count">[docs]</a><span class="k">def</span> <span class="nf">series_count</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return dataframe with enhanced series.value_counts()</span>
 
@@ -490,7 +496,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="print_dataframe_overview"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.print_dataframe_overview">[docs]</a><span class="k">def</span> <span class="nf">print_dataframe_overview</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="print_dataframe_overview"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.print_dataframe_overview">[docs]</a><span class="k">def</span> <span class="nf">print_dataframe_overview</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print the given dataframe&#39;s columns&#39; value_counts() in console</span>
 
@@ -550,7 +556,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to get value_counts of </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2"> ...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="useless_columns"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.useless_columns">[docs]</a><span class="k">def</span> <span class="nf">useless_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+<div class="viewcode-block" id="useless_columns"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.useless_columns">[docs]</a><span class="k">def</span> <span class="nf">useless_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return tuple of empty columns and single columns from given dataframe</span>
 
@@ -580,7 +586,7 @@
     <span class="k">return</span> <span class="n">empty_columns</span><span class="p">,</span> <span class="n">single_columns</span></div>
 
 
-<div class="viewcode-block" id="split_left_merged_dataframe"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.split_left_merged_dataframe">[docs]</a><span class="k">def</span> <span class="nf">split_left_merged_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+<div class="viewcode-block" id="split_left_merged_dataframe"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.split_left_merged_dataframe">[docs]</a><span class="k">def</span> <span class="nf">split_left_merged_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return tuple of dataframes split by merged_type after left merging two given dataframes at columns</span>
 <span class="sd">    </span>
@@ -639,7 +645,7 @@
     <span class="k">return</span> <span class="n">df_both</span><span class="p">,</span> <span class="n">df_left</span></div>
 
 
-<div class="viewcode-block" id="series_to_columns"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.series_to_columns">[docs]</a><span class="k">def</span> <span class="nf">series_to_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+<div class="viewcode-block" id="series_to_columns"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.series_to_columns">[docs]</a><span class="k">def</span> <span class="nf">series_to_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a dataframe converted from given dataframe&#39;s dtype column</span>
 
@@ -672,7 +678,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="clean_none"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.clean_none">[docs]</a><span class="k">def</span> <span class="nf">clean_none</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">clean_variation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="clean_none"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.clean_none">[docs]</a><span class="k">def</span> <span class="nf">clean_none</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">clean_variation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a dataframe from given dataframe with standardized None</span>
 
@@ -683,8 +689,26 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; from data_manipulation.base.base_ import get_none_variation</span>
+<span class="sd">    &gt;&gt;&gt; from base import get_none_variation</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;c1&quot;: get_none_variation()})</span>
+<span class="sd">    &gt;&gt;&gt; df</span>
+<span class="sd">          c1</span>
+<span class="sd">    0   None</span>
+<span class="sd">    1   none</span>
+<span class="sd">    2   None</span>
+<span class="sd">    3   NONE</span>
+<span class="sd">    4   null</span>
+<span class="sd">    5   Null</span>
+<span class="sd">    6   NULL</span>
+<span class="sd">    7     na</span>
+<span class="sd">    8     Na</span>
+<span class="sd">    9     nA</span>
+<span class="sd">    10    NA</span>
+<span class="sd">    11   N.A</span>
+<span class="sd">    12  N.A.</span>
+<span class="sd">    13   nil</span>
+<span class="sd">    14   Nil</span>
+<span class="sd">    15   NIL</span>
 <span class="sd">    &gt;&gt;&gt; clean_none(df)</span>
 <span class="sd">          c1</span>
 <span class="sd">    0   None</span>
@@ -702,6 +726,7 @@
 <span class="sd">    12  None</span>
 <span class="sd">    13  None</span>
 <span class="sd">    14  None</span>
+<span class="sd">    15  None</span>
 <span class="sd">    &gt;&gt;&gt; df = pd.DataFrame({&quot;c1&quot;: [&quot;&quot;]})</span>
 <span class="sd">    &gt;&gt;&gt; clean_none(df)</span>
 <span class="sd">         c1</span>
@@ -721,7 +746,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-    <span class="kn">from</span> <span class="nn">data_manipulation.base.base_</span> <span class="kn">import</span> <span class="n">get_none_variation</span>
+    <span class="kn">from</span> <span class="nn">base</span> <span class="kn">import</span> <span class="n">get_none_variation</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*$&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -732,7 +757,7 @@
     <span class="k">return</span> <span class="n">df</span></div>
 
 
-<div class="viewcode-block" id="split_dataframe"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas.split_dataframe">[docs]</a><span class="k">def</span> <span class="nf">split_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+<div class="viewcode-block" id="split_dataframe"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.split_dataframe">[docs]</a><span class="k">def</span> <span class="nf">split_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return tuple of dataframes from given dataframe, linked by uuid and have different columns</span>
 
@@ -788,8 +813,11 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">subprocess</span>
 
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;mkdir -p test_pandas_folder&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">)</span>
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">NORMALIZE_WHITESPACE</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;rm -rf test_pandas_folder&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">)</span>
 </pre></div>
 
             <div class="clearer"></div>
@@ -821,9 +849,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.21 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.22 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas</a></li> 
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

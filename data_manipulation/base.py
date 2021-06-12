@@ -30,9 +30,7 @@ def string_str_to_str(string_str_rep):
 
 def string_boolean_to_int(boolean_str_rep):
     """
-    Return integer from given string boolean. 1 instead of "true"/"True"/"1"
-
-    https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool
+    Return integer from given string boolean. 1 instead of "true"/"True"/"1". Reference from https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool
 
     Parameters
     ----------
@@ -117,8 +115,8 @@ def get_path_files(path, keywords):
 
     Examples
     --------
-    >>> get_path_files("data_manipulation/base", [".py"])
-    ['__init__.py', 'base_.py']
+    >>> get_path_files("test_base_folder", ["py"])
+    ['test1.py', 'test2.py', 'test3.py', 'test4.py', 'test5.py']
 
     Returns
     -------
@@ -150,6 +148,17 @@ def remove_path_file(path, keyword, n=2):
         Keyword
     n: int, optional
         Keep latest n files
+
+    Examples
+    --------
+    >>> get_path_files("test_base_folder", ["py"])
+    ['test1.py', 'test2.py', 'test3.py', 'test4.py', 'test5.py']
+    >>> remove_path_file("test_base_folder", ".py")
+    test_base_folder/test1.py deleted ...
+    test_base_folder/test2.py deleted ...
+    test_base_folder/test3.py deleted ...
+    >>> get_path_files("test_base_folder", ["py"])
+    ['test4.py', 'test5.py']
 
     Returns
     -------
@@ -230,7 +239,7 @@ def list_tuple_without_none(list_tuple):
 
 def clean_string(string, remove_parenthesis=False, remove_brackets=False):
     """
-    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that \t\n\s will be removed
+    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that "\t\n\s" will be removed
 
     Parameters
     ----------
@@ -273,5 +282,9 @@ def clean_string(string, remove_parenthesis=False, remove_brackets=False):
 
 if __name__ == "__main__":
     import doctest
+    import subprocess
 
+    subprocess.run("mkdir -p test_base_folder", shell=True, executable="/bin/bash")
+    subprocess.run("touch test_base_folder/test{1..5}.py", shell=True, executable="/bin/bash")
     doctest.testmod()
+    subprocess.run("rm -rf test_base_folder", shell=True, executable="/bin/bash")

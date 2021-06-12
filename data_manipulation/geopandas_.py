@@ -1,11 +1,6 @@
 def haversine_np(longitude1, latitude1, longitude2, latitude2):
     """
-    Return the great circle distance between two points on the earth (specified in decimal degrees)
-
-    All args must be of equal length.
-
-    https://stackoverflow.com/a/4913653
-    https://stackoverflow.com/a/29546836
+    Return the great circle distance between two points on the earth (specified in decimal degrees). All args must be of equal length. Reference from https://stackoverflow.com/a/4913653, https://stackoverflow.com/a/29546836
 
     Parameters
     ----------

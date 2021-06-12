@@ -1,8 +1,6 @@
 def init_django(project_name):
     """
-    Setup Django in Jupyter
-
-    https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe
+    Setup Django in Jupyter. Reference from https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe
 
     Parameters
     ----------

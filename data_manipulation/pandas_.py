@@ -25,6 +25,9 @@ def add_type_columns(dataframe):
     >>> values = [[0, '0', [], {}, None, ""]]
     >>> cols = ["int_", "str_", "list_", "set_", "none_", "_"]
     >>> df = pd.DataFrame(values, columns=cols)
+    >>> df
+       int_ str_ list_ set_ none_ _
+    0     0    0    []   {}  None
     >>> add_type_columns(df)
        int_      int__type str_      str__type list_      list__type set_       set__type none_          none__type _         __type
     0     0  <class 'int'>    0  <class 'str'>    []  <class 'list'>   {}  <class 'dict'>  None  <class 'NoneType'>    <class 'str'>
@@ -114,6 +117,9 @@ def dtypes_dictionary(dataframe):
     >>> values = [[0, '0', [], {}, None, ""]]
     >>> cols = ["int_", "str_", "list_", "set_", "none_", "_"]
     >>> df = pd.DataFrame(values, columns=cols)
+    >>> df
+       int_ str_ list_ set_ none_ _
+    0     0    0    []   {}  None
     >>> dtypes_dictionary(df)
     {<class 'numpy.int64'>: ['int_'], <class 'str'>: ['str_', '_'], <class 'list'>: ['list_'], <class 'dict'>: ['set_'], <class 'NoneType'>: ['none_']}
 
@@ -303,7 +309,7 @@ def to_excel_keep_url(filepath, dataframe):
     >>> values = ["https://www.shawnngtq.com"]
     >>> cols = ["url"]
     >>> df = pd.DataFrame(values, columns=cols)
-    >>> to_excel_keep_url("./tmp.xlsx", df)
+    >>> to_excel_keep_url("test_pandas_folder/tmp.xlsx", df)
     Excel exported ...
 
     Returns
@@ -349,9 +355,9 @@ def compare_dataframes(dataframe, dataframe2):
     0  2  3
     1  4  4
     >>> compare_dataframes(df1, df2)
-    =======================
+    ================
     Dataframe length
-    =======================
+    ================
     df1 length: 2
     df2 length: 2
     same df length: True
@@ -645,8 +651,26 @@ def clean_none(dataframe, clean_variation=True):
 
     Examples
     --------
-    >>> from data_manipulation.base.base_ import get_none_variation
+    >>> from base import get_none_variation
     >>> df = pd.DataFrame({"c1": get_none_variation()})
+    >>> df
+          c1
+    0   None
+    1   none
+    2   None
+    3   NONE
+    4   null
+    5   Null
+    6   NULL
+    7     na
+    8     Na
+    9     nA
+    10    NA
+    11   N.A
+    12  N.A.
+    13   nil
+    14   Nil
+    15   NIL
     >>> clean_none(df)
           c1
     0   None
@@ -664,6 +688,7 @@ def clean_none(dataframe, clean_variation=True):
     12  None
     13  None
     14  None
+    15  None
     >>> df = pd.DataFrame({"c1": [""]})
     >>> clean_none(df)
          c1
@@ -683,7 +708,7 @@ def clean_none(dataframe, clean_variation=True):
     """
     import numpy as np
     import pandas as pd
-    from data_manipulation.base.base_ import get_none_variation
+    from base import get_none_variation
 
     df = dataframe.copy()
     df = df.replace(r"^\s*$", np.nan, regex=True)
@@ -750,5 +775,8 @@ def split_dataframe(dataframe, uuid, columns):
 if __name__ == "__main__":
     import doctest
     import pandas as pd
+    import subprocess
 
+    subprocess.run("mkdir -p test_pandas_folder", shell=True, executable="/bin/bash")
     doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)
+    subprocess.run("rm -rf test_pandas_folder", shell=True, executable="/bin/bash")
