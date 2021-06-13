@@ -16,4 +16,3 @@ conda install versioneer
 conda install xlsxwriter
 conda install django
 conda install lxml
-conda install koalas

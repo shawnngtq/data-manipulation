@@ -4,6 +4,7 @@ def config_pandas_display():
     """
     import pandas as pd
 
+    global pd
     pd.set_option("display.max_columns", 500)
     # pd.set_option("display.max_colwidth", -1)
     pd.set_option("display.max_colwidth", 500)
@@ -54,6 +55,153 @@ def add_type_columns(dataframe):
     return df
 
 
+def chunking_dataframe(dataframe, chunk_size):
+    """
+    Return list of dataframes split from given dataframe and chunk size
+
+    Parameters
+    ----------
+    dataframe : pandas.DataFrame
+        Original dataframe
+    chunk_size : int
+        The chunk size of each smaller dataframes
+
+    Examples
+    --------
+    >>> chunking_dataframe(pd.DataFrame(), 2)
+    [Empty DataFrame
+    Columns: []
+    Index: []]
+
+    >>> values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    >>> cols = ["test"]
+    >>> df = pd.DataFrame(values, columns=cols)
+    >>> chunking_dataframe(df, 5)
+    [   test
+    0     1
+    1     2
+    2     3
+    3     4
+    4     5,    test
+    5     6
+    6     7
+    7     8
+    8     9
+    9    10, Empty DataFrame
+    Columns: [test]
+    Index: []]
+
+    >>> chunking_dataframe(df, 4)
+    [   test
+    0     1
+    1     2
+    2     3
+    3     4,    test
+    4     5
+    5     6
+    6     7
+    7     8,    test
+    8     9
+    9    10]
+
+    Returns
+    -------
+    list_ : list
+        [dataframe, dataframe2, ...]
+    """
+    import numpy as np
+    import pandas as pd
+
+    list_ = None
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("Argument must be a dataframe ...")
+    if not isinstance(chunk_size, int):
+        raise TypeError("Argument must be a int ...")
+
+    indices = index_marks(dataframe.shape[0], chunk_size)
+    list_ = np.split(dataframe, indices)
+    return list_
+
+
+def clean_none(dataframe, clean_variation=True):
+    """
+    Return a dataframe from given dataframe with standardized None
+
+    Parameters
+    ----------
+    dataframe : pandas.DataFrame
+        Dataframe
+
+    Examples
+    --------
+    >>> from base import get_none_variation
+    >>> df = pd.DataFrame({"c1": get_none_variation()})
+    >>> df
+          c1
+    0   None
+    1   none
+    2   None
+    3   NONE
+    4   null
+    5   Null
+    6   NULL
+    7     na
+    8     Na
+    9     nA
+    10    NA
+    11   N.A
+    12  N.A.
+    13   nil
+    14   Nil
+    15   NIL
+    >>> clean_none(df)
+          c1
+    0   None
+    1   None
+    2   None
+    3   None
+    4   None
+    5   None
+    6   None
+    7   None
+    8   None
+    9   None
+    10  None
+    11  None
+    12  None
+    13  None
+    14  None
+    15  None
+    >>> df = pd.DataFrame({"c1": [""]})
+    >>> clean_none(df)
+         c1
+    0  None
+    >>> df = pd.DataFrame({"c1": ["Nathing"]})
+    >>> clean_none(df)
+            c1
+    0  Nathing
+    >>> df = pd.DataFrame({"c1": ["Na "]})
+    >>> clean_none(df)
+        c1
+    0  Na
+
+    Returns
+    -------
+    df : pandas.DataFrame
+    """
+    import numpy as np
+    import pandas as pd
+    from data_manipulation.base import get_none_variation
+
+    df = dataframe.copy()
+    df = df.replace(r"^\s*$", np.nan, regex=True)
+    if clean_variation:
+        non_variations = get_none_variation()
+        df = df.replace(non_variations, np.nan)
+    df = df.where(pd.notnull(df), None)
+    return df
+
+
 def compare_all_list_items(list_):
     """
     Return dataframe of given list's Cartesian product
@@ -96,6 +244,99 @@ def compare_all_list_items(list_):
 
     df = pd.DataFrame(df, columns=["item1", "item2", "item1_eq_item2"])
     return df
+
+
+def compare_dataframes(dataframe, dataframe2):
+    """
+    Print the difference between the two given dataframes
+
+    Parameters
+    ----------
+    dataframe : pandas.DataFrame
+        1st dataframe
+    dataframe2 : pandas.DataFrame
+        2nd dataframe
+
+    Examples
+    --------
+    >>> df1 = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
+    >>> df1
+       a  b
+    0  1  3
+    1  2  4
+    >>> df2 = df1.copy()
+    >>> df2["a"] = df2["a"].apply(lambda x: x*2)
+    >>> df2
+       a  b
+    0  2  3
+    1  4  4
+    >>> compare_dataframes(df1, df2)
+    ================
+    Dataframe length
+    ================
+    df1 length: 2
+    df2 length: 2
+    same df length: True
+    <BLANKLINE>
+    ----------------
+    COMPARE COLUMNS
+    ----------------
+    df1 non-null a: 2
+    df2 non-null a: 2
+    df1 & df2 has the same length
+    df1 non-null b: 2
+    df2 non-null b: 2
+    df1 & df2 has the same length
+
+    Returns
+    -------
+    None
+    """
+    import pandas as pd
+
+    if not all(isinstance(x, pd.DataFrame) for x in [dataframe, dataframe2]):
+        raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
+
+    print("=" * len("Dataframe length"))
+    print("Dataframe length")
+    print("=" * len("Dataframe length"))
+    print(f"df1 length: {len(dataframe)}")
+    print(f"df2 length: {len(dataframe)}")
+    print(f"same df length: {len(dataframe) == len(dataframe2)}\n")
+    print("----------------")
+    print("COMPARE COLUMNS")
+    print("----------------")
+    for column in dataframe.columns:
+        pd_df = dataframe[dataframe[column].notnull()]
+        pd_df2 = None
+        print(f"df1 non-null {column}: {len(pd_df)}")
+
+        try:
+            pd_df2 = dataframe2[dataframe2[column].notnull()]
+        except KeyError:
+            print(f"df2 {column}: does not exist")
+
+        if pd_df2 is not None:
+            print(f"df2 non-null {column}: {len(pd_df2)}")
+
+            if len(pd_df) == len(pd_df2):
+                print("df1 & df2 has the same length")
+            elif len(pd_df2) > len(pd_df):
+                print("df2 > df1, check")
+            else:
+                strings = ["null", "NA"]
+                null_count = len(dataframe[dataframe[column].isnull()])
+                string_count = len(dataframe[dataframe[column].isin(strings)])
+                empty_string_count = len(dataframe[dataframe[column].str.len() == 0])
+                non_null_count = len(dataframe) - null_count - string_count - empty_string_count
+                print(f"""
+                df1
+                - null ({null_count})
+                - string null ({string_count})
+                - empty string ({empty_string_count})
+                = {non_null_count}
+                == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}
+                """)
 
 
 def dtypes_dictionary(dataframe):
@@ -222,242 +463,6 @@ def index_marks(n_rows, chunk_size):
     return range_
 
 
-def chunking_dataframe(dataframe, chunk_size):
-    """
-    Return list of dataframes split from given dataframe and chunk size
-
-    Parameters
-    ----------
-    dataframe : pandas.DataFrame
-        Original dataframe
-    chunk_size : int
-        The chunk size of each smaller dataframes
-
-    Examples
-    --------
-    >>> chunking_dataframe(pd.DataFrame(), 2)
-    [Empty DataFrame
-    Columns: []
-    Index: []]
-
-    >>> values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    >>> cols = ["test"]
-    >>> df = pd.DataFrame(values, columns=cols)
-    >>> chunking_dataframe(df, 5)
-    [   test
-    0     1
-    1     2
-    2     3
-    3     4
-    4     5,    test
-    5     6
-    6     7
-    7     8
-    8     9
-    9    10, Empty DataFrame
-    Columns: [test]
-    Index: []]
-
-    >>> chunking_dataframe(df, 4)
-    [   test
-    0     1
-    1     2
-    2     3
-    3     4,    test
-    4     5
-    5     6
-    6     7
-    7     8,    test
-    8     9
-    9    10]
-
-    Returns
-    -------
-    list_ : list
-        [dataframe, dataframe2, ...]
-    """
-    import numpy as np
-    import pandas as pd
-
-    list_ = None
-    if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument must be a dataframe ...")
-    if not isinstance(chunk_size, int):
-        raise TypeError("Argument must be a int ...")
-
-    indices = index_marks(dataframe.shape[0], chunk_size)
-    list_ = np.split(dataframe, indices)
-    return list_
-
-
-def to_excel_keep_url(filepath, dataframe):
-    """
-    Save dataframe as excel, without converting urls to strings.
-        - Excel auto converts string to urls
-        - Excel limit of 65,530 urls per worksheet
-        - Excel does not keep url > 255 characters
-
-    Parameters
-    ----------
-    filepath : str
-        Filepath
-    dataframe : pandas.DataFrame
-        Dataframe to export into excel
-
-    Examples
-    --------
-    >>> values = ["https://www.shawnngtq.com"]
-    >>> cols = ["url"]
-    >>> df = pd.DataFrame(values, columns=cols)
-    >>> to_excel_keep_url("test_pandas_folder/tmp.xlsx", df)
-    Excel exported ...
-
-    Returns
-    -------
-    None
-    """
-    import pandas as pd
-
-    if not isinstance(filepath, str):
-        raise TypeError("Argument 1 must be a non-empty string ...")
-
-    if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument 2 must be a dataframe ...")
-
-    writer = pd.ExcelWriter(filepath, engine="xlsxwriter", options={"strings_to_urls": False})
-    dataframe.to_excel(writer, index=False)
-    writer.close()
-    print("Excel exported ...")
-
-
-def compare_dataframes(dataframe, dataframe2):
-    """
-    Print the difference between the two given dataframes
-
-    Parameters
-    ----------
-    dataframe : pandas.DataFrame
-        1st dataframe
-    dataframe2 : pandas.DataFrame
-        2nd dataframe
-
-    Examples
-    --------
-    >>> df1 = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
-    >>> df1
-       a  b
-    0  1  3
-    1  2  4
-    >>> df2 = df1.copy()
-    >>> df2["a"] = df2["a"].apply(lambda x: x*2)
-    >>> df2
-       a  b
-    0  2  3
-    1  4  4
-    >>> compare_dataframes(df1, df2)
-    ================
-    Dataframe length
-    ================
-    df1 length: 2
-    df2 length: 2
-    same df length: True
-    <BLANKLINE>
-    ----------------
-    COMPARE COLUMNS
-    ----------------
-    df1 non-null a: 2
-    df2 non-null a: 2
-    df1 & df2 has the same length
-    df1 non-null b: 2
-    df2 non-null b: 2
-    df1 & df2 has the same length
-
-    Returns
-    -------
-    None
-    """
-    import pandas as pd
-
-    if not all(isinstance(x, pd.DataFrame) for x in [dataframe, dataframe2]):
-        raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
-
-    print("=" * len("Dataframe length"))
-    print("Dataframe length")
-    print("=" * len("Dataframe length"))
-    print(f"df1 length: {len(dataframe)}")
-    print(f"df2 length: {len(dataframe)}")
-    print(f"same df length: {len(dataframe) == len(dataframe2)}\n")
-    print("----------------")
-    print("COMPARE COLUMNS")
-    print("----------------")
-    for column in dataframe.columns:
-        pd_df = dataframe[dataframe[column].notnull()]
-        pd_df2 = None
-        print(f"df1 non-null {column}: {len(pd_df)}")
-
-        try:
-            pd_df2 = dataframe2[dataframe2[column].notnull()]
-        except KeyError:
-            print(f"df2 {column}: does not exist")
-
-        if pd_df2 is not None:
-            print(f"df2 non-null {column}: {len(pd_df2)}")
-
-            if len(pd_df) == len(pd_df2):
-                print("df1 & df2 has the same length")
-            elif len(pd_df2) > len(pd_df):
-                print("df2 > df1, check")
-            else:
-                strings = ["null", "NA"]
-                null_count = len(dataframe[dataframe[column].isnull()])
-                string_count = len(dataframe[dataframe[column].isin(strings)])
-                empty_string_count = len(dataframe[dataframe[column].str.len() == 0])
-                non_null_count = len(dataframe) - null_count - string_count - empty_string_count
-                print(f"""
-                df1
-                - null ({null_count})
-                - string null ({string_count})
-                - empty string ({empty_string_count})
-                = {non_null_count}
-                == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}
-                """)
-
-
-def series_count(series):
-    """
-    Return dataframe with enhanced series.value_counts()
-
-    Parameters
-    ----------
-    series : pd.Series
-        The series to get value_counts()
-
-    Examples
-    --------
-    >>> values = [1, 1, 1, 2, 2, 3]
-    >>> cols = ["test"]
-    >>> df = pd.DataFrame(values, columns=cols)
-    >>> series_count(df["test"])
-       count    percent
-    1      3  50.000000
-    2      2  33.333333
-    3      1  16.666667
-
-    Returns
-    -------
-    df : pandas.DataFrame
-    """
-    import pandas as pd
-
-    if not isinstance(series, pd.Series):
-        raise TypeError("Argument must be a series ...")
-
-    df = series.value_counts().to_frame(name="count")
-    total = df.sum()["count"]
-    df["percent"] = df["count"] / total * 100
-    return df
-
-
 def print_dataframe_overview(dataframe, stats=False):
     """
     Print the given dataframe's columns' value_counts() in console
@@ -518,40 +523,131 @@ def print_dataframe_overview(dataframe, stats=False):
             print(f"Unable to get value_counts of {column} ...\n")
 
 
-def useless_columns(dataframe):
+def series_count(series):
     """
-    Return tuple of empty columns and single columns from given dataframe
+    Return dataframe with enhanced series.value_counts()
+
+    Parameters
+    ----------
+    series : pd.Series
+        The series to get value_counts()
+
+    Examples
+    --------
+    >>> values = [1, 1, 1, 2, 2, 3]
+    >>> cols = ["test"]
+    >>> df = pd.DataFrame(values, columns=cols)
+    >>> series_count(df["test"])
+       count    percent
+    1      3  50.000000
+    2      2  33.333333
+    3      1  16.666667
+
+    Returns
+    -------
+    df : pandas.DataFrame
+    """
+    import pandas as pd
+
+    if not isinstance(series, pd.Series):
+        raise TypeError("Argument must be a series ...")
+
+    df = series.value_counts().to_frame(name="count")
+    total = df.sum()["count"]
+    df["percent"] = df["count"] / total * 100
+    return df
+
+
+def series_to_columns(dataframe, column):
+    """
+    Return a dataframe converted from given dataframe's dtype column
 
     Parameters
     ----------
     dataframe : pandas.DataFrame
-        Base dataframe
+        Dataframe
+    column : pd.Series
+        Series with dict dtype
+
+    Examples
+    --------
+    >>> values = [[1, {'a':1, 'b':2}]]
+    >>> cols = ["c1", "c2"]
+    >>> df = pd.DataFrame(values, columns=cols)
+    >>> df
+       c1                c2
+    0   1  {'a': 1, 'b': 2}
+    >>> series_to_columns(df, "c2")
+       c1  a  b
+    0   1  1  2
 
     Returns
     -------
-    empty_columns : list
-        List of empty columns
-    single_columns : list
-        List of single value columns
+    df : pandas.DataFrame
+    """
+    import pandas as pd
 
-    (empty_columns, single_columns)
+    df = pd.concat([dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1)
+    return df
+
+
+def split_dataframe(dataframe, uuid, columns):
+    """
+    Return tuple of dataframes from given dataframe, linked by uuid and have different columns
+
+    Parameters
+    ----------
+    dataframe : pandas.DataFrame
+        Original dataframe
+    uuid : str
+        The uuid that can join the splited dataframes
+    columns : list
+        The list of columns to split from original dataframe
+
+    Examples
+    --------
+    >>> df = pd.DataFrame({"a": [1, 2], "b": [2, 3], "uuid": ["abc123", "efg456"]})
+    >>> df
+       a  b    uuid
+    0  1  2  abc123
+    1  2  3  efg456
+    >>> df1, df2 = split_dataframe(df, "uuid", ["b"])
+    >>> df1
+       a    uuid
+    0  1  abc123
+    1  2  efg456
+    >>> df2
+       b    uuid
+    0  2  abc123
+    1  3  efg456
+
+    Returns
+    -------
+    df1: pandas.DataFrame
+        Dataframe without specific columns
+    df2: pandas.DataFrame
+        Datafrane with specific columns and uuid
+
+    (df1, df2)
     """
     import pandas as pd
 
     if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument must be a dataframe ...")
+        raise TypeError("Argument 1 must be pandas.DataFrame ...")
+    if not isinstance(uuid, str):
+        raise TypeError("Argument 2 must be str ...")
+    if not isinstance(columns, list):
+        raise TypeError("Argument 3 must be list ...")
 
-    empty_columns = dataframe.nunique().where(lambda x: x == 0).dropna().index.values.tolist()
-    single_columns = dataframe.nunique().where(lambda x: x == 1).dropna().index.values.tolist()
-    print(f"Empty columns: {empty_columns}")
-    print(f"Single value columns: {single_columns}")
-    return empty_columns, single_columns
+    df1 = dataframe[dataframe.columns[~dataframe.columns.isin(columns)]].copy()
+    df2 = dataframe[columns + [uuid]].copy()
+    return df1, df2
 
 
 def split_left_merged_dataframe(dataframe, dataframe2, columns):
     """
     Return tuple of dataframes split by merged_type after left merging two given dataframes at columns
-    
+
     Parameters
     ----------
     dataframe : pandas.DataFrame
@@ -607,169 +703,74 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
     return df_both, df_left
 
 
-def series_to_columns(dataframe, column):
+def to_excel_keep_url(filepath, dataframe):
     """
-    Return a dataframe converted from given dataframe's dtype column
+    Save dataframe as excel, without converting urls to strings.
+        - Excel auto converts string to urls
+        - Excel limit of 65,530 urls per worksheet
+        - Excel does not keep url > 255 characters
 
     Parameters
     ----------
+    filepath : str
+        Filepath
     dataframe : pandas.DataFrame
-        Dataframe
-    column : pd.Series
-        Series with dict dtype
+        Dataframe to export into excel
 
     Examples
     --------
-    >>> values = [[1, {'a':1, 'b':2}]]
-    >>> cols = ["c1", "c2"]
+    >>> values = ["https://www.shawnngtq.com"]
+    >>> cols = ["url"]
     >>> df = pd.DataFrame(values, columns=cols)
-    >>> df
-       c1                c2
-    0   1  {'a': 1, 'b': 2}
-    >>> series_to_columns(df, "c2")
-       c1  a  b
-    0   1  1  2
+    >>> to_excel_keep_url("test_pandas_folder/tmp.xlsx", df)
+    Excel exported ...
 
     Returns
     -------
-    df : pandas.DataFrame
+    None
     """
     import pandas as pd
 
-    df = pd.concat([dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1)
-    return df
+    if not isinstance(filepath, str):
+        raise TypeError("Argument 1 must be a non-empty string ...")
+
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("Argument 2 must be a dataframe ...")
+
+    writer = pd.ExcelWriter(filepath, engine="xlsxwriter", options={"strings_to_urls": False})
+    dataframe.to_excel(writer, index=False)
+    writer.close()
+    print("Excel exported ...")
 
 
-def clean_none(dataframe, clean_variation=True):
+def useless_columns(dataframe):
     """
-    Return a dataframe from given dataframe with standardized None
+    Return tuple of empty columns and single columns from given dataframe
 
     Parameters
     ----------
     dataframe : pandas.DataFrame
-        Dataframe
-
-    Examples
-    --------
-    >>> from base import get_none_variation
-    >>> df = pd.DataFrame({"c1": get_none_variation()})
-    >>> df
-          c1
-    0   None
-    1   none
-    2   None
-    3   NONE
-    4   null
-    5   Null
-    6   NULL
-    7     na
-    8     Na
-    9     nA
-    10    NA
-    11   N.A
-    12  N.A.
-    13   nil
-    14   Nil
-    15   NIL
-    >>> clean_none(df)
-          c1
-    0   None
-    1   None
-    2   None
-    3   None
-    4   None
-    5   None
-    6   None
-    7   None
-    8   None
-    9   None
-    10  None
-    11  None
-    12  None
-    13  None
-    14  None
-    15  None
-    >>> df = pd.DataFrame({"c1": [""]})
-    >>> clean_none(df)
-         c1
-    0  None
-    >>> df = pd.DataFrame({"c1": ["Nathing"]})
-    >>> clean_none(df)
-            c1
-    0  Nathing
-    >>> df = pd.DataFrame({"c1": ["Na "]})
-    >>> clean_none(df)
-        c1
-    0  Na
+        Base dataframe
 
     Returns
     -------
-    df : pandas.DataFrame
-    """
-    import numpy as np
-    import pandas as pd
-    from data_manipulation.base import get_none_variation
+    empty_columns : list
+        List of empty columns
+    single_columns : list
+        List of single value columns
 
-    df = dataframe.copy()
-    df = df.replace(r"^\s*$", np.nan, regex=True)
-    if clean_variation:
-        non_variations = get_none_variation()
-        df = df.replace(non_variations, np.nan)
-    df = df.where(pd.notnull(df), None)
-    return df
-
-
-def split_dataframe(dataframe, uuid, columns):
-    """
-    Return tuple of dataframes from given dataframe, linked by uuid and have different columns
-
-    Parameters
-    ----------
-    dataframe : pandas.DataFrame
-        Original dataframe
-    uuid : str
-        The uuid that can join the splited dataframes
-    columns : list
-        The list of columns to split from original dataframe
-
-    Examples
-    --------
-    >>> df = pd.DataFrame({"a": [1, 2], "b": [2, 3], "uuid": ["abc123", "efg456"]})
-    >>> df
-       a  b    uuid
-    0  1  2  abc123
-    1  2  3  efg456
-    >>> df1, df2 = split_dataframe(df, "uuid", ["b"])
-    >>> df1
-       a    uuid
-    0  1  abc123
-    1  2  efg456
-    >>> df2
-       b    uuid
-    0  2  abc123
-    1  3  efg456
-
-    Returns
-    -------
-    df1: pandas.DataFrame
-        Dataframe without specific columns
-    df2: pandas.DataFrame
-        Datafrane with specific columns and uuid
-
-    (df1, df2)
+    (empty_columns, single_columns)
     """
     import pandas as pd
 
     if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument 1 must be pandas.DataFrame ...")
-    if not isinstance(uuid, str):
-        raise TypeError("Argument 2 must be str ...")
-    if not isinstance(columns, list):
-        raise TypeError("Argument 3 must be list ...")
+        raise TypeError("Argument must be a dataframe ...")
 
-    df1 = dataframe[dataframe.columns[~dataframe.columns.isin(columns)]].copy()
-    df2 = dataframe[columns + [uuid]].copy()
-    return df1, df2
+    empty_columns = dataframe.nunique().where(lambda x: x == 0).dropna().index.values.tolist()
+    single_columns = dataframe.nunique().where(lambda x: x == 1).dropna().index.values.tolist()
+    print(f"Empty columns: {empty_columns}")
+    print(f"Single value columns: {single_columns}")
+    return empty_columns, single_columns
 
 
 if __name__ == "__main__":
