@@ -17,7 +17,7 @@ def config_spark_local(autoset=True):
     spark_executor_memory: 27
     memory_overhead: 3
     spark_default_parallelism: 10
-    spark.sql.execution.arrow.enabled recommended by Koalas ...
+    spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...
     spark auto-configured ...
     config_spark_local exited ...
     >>> config_spark_local(autoset=False)
@@ -81,9 +81,9 @@ def config_spark_local(autoset=True):
             .config("spark.sql.shuffle.partitions", str(spark_default_parallelism)) \
             .getOrCreate()
 
-        print("spark.sql.execution.arrow.enabled recommended by Koalas ...")
-        spark.conf.set("spark.sql.execution.arrow.enabled", True)
-        spark.conf.get("spark.sql.execution.arrow.enabled")
+        print("spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...")
+        spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", True)
+        spark.conf.get("spark.sql.execution.arrow.pyspark.enabled")
         print("spark auto-configured ...")
     else:
         print("Here is the recommended command to execute:")
@@ -356,6 +356,26 @@ def rename(dataframe, columns):
     columns : dict
         A dictionary {oldName: newName} of columns to rename
 
+    Examples
+    --------
+    >>> l = [('Alice', 1)]
+    >>> df = spark.createDataFrame(l)
+    >>> df.show()
+    +-----+---+
+    |   _1| _2|
+    +-----+---+
+    |Alice|  1|
+    +-----+---+
+    <BLANKLINE>
+    >>> df2 = rename(df, {"_1": "name", "_2": "id"})
+    >>> df2.show()
+    +-----+---+
+    | name| id|
+    +-----+---+
+    |Alice|  1|
+    +-----+---+
+    <BLANKLINE>
+
     Returns
     -------
     df : pyspark.sql.dataframe.DataFrame
@@ -365,8 +385,8 @@ def rename(dataframe, columns):
 
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
-    if not isinstance(columns, list):
-        raise TypeError("Argument must be a list ...")
+    if not isinstance(columns, dict):
+        raise TypeError("Argument must be a dict ...")
 
     df = dataframe.select([F.col(c).alias(columns.get(c, c)) for c in dataframe.columns])
     return df

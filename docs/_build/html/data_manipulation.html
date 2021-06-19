@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>data_manipulation package &#8212; data_manipulation 0.24 documentation</title>
+    <title>data_manipulation package &#8212; data_manipulation 0.25 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.25 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>  
@@ -1163,7 +1163,7 @@
 <span class="go">spark_executor_memory: 27</span>
 <span class="go">memory_overhead: 3</span>
 <span class="go">spark_default_parallelism: 10</span>
-<span class="go">spark.sql.execution.arrow.enabled recommended by Koalas ...</span>
+<span class="go">spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...</span>
 <span class="go">spark auto-configured ...</span>
 <span class="go">config_spark_local exited ...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">config_spark_local</span><span class="p">(</span><span class="n">autoset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1266,11 +1266,32 @@
 <li><p><strong>columns</strong> (<em>dict</em>) – A dictionary {oldName: newName} of columns to rename</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>df</strong></p>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">+-----+---+</span>
+<span class="go">|   _1| _2|</span>
+<span class="go">+-----+---+</span>
+<span class="go">|Alice|  1|</span>
+<span class="go">+-----+---+</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">rename</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_1&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;_2&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">+-----+---+</span>
+<span class="go">| name| id|</span>
+<span class="go">+-----+---+</span>
+<span class="go">|Alice|  1|</span>
+<span class="go">+-----+---+</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pyspark.sql.dataframe.DataFrame</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pyspark.sql.dataframe.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1340,7 +1361,7 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.24 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.25 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>
