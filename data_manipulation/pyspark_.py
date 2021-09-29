@@ -38,9 +38,10 @@ def config_spark_local(autoset=True):
     -------
     None
     """
-    import multiprocessing
     import math
+    import multiprocessing
     import os
+
     import pyspark
 
     def round_down_or_one(x):
@@ -53,14 +54,22 @@ def config_spark_local(autoset=True):
     vcore_per_node = multiprocessing.cpu_count()
     spark_executor_cores = 5
     number_of_nodes = 1
-    total_ram_per_node_gb = os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES') / (1024. ** 3)
+    total_ram_per_node_gb = (
+        os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / (1024.0 ** 3)
+    )
 
     executor_per_node = round_down_or_one((vcore_per_node - 1) / spark_executor_cores)
-    spark_executor_instances = round_down_or_one((executor_per_node * number_of_nodes) - 1)
-    total_executor_memory = round_down_or_one((total_ram_per_node_gb - 1) / executor_per_node)
+    spark_executor_instances = round_down_or_one(
+        (executor_per_node * number_of_nodes) - 1
+    )
+    total_executor_memory = round_down_or_one(
+        (total_ram_per_node_gb - 1) / executor_per_node
+    )
     spark_executor_memory = round_down_or_one(total_executor_memory * 0.9)
     memory_overhead = round_down_or_one(total_executor_memory * 0.1)
-    spark_default_parallelism = round_down_or_one(spark_executor_instances * spark_executor_cores * 2)
+    spark_default_parallelism = round_down_or_one(
+        spark_executor_instances * spark_executor_cores * 2
+    )
     print(f"executor_per_node: {executor_per_node}")
     print(f"spark_executor_instances: {spark_executor_instances}")
     print(f"total_executor_memory: {total_executor_memory}")
@@ -70,16 +79,18 @@ def config_spark_local(autoset=True):
 
     if autoset:
         global spark
-        spark = pyspark.sql.SparkSession.builder.master("local") \
-            .config("spark.executor.cores", str(spark_executor_cores)) \
-            .config("spark.driver.cores", str(spark_executor_cores)) \
-            .config("spark.executor.instances", str(spark_executor_instances)) \
-            .config("spark.executor.memory", f"{spark_executor_memory}g") \
-            .config("spark.driver.memory", f"{spark_executor_memory}g") \
-            .config("spark.executor.memoryOverhead", f"{memory_overhead}g") \
-            .config("spark.default.parallelism", str(spark_default_parallelism)) \
-            .config("spark.sql.shuffle.partitions", str(spark_default_parallelism)) \
+        spark = (
+            pyspark.sql.SparkSession.builder.master("local")
+            .config("spark.executor.cores", str(spark_executor_cores))
+            .config("spark.driver.cores", str(spark_executor_cores))
+            .config("spark.executor.instances", str(spark_executor_instances))
+            .config("spark.executor.memory", f"{spark_executor_memory}g")
+            .config("spark.driver.memory", f"{spark_executor_memory}g")
+            .config("spark.executor.memoryOverhead", f"{memory_overhead}g")
+            .config("spark.default.parallelism", str(spark_default_parallelism))
+            .config("spark.sql.shuffle.partitions", str(spark_default_parallelism))
             .getOrCreate()
+        )
 
         print("spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...")
         spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", True)
@@ -256,11 +267,19 @@ def columns_statistics(dataframe, n=10):
             single_columns.append(column)
             print(f"!!!!! {column} is a candidate to drop !!!!!\n\n")
 
-            if not df.first()[0] or df.first()[0].casefold() == "none" or df.first()[0].casefold():
+            if (
+                not df.first()[0]
+                or df.first()[0].casefold() == "none"
+                or df.first()[0].casefold()
+            ):
                 empty_columns.append(column)
 
-    print(f"There are {len(single_columns)} of single value columns, they are: {single_columns}")
-    print(f"There are {len(empty_columns)} of null value columns, they are: {empty_columns}")
+    print(
+        f"There are {len(single_columns)} of single value columns, they are: {single_columns}"
+    )
+    print(
+        f"There are {len(empty_columns)} of null value columns, they are: {empty_columns}"
+    )
     return empty_columns, single_columns
 
 
@@ -339,7 +358,9 @@ def group_count(dataframe, columns, n=10):
 
     df = dataframe.groupBy(columns).count().orderBy("count", ascending=False)
     row_count = dataframe.count()
-    df = df.withColumn("percent", F.round(F.udf(lambda x: x * 100 / row_count)("count"), 3))
+    df = df.withColumn(
+        "percent", F.round(F.udf(lambda x: x * 100 / row_count)("count"), 3)
+    )
     if n != float("inf"):
         df = df.limit(n)
     return df
@@ -388,12 +409,15 @@ def rename(dataframe, columns):
     if not isinstance(columns, dict):
         raise TypeError("Argument must be a dict ...")
 
-    df = dataframe.select([F.col(c).alias(columns.get(c, c)) for c in dataframe.columns])
+    df = dataframe.select(
+        [F.col(c).alias(columns.get(c, c)) for c in dataframe.columns]
+    )
     return df
 
 
 if __name__ == "__main__":
     import doctest
+
     import pandas as pd
     import pyspark
 

@@ -23,11 +23,13 @@ CLASSIFIERS = [
 ]
 
 DEPENDENCIES = [
-    "beautifulsoup4", "lxml",
+    "beautifulsoup4",
+    "lxml",
     "django",
     "numpy",
     "pandas",
-    "IPython", "requests",
+    "IPython",
+    "requests",
     "psycopg2",
     "pyspark",
 ]

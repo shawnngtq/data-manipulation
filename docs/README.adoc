@@ -38,8 +38,9 @@ versioneer install
 # Git tag
 git add .
 git commit -m "something"
-git push
 git tag 0.15
+git push
+git push origin --tags
 
 rm -r build
 rm -r dist

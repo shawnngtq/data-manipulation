@@ -55,10 +55,22 @@ def get_none_variation():
     variations : list
     """
     variations = [
-        None, "none", "None", "NONE",
-        "null", "Null", "NULL",
-        "na", "Na", "nA", "NA", "N.A", "N.A.",
-        "nil", "Nil", "NIL",
+        None,
+        "none",
+        "None",
+        "NONE",
+        "null",
+        "Null",
+        "NULL",
+        "na",
+        "Na",
+        "nA",
+        "NA",
+        "N.A",
+        "N.A.",
+        "nil",
+        "Nil",
+        "NIL",
     ]
     return variations
 
@@ -285,6 +297,8 @@ if __name__ == "__main__":
     import subprocess
 
     subprocess.run("mkdir -p test_base_folder", shell=True, executable="/bin/bash")
-    subprocess.run("touch test_base_folder/test{1..5}.py", shell=True, executable="/bin/bash")
+    subprocess.run(
+        "touch test_base_folder/test{1..5}.py", shell=True, executable="/bin/bash"
+    )
     doctest.testmod()
     subprocess.run("rm -rf test_base_folder", shell=True, executable="/bin/bash")

@@ -19,7 +19,9 @@ def haversine_np(longitude1, latitude1, longitude2, latitude2):
     """
     import numpy as np
 
-    lon1, lat1, lon2, lat2 = map(np.radians, [longitude1, latitude1, longitude2, latitude2])
+    lon1, lat1, lon2, lat2 = map(
+        np.radians, [longitude1, latitude1, longitude2, latitude2]
+    )
 
     dlon = lon2 - lon1
     dlat = lat2 - lat1

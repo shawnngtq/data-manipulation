@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base &#8212; data_manipulation 0.25 documentation</title>
+    <title>data_manipulation.base &#8212; data_manipulation 0.26 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.25 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.26 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
       </ul>
@@ -93,10 +93,22 @@
 <span class="sd">    variations : list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">variations</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;null&quot;</span><span class="p">,</span> <span class="s2">&quot;Null&quot;</span><span class="p">,</span> <span class="s2">&quot;NULL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;na&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;nA&quot;</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A&quot;</span><span class="p">,</span> <span class="s2">&quot;N.A.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nil&quot;</span><span class="p">,</span> <span class="s2">&quot;Nil&quot;</span><span class="p">,</span> <span class="s2">&quot;NIL&quot;</span><span class="p">,</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;null&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Null&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NULL&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;na&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Na&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;N.A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;N.A.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;nil&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Nil&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NIL&quot;</span><span class="p">,</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">variations</span></div>
 
@@ -323,7 +335,9 @@
     <span class="kn">import</span> <span class="nn">subprocess</span>
 
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;mkdir -p test_base_folder&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">)</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;touch test_base_folder/test{1..5}.py&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="s2">&quot;touch test_base_folder/test{1..5}.py&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span>
+    <span class="p">)</span>
     <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;rm -rf test_base_folder&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span><span class="p">)</span>
 </pre></div>
@@ -357,7 +371,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.25 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.26 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
       </ul>

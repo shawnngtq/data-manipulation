@@ -191,6 +191,7 @@ def clean_none(dataframe, clean_variation=True):
     """
     import numpy as np
     import pandas as pd
+
     from data_manipulation.base import get_none_variation
 
     df = dataframe.copy()
@@ -231,8 +232,9 @@ def compare_all_list_items(list_):
     -------
     df : pandas.DataFrame
     """
-    import pandas as pd
     from itertools import combinations
+
+    import pandas as pd
 
     if not isinstance(list_, list):
         raise TypeError("Argument must be a list ...")
@@ -328,15 +330,19 @@ def compare_dataframes(dataframe, dataframe2):
                 null_count = len(dataframe[dataframe[column].isnull()])
                 string_count = len(dataframe[dataframe[column].isin(strings)])
                 empty_string_count = len(dataframe[dataframe[column].str.len() == 0])
-                non_null_count = len(dataframe) - null_count - string_count - empty_string_count
-                print(f"""
+                non_null_count = (
+                    len(dataframe) - null_count - string_count - empty_string_count
+                )
+                print(
+                    f"""
                 df1
                 - null ({null_count})
                 - string null ({string_count})
                 - empty string ({empty_string_count})
                 = {non_null_count}
                 == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}
-                """)
+                """
+                )
 
 
 def dtypes_dictionary(dataframe):
@@ -587,7 +593,9 @@ def series_to_columns(dataframe, column):
     """
     import pandas as pd
 
-    df = pd.concat([dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1)
+    df = pd.concat(
+        [dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1
+    )
     return df
 
 
@@ -696,7 +704,9 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
     if not isinstance(columns, list):
         raise TypeError("Argument must be a list ...")
 
-    df_merged = dataframe.merge(dataframe2, on=columns, how="left", indicator=True, suffixes=("", "_y"))
+    df_merged = dataframe.merge(
+        dataframe2, on=columns, how="left", indicator=True, suffixes=("", "_y")
+    )
     df_both = df_merged[df_merged["_merge"] == "both"].copy()
     df_left = df_merged[df_merged["_merge"] == "left_only"].copy()
     display(series_count(df_merged["_merge"]))
@@ -737,7 +747,9 @@ def to_excel_keep_url(filepath, dataframe):
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument 2 must be a dataframe ...")
 
-    writer = pd.ExcelWriter(filepath, engine="xlsxwriter", options={"strings_to_urls": False})
+    writer = pd.ExcelWriter(
+        filepath, engine="xlsxwriter", options={"strings_to_urls": False}
+    )
     dataframe.to_excel(writer, index=False)
     writer.close()
     print("Excel exported ...")
@@ -766,8 +778,12 @@ def useless_columns(dataframe):
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a dataframe ...")
 
-    empty_columns = dataframe.nunique().where(lambda x: x == 0).dropna().index.values.tolist()
-    single_columns = dataframe.nunique().where(lambda x: x == 1).dropna().index.values.tolist()
+    empty_columns = (
+        dataframe.nunique().where(lambda x: x == 0).dropna().index.values.tolist()
+    )
+    single_columns = (
+        dataframe.nunique().where(lambda x: x == 1).dropna().index.values.tolist()
+    )
     print(f"Empty columns: {empty_columns}")
     print(f"Single value columns: {single_columns}")
     return empty_columns, single_columns
@@ -775,8 +791,9 @@ def useless_columns(dataframe):
 
 if __name__ == "__main__":
     import doctest
-    import pandas as pd
     import subprocess
+
+    import pandas as pd
 
     subprocess.run("mkdir -p test_pandas_folder", shell=True, executable="/bin/bash")
     doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)

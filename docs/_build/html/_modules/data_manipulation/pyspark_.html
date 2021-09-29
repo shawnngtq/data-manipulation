@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pyspark_ &#8212; data_manipulation 0.25 documentation</title>
+    <title>data_manipulation.pyspark_ &#8212; data_manipulation 0.26 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -24,7 +24,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.25 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.26 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark_</a></li> 
       </ul>
@@ -76,9 +76,10 @@
 <span class="sd">    -------</span>
 <span class="sd">    None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">multiprocessing</span>
     <span class="kn">import</span> <span class="nn">math</span>
+    <span class="kn">import</span> <span class="nn">multiprocessing</span>
     <span class="kn">import</span> <span class="nn">os</span>
+
     <span class="kn">import</span> <span class="nn">pyspark</span>
 
     <span class="k">def</span> <span class="nf">round_down_or_one</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -91,14 +92,22 @@
     <span class="n">vcore_per_node</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
     <span class="n">spark_executor_cores</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">number_of_nodes</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">total_ram_per_node_gb</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="s1">&#39;SC_PAGE_SIZE&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="s1">&#39;SC_PHYS_PAGES&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1024.</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">total_ram_per_node_gb</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="s2">&quot;SC_PAGE_SIZE&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="s2">&quot;SC_PHYS_PAGES&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1024.0</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
 
     <span class="n">executor_per_node</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">((</span><span class="n">vcore_per_node</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">spark_executor_cores</span><span class="p">)</span>
-    <span class="n">spark_executor_instances</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">((</span><span class="n">executor_per_node</span> <span class="o">*</span> <span class="n">number_of_nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">total_executor_memory</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">((</span><span class="n">total_ram_per_node_gb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">executor_per_node</span><span class="p">)</span>
+    <span class="n">spark_executor_instances</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">executor_per_node</span> <span class="o">*</span> <span class="n">number_of_nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="n">total_executor_memory</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">total_ram_per_node_gb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">executor_per_node</span>
+    <span class="p">)</span>
     <span class="n">spark_executor_memory</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span><span class="n">total_executor_memory</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">)</span>
     <span class="n">memory_overhead</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span><span class="n">total_executor_memory</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
-    <span class="n">spark_default_parallelism</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span><span class="n">spark_executor_instances</span> <span class="o">*</span> <span class="n">spark_executor_cores</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">spark_default_parallelism</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span>
+        <span class="n">spark_executor_instances</span> <span class="o">*</span> <span class="n">spark_executor_cores</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;executor_per_node: </span><span class="si">{</span><span class="n">executor_per_node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;spark_executor_instances: </span><span class="si">{</span><span class="n">spark_executor_instances</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;total_executor_memory: </span><span class="si">{</span><span class="n">total_executor_memory</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -108,16 +117,18 @@
 
     <span class="k">if</span> <span class="n">autoset</span><span class="p">:</span>
         <span class="k">global</span> <span class="n">spark</span>
-        <span class="n">spark</span> <span class="o">=</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.cores&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_executor_cores</span><span class="p">))</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.cores&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_executor_cores</span><span class="p">))</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.instances&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_executor_instances</span><span class="p">))</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memory&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark_executor_memory</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.memory&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark_executor_memory</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memoryOverhead&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">memory_overhead</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.default.parallelism&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">))</span> \
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">))</span> \
+        <span class="n">spark</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.cores&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_executor_cores</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.cores&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_executor_cores</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.instances&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_executor_instances</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memory&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark_executor_memory</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.memory&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark_executor_memory</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memoryOverhead&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">memory_overhead</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.default.parallelism&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">))</span>
             <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+        <span class="p">)</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...&quot;</span><span class="p">)</span>
         <span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.execution.arrow.pyspark.enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -294,11 +305,19 @@
             <span class="n">single_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;!!!!! </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2"> is a candidate to drop !!!!!</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">casefold</span><span class="p">():</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span>
+                <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
+            <span class="p">):</span>
                 <span class="n">empty_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">single_columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> of single value columns, they are: </span><span class="si">{</span><span class="n">single_columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">empty_columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> of null value columns, they are: </span><span class="si">{</span><span class="n">empty_columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">single_columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> of single value columns, they are: </span><span class="si">{</span><span class="n">single_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">empty_columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> of null value columns, they are: </span><span class="si">{</span><span class="n">empty_columns</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">empty_columns</span><span class="p">,</span> <span class="n">single_columns</span></div>
 
 
@@ -377,7 +396,9 @@
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">row_count</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">row_count</span><span class="p">)(</span><span class="s2">&quot;count&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">row_count</span><span class="p">)(</span><span class="s2">&quot;count&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">):</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span></div>
@@ -426,12 +447,15 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a dict ...&quot;</span><span class="p">)</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">doctest</span>
+
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
     <span class="kn">import</span> <span class="nn">pyspark</span>
 
@@ -469,7 +493,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.25 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.26 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark_</a></li> 
       </ul>

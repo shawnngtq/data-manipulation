@@ -13,6 +13,7 @@ def init_django(project_name):
     """
     import os
     import sys
+
     import django
 
     present_working_dir = os.getenv("PWD")
@@ -20,10 +21,12 @@ def init_django(project_name):
 
     project_name = project_name or os.environ.get("DJANGO_PROJECT") or None
     if not project_name:
-        raise Exception("""
+        raise Exception(
+            """
         Set an environment variable: `DJANGO_PROJECT=your_project_name` or call `init_django(your_project_name)`
-        """)
-    
+        """
+        )
+
     sys.path.insert(0, present_working_dir)
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
     os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"

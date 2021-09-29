@@ -20,7 +20,9 @@ def psy_pg_connect(host, database, username, password):
     """
     import psycopg2
 
-    connection_string = f"host={host} port=5432 dbname={database} user={username} password={password}"
+    connection_string = (
+        f"host={host} port=5432 dbname={database} user={username} password={password}"
+    )
     connection = psycopg2.connect(connection_string)
     print("PostgreSQL database connected ...")
 
