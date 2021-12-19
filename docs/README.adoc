@@ -19,21 +19,7 @@ To make Sphinx documentation work in Github:
 
 [source,bash]
 ----
-cd docs
-
-# Cleanup
-make clean
-
-# Generate rst
-sphinx-apidoc -o . ../data_manipulation/
-
-# Generate html
-make html
-
-cd ..
-
-# Setup versioneer
-versioneer install
+./build.sh
 
 # Git tag
 git add .
@@ -42,18 +28,7 @@ git tag 0.15
 git push
 git push origin --tags
 
-rm -r build
-rm -r dist
-rm -r data_manipulation.egg-info
-
-# Build distribution
-python setup.py sdist bdist_wheel
-
-# Upload to Test PyPi
-python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
-
-# Upload to PyPi
-twine upload dist/*
+./build.sh cleanup upload
 ----
 
 == References

@@ -36,6 +36,14 @@ data\_manipulation.geopandas\_ module
    :undoc-members:
    :show-inheritance:
 
+data\_manipulation.mysql\_connector\_python\_ module
+----------------------------------------------------
+
+.. automodule:: data_manipulation.mysql_connector_python_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 data\_manipulation.pandas\_ module
 ----------------------------------
 

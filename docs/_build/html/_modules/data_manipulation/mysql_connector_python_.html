@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.psycopg2_ &#8212; data_manipulation 0.27 documentation</title>
+    <title>data_manipulation.mysql_connector_python_ &#8212; data_manipulation 0.27 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -26,7 +26,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.27 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">data_manipulation.psycopg2_</a></li> 
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.mysql_connector_python_</a></li> 
       </ul>
     </div>  
 
@@ -35,12 +35,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for data_manipulation.psycopg2_</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="create_connection"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.create_connection">[docs]</a><span></span><span class="k">def</span> <span class="nf">create_connection</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5432</span><span class="p">):</span>
+  <h1>Source code for data_manipulation.mysql_connector_python_</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="create_connection"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.mysql_connector_python_.create_connection">[docs]</a><span></span><span class="k">def</span> <span class="nf">create_connection</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">3306</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return psycopg2 connection</span>
+<span class="sd">    Return MySQL connection</span>
 
-<span class="sd">    https://www.psycopg.org/</span>
+<span class="sd">    https://github.com/mysql/mysql-connector-python</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -53,35 +53,38 @@
 <span class="sd">    password : str</span>
 <span class="sd">        Password used to authenticate</span>
 <span class="sd">    port : int, optional</span>
-<span class="sd">        Connection port number, by default 5432</span>
+<span class="sd">        Connection port number, by default 3306</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    connection</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">logging</span>
-    <span class="kn">import</span> <span class="nn">psycopg2</span>
+    <span class="kn">import</span> <span class="nn">mysql.connector</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">connection_string</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;host=</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> port=</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2"> dbname=</span><span class="si">{</span><span class="n">dbname</span><span class="si">}</span><span class="s2"> user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2"> password=</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
+            <span class="n">database</span><span class="o">=</span><span class="n">dbname</span><span class="p">,</span>
+            <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+            <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+            <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">connection</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">connection_string</span><span class="p">)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;PostgreSQL database connected ...&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MySQL database connected ...&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">connection</span></div>
 
 
-<div class="viewcode-block" id="execute_sql"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.execute_sql">[docs]</a><span class="k">def</span> <span class="nf">execute_sql</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="execute_query"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.mysql_connector_python_.execute_query">[docs]</a><span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">sql_query</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Execute and commit PostgreSQL query</span>
+<span class="sd">    Execute and commit MySQL query</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    connection : str</span>
-<span class="sd">        psycopg2 connection class</span>
+<span class="sd">        mysql connection class</span>
 <span class="sd">    sql_query : str</span>
 <span class="sd">        SQL query</span>
 <span class="sd">    commit : bool, optional</span>
@@ -90,46 +93,19 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    None</span>
-<span class="sd">        Just log sql execute &amp; commit status</span>
+<span class="sd">        Just log query commit status</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">logging</span>
-    <span class="kn">import</span> <span class="nn">psycopg2</span>
+    <span class="kn">import</span> <span class="nn">mysql.connector</span>
 
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_query</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">commit</span><span class="p">:</span>
             <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;PostgreSQL committed ...&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MySQL committed ...&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="query_to_pandas"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.query_to_pandas">[docs]</a><span class="k">def</span> <span class="nf">query_to_pandas</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">sql_query</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return Pandas dataframe from result of given SQL query</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    connection : str</span>
-<span class="sd">        psycopg2 connection class</span>
-<span class="sd">    sql_query : str</span>
-<span class="sd">        SQL query</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; sql_query = &#39;&#39;&#39;SELECT * FROM users;&#39;&#39;&#39;</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pandas.core.frame.DataFrame</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
-        <span class="n">sql_query</span><span class="p">,</span>
-        <span class="n">connection</span><span class="p">,</span>
-    <span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -169,7 +145,7 @@
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.27 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">data_manipulation.psycopg2_</a></li> 
+        <li class="nav-item nav-item-this"><a href="">data_manipulation.mysql_connector_python_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>data_manipulation package &#8212; data_manipulation 0.26 documentation</title>
+    <title>data_manipulation package &#8212; data_manipulation 0.27 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.26 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.27 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>  
@@ -355,6 +355,54 @@
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-data_manipulation.mysql_connector_python_">
+<span id="data-manipulation-mysql-connector-python-module"></span><h2>data_manipulation.mysql_connector_python_ module<a class="headerlink" href="#module-data_manipulation.mysql_connector_python_" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.create_connection">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3306</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#create_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.create_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return MySQL connection</p>
+<p><a class="reference external" href="https://github.com/mysql/mysql-connector-python">https://github.com/mysql/mysql-connector-python</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – Database host address</p></li>
+<li><p><strong>dbname</strong> (<em>str</em>) – Database name</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – User used to authenticate</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Password used to authenticate</p></li>
+<li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Connection port number, by default 3306</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.execute_query">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#execute_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.execute_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute and commit MySQL query</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>connection</strong> (<em>str</em>) – mysql connection class</p></li>
+<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query</p></li>
+<li><p><strong>commit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Make database change persistent, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Just log query commit status</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -992,36 +1040,59 @@
 <section id="module-data_manipulation.psycopg2_">
 <span id="data-manipulation-psycopg2-module"></span><h2>data_manipulation.psycopg2_ module<a class="headerlink" href="#module-data_manipulation.psycopg2_" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.psy_pg_connect">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">psy_pg_connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#psy_pg_connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.psy_pg_connect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return connection and cursor of psycopg2 postgres server connection</p>
+<dt class="sig sig-object py" id="data_manipulation.psycopg2_.create_connection">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5432</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#create_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.create_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return psycopg2 connection</p>
+<p><a class="reference external" href="https://www.psycopg.org/">https://www.psycopg.org/</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>host</strong> (<em>str</em>) – Hostname</p></li>
-<li><p><strong>database</strong> (<em>str</em>) – Database name</p></li>
-<li><p><strong>username</strong> (<em>str</em>) – Username</p></li>
-<li><p><strong>password</strong> (<em>str</em>) – Password</p></li>
+<li><p><strong>host</strong> (<em>str</em>) – Database host address</p></li>
+<li><p><strong>dbname</strong> (<em>str</em>) – Database name</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – User used to authenticate</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Password used to authenticate</p></li>
+<li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Connection port number, by default 5432</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>(connection, cursor)</p>
+<dd class="field-even"><p></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple</p>
+<dd class="field-odd"><p>connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.psycopg2_.execute_sql">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">execute_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#execute_sql"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.execute_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute and commit PostgreSQL query</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>connection</strong> (<em>str</em>) – psycopg2 connection class</p></li>
+<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query</p></li>
+<li><p><strong>commit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Make database change persistent, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Just log sql execute &amp; commit status</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.psycopg2_.query_to_pandas">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">query_to_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sql_query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#query_to_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.query_to_pandas" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">query_to_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#query_to_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.query_to_pandas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return Pandas dataframe from result of given SQL query</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>connection</strong> (<em>str</em>) – psycopg2 connection class</p></li>
 <li><p><strong>sql_query</strong> (<em>str</em>) – SQL query</p></li>
-<li><p><strong>connection</strong> (<em>str</em>) – Connection return by psycopg2</p></li>
 </ul>
 </dd>
 </dl>
@@ -1317,6 +1388,7 @@
 <li><a class="reference internal" href="#module-data_manipulation.beautifulsoup_">data_manipulation.beautifulsoup_ module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation.django_">data_manipulation.django_ module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation.geopandas_">data_manipulation.geopandas_ module</a></li>
+<li><a class="reference internal" href="#module-data_manipulation.mysql_connector_python_">data_manipulation.mysql_connector_python_ module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation.pandas_">data_manipulation.pandas_ module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation.psycopg2_">data_manipulation.psycopg2_ module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation.pyspark_">data_manipulation.pyspark_ module</a></li>
@@ -1339,7 +1411,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -1361,13 +1433,13 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.26 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.27 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>
