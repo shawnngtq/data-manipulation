@@ -32,6 +32,5 @@ function upload {
     twine upload dist/*
 }
 
-create_update_docs
 "$@"
 exit 0
