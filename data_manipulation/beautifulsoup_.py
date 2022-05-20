@@ -22,7 +22,7 @@ def build_soup(url):
 
     response = requests.get(url)
     if response.status_code == 200:
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response.text, features="lxml")
         return soup
     else:
         print(f"response status code: {response.status_code}")

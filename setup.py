@@ -24,14 +24,16 @@ CLASSIFIERS = [
 
 DEPENDENCIES = [
     "beautifulsoup4",
-    "lxml",
     "django",
-    "numpy",
+    "lxml",
+    "matplotlib",
+    "mysql-connector-python",
     "pandas",
-    "IPython",
-    "requests",
     "psycopg2",
     "pyspark",
+    "seaborn",
+    "tqdm",
+    "xlsxwriter",
 ]
 
 setup(

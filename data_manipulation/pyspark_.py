@@ -1,3 +1,11 @@
+import pandas as pd
+import pyspark
+import pyspark.sql.functions as F
+
+spark = pyspark.sql.SparkSession.builder.master("local").getOrCreate()
+
+
+# CONFIG
 def config_spark_local(autoset=True):
     """
     Automatically configure Spark local or provide recommendation if not autoset. Reference https://towardsdatascience.com/basics-of-apache-spark-configuration-settings-ca4faff40d45
@@ -42,8 +50,6 @@ def config_spark_local(autoset=True):
     import multiprocessing
     import os
 
-    import pyspark
-
     def round_down_or_one(x):
         if math.floor(x) == 0:
             return 1
@@ -55,7 +61,7 @@ def config_spark_local(autoset=True):
     spark_executor_cores = 5
     number_of_nodes = 1
     total_ram_per_node_gb = (
-        os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / (1024.0 ** 3)
+        os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / (1024.0**3)
     )
 
     executor_per_node = round_down_or_one((vcore_per_node - 1) / spark_executor_cores)
@@ -114,6 +120,7 @@ def config_spark_local(autoset=True):
     print("config_spark_local exited ...")
 
 
+# COLUMNS
 def add_dummy_columns(dataframe, columns, value):
     """
     Return dataframe with additional given dummy column(s) and value
@@ -131,9 +138,6 @@ def add_dummy_columns(dataframe, columns, value):
     -------
     df : pyspark.sql.dataframe.DataFrame
     """
-    import pyspark
-    import pyspark.sql.functions as F
-
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     if not isinstance(columns, list):
@@ -163,8 +167,6 @@ def column_into_list(dataframe, column):
     -------
     list_ : []
     """
-    import pyspark
-
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     if not isinstance(column, str):
@@ -190,8 +192,6 @@ def column_into_set(dataframe, column):
     -------
     set_ : {}
     """
-    import pyspark
-
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     if not isinstance(column, str):
@@ -216,8 +216,6 @@ def columns_prefix(dataframe, prefix):
     -------
     df : pyspark.sql.dataframe.DataFrame
     """
-    import pyspark
-
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     if not isinstance(prefix, str):
@@ -250,8 +248,6 @@ def columns_statistics(dataframe, n=10):
 
     (empty_columns, single_columns)
     """
-    import pyspark
-
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
 
@@ -283,6 +279,54 @@ def columns_statistics(dataframe, n=10):
     return empty_columns, single_columns
 
 
+# DATAFRAME
+def rename(dataframe, columns):
+    """
+    Return dataframe with new renamed column(s)
+
+    Parameters
+    ----------
+    dataframe : pyspark.sql.dataframe.DataFrame
+        One Spark dataframe
+    columns : dict
+        A dictionary {oldName: newName} of columns to rename
+
+    Examples
+    --------
+    >>> l = [('Alice', 1)]
+    >>> df = spark.createDataFrame(l)
+    >>> df.show()
+    +-----+---+
+    |   _1| _2|
+    +-----+---+
+    |Alice|  1|
+    +-----+---+
+    <BLANKLINE>
+    >>> df2 = rename(df, {"_1": "name", "_2": "id"})
+    >>> df2.show()
+    +-----+---+
+    | name| id|
+    +-----+---+
+    |Alice|  1|
+    +-----+---+
+    <BLANKLINE>
+
+    Returns
+    -------
+    df : pyspark.sql.dataframe.DataFrame
+    """
+    if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
+        raise TypeError("Argument must be a Pyspark dataframe ...")
+    if not isinstance(columns, dict):
+        raise TypeError("Argument must be a dict ...")
+
+    df = dataframe.select(
+        [F.col(c).alias(columns.get(c, c)) for c in dataframe.columns]
+    )
+    return df
+
+
+# STATISTICS
 def describe(dataframe):
     """
     Display dataframe information similar to Pandas dataframe describe()
@@ -296,8 +340,6 @@ def describe(dataframe):
     -------
     None
     """
-    import pyspark
-
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     print(f"The dataframe: {type(dataframe)}")
@@ -348,8 +390,6 @@ def group_count(dataframe, columns, n=10):
     -------
     df : pyspark.sql.dataframe.DataFrame
     """
-    import pyspark
-    import pyspark.sql.functions as F
 
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
@@ -366,61 +406,7 @@ def group_count(dataframe, columns, n=10):
     return df
 
 
-def rename(dataframe, columns):
-    """
-    Return dataframe with new renamed column(s)
-
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        One Spark dataframe
-    columns : dict
-        A dictionary {oldName: newName} of columns to rename
-
-    Examples
-    --------
-    >>> l = [('Alice', 1)]
-    >>> df = spark.createDataFrame(l)
-    >>> df.show()
-    +-----+---+
-    |   _1| _2|
-    +-----+---+
-    |Alice|  1|
-    +-----+---+
-    <BLANKLINE>
-    >>> df2 = rename(df, {"_1": "name", "_2": "id"})
-    >>> df2.show()
-    +-----+---+
-    | name| id|
-    +-----+---+
-    |Alice|  1|
-    +-----+---+
-    <BLANKLINE>
-
-    Returns
-    -------
-    df : pyspark.sql.dataframe.DataFrame
-    """
-    import pyspark
-    import pyspark.sql.functions as F
-
-    if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
-        raise TypeError("Argument must be a Pyspark dataframe ...")
-    if not isinstance(columns, dict):
-        raise TypeError("Argument must be a dict ...")
-
-    df = dataframe.select(
-        [F.col(c).alias(columns.get(c, c)) for c in dataframe.columns]
-    )
-    return df
-
-
 if __name__ == "__main__":
     import doctest
-
-    import pandas as pd
-    import pyspark
-
-    spark = pyspark.sql.SparkSession.builder.master("local").getOrCreate()
 
     doctest.testmod()

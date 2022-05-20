@@ -1,4 +1,16 @@
-def create_connection(host, dbname, user, password, port=3306):
+import logging
+from typing import Optional, Union
+
+import mysql.connector
+
+
+def create_connection(
+    host: str,
+    dbname: str,
+    user: str,
+    password: str,
+    port=3306,
+) -> mysql.connector.connection_cext.CMySQLConnection:
     """
     Return MySQL connection
 
@@ -19,11 +31,9 @@ def create_connection(host, dbname, user, password, port=3306):
 
     Returns
     -------
-    connection
+    mysql.connector.connection_cext.CMySQLConnection
+        Connection object
     """
-    import logging
-    import mysql.connector
-
     connection = None
     try:
         connection = mysql.connector.connect(
@@ -35,39 +45,46 @@ def create_connection(host, dbname, user, password, port=3306):
         )
         logging.info("MySQL database connected ...")
     except mysql.connector.errors.Error as e:
-        logging.info(f"{e}")
+        logging.error(f"{e}")
     return connection
 
 
-def execute_query(connection, sql_query, commit=True):
+def execute_query(
+    connection: mysql.connector.connection_cext.CMySQLConnection,
+    sql_query: str,
+    data: Union[dict, tuple],
+    commit=True,
+) -> Optional[int]:
     """
     Execute and commit MySQL query
 
     Parameters
     ----------
-    connection : str
+    connection : mysql.connector.connection_cext.CMySQLConnection
         mysql connection class
     sql_query : str
         SQL query
+    data : Union[dict, tuple]
+        _description_
     commit : bool, optional
         Make database change persistent, by default True
 
     Returns
     -------
-    None
-        Just log query commit status
+    Optional[int]
+        Query id should be int
     """
-    import logging
-    import mysql.connector
-
     cursor = connection.cursor()
     try:
-        cursor.execute(sql_query)
+        cursor.execute(sql_query, data)
         if commit:
             connection.commit()
             logging.info("MySQL committed ...")
+            id = cursor.lastrowid
+            cursor.close()
+            return id
     except mysql.connector.errors.Error as e:
-        logging.info(f"{e}")
+        logging.error(f"{e}")
 
 
 if __name__ == "__main__":

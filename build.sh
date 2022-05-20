@@ -5,6 +5,7 @@ function create_update_docs {
     # Cleanup
     make clean
     rm data_manipulation.rst
+    rm modules.rst
     # Generate rst
     sphinx-apidoc -o . ../data_manipulation/
     # Generate html

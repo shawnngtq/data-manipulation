@@ -21,6 +21,7 @@ from os.path import dirname, join, pardir
 # sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath(".."))
 sys.path.insert(0, join(dirname(__file__), pardir))
+sys.path.insert(0, os.path.abspath("../data_manipulation"))
 
 from data_manipulation._version import get_versions
 
@@ -53,7 +54,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"data_manipulation"
+project = "data_manipulation"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -195,8 +196,8 @@ latex_documents = [
     (
         "index",
         "data_manipulation.tex",
-        u"data_manipulation Documentation",
-        u"Shawn Ng",
+        "data_manipulation Documentation",
+        "Shawn Ng",
         "manual",
     ),
 ]
@@ -227,7 +228,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ("index", "data_manipulation", u"data_manipulation Documentation", [u"Shawn Ng"], 1)
+    ("index", "data_manipulation", "data_manipulation Documentation", ["Shawn Ng"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -243,8 +244,8 @@ texinfo_documents = [
     (
         "index",
         "data_manipulation",
-        u"data_manipulation Documentation",
-        u"Shawn Ng",
+        "data_manipulation Documentation",
+        "Shawn Ng",
         "data_manipulation",
         "Powerful data manipulation",
         "Miscellaneous",

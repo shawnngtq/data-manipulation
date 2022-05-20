@@ -28,6 +28,14 @@ data\_manipulation.django\_ module
    :undoc-members:
    :show-inheritance:
 
+data\_manipulation.flask\_ module
+---------------------------------
+
+.. automodule:: data_manipulation.flask_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 data\_manipulation.geopandas\_ module
 -------------------------------------
 
