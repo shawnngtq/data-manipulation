@@ -3,7 +3,6 @@ from itertools import combinations
 
 import numpy as np
 import pandas as pd
-from base import get_none_variation
 from IPython.display import display
 
 
@@ -377,6 +376,7 @@ def clean_none(dataframe, clean_variation=True):
 
     Examples
     --------
+    >>> from base import get_none_variation
     >>> df = pd.DataFrame({"c1": get_none_variation()})
     >>> df
           c1
@@ -412,6 +412,8 @@ def clean_none(dataframe, clean_variation=True):
     -------
     df : pandas.DataFrame
     """
+    from base import get_none_variation
+
     df = dataframe.copy()
     df = df.replace(r"^\s*$", np.nan, regex=True)
     if clean_variation:
@@ -766,7 +768,7 @@ def ps_aux_dataframe(ps_aux_commands: str) -> pd.DataFrame:
     pd.DataFrame
         Like shell output display
     """
-    from .base import parse_ps_aux
+    from base import parse_ps_aux
 
     if isinstance(ps_aux_commands, str):
         rows = parse_ps_aux(ps_aux_commands)

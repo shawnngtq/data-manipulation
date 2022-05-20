@@ -19,7 +19,7 @@ To make Sphinx documentation work in Github:
 
 [source,bash]
 ----
-./build.sh
+./build.sh create_update_docs
 
 # Git tag
 git add .
