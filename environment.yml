@@ -34,8 +34,8 @@ dependencies:
   - brotlipy=0.7.0
   - bzip2=1.0.8
   - c-ares=1.18.1
-  - ca-certificates=2021.10.8
-  - certifi=2021.10.8
+  - ca-certificates=2022.5.18.1
+  - certifi=2022.5.18.1
   - cffi=1.15.0
   - chardet=4.0.0
   - charset-normalizer=2.0.9

@@ -365,7 +365,7 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
 
 
 # DATA STRUCTURE
-def clean_none(dataframe, clean_variation=True):
+def clean_none(dataframe, clean_variation=True, non_variations=[]):
     """
     Return a dataframe from given dataframe with standardized None. Deprecated as of pandas 1.3.0.
 
@@ -412,12 +412,9 @@ def clean_none(dataframe, clean_variation=True):
     -------
     df : pandas.DataFrame
     """
-    from base import get_none_variation
-
     df = dataframe.copy()
     df = df.replace(r"^\s*$", np.nan, regex=True)
     if clean_variation:
-        non_variations = get_none_variation()
         df = df.replace(non_variations, np.nan)
     df = df.where(pd.notnull(df), None)
     return df
