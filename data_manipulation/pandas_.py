@@ -765,7 +765,7 @@ def ps_aux_dataframe(ps_aux_commands: str) -> pd.DataFrame:
     pd.DataFrame
         Like shell output display
     """
-    from base import parse_ps_aux
+    from .base import parse_ps_aux
 
     if isinstance(ps_aux_commands, str):
         rows = parse_ps_aux(ps_aux_commands)
