@@ -92,4 +92,6 @@ target/
 .mypy_cache/
 
 # custom
-data_manipulation/pandas/README.md
+build.sh
+install_packages.sh
+docs/README*
