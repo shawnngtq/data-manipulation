@@ -1,21 +1,24 @@
-def haversine_np(longitude1, latitude1, longitude2, latitude2):
+def haversine_np(
+    longitude1: float, latitude1: float, longitude2: float, latitude2: float
+) -> float:
     """
     Return the great circle distance between two points on the earth (specified in decimal degrees). All args must be of equal length. Reference from https://stackoverflow.com/a/4913653, https://stackoverflow.com/a/29546836
 
     Parameters
     ----------
-    longitude1: float
+    longitude1 : float
         Base longitude
-    latitude1: float
+    latitude1 : float
         Base latitude
-    longitude2: float
+    longitude2 : float
         Longitude to compare
-    latitude2: float
+    latitude2 : float
         Latitude to compare
 
     Returns
     -------
-    km : float
+    float
+        Kilometer
     """
     import numpy as np
 
