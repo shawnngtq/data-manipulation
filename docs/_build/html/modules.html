@@ -1,18 +1,20 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>data_manipulation &#8212; data_manipulation 0.31 documentation</title>
+    <title>data_manipulation &#8212; data_manipulation 0.33 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -25,7 +27,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.31 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.33 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation</a></li> 
       </ul>
     </div>  
@@ -36,20 +38,86 @@
           <div class="body" role="main">
             
   <section id="data-manipulation">
-<h1>data_manipulation<a class="headerlink" href="#data-manipulation" title="Permalink to this headline">¶</a></h1>
+<h1>data_manipulation<a class="headerlink" href="#data-manipulation" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="data_manipulation.html">data_manipulation package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.base">data_manipulation.base module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.beautifulsoup_">data_manipulation.beautifulsoup_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.django_">data_manipulation.django_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.base">data_manipulation.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.clean_string"><code class="docutils literal notranslate"><span class="pre">clean_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.decrypt_fernet_data"><code class="docutils literal notranslate"><span class="pre">decrypt_fernet_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.delete_list_indices"><code class="docutils literal notranslate"><span class="pre">delete_list_indices()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.encrypt_fernet_file"><code class="docutils literal notranslate"><span class="pre">encrypt_fernet_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.get_none_variation"><code class="docutils literal notranslate"><span class="pre">get_none_variation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.get_path_files"><code class="docutils literal notranslate"><span class="pre">get_path_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.get_string_case_combination"><code class="docutils literal notranslate"><span class="pre">get_string_case_combination()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.list_to_file"><code class="docutils literal notranslate"><span class="pre">list_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.list_tuple_without_none"><code class="docutils literal notranslate"><span class="pre">list_tuple_without_none()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.parse_ps_aux"><code class="docutils literal notranslate"><span class="pre">parse_ps_aux()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.remove_path_file"><code class="docutils literal notranslate"><span class="pre">remove_path_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.send_email"><code class="docutils literal notranslate"><span class="pre">send_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.string_boolean_to_int"><code class="docutils literal notranslate"><span class="pre">string_boolean_to_int()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.string_dlt_to_dlt"><code class="docutils literal notranslate"><span class="pre">string_dlt_to_dlt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.string_str_to_str"><code class="docutils literal notranslate"><span class="pre">string_str_to_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.beautifulsoup_">data_manipulation.beautifulsoup_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.beautifulsoup_.build_soup"><code class="docutils literal notranslate"><span class="pre">build_soup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.beautifulsoup_.preprocess"><code class="docutils literal notranslate"><span class="pre">preprocess()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.django_">data_manipulation.django_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.django_.init_django"><code class="docutils literal notranslate"><span class="pre">init_django()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.flask_">data_manipulation.flask_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.geopandas_">data_manipulation.geopandas_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.mysql_connector_python_">data_manipulation.mysql_connector_python_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.pandas_">data_manipulation.pandas_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.psycopg2_">data_manipulation.psycopg2_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.pyspark_">data_manipulation.pyspark_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.geopandas_">data_manipulation.geopandas_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.geopandas_.haversine_np"><code class="docutils literal notranslate"><span class="pre">haversine_np()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.mysql_connector_python_">data_manipulation.mysql_connector_python_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.mysql_connector_python_.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.mysql_connector_python_.execute_query"><code class="docutils literal notranslate"><span class="pre">execute_query()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.pandas_">data_manipulation.pandas_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.add_type_columns"><code class="docutils literal notranslate"><span class="pre">add_type_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.chunking_dataframe"><code class="docutils literal notranslate"><span class="pre">chunking_dataframe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.clean_none"><code class="docutils literal notranslate"><span class="pre">clean_none()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.compare_all_list_items"><code class="docutils literal notranslate"><span class="pre">compare_all_list_items()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.compare_dataframes"><code class="docutils literal notranslate"><span class="pre">compare_dataframes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.config_pandas_display"><code class="docutils literal notranslate"><span class="pre">config_pandas_display()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.dtypes_dictionary"><code class="docutils literal notranslate"><span class="pre">dtypes_dictionary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.head_tail"><code class="docutils literal notranslate"><span class="pre">head_tail()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.index_marks"><code class="docutils literal notranslate"><span class="pre">index_marks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.print_dataframe_overview"><code class="docutils literal notranslate"><span class="pre">print_dataframe_overview()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.ps_aux_dataframe"><code class="docutils literal notranslate"><span class="pre">ps_aux_dataframe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.series_count"><code class="docutils literal notranslate"><span class="pre">series_count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.series_to_columns"><code class="docutils literal notranslate"><span class="pre">series_to_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.split_dataframe"><code class="docutils literal notranslate"><span class="pre">split_dataframe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.split_left_merged_dataframe"><code class="docutils literal notranslate"><span class="pre">split_left_merged_dataframe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.to_excel_keep_url"><code class="docutils literal notranslate"><span class="pre">to_excel_keep_url()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.useless_columns"><code class="docutils literal notranslate"><span class="pre">useless_columns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.psycopg2_">data_manipulation.psycopg2_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.psycopg2_.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.psycopg2_.execute_sql"><code class="docutils literal notranslate"><span class="pre">execute_sql()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.psycopg2_.query_to_pandas"><code class="docutils literal notranslate"><span class="pre">query_to_pandas()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.pyspark_">data_manipulation.pyspark_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.add_dummy_columns"><code class="docutils literal notranslate"><span class="pre">add_dummy_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.column_into_list"><code class="docutils literal notranslate"><span class="pre">column_into_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.column_into_set"><code class="docutils literal notranslate"><span class="pre">column_into_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.columns_prefix"><code class="docutils literal notranslate"><span class="pre">columns_prefix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.columns_statistics"><code class="docutils literal notranslate"><span class="pre">columns_statistics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.config_spark_local"><code class="docutils literal notranslate"><span class="pre">config_spark_local()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.describe"><code class="docutils literal notranslate"><span class="pre">describe()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.group_count"><code class="docutils literal notranslate"><span class="pre">group_count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pyspark_.rename"><code class="docutils literal notranslate"><span class="pre">rename()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation">Module contents</a></li>
 </ul>
 </li>
@@ -80,7 +148,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -94,13 +162,13 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.31 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.33 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

@@ -1,17 +1,19 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.beautifulsoup_ &#8212; data_manipulation 0.31 documentation</title>
+    <title>data_manipulation.beautifulsoup_ &#8212; data_manipulation 0.33 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -24,7 +26,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.31 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.33 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.beautifulsoup_</a></li> 
       </ul>
@@ -36,14 +38,59 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.beautifulsoup_</h1><div class="highlight"><pre>
-<div class="viewcode-block" id="build_soup"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.beautifulsoup_.build_soup">[docs]</a><span></span><span class="k">def</span> <span class="nf">build_soup</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<div class="viewcode-block" id="preprocess"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.beautifulsoup_.preprocess">[docs]</a><span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove whitespaces and newline characters. Reference: https://stackoverflow.com/questions/23241641/how-to-ignore-empty-lines-while-using-next-sibling-in-beautifulsoup4-in-python</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    html : str</span>
+<span class="sd">        html to be cleared</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; a = &quot;&lt;html&gt;   &lt;p&gt; Something &lt;/p&gt;    &lt;/html&gt; &quot;</span>
+<span class="sd">    &gt;&gt;&gt; preprocess(a)</span>
+<span class="sd">    &#39;&lt;html&gt;&lt;p&gt;Something&lt;/p&gt;&lt;/html&gt;&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Optional[str]</span>
+<span class="sd">        cleaned html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+
+    <span class="c1"># remove leading and trailing whitespaces</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(^[\s]+)|([\s]+$)&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+    <span class="c1"># convert newlines to spaces, this preserves newline delimiters</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+    <span class="c1"># remove whitespaces before opening tags</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[\s]+&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+    <span class="c1"># remove whitespaces after closing tags</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&gt;[\s]+&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+
+
+<div class="viewcode-block" id="build_soup"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.beautifulsoup_.build_soup">[docs]</a><span class="k">def</span> <span class="nf">build_soup</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lxml&quot;</span><span class="p">,</span> <span class="n">to_preprocess</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BeautifulSoup</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return Beautifulsoup object from given url</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    url: str</span>
+<span class="sd">    url : str</span>
 <span class="sd">        URL</span>
+<span class="sd">    features : str, optional</span>
+<span class="sd">        parser to use</span>
+<span class="sd">    to_preprocess : str, optional</span>
+<span class="sd">        to preprocess?</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -53,14 +100,18 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    BS4 or None</span>
+<span class="sd">    Optional[BeautifulSoup]</span>
+<span class="sd">        BeautifulSoup parsed by lxml</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">requests</span>
     <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">to_preprocess</span><span class="p">:</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">preprocess</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">),</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">soup</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;response status code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -87,7 +138,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -101,14 +152,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.31 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.33 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.beautifulsoup_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>
