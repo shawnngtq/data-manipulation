@@ -7,7 +7,7 @@ def clean_string(
     string: str, remove_parenthesis: bool = False, remove_brackets: bool = False
 ) -> str:
     """
-    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that "\t\n\s" will be removed
+    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that tab, newline, whitespace will be removed
 
     Parameters
     ----------

@@ -31,7 +31,6 @@ DEPENDENCIES = [
     "pandas",
     "psycopg2",
     "pyspark",
-    # "seaborn",
     "tqdm",
     "xlsxwriter",
 ]

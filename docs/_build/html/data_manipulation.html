@@ -51,19 +51,17 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.clean_string">
 <span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">clean_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_parenthesis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_brackets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#clean_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.clean_string" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that “</p>
-</div></blockquote>
-<p>s” will be removed</p>
-<blockquote>
-<div><dl class="simple">
-<dt>string<span class="classifier">str</span></dt><dd><p>String to clean</p>
-</dd>
-<dt>remove_parenthesis<span class="classifier">bool, optional</span></dt><dd><p>To remove parenthesis, by default False</p>
-</dd>
-<dt>remove_brackets<span class="classifier">bool, optional</span></dt><dd><p>To remove brackets, by default False</p>
+<dd><p>Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that tab, newline, whitespace will be removed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> (<em>str</em>) – String to clean</p></li>
+<li><p><strong>remove_parenthesis</strong> (<em>bool</em><em>, </em><em>optional</em>) – To remove parenthesis, by default False</p></li>
+<li><p><strong>remove_brackets</strong> (<em>bool</em><em>, </em><em>optional</em>) – To remove brackets, by default False</p></li>
+</ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot; sHawn  tesT &quot;</span><span class="p">)</span>
 <span class="go">&#39;SHAWN TEST&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">clean_string</span><span class="p">(</span><span class="s2">&quot;shawn ( te  st )&quot;</span><span class="p">)</span>
@@ -74,11 +72,14 @@
 <span class="go">&#39;SHAWN&#39;</span>
 </pre></div>
 </div>
-<dl class="simple">
-<dt>str</dt><dd><p>Uppercase cleaned string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Uppercase cleaned string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="py function">
