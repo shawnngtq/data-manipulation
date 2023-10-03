@@ -1,19 +1,15 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base &#8212; data_manipulation 0.34 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
+    <title>data_manipulation.base &#8212; data_manipulation 0.35 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=601dbdee" />
+    <script src="../../_static/documentation_options.js?v=3d82ad78"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -26,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.34 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.35 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
       </ul>
@@ -43,10 +39,12 @@
 
 
 <span class="c1"># DATA STRUCTURE</span>
-<div class="viewcode-block" id="clean_string"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.clean_string">[docs]</a><span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span>
+<div class="viewcode-block" id="clean_string">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.clean_string">[docs]</a>
+<span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that tab, newline, whitespace will be removed</span>
 
 <span class="sd">    Parameters</span>
@@ -86,8 +84,11 @@
     <span class="k">return</span> <span class="n">string</span></div>
 
 
-<div class="viewcode-block" id="get_string_case_combination"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_string_case_combination">[docs]</a><span class="k">def</span> <span class="nf">get_string_case_combination</span><span class="p">(</span><span class="n">str_</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="get_string_case_combination">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_string_case_combination">[docs]</a>
+<span class="k">def</span> <span class="nf">get_string_case_combination</span><span class="p">(</span><span class="n">str_</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get list of case combination of a string. Reference: https://stackoverflow.com/questions/11144389/find-all-upper-lower-and-mixed-case-combinations-of-a-string</span>
 
 <span class="sd">    Parameters</span>
@@ -110,8 +111,11 @@
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">,</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="n">str_</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">str_</span><span class="o">.</span><span class="n">lower</span><span class="p">()))))</span></div>
 
 
-<div class="viewcode-block" id="get_none_variation"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_none_variation">[docs]</a><span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="get_none_variation">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_none_variation">[docs]</a>
+<span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get List of none variation</span>
 
 <span class="sd">    Examples</span>
@@ -137,8 +141,31 @@
     <span class="k">return</span> <span class="n">variations</span></div>
 
 
-<div class="viewcode-block" id="list_tuple_without_none"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_tuple_without_none">[docs]</a><span class="k">def</span> <span class="nf">list_tuple_without_none</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="get_country_name_variation">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_country_name_variation">[docs]</a>
+<span class="k">def</span> <span class="nf">get_country_name_variation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">variations</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;AFRICA&quot;</span><span class="p">:</span> <span class="s2">&quot;BW&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;BOSNIA&quot;</span><span class="p">:</span> <span class="s2">&quot;BA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CZECH REPUBLIC&quot;</span><span class="p">:</span> <span class="s2">&quot;CZ&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;MACEDONIA&quot;</span><span class="p">:</span> <span class="s2">&quot;MK&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;REPUBLIC OF CHINA&quot;</span><span class="p">:</span> <span class="s2">&quot;CN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;REPUBLIC OF KOREA&quot;</span><span class="p">:</span> <span class="s2">&quot;KR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RUSSIAN FEDERATION&quot;</span><span class="p">:</span> <span class="s2">&quot;RU&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SLAVONIC&quot;</span><span class="p">:</span> <span class="s2">&quot;SK&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SLOVAK REPUBLIC&quot;</span><span class="p">:</span> <span class="s2">&quot;SK&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TURKEY&quot;</span><span class="p">:</span> <span class="s2">&quot;TR&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UNITED STATES&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">variations</span></div>
+
+
+
+<div class="viewcode-block" id="list_tuple_without_none">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_tuple_without_none">[docs]</a>
+<span class="k">def</span> <span class="nf">list_tuple_without_none</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the given list / tuple without None variation</span>
 
 <span class="sd">    Parameters</span>
@@ -179,8 +206,11 @@
     <span class="k">return</span> <span class="n">lt</span></div>
 
 
-<div class="viewcode-block" id="string_boolean_to_int"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_boolean_to_int">[docs]</a><span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="string_boolean_to_int">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_boolean_to_int">[docs]</a>
+<span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return integer from given string boolean. 1 instead of &quot;true&quot;/&quot;True&quot;/&quot;1&quot;. Reference from https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</span>
 
 <span class="sd">    Parameters</span>
@@ -212,8 +242,11 @@
     <span class="k">return</span> <span class="n">int_</span></div>
 
 
-<div class="viewcode-block" id="string_dlt_to_dlt"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_dlt_to_dlt">[docs]</a><span class="k">def</span> <span class="nf">string_dlt_to_dlt</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="string_dlt_to_dlt">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_dlt_to_dlt">[docs]</a>
+<span class="k">def</span> <span class="nf">string_dlt_to_dlt</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return dictionary/list/tuple from given string representation of dictionary/list/tuple</span>
 
 <span class="sd">    Parameters</span>
@@ -247,8 +280,11 @@
     <span class="k">return</span> <span class="n">dlt</span></div>
 
 
-<div class="viewcode-block" id="string_str_to_str"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_str_to_str">[docs]</a><span class="k">def</span> <span class="nf">string_str_to_str</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="string_str_to_str">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_str_to_str">[docs]</a>
+<span class="k">def</span> <span class="nf">string_str_to_str</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return string from given string representation of string</span>
 
 <span class="sd">    Parameters</span>
@@ -276,8 +312,11 @@
     <span class="k">return</span> <span class="n">str_</span></div>
 
 
-<div class="viewcode-block" id="delete_list_indices"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.delete_list_indices">[docs]</a><span class="k">def</span> <span class="nf">delete_list_indices</span><span class="p">(</span><span class="n">list_</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="delete_list_indices">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.delete_list_indices">[docs]</a>
+<span class="k">def</span> <span class="nf">delete_list_indices</span><span class="p">(</span><span class="n">list_</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Delete multiple indices in a list</span>
 
 <span class="sd">    Parameters</span>
@@ -298,131 +337,12 @@
         <span class="k">del</span> <span class="n">list_</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
 
 
-<span class="c1"># DECRYPT / ENCRYPT</span>
-<div class="viewcode-block" id="encrypt_fernet_file"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.encrypt_fernet_file">[docs]</a><span class="k">def</span> <span class="nf">encrypt_fernet_file</span><span class="p">(</span><span class="n">keypath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encrypt file</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    keypath : str</span>
-<span class="sd">        keypath</span>
-<span class="sd">    filepath : str</span>
-<span class="sd">        File path</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Encrypted data</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">cryptography.fernet</span> <span class="kn">import</span> <span class="n">Fernet</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">fernet</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">encrypt_data</span> <span class="o">=</span> <span class="n">fernet</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">encrypt_data</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Wrong datatype(s)&quot;</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="decrypt_fernet_data"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.decrypt_fernet_data">[docs]</a><span class="k">def</span> <span class="nf">decrypt_fernet_data</span><span class="p">(</span><span class="n">keypath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decrypt file</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    keypath : str</span>
-<span class="sd">        keypath</span>
-<span class="sd">    filepath : str</span>
-<span class="sd">        File path</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Decrypted data</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">cryptography.fernet</span> <span class="kn">import</span> <span class="n">Fernet</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">fernet</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">decrypt_data</span> <span class="o">=</span> <span class="n">fernet</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">decrypt_data</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Wrong datatype(s)&quot;</span><span class="p">)</span></div>
-
-
-<span class="c1"># EMAIL</span>
-<div class="viewcode-block" id="send_email"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.send_email">[docs]</a><span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span>
-    <span class="n">logname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">message_subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">message_sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">message_receiver</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">smtp_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Send html email</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    logname : str</span>
-<span class="sd">        Log</span>
-<span class="sd">    message_subject : str</span>
-<span class="sd">        Message subject</span>
-<span class="sd">    message_sender : str</span>
-<span class="sd">        Sender email</span>
-<span class="sd">    message_receiver : str</span>
-<span class="sd">        Receiver email</span>
-<span class="sd">    html : str</span>
-<span class="sd">        HTML string</span>
-<span class="sd">    smtp_address: str</span>
-<span class="sd">        SMTP address</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">logging</span>
-    <span class="kn">import</span> <span class="nn">smtplib</span>
-    <span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
-    <span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
-
-    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span>
-            <span class="n">logname</span><span class="p">,</span>
-            <span class="n">message_subject</span><span class="p">,</span>
-            <span class="n">message_sender</span><span class="p">,</span>
-            <span class="n">message_receiver</span><span class="p">,</span>
-            <span class="n">html</span><span class="p">,</span>
-            <span class="n">smtp_address</span><span class="p">,</span>
-        <span class="p">]</span>
-    <span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">logname</span><span class="p">,</span>
-            <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-            <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">datefmt</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&quot;alternative&quot;</span><span class="p">)</span>
-        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_subject</span>
-        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_sender</span>
-        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_receiver</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
-        <span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_address</span><span class="p">)</span>
-            <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">message_sender</span><span class="p">,</span> <span class="n">message_receiver</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
-            <span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Email sent&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Email not send: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Wrong datatype(s)&quot;</span><span class="p">)</span></div>
-
 
 <span class="c1"># FILESYSTEM</span>
-<div class="viewcode-block" id="get_path_files"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_path_files">[docs]</a><span class="k">def</span> <span class="nf">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="get_path_files">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_path_files">[docs]</a>
+<span class="k">def</span> <span class="nf">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return sorted list of files from given path and keywords</span>
 
 <span class="sd">    Parameters</span>
@@ -451,8 +371,11 @@
     <span class="k">return</span> <span class="n">list_</span></div>
 
 
-<div class="viewcode-block" id="remove_path_file"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.remove_path_file">[docs]</a><span class="k">def</span> <span class="nf">remove_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="remove_path_file">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.remove_path_file">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Remove n oldest files from given path and keyword</span>
 
 <span class="sd">    Parameters</span>
@@ -483,8 +406,11 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> deleted ...&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="list_to_file"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_to_file">[docs]</a><span class="k">def</span> <span class="nf">list_to_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">list_</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">newline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="list_to_file">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_to_file">[docs]</a>
+<span class="k">def</span> <span class="nf">list_to_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">list_</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">newline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Export list to file</span>
 
 <span class="sd">    Parameters</span>
@@ -508,9 +434,12 @@
     <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
+
 <span class="c1"># SYSTEM</span>
-<div class="viewcode-block" id="parse_ps_aux"><a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.parse_ps_aux">[docs]</a><span class="k">def</span> <span class="nf">parse_ps_aux</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">list</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="parse_ps_aux">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.parse_ps_aux">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_ps_aux</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">list</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse linux ps aux related-command to list of lists</span>
 
 <span class="sd">    Parameters</span>
@@ -538,6 +467,7 @@
     <span class="n">n_columns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="n">line</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">rows</span></div>
+
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -603,14 +533,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.34 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.35 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

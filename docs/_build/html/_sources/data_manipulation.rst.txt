@@ -20,6 +20,14 @@ data\_manipulation.beautifulsoup\_ module
    :undoc-members:
    :show-inheritance:
 
+data\_manipulation.cryptography\_ module
+----------------------------------------
+
+.. automodule:: data_manipulation.cryptography_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 data\_manipulation.django\_ module
 ----------------------------------
 
@@ -44,6 +52,14 @@ data\_manipulation.geopandas\_ module
    :undoc-members:
    :show-inheritance:
 
+data\_manipulation.kerberos\_ module
+------------------------------------
+
+.. automodule:: data_manipulation.kerberos_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 data\_manipulation.mysql\_connector\_python\_ module
 ----------------------------------------------------
 
@@ -52,10 +68,26 @@ data\_manipulation.mysql\_connector\_python\_ module
    :undoc-members:
    :show-inheritance:
 
+data\_manipulation.openldap\_ module
+------------------------------------
+
+.. automodule:: data_manipulation.openldap_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 data\_manipulation.pandas\_ module
 ----------------------------------
 
 .. automodule:: data_manipulation.pandas_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.prometheus\_ module
+--------------------------------------
+
+.. automodule:: data_manipulation.prometheus_
    :members:
    :undoc-members:
    :show-inheritance:
@@ -72,6 +104,22 @@ data\_manipulation.pyspark\_ module
 -----------------------------------
 
 .. automodule:: data_manipulation.pyspark_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.smtplib\_ module
+-----------------------------------
+
+.. automodule:: data_manipulation.smtplib_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+data\_manipulation.sqlalchemy\_ module
+--------------------------------------
+
+.. automodule:: data_manipulation.sqlalchemy_
    :members:
    :undoc-members:
    :show-inheritance:

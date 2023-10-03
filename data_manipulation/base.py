@@ -97,6 +97,23 @@ def get_none_variation() -> list:
     return variations
 
 
+def get_country_name_variation() -> dict:
+    variations = {
+        "AFRICA": "BW",
+        "BOSNIA": "BA",
+        "CZECH REPUBLIC": "CZ",
+        "MACEDONIA": "MK",
+        "REPUBLIC OF CHINA": "CN",
+        "REPUBLIC OF KOREA": "KR",
+        "RUSSIAN FEDERATION": "RU",
+        "SLAVONIC": "SK",
+        "SLOVAK REPUBLIC": "SK",
+        "TURKEY": "TR",
+        "UNITED STATES": "US",
+    }
+    return variations
+
+
 def list_tuple_without_none(list_tuple: list | tuple) -> list | tuple:
     """
     Return the given list / tuple without None variation
@@ -256,128 +273,6 @@ def delete_list_indices(list_: list, indices: list) -> None:
     """
     for index in sorted(indices, reverse=True):
         del list_[index]
-
-
-# DECRYPT / ENCRYPT
-def encrypt_fernet_file(keypath: str, filepath: str) -> str:
-    """
-    Encrypt file
-
-    Parameters
-    ----------
-    keypath : str
-        keypath
-    filepath : str
-        File path
-
-    Returns
-    -------
-    str
-        Encrypted data
-    """
-    from cryptography.fernet import Fernet
-
-    if isinstance(keypath, str) and isinstance(filepath, str):
-        fernet = Fernet(open(keypath, "rb").read())
-        data = open(filepath, "rb").read()
-        encrypt_data = fernet.encrypt(data)
-        return encrypt_data
-    else:
-        raise TypeError("Wrong datatype(s)")
-
-
-def decrypt_fernet_data(keypath: str, filepath: str) -> str:
-    """
-    Decrypt file
-
-    Parameters
-    ----------
-    keypath : str
-        keypath
-    filepath : str
-        File path
-
-    Returns
-    -------
-    str
-        Decrypted data
-    """
-    from cryptography.fernet import Fernet
-
-    if isinstance(keypath, str) and isinstance(filepath, str):
-        fernet = Fernet(open(keypath, "rb").read())
-        data = open(filepath, "rb").read()
-        decrypt_data = fernet.decrypt(data)
-        return decrypt_data
-    else:
-        raise TypeError("Wrong datatype(s)")
-
-
-# EMAIL
-def send_email(
-    logname: str,
-    message_subject: str,
-    message_sender: str,
-    message_receiver: str,
-    html: str,
-    smtp_address: str,
-) -> None:
-    """
-    Send html email
-
-    Parameters
-    ----------
-    logname : str
-        Log
-    message_subject : str
-        Message subject
-    message_sender : str
-        Sender email
-    message_receiver : str
-        Receiver email
-    html : str
-        HTML string
-    smtp_address: str
-        SMTP address
-    """
-    import logging
-    import smtplib
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
-
-    if all(
-        isinstance(i, str)
-        for i in [
-            logname,
-            message_subject,
-            message_sender,
-            message_receiver,
-            html,
-            smtp_address,
-        ]
-    ):
-        logging.basicConfig(
-            filename=logname,
-            level=logging.DEBUG,
-            format="%(asctime)s %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S",
-        )
-
-        message = MIMEMultipart("alternative")
-        message["Subject"] = message_subject
-        message["From"] = message_sender
-        message["To"] = message_receiver
-        html = MIMEText(html, "html")
-        message.attach(html)
-        try:
-            server = smtplib.SMTP(smtp_address)
-            server.sendmail(message_sender, message_receiver, message.as_string())
-            server.quit()
-            logging.info("Email sent")
-        except Exception as e:
-            logging.error(f"Email not send: {str(e)}")
-    else:
-        raise TypeError("Wrong datatype(s)")
 
 
 # FILESYSTEM
