@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>data_manipulation &#8212; data_manipulation 0.35 documentation</title>
+    <title>data_manipulation &#8212; data_manipulation 0.36 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
-    <script src="_static/documentation_options.js?v=3d82ad78"></script>
+    <script src="_static/documentation_options.js?v=0a7a2712"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -23,7 +23,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.35 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.36 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation</a></li> 
       </ul>
     </div>  
@@ -41,6 +41,7 @@
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.base">data_manipulation.base module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.clean_string"><code class="docutils literal notranslate"><span class="pre">clean_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.create_encode_url"><code class="docutils literal notranslate"><span class="pre">create_encode_url()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.delete_list_indices"><code class="docutils literal notranslate"><span class="pre">delete_list_indices()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.get_country_name_variation"><code class="docutils literal notranslate"><span class="pre">get_country_name_variation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.base.get_none_variation"><code class="docutils literal notranslate"><span class="pre">get_none_variation()</span></code></a></li>
@@ -60,6 +61,10 @@
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.beautifulsoup_.preprocess"><code class="docutils literal notranslate"><span class="pre">preprocess()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.boto3_">data_manipulation.boto3_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.boto3_.send_aws_ses_email"><code class="docutils literal notranslate"><span class="pre">send_aws_ses_email()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.cryptography_">data_manipulation.cryptography_ module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.cryptography_.decrypt_fernet_data"><code class="docutils literal notranslate"><span class="pre">decrypt_fernet_data()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.cryptography_.encrypt_fernet_file"><code class="docutils literal notranslate"><span class="pre">encrypt_fernet_file()</span></code></a></li>
@@ -67,6 +72,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.django_">data_manipulation.django_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.django_.django_validate_email"><code class="docutils literal notranslate"><span class="pre">django_validate_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.django_.django_validate_phone"><code class="docutils literal notranslate"><span class="pre">django_validate_phone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.django_.django_validate_url"><code class="docutils literal notranslate"><span class="pre">django_validate_url()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.django_.get_django_countries_dict"><code class="docutils literal notranslate"><span class="pre">get_django_countries_dict()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.django_.init_django"><code class="docutils literal notranslate"><span class="pre">init_django()</span></code></a></li>
 </ul>
@@ -91,6 +99,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.pandas_">data_manipulation.pandas_ module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.add_type_columns"><code class="docutils literal notranslate"><span class="pre">add_type_columns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.aggregate_set_without_none"><code class="docutils literal notranslate"><span class="pre">aggregate_set_without_none()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.chunking_dataframe"><code class="docutils literal notranslate"><span class="pre">chunking_dataframe()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.clean_none"><code class="docutils literal notranslate"><span class="pre">clean_none()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.compare_all_list_items"><code class="docutils literal notranslate"><span class="pre">compare_all_list_items()</span></code></a></li>
@@ -109,10 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.pandas_.useless_columns"><code class="docutils literal notranslate"><span class="pre">useless_columns()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.prometheus_">data_manipulation.prometheus_ module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.prometheus_.ldapsearch"><code class="docutils literal notranslate"><span class="pre">ldapsearch()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.prometheus_">data_manipulation.prometheus_ module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.psycopg2_">data_manipulation.psycopg2_ module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.psycopg2_.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.psycopg2_.execute_sql"><code class="docutils literal notranslate"><span class="pre">execute_sql()</span></code></a></li>
@@ -136,7 +142,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data_manipulation.html#module-data_manipulation.sqlalchemy_">data_manipulation.sqlalchemy_ module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.sqlalchemy_.check_connection_valid"><code class="docutils literal notranslate"><span class="pre">check_connection_valid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.sqlalchemy_.create_sqlalchemy_engine"><code class="docutils literal notranslate"><span class="pre">create_sqlalchemy_engine()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="data_manipulation.html#data_manipulation.sqlalchemy_.create_sqlalchemy_url"><code class="docutils literal notranslate"><span class="pre">create_sqlalchemy_url()</span></code></a></li>
 </ul>
 </li>
@@ -184,7 +190,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.35 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.36 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation</a></li> 
       </ul>
     </div>

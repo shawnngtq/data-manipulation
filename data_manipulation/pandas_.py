@@ -364,15 +364,56 @@ def split_left_merged_dataframe(dataframe, dataframe2, columns):
     return df_both, df_left
 
 
+## AGGREGATE
+def aggregate_set_without_none(column: pd.Series, nested_set: bool = False) -> set:
+    """
+    Use in pandas groupby agg, create a set without none based on input column
+
+    Parameters
+    ----------
+    column : pd.Series
+        columns to set
+    nested_set : bool, optional
+        nested set within set, by default False
+
+    Returns
+    -------
+    set
+        set without None
+    """
+    if nested_set:
+        output = set()
+        for value in column:
+            if isinstance(value, set):
+                output.update(value)
+            # todo, what if there is valid list / dict / tuple / complex object?
+            elif value:
+                output.add(value)
+        return output
+    else:
+        return {value for value in column if value is not None}
+
+
 # DATA STRUCTURE
-def clean_none(dataframe, clean_variation=True, non_variations=[]):
+def clean_none(
+    dataframe: pd.DataFrame,
+    nan_to_none: bool = True,
+    clean_variation: bool = True,
+    none_variations: list = [],
+) -> pd.DataFrame:
     """
     Return a dataframe from given dataframe with standardized None. Deprecated as of pandas 1.3.0.
 
     Parameters
     ----------
-    dataframe : pandas.DataFrame
-        Dataframe
+    dataframe : pd.DataFrame
+        _description_
+    nan_to_none : bool, optional
+        replace np.NaN with None, by default True
+    clean_variation : bool, optional
+        clean custom variables, by default True
+    none_variations : list, optional
+        list of none variations, by default []
 
     Examples
     --------
@@ -410,12 +451,15 @@ def clean_none(dataframe, clean_variation=True, non_variations=[]):
 
     Returns
     -------
-    df : pandas.DataFrame
+    pd.DataFrame
+        _description_
     """
     df = dataframe.copy()
     df = df.replace(r"^\s*$", np.nan, regex=True)
+    if nan_to_none:
+        df = df.replace(np.NaN, None, inplace=True)
     if clean_variation:
-        df = df.replace(non_variations, np.nan)
+        df = df.replace(none_variations, np.nan)
     df = df.where(pd.notnull(df), None)
     return df
 

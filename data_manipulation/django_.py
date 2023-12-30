@@ -42,6 +42,81 @@ def get_django_countries_dict():
     return code_name, name_code
 
 
+def django_validate_email(email: str) -> str | None:
+    """
+    Django validate email
+
+    Parameters
+    ----------
+    email : str
+        email to check
+
+    Returns
+    -------
+    str | None
+        email or none
+    """
+    from django.core.validators import validate_email
+
+    try:
+        validate_email(email)
+        return email
+    except Exception as e:
+        return
+
+
+def django_validate_url(url: str) -> str | None:
+    """
+    Django validate url
+
+    Parameters
+    ----------
+    url : str
+        url to validate
+
+    Returns
+    -------
+    str | None
+        url or None
+    """
+    from django.core.validators import URLValidator
+
+    validator = URLValidator()
+    try:
+        validator(url)
+        return url
+    except Exception as e:
+        return
+
+
+def django_validate_phone(phone: str, region=None) -> str | None:
+    """
+    Django validate phone
+
+    Parameters
+    ----------
+    phone : str
+        phone to check
+    region : _type_, optional
+        phone region, by default None
+
+    Returns
+    -------
+    str | None
+        parsed phone or none
+    """
+    from phonenumber_field.phonenumber import PhoneNumber
+
+    try:
+        return PhoneNumber.from_string(phone).as_e164
+    except:
+        try:
+            return PhoneNumber.from_string(phone, region=region).as_e164
+        except Exception as e:
+            print(e)
+            return
+
+
 if __name__ == "__main__":
     import doctest
 

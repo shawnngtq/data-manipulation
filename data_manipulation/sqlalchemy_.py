@@ -45,7 +45,7 @@ def create_sqlalchemy_url(
     return url
 
 
-def check_connection_valid(
+def create_sqlalchemy_engine(
     drivername: str,
     host: str,
     dbname: str,
@@ -54,7 +54,7 @@ def check_connection_valid(
     port=3306,
 ) -> sqlalchemy.engine.base.Engine:
     """
-    Check mysql connection validity
+    Create SQLalchemy engine
 
     Parameters
     ----------
@@ -87,9 +87,9 @@ def check_connection_valid(
     engine = sqlalchemy.create_engine(url)
     try:
         engine.connect()
-        logging.info("check_connection_valid: True")
+        logging.info("create_sqlalchemy_engine: True")
     except Exception as e:
-        logging.error(f"check_connection_valid: False ({e})")
+        logging.error(f"create_sqlalchemy_engine: False ({e})")
     return engine
 
 

@@ -20,6 +20,14 @@ data\_manipulation.beautifulsoup\_ module
    :undoc-members:
    :show-inheritance:
 
+data\_manipulation.boto3\_ module
+-----------------------------------------
+
+.. automodule:: data_manipulation.boto3_
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 data\_manipulation.cryptography\_ module
 ----------------------------------------
 

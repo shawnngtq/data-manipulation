@@ -109,6 +109,7 @@ def get_country_name_variation() -> dict:
         "SLAVONIC": "SK",
         "SLOVAK REPUBLIC": "SK",
         "TURKEY": "TR",
+        "TURKIYE": "TR",
         "UNITED STATES": "US",
     }
     return variations
@@ -361,6 +362,28 @@ def list_to_file(filepath: str, list_: list, newline: bool = True) -> None:
         if newline:
             f.write("\n")
     f.close()
+
+
+# URLLIB
+def create_encode_url(url: str, query_params: dict = {}) -> str:
+    """
+    Create encoded url
+
+    Parameters
+    ----------
+    url : str
+        base url
+    query_params : dict, optional
+        dictionary of url query parameters, by default {}
+
+    Returns
+    -------
+    str
+        encoded url
+    """
+    from urllib.parse import urlencode
+
+    return f"{url}{urlencode(query_params)}"
 
 
 # SYSTEM
