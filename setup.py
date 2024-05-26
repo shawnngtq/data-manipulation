@@ -29,7 +29,7 @@ DEPENDENCIES = [
     "geopandas",
     "mysql-connector-python",
     "pandas",
-    "psycopy",
+    "psycopg",
     "psycopg2",
     "pyspark",
     "sqlalchemy",
