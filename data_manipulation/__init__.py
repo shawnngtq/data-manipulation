@@ -12,6 +12,7 @@ from data_manipulation import (
     pandas_,
     prometheus_,
     psycopg2_,
+    psycopg_,
     pyspark_,
     smtplib_,
     sqlalchemy_,

@@ -1,6 +1,9 @@
 import logging
 import subprocess
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
+
 
 def keytab_valid(
     keytab_filepath: str,
@@ -29,11 +32,11 @@ def keytab_valid(
     )
     try:
         if output.returncode == 0:
-            logging.info("keytab_valid: True")
+            logger.info("keytab_valid: True")
         else:
-            logging.info("keytab_valid: False")
+            logger.info("keytab_valid: False")
     except Exception as e:
-        logging.error(f"keytab_valid: False ({e})")
+        logger.error(f"keytab_valid: False ({e})")
     return output
 
 

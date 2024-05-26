@@ -2,6 +2,9 @@ import logging
 
 from cryptography.fernet import Fernet
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
+
 
 def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
     """
@@ -29,9 +32,9 @@ def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
             f = open(filepath, "wb")
             f.write(key)
             f.close()
-            logging.info(f"generate_fernet_key: True")
+            logger.info(f"generate_fernet_key: True")
         except Exception as e:
-            logging.error(f"generate_fernet_key: False ({e})")
+            logger.error(f"generate_fernet_key: False ({e})")
     return key
 
 

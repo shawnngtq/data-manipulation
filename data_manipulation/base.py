@@ -1,5 +1,9 @@
+import logging
 import subprocess
 from typing import List
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
 
 
 # DATA STRUCTURE
@@ -336,7 +340,7 @@ def remove_path_file(path: str, keyword: str, n: int = 2) -> None:
     to_delete = get_path_files(path=path, keywords=[keyword])[:-n]
     for file in to_delete:
         os.remove(f"{path}/{file}")
-        print(f"{path}/{file} deleted ...")
+        logger.info(f"{path}/{file} deleted ...")
 
 
 def list_to_file(filepath: str, list_: list, newline: bool = True) -> None:

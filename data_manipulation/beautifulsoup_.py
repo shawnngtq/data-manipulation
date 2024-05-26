@@ -1,6 +1,8 @@
+import logging
 from typing import Optional
 
-from bs4 import BeautifulSoup
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
 
 
 def preprocess(html: str) -> Optional[str]:
@@ -37,9 +39,7 @@ def preprocess(html: str) -> Optional[str]:
     return html
 
 
-def build_soup(
-    url: str, features: str = "lxml", to_preprocess: str = True
-) -> Optional[BeautifulSoup]:
+def build_soup(url: str, features: str = "lxml", to_preprocess: str = True):
     """
     Return Beautifulsoup object from given url
 
@@ -74,7 +74,7 @@ def build_soup(
             soup = BeautifulSoup(response.text, features=features)
         return soup
     else:
-        print(f"response status code: {response.status_code}")
+        logger.error(f"response status code: {response.status_code}")
 
 
 if __name__ == "__main__":

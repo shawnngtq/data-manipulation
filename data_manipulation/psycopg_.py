@@ -2,7 +2,7 @@ import logging
 from typing import Optional, Union
 
 import pandas as pd
-import psycopg2
+import psycopg
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
@@ -14,9 +14,9 @@ def create_connection(
     user: str,
     password: str,
     port=5432,
-) -> psycopg2.extensions.connection:
+) -> psycopg.Connection:
     """
-    Return psycopg2 connection (https://www.psycopg.org/)
+    Return psycopg connection (https://www.psycopg.org/)
 
     Parameters
     ----------
@@ -33,7 +33,7 @@ def create_connection(
 
     Returns
     -------
-    psycopg2.extensions.connection
+    psycopg.Connection
         Connection object
     """
     connection = None
@@ -41,15 +41,15 @@ def create_connection(
         connection_string = (
             f"host={host} port={port} dbname={dbname} user={user} password={password}"
         )
-        connection = psycopg2.connect(connection_string)
+        connection = psycopg.connect(connection_string)
         logger.info("PostgreSQL database connected ...")
-    except psycopg2.OperationalError as e:
+    except psycopg.OperationalError as e:
         logger.error(f"{e}")
     return connection
 
 
 def execute_sql(
-    connection: psycopg2.extensions.connection,
+    connection: psycopg.Connection,
     sql_query: str,
     data: Union[dict, tuple],
     commit=True,
@@ -59,7 +59,7 @@ def execute_sql(
 
     Parameters
     ----------
-    connection : psycopg2.extensions.connection
+    connection : psycopg.Connection
         _description_
     sql_query : str
         SQL query
@@ -67,6 +67,11 @@ def execute_sql(
         Data
     commit : bool, optional
         Make database change persistent, by default True
+
+    Reference
+    ---------
+    When you insert data key-value with dict type, error
+        ProgrammingError: cannot adapt type 'dict' using placeholder '%s' (format: AUTO)
     """
     cursor = connection.cursor()
     try:
@@ -74,12 +79,12 @@ def execute_sql(
         if commit:
             connection.commit()
             logger.info("PostgreSQL committed ...")
-    except psycopg2.OperationalError as e:
+    except psycopg.OperationalError as e:
         logger.error(f"{e}")
 
 
 def query_to_pandas(
-    connection: psycopg2.extensions.connection,
+    connection: psycopg.Connection,
     sql_query: str,
 ) -> pd.DataFrame:
     """
@@ -87,7 +92,7 @@ def query_to_pandas(
 
     Parameters
     ----------
-    connection : psycopg2.extensions.connection
+    connection : psycopg.Connection
         _description_
     sql_query : str
         SQL query

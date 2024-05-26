@@ -1,3 +1,9 @@
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
+
+
 def init_django(django_dir: str, project_name: str) -> None:
     """
     Setup Django in Jupyter. Reference from https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe
@@ -113,7 +119,7 @@ def django_validate_phone(phone: str, region=None) -> str | None:
         try:
             return PhoneNumber.from_string(phone, region=region).as_e164
         except Exception as e:
-            print(e)
+            logger.error(e)
             return
 
 

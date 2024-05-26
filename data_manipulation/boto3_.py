@@ -1,3 +1,9 @@
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
+
+
 def send_aws_ses_email(
     sender: str,
     recipient: list,
@@ -29,8 +35,12 @@ def send_aws_ses_email(
 
     Returns
     -------
-    str
+    dict
         aws ses client email response or none
+
+    Reference
+    ---------
+    - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_raw_email.html
     """
     import os
     from email.mime.application import MIMEApplication
@@ -58,7 +68,7 @@ def send_aws_ses_email(
                 )
                 msg.attach(part)
         except FileNotFoundError:
-            print(f"{attachment} not found")
+            logger.error(f"{attachment} not found")
             return
 
     try:
@@ -69,11 +79,10 @@ def send_aws_ses_email(
                 "Data": msg.as_string(),
             },
         )
-    except (BotoCoreError, ClientError) as error:
-        print(f"Error: {error}")
-        return
-    else:
         return response
+    except (BotoCoreError, ClientError) as error:
+        logger.error(f"Error: {error}")
+        return
 
 
 if __name__ == "__main__":

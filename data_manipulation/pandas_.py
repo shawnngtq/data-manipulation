@@ -1,9 +1,13 @@
+import logging
 import subprocess
 from itertools import combinations
 
 import numpy as np
 import pandas as pd
 from IPython.display import display
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
 
 
 # CONFIG
@@ -226,7 +230,7 @@ def compare_dataframes(dataframe, dataframe2):
         try:
             pd_df2 = dataframe2[dataframe2[column].notnull()]
         except KeyError:
-            print(f"df2 {column}: does not exist")
+            logger.error(f"df2 {column}: does not exist")
 
         if pd_df2 is not None:
             print(f"df2 non-null {column}: {len(pd_df2)}")
@@ -722,7 +726,7 @@ def print_dataframe_overview(dataframe, stats=False):
                 print(f"Maximum: {max(dataframe[column])}")
             display(series_count(dataframe[column]).head(20))
         except:
-            print(f"Unable to get value_counts of {column} ...\n")
+            logger.error(f"Unable to get value_counts of {column} ...\n")
 
 
 def series_count(series):

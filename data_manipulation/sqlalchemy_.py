@@ -2,6 +2,9 @@ import logging
 
 import sqlalchemy
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
+
 
 def create_sqlalchemy_url(
     drivername: str,
@@ -87,9 +90,9 @@ def create_sqlalchemy_engine(
     engine = sqlalchemy.create_engine(url)
     try:
         engine.connect()
-        logging.info("create_sqlalchemy_engine: True")
+        logger.info("create_sqlalchemy_engine: True")
     except Exception as e:
-        logging.error(f"create_sqlalchemy_engine: False ({e})")
+        logger.error(f"create_sqlalchemy_engine: False ({e})")
     return engine
 
 

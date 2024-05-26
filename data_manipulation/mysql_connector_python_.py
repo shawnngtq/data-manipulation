@@ -3,6 +3,9 @@ from typing import Optional, Union
 
 import mysql.connector
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__file__)
+
 
 def create_connection(
     host: str,
@@ -43,9 +46,9 @@ def create_connection(
             password=password,
             port=port,
         )
-        logging.info("MySQL database connected ...")
+        logger.info("MySQL database connected ...")
     except mysql.connector.errors.Error as e:
-        logging.error(f"{e}")
+        logger.error(f"{e}")
     return connection
 
 
@@ -79,12 +82,12 @@ def execute_query(
         cursor.execute(sql_query, data)
         if commit:
             connection.commit()
-            logging.info("MySQL committed ...")
+            logger.info("MySQL committed ...")
             id = cursor.lastrowid
             cursor.close()
             return id
     except mysql.connector.errors.Error as e:
-        logging.error(f"{e}")
+        logger.error(f"{e}")
 
 
 if __name__ == "__main__":

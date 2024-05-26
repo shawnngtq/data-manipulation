@@ -2,8 +2,6 @@ import pandas as pd
 import pyspark
 import pyspark.sql.functions as F
 
-spark = pyspark.sql.SparkSession.builder.master("local").getOrCreate()
-
 
 # CONFIG
 def config_spark_local(autoset=True):
@@ -84,7 +82,6 @@ def config_spark_local(autoset=True):
     print(f"spark_default_parallelism: {spark_default_parallelism}")
 
     if autoset:
-        global spark
         spark = (
             pyspark.sql.SparkSession.builder.master("local")
             .config("spark.executor.cores", str(spark_executor_cores))

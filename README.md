@@ -25,16 +25,7 @@ pip install data-manipulation
 
 ## Dependencies
 
-The dependencies will be installed automatically along with this package
-
-- beautifulsoup4
-- django
-- numpy
-- pandas
-- ipython
-- requests
-- psycopg2
-- pyspark
+The dependencies will be installed automatically along with this package, in `setup.py`
 
 ## License
 
