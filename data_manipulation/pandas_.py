@@ -1,13 +1,10 @@
-import logging
 import subprocess
 from itertools import combinations
 
 import numpy as np
 import pandas as pd
 from IPython.display import display
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 # CONFIG

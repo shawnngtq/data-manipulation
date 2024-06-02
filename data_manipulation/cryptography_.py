@@ -1,9 +1,7 @@
-import logging
+import os
 
 from cryptography.fernet import Fernet
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
@@ -22,7 +20,6 @@ def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
     bytes
         Fernet key in bytes
     """
-    import os
 
     key = None
     if os.path.isdir(output_directory):

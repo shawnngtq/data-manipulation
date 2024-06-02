@@ -1,11 +1,8 @@
-import logging
 from typing import Optional, Union
 
 import pandas as pd
 import psycopg2
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def create_connection(

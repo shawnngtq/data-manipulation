@@ -1,9 +1,5 @@
-import logging
-
 import sqlalchemy
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def create_sqlalchemy_url(

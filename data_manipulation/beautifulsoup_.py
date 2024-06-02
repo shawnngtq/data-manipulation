@@ -1,8 +1,7 @@
-import logging
+import re
 from typing import Optional
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def preprocess(html: str) -> Optional[str]:
@@ -25,7 +24,6 @@ def preprocess(html: str) -> Optional[str]:
     Optional[str]
         cleaned html
     """
-    import re
 
     # remove leading and trailing whitespaces
     pattern = re.compile("(^[\s]+)|([\s]+$)", re.MULTILINE)

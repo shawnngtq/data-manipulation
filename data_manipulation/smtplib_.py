@@ -1,3 +1,9 @@
+import logging
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
 def send_email(
     logname: str,
     message_subject: str,
@@ -24,10 +30,6 @@ def send_email(
     smtp_address: str
         SMTP address
     """
-    import logging
-    import smtplib
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
 
     if all(
         isinstance(i, str)

@@ -1,7 +1,7 @@
-import logging
+import os
+import sys
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def init_django(django_dir: str, project_name: str) -> None:
@@ -15,8 +15,6 @@ def init_django(django_dir: str, project_name: str) -> None:
     project_name : str
         Django project name
     """
-    import os
-    import sys
 
     import django
 

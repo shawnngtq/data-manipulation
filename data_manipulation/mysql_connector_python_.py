@@ -1,10 +1,6 @@
-import logging
 from typing import Optional, Union
 
-import mysql.connector
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def create_connection(
@@ -13,7 +9,7 @@ def create_connection(
     user: str,
     password: str,
     port=3306,
-) -> mysql.connector.connection_cext.CMySQLConnection:
+):
     """
     Return MySQL connection
 
@@ -37,6 +33,8 @@ def create_connection(
     mysql.connector.connection_cext.CMySQLConnection
         Connection object
     """
+    import mysql.connector
+
     connection = None
     try:
         connection = mysql.connector.connect(
@@ -53,7 +51,7 @@ def create_connection(
 
 
 def execute_query(
-    connection: mysql.connector.connection_cext.CMySQLConnection,
+    connection,
     sql_query: str,
     data: Union[dict, tuple],
     commit=True,
@@ -77,6 +75,8 @@ def execute_query(
     Optional[int]
         Query id should be int
     """
+    import mysql.connector
+
     cursor = connection.cursor()
     try:
         cursor.execute(sql_query, data)

@@ -1,9 +1,13 @@
-import logging
+import itertools
+import os
+import re
 import subprocess
+from ast import literal_eval
+from distutils.util import strtobool
 from typing import List
+from urllib.parse import urlencode
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 # DATA STRUCTURE
@@ -38,7 +42,6 @@ def clean_string(
     str
         Uppercase cleaned string
     """
-    import re
 
     if remove_parenthesis:
         string = re.sub(r"\(.*\)", "", string)
@@ -69,7 +72,6 @@ def get_string_case_combination(str_: str) -> list:
     list
         Case combinations
     """
-    import itertools
 
     return list(map("".join, itertools.product(*zip(str_.upper(), str_.lower()))))
 
@@ -188,7 +190,6 @@ def string_boolean_to_int(boolean_str_rep: str) -> int:
     int
         _description_
     """
-    from distutils.util import strtobool
 
     int_ = strtobool(string_str_to_str(boolean_str_rep))
     return int_
@@ -223,7 +224,6 @@ def string_dlt_to_dlt(dlt_str_rep: str) -> dict | list | tuple:
     dict | list | tuple
         _description_
     """
-    from ast import literal_eval
 
     dlt = literal_eval(dlt_str_rep)
     return dlt
@@ -302,7 +302,6 @@ def get_path_files(path: str, keywords: list) -> list:
     list
         Sorted list
     """
-    import os
 
     list_ = []
     for file in sorted(os.listdir(path)):
@@ -335,7 +334,6 @@ def remove_path_file(path: str, keyword: str, n: int = 2) -> None:
     >>> get_path_files("test_base_folder", ["py"])
     ['test4.py', 'test5.py']
     """
-    import os
 
     to_delete = get_path_files(path=path, keywords=[keyword])[:-n]
     for file in to_delete:
@@ -385,7 +383,6 @@ def create_encode_url(url: str, query_params: dict = {}) -> str:
     str
         encoded url
     """
-    from urllib.parse import urlencode
 
     return f"{url}{urlencode(query_params)}"
 

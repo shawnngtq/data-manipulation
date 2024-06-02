@@ -1,7 +1,9 @@
-import logging
+import os
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def send_aws_ses_email(
@@ -42,10 +44,6 @@ def send_aws_ses_email(
     ---------
     - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_raw_email.html
     """
-    import os
-    from email.mime.application import MIMEApplication
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
 
     from botocore.exceptions import BotoCoreError, ClientError
 

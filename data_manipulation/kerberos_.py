@@ -1,8 +1,6 @@
-import logging
 import subprocess
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__file__)
+from loguru import logger
 
 
 def keytab_valid(
@@ -24,6 +22,7 @@ def keytab_valid(
     subprocess.CompletedProcess
         Subprocess object
     """
+
     output = subprocess.run(
         f"kinit -kt {keytab_filepath} {principal_name}",
         capture_output=True,

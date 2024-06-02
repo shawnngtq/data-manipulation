@@ -1,4 +1,7 @@
-import pandas as pd
+import math
+import multiprocessing
+import os
+
 import pyspark
 import pyspark.sql.functions as F
 
@@ -44,9 +47,6 @@ def config_spark_local(autoset=True):
     -------
     None
     """
-    import math
-    import multiprocessing
-    import os
 
     def round_down_or_one(x):
         if math.floor(x) == 0:
@@ -360,6 +360,7 @@ def group_count(dataframe, columns, n=10):
 
     Examples
     --------
+    >>> import pandas as pd
     >>> data = {'id': [1, 1, 1, 2, 2, 3], 'value': [5, 2, 5, 2135, 124390, 213]}
     >>> df = spark.createDataFrame(pd.DataFrame(data))
     >>> group_count(df, ["id"]).show()
