@@ -121,6 +121,22 @@ def get_country_name_variation() -> dict:
     return variations
 
 
+def get_country_code_variation() -> dict:
+    variations = {
+        "BA": ["BOSNIA"],
+        "BW": ["AFRICA"],
+        "CN": ["REPUBLIC OF CHINA"],
+        "CZ": ["CZECH REPUBLIC"],
+        "KR": ["REPUBLIC OF KOREA"],
+        "MK": ["MACEDONIA"],
+        "RU": ["RUSSIAN FEDERATION"],
+        "SK": ["SLAVONIC", "SLOVAK REPUBLIC"],
+        "TR": ["TURKEY", "TURKIYE"],
+        "US": ["UNITED STATES"],
+    }
+    return variations
+
+
 def list_tuple_without_none(list_tuple: list | tuple) -> list | tuple:
     """
     Return the given list / tuple without None variation

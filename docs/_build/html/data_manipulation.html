@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>data_manipulation package &#8212; data_manipulation 0.40 documentation</title>
+    <title>data_manipulation package &#8212; data_manipulation 0.41 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=0f882399" />
-    <script src="_static/documentation_options.js?v=8095045b"></script>
+    <script src="_static/documentation_options.js?v=24ed8042"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.40 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.41 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>  
@@ -118,6 +118,11 @@
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.get_country_code_variation">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_country_code_variation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_country_code_variation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_country_code_variation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.get_country_name_variation">
@@ -1109,6 +1114,20 @@ name_code - “SINGAPORE”: “SG”</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.pandas_.is_running_in_jupyter">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas_.</span></span><span class="sig-name descname"><span class="pre">is_running_in_jupyter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas_.html#is_running_in_jupyter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas_.is_running_in_jupyter" title="Link to this definition">¶</a></dt>
+<dd><p>Running in jupyter?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True means running in jupyter env</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.pandas_.print_dataframe_overview">
 <span class="sig-prename descclassname"><span class="pre">data_manipulation.pandas_.</span></span><span class="sig-name descname"><span class="pre">print_dataframe_overview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/pandas_.html#print_dataframe_overview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.pandas_.print_dataframe_overview" title="Link to this definition">¶</a></dt>
 <dd><p>Print the given dataframe’s columns’ value_counts() in console</p>
@@ -1797,6 +1816,7 @@ name_code - “SINGAPORE”: “SG”</p>
 <li><a class="reference internal" href="#data_manipulation.base.clean_string"><code class="docutils literal notranslate"><span class="pre">clean_string()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.create_encode_url"><code class="docutils literal notranslate"><span class="pre">create_encode_url()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.delete_list_indices"><code class="docutils literal notranslate"><span class="pre">delete_list_indices()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.base.get_country_code_variation"><code class="docutils literal notranslate"><span class="pre">get_country_code_variation()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.get_country_name_variation"><code class="docutils literal notranslate"><span class="pre">get_country_name_variation()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.get_none_variation"><code class="docutils literal notranslate"><span class="pre">get_none_variation()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.get_path_files"><code class="docutils literal notranslate"><span class="pre">get_path_files()</span></code></a></li>
@@ -1862,6 +1882,7 @@ name_code - “SINGAPORE”: “SG”</p>
 <li><a class="reference internal" href="#data_manipulation.pandas_.dtypes_dictionary"><code class="docutils literal notranslate"><span class="pre">dtypes_dictionary()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.pandas_.head_tail"><code class="docutils literal notranslate"><span class="pre">head_tail()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.pandas_.index_marks"><code class="docutils literal notranslate"><span class="pre">index_marks()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.pandas_.is_running_in_jupyter"><code class="docutils literal notranslate"><span class="pre">is_running_in_jupyter()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.pandas_.print_dataframe_overview"><code class="docutils literal notranslate"><span class="pre">print_dataframe_overview()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.pandas_.ps_aux_dataframe"><code class="docutils literal notranslate"><span class="pre">ps_aux_dataframe()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.pandas_.series_count"><code class="docutils literal notranslate"><span class="pre">series_count()</span></code></a></li>
@@ -1944,7 +1965,7 @@ name_code - “SINGAPORE”: “SG”</p>
         <li class="right" >
           <a href="commands.html" title="Commands"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.40 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.41 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>

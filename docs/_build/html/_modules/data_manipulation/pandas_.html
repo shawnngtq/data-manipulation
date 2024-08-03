@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pandas_ &#8212; data_manipulation 0.40 documentation</title>
+    <title>data_manipulation.pandas_ &#8212; data_manipulation 0.41 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=8095045b"></script>
+    <script src="../../_static/documentation_options.js?v=24ed8042"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.40 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas_</a></li> 
       </ul>
@@ -56,6 +56,33 @@
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
     <span class="c1"># pd.set_option(&quot;display.max_rows&quot;, 200)</span>
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.expand_frame_repr&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># JUPYTER</span>
+<div class="viewcode-block" id="is_running_in_jupyter">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.is_running_in_jupyter">[docs]</a>
+<span class="k">def</span> <span class="nf">is_running_in_jupyter</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Running in jupyter?</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        True means running in jupyter env</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Check if the IPython module is available</span>
+        <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
+
+        <span class="c1"># Check if we are in a notebook environment</span>
+        <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">in</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># IPython module not found, not running in Jupyter Notebook</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 
 
@@ -959,7 +986,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.40 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas_</a></li> 
       </ul>

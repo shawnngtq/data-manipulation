@@ -20,6 +20,30 @@ def config_pandas_display():
     pd.set_option("display.expand_frame_repr", True)
 
 
+# JUPYTER
+def is_running_in_jupyter():
+    """
+    Running in jupyter?
+
+    Returns
+    -------
+    bool
+        True means running in jupyter env
+    """
+    try:
+        # Check if the IPython module is available
+        from IPython import get_ipython
+
+        # Check if we are in a notebook environment
+        if "IPKernelApp" in get_ipython().config:
+            return True
+        else:
+            return False
+    # IPython module not found, not running in Jupyter Notebook
+    except ImportError:
+        return False
+
+
 # COLUMN
 def add_type_columns(dataframe):
     """
