@@ -24,6 +24,7 @@ CLASSIFIERS = [
 DEPENDENCIES = [
     "beautifulsoup4",
     "boto3",
+    "cryptography",
     "django",
     "flask",
     "geopandas",
