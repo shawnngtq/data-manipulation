@@ -2,10 +2,7 @@ import itertools
 import os
 import re
 import subprocess
-from ast import literal_eval
-from distutils.util import strtobool
 from typing import List
-from urllib.parse import urlencode
 
 from loguru import logger
 
@@ -181,6 +178,8 @@ def list_tuple_without_none(list_tuple: list | tuple) -> list | tuple:
 
 def string_boolean_to_int(boolean_str_rep: str) -> int:
     """
+    DEPRECATED from python 3.12 onwards
+
     Return integer from given string boolean. 1 instead of "true"/"True"/"1". Reference from https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool
 
     Parameters
@@ -205,7 +204,12 @@ def string_boolean_to_int(boolean_str_rep: str) -> int:
     -------
     int
         _description_
+
+    Reference
+    ---------
+    - https://docs.python.org/3.10/library/distutils.html
     """
+    from distutils.util import strtobool
 
     int_ = strtobool(string_str_to_str(boolean_str_rep))
     return int_
@@ -240,6 +244,7 @@ def string_dlt_to_dlt(dlt_str_rep: str) -> dict | list | tuple:
     dict | list | tuple
         _description_
     """
+    from ast import literal_eval
 
     dlt = literal_eval(dlt_str_rep)
     return dlt
@@ -399,6 +404,7 @@ def create_encode_url(url: str, query_params: dict = {}) -> str:
     str
         encoded url
     """
+    from urllib.parse import urlencode
 
     return f"{url}{urlencode(query_params)}"
 

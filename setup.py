@@ -35,6 +35,7 @@ DEPENDENCIES = [
     "psycopg",
     "psycopg2",
     "pyspark",
+    "python-dotenv",
     "sqlalchemy",
 ]
 

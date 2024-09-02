@@ -3,7 +3,6 @@ import multiprocessing
 import os
 
 import pyspark
-import pyspark.sql.functions as F
 
 
 # CONFIG
@@ -135,6 +134,8 @@ def add_dummy_columns(dataframe, columns, value):
     -------
     df : pyspark.sql.dataframe.DataFrame
     """
+    import pyspark.sql.functions as F
+
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     if not isinstance(columns, list):
@@ -312,6 +313,8 @@ def rename(dataframe, columns):
     -------
     df : pyspark.sql.dataframe.DataFrame
     """
+    import pyspark.sql.functions as F
+
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
     if not isinstance(columns, dict):
@@ -388,6 +391,7 @@ def group_count(dataframe, columns, n=10):
     -------
     df : pyspark.sql.dataframe.DataFrame
     """
+    import pyspark.sql.functions as F
 
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
