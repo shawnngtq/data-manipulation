@@ -83,6 +83,47 @@ def send_aws_ses_email(
         return
 
 
+def list_s3_bucket_files(
+    bucket: str,
+    to_dateframe: bool = False,
+):
+    """
+    List s3 bucket files
+
+    Parameters
+    ----------
+    bucket : str
+        bucket name
+    to_dateframe : bool, optional
+        to convert to pandas dataframe, by default False
+
+    Returns
+    -------
+    list | pandas.DataFrame
+        default list, pandas.DataFrame if requested
+    """
+
+    import boto3
+
+    s3_client = boto3.client("s3")
+    paginator = s3_client.get_paginator("list_objects_v2")
+    keys = list()
+
+    for page in paginator.paginate(Bucket=bucket):
+        for obj in page["Contents"]:
+            if obj["Key"].endswith("/"):
+                continue
+            keys.append(obj["Key"])
+
+    if to_dateframe:
+        import pandas as pd
+
+        df = pd.DataFrame(keys, columns=["key"])
+        return df
+    else:
+        return keys
+
+
 if __name__ == "__main__":
     import doctest
 

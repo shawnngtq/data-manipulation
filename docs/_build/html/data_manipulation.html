@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>data_manipulation package &#8212; data_manipulation 0.43 documentation</title>
+    <title>data_manipulation package &#8212; data_manipulation 0.44 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=0f882399" />
-    <script src="_static/documentation_options.js?v=b76d8e31"></script>
+    <script src="_static/documentation_options.js?v=7ce41efc"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.43 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.44 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>  
@@ -460,6 +460,26 @@
 </section>
 <section id="module-data_manipulation.boto3_">
 <span id="data-manipulation-boto3-module"></span><h2>data_manipulation.boto3_ module<a class="headerlink" href="#module-data_manipulation.boto3_" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.boto3_.list_s3_bucket_files">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.boto3_.</span></span><span class="sig-name descname"><span class="pre">list_s3_bucket_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_dateframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/boto3_.html#list_s3_bucket_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.boto3_.list_s3_bucket_files" title="Link to this definition">¶</a></dt>
+<dd><p>List s3 bucket files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bucket</strong> (<em>str</em>) – bucket name</p></li>
+<li><p><strong>to_dateframe</strong> (<em>bool</em><em>, </em><em>optional</em>) – to convert to pandas dataframe, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>default list, pandas.DataFrame if requested</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list | pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.boto3_.send_aws_ses_email">
 <span class="sig-prename descclassname"><span class="pre">data_manipulation.boto3_.</span></span><span class="sig-name descname"><span class="pre">send_aws_ses_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attachment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/boto3_.html#send_aws_ses_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.boto3_.send_aws_ses_email" title="Link to this definition">¶</a></dt>
@@ -1840,6 +1860,7 @@ name_code - “SINGAPORE”: “SG”</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation.boto3_">data_manipulation.boto3_ module</a><ul>
+<li><a class="reference internal" href="#data_manipulation.boto3_.list_s3_bucket_files"><code class="docutils literal notranslate"><span class="pre">list_s3_bucket_files()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.boto3_.send_aws_ses_email"><code class="docutils literal notranslate"><span class="pre">send_aws_ses_email()</span></code></a></li>
 </ul>
 </li>
@@ -1969,7 +1990,7 @@ name_code - “SINGAPORE”: “SG”</p>
         <li class="right" >
           <a href="commands.html" title="Commands"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.43 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.44 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>
