@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.psycopg2_ &#8212; data_manipulation 0.44 documentation</title>
+    <title>data_manipulation.psycopg2_ &#8212; data_manipulation 0.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=7ce41efc"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
+    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.psycopg2_</a></li> 
       </ul>
@@ -34,7 +34,7 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.psycopg2_</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">psycopg2</span>
@@ -48,28 +48,28 @@
     <span class="n">dbname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">port</span><span class="o">=</span><span class="mi">5432</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return psycopg2 connection (https://www.psycopg.org/)</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5432</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates and returns a connection to a PostgreSQL database.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    host : str</span>
-<span class="sd">        Database host address</span>
-<span class="sd">    dbname : str</span>
-<span class="sd">        Database name</span>
-<span class="sd">    user : str</span>
-<span class="sd">        User used to authenticate</span>
-<span class="sd">    password : str</span>
-<span class="sd">        Password used to authenticate</span>
-<span class="sd">    port : int, optional</span>
-<span class="sd">        Port number, by default 5432</span>
+<span class="sd">    Args:</span>
+<span class="sd">        host (str): Database host address (e.g., &#39;localhost&#39; or IP address)</span>
+<span class="sd">        dbname (str): Name of the database to connect to</span>
+<span class="sd">        user (str): Username for database authentication</span>
+<span class="sd">        password (str): Password for database authentication</span>
+<span class="sd">        port (int, optional): Database port number. Defaults to 5432.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    psycopg2.extensions.connection</span>
-<span class="sd">        Connection object</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[psycopg2.extensions.connection]: Database connection object if successful,</span>
+<span class="sd">            None if connection fails</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        psycopg2.OperationalError: If connection to database fails</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; conn = create_connection(&quot;localhost&quot;, &quot;mydb&quot;, &quot;user&quot;, &quot;pass&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; isinstance(conn, psycopg2.extensions.connection)</span>
+<span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">connection</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">try</span><span class="p">:</span>
@@ -84,27 +84,35 @@
 
 
 
-<div class="viewcode-block" id="execute_sql">
-<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.execute_sql">[docs]</a>
-<span class="k">def</span> <span class="nf">execute_sql</span><span class="p">(</span>
+<div class="viewcode-block" id="execute_query">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.execute_query">[docs]</a>
+<span class="k">def</span> <span class="nf">execute_query</span><span class="p">(</span>
     <span class="n">connection</span><span class="p">:</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
     <span class="n">sql_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
-    <span class="n">commit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Execute and commit PostgreSQL query</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">commit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes a SQL query with optional parameters and transaction control.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    connection : psycopg2.extensions.connection</span>
-<span class="sd">        _description_</span>
-<span class="sd">    sql_query : str</span>
-<span class="sd">        SQL query</span>
-<span class="sd">    data : Union[dict, tuple]</span>
-<span class="sd">        Data</span>
-<span class="sd">    commit : bool, optional</span>
-<span class="sd">        Make database change persistent, by default True</span>
+<span class="sd">    Args:</span>
+<span class="sd">        connection (psycopg2.extensions.connection): Active PostgreSQL connection</span>
+<span class="sd">        sql_query (str): SQL query string with placeholders for parameters</span>
+<span class="sd">        data (Union[dict, tuple, None], optional): Parameters for the SQL query.</span>
+<span class="sd">            Use dict for named parameters (%(name)s) or tuple for positional parameters (%s).</span>
+<span class="sd">            Defaults to None.</span>
+<span class="sd">        commit (bool, optional): Whether to commit the transaction. Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[int]: Number of rows affected by the query if successful, None if query fails</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        psycopg2.OperationalError: If query execution fails</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; conn = create_connection(&quot;localhost&quot;, &quot;mydb&quot;, &quot;user&quot;, &quot;pass&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; query = &quot;INSERT INTO users (name, age) VALUES (%(name)s, %(age)s)&quot;</span>
+<span class="sd">        &gt;&gt;&gt; execute_query(conn, query, {&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 30})</span>
+<span class="sd">        1  # One row inserted</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
@@ -112,8 +120,139 @@
         <span class="k">if</span> <span class="n">commit</span><span class="p">:</span>
             <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;PostgreSQL committed ...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
     <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="execute_values">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.execute_values">[docs]</a>
+<span class="k">def</span> <span class="nf">execute_values</span><span class="p">(</span>
+    <span class="n">connection</span><span class="p">:</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">],</span>
+    <span class="n">commit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Efficiently performs bulk insertion of multiple rows into a PostgreSQL table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        connection (psycopg2.extensions.connection): Active PostgreSQL connection</span>
+<span class="sd">        table (str): Target table name for insertion</span>
+<span class="sd">        columns (List[str]): List of column names in the target table</span>
+<span class="sd">        values (List[tuple]): List of value tuples to insert, each tuple corresponding</span>
+<span class="sd">            to one row of data</span>
+<span class="sd">        commit (bool, optional): Whether to commit the transaction. Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[int]: Number of rows successfully inserted if successful, None if operation fails</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        psycopg2.OperationalError: If bulk insertion fails</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; conn = create_connection(&quot;localhost&quot;, &quot;mydb&quot;, &quot;user&quot;, &quot;pass&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; cols = [&quot;name&quot;, &quot;age&quot;, &quot;email&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; vals = [</span>
+<span class="sd">        ...     (&quot;John Doe&quot;, 30, &quot;john@example.com&quot;),</span>
+<span class="sd">        ...     (&quot;Jane Smith&quot;, 25, &quot;jane@example.com&quot;)</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; execute_values(conn, &quot;users&quot;, cols, vals)</span>
+<span class="sd">        2  # Two rows inserted</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">psycopg2</span><span class="o">.</span><span class="n">extras</span><span class="o">.</span><span class="n">execute_values</span><span class="p">(</span>
+            <span class="n">cursor</span><span class="o">=</span><span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">(),</span>
+            <span class="n">sql</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;INSERT INTO </span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">) VALUES %s&quot;</span><span class="p">,</span>
+            <span class="n">argslist</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">commit</span><span class="p">:</span>
+            <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;PostgreSQL committed ...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span><span class="o">.</span><span class="n">rowcount</span>
+    <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="get_table_columns">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.get_table_columns">[docs]</a>
+<span class="k">def</span> <span class="nf">get_table_columns</span><span class="p">(</span>
+    <span class="n">connection</span><span class="p">:</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves a list of column names from a specified PostgreSQL table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        connection (psycopg2.extensions.connection): Active PostgreSQL connection</span>
+<span class="sd">        table (str): Name of the table to query</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[List[str]]: List of column names in order of their position in the table,</span>
+<span class="sd">            None if query fails</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        psycopg2.OperationalError: If column information retrieval fails</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; conn = create_connection(&quot;localhost&quot;, &quot;mydb&quot;, &quot;user&quot;, &quot;pass&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; get_table_columns(conn, &quot;users&quot;)</span>
+<span class="sd">        [&#39;id&#39;, &#39;name&#39;, &#39;email&#39;, &#39;age&#39;, &#39;created_at&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;SELECT column_name FROM information_schema.columns WHERE table_name = &#39;</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
+    <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="get_table_schema">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.psycopg2_.get_table_schema">[docs]</a>
+<span class="k">def</span> <span class="nf">get_table_schema</span><span class="p">(</span>
+    <span class="n">connection</span><span class="p">:</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves detailed schema information for a specified PostgreSQL table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        connection (psycopg2.extensions.connection): Active PostgreSQL connection</span>
+<span class="sd">        table (str): Name of the table to query</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[List[tuple]]: List of tuples containing column information:</span>
+<span class="sd">            (column_name, data_type, character_maximum_length, is_nullable)</span>
+<span class="sd">            Returns None if query fails</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        psycopg2.OperationalError: If schema information retrieval fails</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; conn = create_connection(&quot;localhost&quot;, &quot;mydb&quot;, &quot;user&quot;, &quot;pass&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; schema = get_table_schema(conn, &quot;users&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; for col in schema:</span>
+<span class="sd">        ...     print(f&quot;Column: {col[0]}, Type: {col[1]}, Max Length: {col[2]}, Nullable: {col[3]}&quot;)</span>
+<span class="sd">        Column: id, Type: integer, Max Length: None, Nullable: NO</span>
+<span class="sd">        Column: name, Type: character varying, Max Length: 255, Nullable: YES</span>
+<span class="sd">        Column: created_at, Type: timestamp, Max Length: None, Nullable: NO</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;SELECT column_name, data_type, character_maximum_length, is_nullable FROM information_schema.columns WHERE table_name = &#39;</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
 
 
 
@@ -123,24 +262,30 @@
     <span class="n">connection</span><span class="p">:</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span>
     <span class="n">sql_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return Pandas dataframe from result of given SQL query</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes a SQL query and returns the results as a pandas DataFrame.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    connection : psycopg2.extensions.connection</span>
-<span class="sd">        _description_</span>
-<span class="sd">    sql_query : str</span>
-<span class="sd">        SQL query</span>
+<span class="sd">    Args:</span>
+<span class="sd">        connection (psycopg2.extensions.connection): Active PostgreSQL connection</span>
+<span class="sd">        sql_query (str): SQL query to execute</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; sql_query = &#39;&#39;&#39;SELECT * FROM users;&#39;&#39;&#39;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Query results converted to a pandas DataFrame</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pd.DataFrame</span>
-<span class="sd">        _description_</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        psycopg2.OperationalError: If query execution fails</span>
+<span class="sd">        pd.io.sql.DatabaseError: If DataFrame conversion fails</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; conn = create_connection(&quot;localhost&quot;, &quot;mydb&quot;, &quot;user&quot;, &quot;pass&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df = query_to_pandas(conn, &#39;&#39;&#39;</span>
+<span class="sd">        ...     SELECT name, age, email</span>
+<span class="sd">        ...     FROM users</span>
+<span class="sd">        ...     WHERE age &gt; 25</span>
+<span class="sd">        ...     ORDER BY age DESC</span>
+<span class="sd">        ... &#39;&#39;&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(df.head())</span>
+<span class="sd">           name  age           email</span>
+<span class="sd">        0  John   30  john@example.com</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
@@ -160,7 +305,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -176,7 +321,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -185,14 +330,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.psycopg2_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

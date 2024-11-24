@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.cryptography_ &#8212; data_manipulation 0.44 documentation</title>
+    <title>data_manipulation.cryptography_ &#8212; data_manipulation 0.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=7ce41efc"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
+    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.cryptography_</a></li> 
       </ul>
@@ -43,20 +43,22 @@
 <div class="viewcode-block" id="generate_fernet_key">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.cryptography_.generate_fernet_key">[docs]</a>
 <span class="k">def</span> <span class="nf">generate_fernet_key</span><span class="p">(</span><span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate cryptography fernet key</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates and saves a Fernet encryption key.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    output_directory : str</span>
-<span class="sd">        Linux directory</span>
-<span class="sd">    output_filename : str</span>
-<span class="sd">        Linux filename</span>
+<span class="sd">    Args:</span>
+<span class="sd">        output_directory (str): Directory path where the key file will be saved.</span>
+<span class="sd">        output_filename (str): Name of the key file to be created.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    bytes</span>
-<span class="sd">        Fernet key in bytes</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        bytes: Generated Fernet key in bytes format.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If key generation or file writing fails.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; key = generate_fernet_key(&#39;/path/to/keys&#39;, &#39;encryption.key&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; isinstance(key, bytes)</span>
+<span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
@@ -77,20 +79,22 @@
 <div class="viewcode-block" id="encrypt_fernet_file">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.cryptography_.encrypt_fernet_file">[docs]</a>
 <span class="k">def</span> <span class="nf">encrypt_fernet_file</span><span class="p">(</span><span class="n">keypath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encrypt file</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encrypts a file using Fernet symmetric encryption.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    keypath : str</span>
-<span class="sd">        keypath</span>
-<span class="sd">    filepath : str</span>
-<span class="sd">        File path</span>
+<span class="sd">    Args:</span>
+<span class="sd">        keypath (str): Path to the Fernet key file.</span>
+<span class="sd">        filepath (str): Path to the file to be encrypted.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Encrypted data</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Encrypted data.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If keypath or filepath are not strings.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; encrypted = encrypt_fernet_file(&#39;key.txt&#39;, &#39;data.txt&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; isinstance(encrypted, str)</span>
+<span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">fernet</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
@@ -105,20 +109,22 @@
 <div class="viewcode-block" id="decrypt_fernet_data">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.cryptography_.decrypt_fernet_data">[docs]</a>
 <span class="k">def</span> <span class="nf">decrypt_fernet_data</span><span class="p">(</span><span class="n">keypath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decrypt file</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decrypts a file using Fernet symmetric encryption.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    keypath : str</span>
-<span class="sd">        keypath</span>
-<span class="sd">    filepath : str</span>
-<span class="sd">        File path</span>
+<span class="sd">    Args:</span>
+<span class="sd">        keypath (str): Path to the Fernet key file.</span>
+<span class="sd">        filepath (str): Path to the encrypted file.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Decrypted data</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Decrypted data.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If keypath or filepath are not strings.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; decrypted = decrypt_fernet_data(&#39;key.txt&#39;, &#39;encrypted_data.txt&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; isinstance(decrypted, str)</span>
+<span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">fernet</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">keypath</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
@@ -140,7 +146,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -156,7 +162,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -165,14 +171,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.cryptography_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

@@ -11,33 +11,25 @@ from loguru import logger
 def clean_string(
     string: str, remove_parenthesis: bool = False, remove_brackets: bool = False
 ) -> str:
-    """
-    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that tab, newline, whitespace will be removed
+    """Cleans and standardizes input string.
 
-    Parameters
-    ----------
-    string : str
-        String to clean
-    remove_parenthesis : bool, optional
-        To remove parenthesis, by default False
-    remove_brackets : bool, optional
-        To remove brackets, by default False
+    Args:
+        string (str): String to clean.
+        remove_parenthesis (bool, optional): Whether to remove content within parentheses. Defaults to False.
+        remove_brackets (bool, optional): Whether to remove content within square brackets. Defaults to False.
 
-    Examples
-    --------
-    >>> clean_string(" sHawn  tesT ")
-    'SHAWN TEST'
-    >>> clean_string("shawn ( te  st )")
-    'SHAWN ( TE ST )'
-    >>> clean_string("shawn ( te  st )", remove_parenthesis=True)
-    'SHAWN'
-    >>> clean_string("shawn [ te  st ]", remove_brackets=True)
-    'SHAWN'
+    Returns:
+        str: Uppercase cleaned string with standardized spacing.
 
-    Returns
-    -------
-    str
-        Uppercase cleaned string
+    Examples:
+        >>> clean_string(" sHawn  tesT ")
+        'SHAWN TEST'
+        >>> clean_string("shawn ( te  st )")
+        'SHAWN ( TE ST )'
+        >>> clean_string("shawn ( te  st )", remove_parenthesis=True)
+        'SHAWN'
+        >>> clean_string("shawn [ te  st ]", remove_brackets=True)
+        'SHAWN'
     """
 
     if remove_parenthesis:
@@ -51,41 +43,31 @@ def clean_string(
 
 
 def get_string_case_combination(str_: str) -> list:
-    """
-    Get list of case combination of a string. Reference: https://stackoverflow.com/questions/11144389/find-all-upper-lower-and-mixed-case-combinations-of-a-string
+    """Generates all possible case combinations of a string.
 
-    Parameters
-    ----------
-    str_ : str
-        Input string
+    Args:
+        str_ (str): Input string to generate combinations for.
 
-    Examples
-    --------
-    >>> get_string_case_combination("abc")
-    ['ABC', 'ABc', 'AbC', 'Abc', 'aBC', 'aBc', 'abC', 'abc']
+    Returns:
+        list: List of all possible case combinations.
 
-    Returns
-    -------
-    list
-        Case combinations
+    Examples:
+        >>> get_string_case_combination("abc")
+        ['ABC', 'ABc', 'AbC', 'Abc', 'aBC', 'aBc', 'abC', 'abc']
     """
 
     return list(map("".join, itertools.product(*zip(str_.upper(), str_.lower()))))
 
 
 def get_none_variation() -> list:
-    """
-    Get List of none variation
+    """Returns a list of common variations of None/null values.
 
-    Examples
-    --------
-    >>> get_none_variation()
-    [None, 'NONE', 'NONe', 'NOnE', 'NOne', 'NoNE', 'NoNe', 'NonE', 'None', 'nONE', 'nONe', 'nOnE', 'nOne', 'noNE', 'noNe', 'nonE', 'none', 'NULL', 'NULl', 'NUlL', 'NUll', 'NuLL', 'NuLl', 'NulL', 'Null', 'nULL', 'nULl', 'nUlL', 'nUll', 'nuLL', 'nuLl', 'nulL', 'null', 'NA', 'Na', 'nA', 'na', 'N.A', 'N.a', 'N.A', 'N.a', 'n.A', 'n.a', 'n.A', 'n.a', 'N.A.', 'N.A.', 'N.a.', 'N.a.', 'N.A.', 'N.A.', 'N.a.', 'N.a.', 'n.A.', 'n.A.', 'n.a.', 'n.a.', 'n.A.', 'n.A.', 'n.a.', 'n.a.', 'NAN', 'NAn', 'NaN', 'Nan', 'nAN', 'nAn', 'naN', 'nan', 'NIL', 'NIl', 'NiL', 'Nil', 'nIL', 'nIl', 'niL', 'nil']
+    Returns:
+        list: List containing None and various string representations of null values.
 
-    Returns
-    -------
-    list
-        None variation
+    Examples:
+        >>> get_none_variation()
+        [None, 'NONE', 'NONe', 'NOnE', 'NOne', 'NoNE', 'NoNe', 'NonE', 'None', 'nONE', 'nONe', 'nOnE', 'nOne', 'noNE', 'noNe', 'nonE', 'none', 'NULL', 'NULl', 'NUlL', 'NUll', 'NuLL', 'NuLl', 'NulL', 'Null', 'nULL', 'nULl', 'nUlL', 'nUll', 'nuLL', 'nuLl', 'nulL', 'null', 'NA', 'Na', 'nA', 'na', 'N.A', 'N.a', 'N.A', 'N.a', 'n.A', 'n.a', 'n.A', 'n.a', 'N.A.', 'N.A.', 'N.a.', 'N.a.', 'N.A.', 'N.A.', 'N.a.', 'N.a.', 'n.A.', 'n.A.', 'n.a.', 'n.a.', 'n.A.', 'n.A.', 'n.a.', 'n.a.', 'NAN', 'NAn', 'NaN', 'Nan', 'nAN', 'nAn', 'naN', 'nan', 'NIL', 'NIl', 'NiL', 'Nil', 'nIL', 'nIl', 'niL', 'nil']
     """
     variations = (
         [None]
@@ -101,6 +83,11 @@ def get_none_variation() -> list:
 
 
 def get_country_name_variation() -> dict:
+    """Returns a dictionary mapping country names to their codes.
+
+    Returns:
+        dict: Dictionary with country names as keys and country codes as values.
+    """
     variations = {
         "AFRICA": "BW",
         "BOSNIA": "BA",
@@ -119,6 +106,11 @@ def get_country_name_variation() -> dict:
 
 
 def get_country_code_variation() -> dict:
+    """Returns a dictionary mapping country codes to their name variations.
+
+    Returns:
+        dict: Dictionary with country codes as keys and lists of country name variations as values.
+    """
     variations = {
         "BA": ["BOSNIA"],
         "BW": ["AFRICA"],
@@ -135,36 +127,22 @@ def get_country_code_variation() -> dict:
 
 
 def list_tuple_without_none(list_tuple: list | tuple) -> list | tuple:
-    """
-    Return the given list / tuple without None variation
+    """Removes None variations from a list or tuple.
 
-    Parameters
-    ----------
-    list_tuple : list | tuple
-        Standard list or tuple
+    Args:
+        list_tuple (list | tuple): Input list or tuple to clean.
 
-    Examples
-    --------
-    >>> list_tuple_without_none(["a", "none"])
-    ['a']
-    >>> list_tuple_without_none(("a", "none"))
-    ('a',)
-    >>> list_tuple_without_none(get_none_variation())
-    []
-    >>> list_tuple_without_none(["a", "none", ""])
-    ['a']
-    >>> list_tuple_without_none(("a", "none", ""))
-    ('a',)
+    Returns:
+        list | tuple: List or tuple with None variations removed.
 
-    Returns
-    -------
-    list | tuple
-        List without none variation
+    Raises:
+        TypeError: If input is not a list or tuple.
 
-    Raises
-    ------
-    TypeError
-        Only list or tuple datatypes
+    Examples:
+        >>> list_tuple_without_none(["a", "none"])
+        ['a']
+        >>> list_tuple_without_none(("a", "none"))
+        ('a',)
     """
     none_variations = get_none_variation()
     if isinstance(list_tuple, list):
@@ -177,37 +155,21 @@ def list_tuple_without_none(list_tuple: list | tuple) -> list | tuple:
 
 
 def string_boolean_to_int(boolean_str_rep: str) -> int:
-    """
-    DEPRECATED from python 3.12 onwards
+    """Converts string boolean representations to integers.
 
-    Return integer from given string boolean. 1 instead of "true"/"True"/"1". Reference from https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool
+    Deprecated: Will be removed in Python 3.12+
 
-    Parameters
-    ----------
-    boolean_str_rep : str
-        String representation of boolean
+    Args:
+        boolean_str_rep (str): String representation of boolean value.
 
-    Notes
-    -----
-    Do not use eval() as it's unsafe
+    Returns:
+        int: 1 for true values, 0 for false values.
 
-    Examples
-    --------
-    >>> string_boolean_to_int("true")
-    1
-    >>> string_boolean_to_int("True")
-    1
-    >>> string_boolean_to_int("1")
-    1
-
-    Returns
-    -------
-    int
-        _description_
-
-    Reference
-    ---------
-    - https://docs.python.org/3.10/library/distutils.html
+    Examples:
+        >>> string_boolean_to_int("true")
+        1
+        >>> string_boolean_to_int("True")
+        1
     """
     from distutils.util import strtobool
 
@@ -216,33 +178,21 @@ def string_boolean_to_int(boolean_str_rep: str) -> int:
 
 
 def string_dlt_to_dlt(dlt_str_rep: str) -> dict | list | tuple:
-    """
-    Return dictionary/list/tuple from given string representation of dictionary/list/tuple
+    """Converts string representation of data structures to actual Python objects.
 
-    Parameters
-    ----------
-    dlt_str_rep : str
-        String representation of dictionary/list/tuple
+    Args:
+        dlt_str_rep (str): String representation of dictionary/list/tuple.
 
-    Examples
-    --------
-    >>> string_dlt_to_dlt("[1, 2, 3]")
-    [1, 2, 3]
-    >>> string_dlt_to_dlt("[]")
-    []
-    >>> string_dlt_to_dlt("['1', '2', '3']")
-    ['1', '2', '3']
-    >>> string_dlt_to_dlt("{'a': 1, 'b': 2}")
-    {'a': 1, 'b': 2}
-    >>> string_dlt_to_dlt("{'a': '1', 'b': '2'}")
-    {'a': '1', 'b': '2'}
-    >>> string_dlt_to_dlt("('1', '2', '3')")
-    ('1', '2', '3')
+    Returns:
+        dict | list | tuple: Converted Python data structure.
 
-    Returns
-    -------
-    dict | list | tuple
-        _description_
+    Examples:
+        >>> string_dlt_to_dlt("[1, 2, 3]")
+        [1, 2, 3]
+        >>> string_dlt_to_dlt("{'a': 1, 'b': 2}")
+        {'a': 1, 'b': 2}
+        >>> string_dlt_to_dlt("('1', '2', '3')")
+        ('1', '2', '3')
     """
     from ast import literal_eval
 
@@ -251,51 +201,36 @@ def string_dlt_to_dlt(dlt_str_rep: str) -> dict | list | tuple:
 
 
 def string_str_to_str(string_str_rep: str) -> str:
-    """
-    Return string from given string representation of string
+    """Converts string representation to a clean string by removing quotes.
 
-    Parameters
-    ----------
-    string_str_rep : str
-        String representation of string
+    Args:
+        string_str_rep (str): String representation to clean.
 
-    Examples
-    --------
-    >>> string_str_to_str("")
-    ''
-    >>> string_str_to_str('test')
-    'test'
-    >>> string_str_to_str("'test'")
-    'test'
-    >>> string_str_to_str('"test"')
-    'test'
+    Returns:
+        str: Cleaned string with outer quotes removed.
 
-    Returns
-    -------
-    str
-        _description_
+    Examples:
+        >>> string_str_to_str("'test'")
+        'test'
+        >>> string_str_to_str('"test"')
+        'test'
     """
     str_ = string_str_rep.strip("'\"")
     return str_
 
 
 def delete_list_indices(list_: list, indices: list) -> None:
-    """
-    Delete multiple indices in a list
+    """Deletes multiple indices from a list in-place.
 
-    Parameters
-    ----------
-    list_ : list
-        Original list
-    indices : list
-        List of indices to delete
+    Args:
+        list_ (list): Original list to modify.
+        indices (list): List of indices to delete.
 
-    Examples
-    --------
-    >>> values = [0, 1, 2, 3, 4]
-    >>> delete_list_indices(values, [1, 3])
-    >>> values
-    [0, 2, 4]
+    Examples:
+        >>> values = [0, 1, 2, 3, 4]
+        >>> delete_list_indices(values, [1, 3])
+        >>> values
+        [0, 2, 4]
     """
     for index in sorted(indices, reverse=True):
         del list_[index]
@@ -303,25 +238,18 @@ def delete_list_indices(list_: list, indices: list) -> None:
 
 # FILESYSTEM
 def get_path_files(path: str, keywords: list) -> list:
-    """
-    Return sorted list of files from given path and keywords
+    """Returns sorted list of files from given path that contain specified keywords.
 
-    Parameters
-    ----------
-    path : str
-        File path
-    keywords : list
-        List of keywords
+    Args:
+        path (str): Directory path to search.
+        keywords (list): List of keywords to match in filenames.
 
-    Examples
-    --------
-    >>> get_path_files("test_base_folder", ["py"])
-    ['test1.py', 'test2.py', 'test3.py', 'test4.py', 'test5.py']
+    Returns:
+        list: Sorted list of matching filenames.
 
-    Returns
-    -------
-    list
-        Sorted list
+    Examples:
+        >>> get_path_files("test_base_folder", ["py"])
+        ['test1.py', 'test2.py', 'test3.py', 'test4.py', 'test5.py']
     """
 
     list_ = []
@@ -332,28 +260,15 @@ def get_path_files(path: str, keywords: list) -> list:
 
 
 def remove_path_file(path: str, keyword: str, n: int = 2) -> None:
-    """
-    Remove n oldest files from given path and keyword
+    """Removes all but the n newest files matching the keyword from the specified path.
 
-    Parameters
-    ----------
-    path : str
-        Directory path
-    keyword : str
-        Keyword
-    n : int, optional
-        Keep latest n files, by default 2
+    Args:
+        path (str): Directory path.
+        keyword (str): Keyword to match in filenames.
+        n (int, optional): Number of newest files to keep. Defaults to 2.
 
-    Examples
-    --------
-    >>> get_path_files("test_base_folder", ["py"])
-    ['test1.py', 'test2.py', 'test3.py', 'test4.py', 'test5.py']
-    >>> remove_path_file("test_base_folder", ".py")
-    test_base_folder/test1.py deleted ...
-    test_base_folder/test2.py deleted ...
-    test_base_folder/test3.py deleted ...
-    >>> get_path_files("test_base_folder", ["py"])
-    ['test4.py', 'test5.py']
+    Examples:
+        >>> remove_path_file("test_base_folder", ".py")
     """
 
     to_delete = get_path_files(path=path, keywords=[keyword])[:-n]
@@ -363,21 +278,15 @@ def remove_path_file(path: str, keyword: str, n: int = 2) -> None:
 
 
 def list_to_file(filepath: str, list_: list, newline: bool = True) -> None:
-    """
-    Export list to file
+    """Writes list contents to a file.
 
-    Parameters
-    ----------
-    filepath : str
-        Filepath
-    list_ : list
-        List of values
-    newline : bool, optional
-        Add newline to end of file, by default True
+    Args:
+        filepath (str): Path to output file.
+        list_ (list): List of values to write.
+        newline (bool, optional): Whether to add newline after each item. Defaults to True.
 
-    Examples
-    --------
-    >>> list_to_file("test.txt", [1, 2, 3])
+    Examples:
+        >>> list_to_file("test.txt", [1, 2, 3])
     """
     f = open(filepath, "w")
     for line in list_:
@@ -389,20 +298,14 @@ def list_to_file(filepath: str, list_: list, newline: bool = True) -> None:
 
 # URLLIB
 def create_encode_url(url: str, query_params: dict = {}) -> str:
-    """
-    Create encoded url
+    """Creates an encoded URL with query parameters.
 
-    Parameters
-    ----------
-    url : str
-        base url
-    query_params : dict, optional
-        dictionary of url query parameters, by default {}
+    Args:
+        url (str): Base URL.
+        query_params (dict, optional): Dictionary of URL query parameters. Defaults to {}.
 
-    Returns
-    -------
-    str
-        encoded url
+    Returns:
+        str: Encoded URL with query parameters.
     """
     from urllib.parse import urlencode
 
@@ -411,22 +314,16 @@ def create_encode_url(url: str, query_params: dict = {}) -> str:
 
 # SYSTEM
 def parse_ps_aux(ps_aux_commands: str) -> List[list]:
-    """
-    Parse linux ps aux related-command to list of lists
+    """Parses Linux ps aux command output into a list of records.
 
-    Parameters
-    ----------
-    ps_aux_commands : str
-        Linux ps aux
+    Args:
+        ps_aux_commands (str): Linux ps aux command string.
 
-    Examples
-    --------
-    >>> # parse_ps_aux("ps aux | egrep -i '%cpu|anaconda3' | head")
+    Returns:
+        List[list]: List of lists, where each inner list represents a process record.
 
-    Returns
-    -------
-    List[list]
-        Each list represent a record
+    Examples:
+        >>> # parse_ps_aux("ps aux | egrep -i '%cpu|anaconda3' | head")
     """
     output = subprocess.run(
         ps_aux_commands,

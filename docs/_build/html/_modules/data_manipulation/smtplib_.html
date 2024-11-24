@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.smtplib_ &#8212; data_manipulation 0.44 documentation</title>
+    <title>data_manipulation.smtplib_ &#8212; data_manipulation 0.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=7ce41efc"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
+    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.smtplib_</a></li> 
       </ul>
@@ -50,23 +50,37 @@
     <span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">smtp_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Send html email</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends an HTML email using SMTP and logs the operation.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    logname : str</span>
-<span class="sd">        Log</span>
-<span class="sd">    message_subject : str</span>
-<span class="sd">        Message subject</span>
-<span class="sd">    message_sender : str</span>
-<span class="sd">        Sender email</span>
-<span class="sd">    message_receiver : str</span>
-<span class="sd">        Receiver email</span>
-<span class="sd">    html : str</span>
-<span class="sd">        HTML string</span>
-<span class="sd">    smtp_address: str</span>
-<span class="sd">        SMTP address</span>
+<span class="sd">    Args:</span>
+<span class="sd">        logname (str): Path to the log file where email sending operations will be recorded</span>
+<span class="sd">        message_subject (str): Subject line of the email</span>
+<span class="sd">        message_sender (str): Email address of the sender</span>
+<span class="sd">        message_receiver (str): Email address of the recipient</span>
+<span class="sd">        html (str): HTML content of the email body</span>
+<span class="sd">        smtp_address (str): SMTP server address (e.g., &#39;smtp.gmail.com:587&#39;)</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If any of the input parameters are not strings</span>
+<span class="sd">        smtplib.SMTPException: If email sending fails</span>
+<span class="sd">        IOError: If log file cannot be accessed or created</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; send_email(</span>
+<span class="sd">        ...     logname=&#39;email.log&#39;,</span>
+<span class="sd">        ...     message_subject=&#39;Test Email&#39;,</span>
+<span class="sd">        ...     message_sender=&#39;sender@example.com&#39;,</span>
+<span class="sd">        ...     message_receiver=&#39;recipient@example.com&#39;,</span>
+<span class="sd">        ...     html=&#39;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;This is a test email.&lt;/p&gt;&#39;,</span>
+<span class="sd">        ...     smtp_address=&#39;smtp.gmail.com:587&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        # Email sent successfully and logged to email.log</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        - All parameters must be strings</span>
+<span class="sd">        - The HTML content should be properly formatted HTML</span>
+<span class="sd">        - The function will log both successful sends and failures</span>
+<span class="sd">        - Make sure the SMTP server address is correctly formatted with port if needed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
@@ -115,7 +129,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -131,7 +145,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -140,14 +154,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.smtplib_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

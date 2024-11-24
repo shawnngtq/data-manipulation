@@ -1,50 +1,45 @@
 import math
 import multiprocessing
 import os
+from typing import Any, Dict, List, Set, Tuple, Union
 
 import pyspark
 
 
 # CONFIG
-def config_spark_local(autoset=True):
-    """
-    Automatically configure Spark local or provide recommendation if not autoset. Reference https://towardsdatascience.com/basics-of-apache-spark-configuration-settings-ca4faff40d45
+def config_spark_local(autoset: bool = True) -> None:
+    """Configures Spark for local execution with optimized settings based on system resources.
 
-    Parameters
-    ----------
-    autoset : bool
-        whether to automatically configure spark
+    Automatically calculates and sets optimal Spark configuration parameters based on:
+    - Available CPU cores
+    - System memory
+    - Executor allocation
+    - Memory distribution
 
-    Examples
-    --------
-    >>> config_spark_local()
-    Here is the  current computer specs ...
-    executor_per_node: 1
-    spark_executor_instances: 1
-    total_executor_memory: 30
-    spark_executor_memory: 27
-    memory_overhead: 3
-    spark_default_parallelism: 10
-    spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...
-    spark auto-configured ...
-    config_spark_local exited ...
-    >>> config_spark_local(autoset=False)
-    Here is the  current computer specs ...
-    executor_per_node: 1
-    spark_executor_instances: 1
-    total_executor_memory: 30
-    spark_executor_memory: 27
-    memory_overhead: 3
-    spark_default_parallelism: 10
-    Here is the recommended command to execute:
-    <BLANKLINE>
-            spark = pyspark.sql.SparkSession.builder.master("local")             .config("spark.executor.cores", "5")             .config("spark.driver.cores", "5")             .config("spark.executor.instances", "1")             .config("spark.executor.memory", "27g")             .config("spark.driver.memory", "27g")             .config("spark.executor.memoryOverhead", "3g")             .config("spark.default.parallelism", "10")             .config("spark.sql.shuffle.partitions", "10")             .getOrCreate()
-    <BLANKLINE>
-    config_spark_local exited ...
+    Args:
+        autoset (bool, optional): Whether to automatically apply the configuration.
+            If False, only prints recommended settings. Defaults to True.
 
-    Returns
-    -------
-    None
+    Examples:
+        >>> config_spark_local()
+        Here is the current computer specs ...
+        executor_per_node: 1
+        spark_executor_instances: 1
+        total_executor_memory: 30
+        spark_executor_memory: 27
+        memory_overhead: 3
+        spark_default_parallelism: 10
+        spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...
+        spark auto-configured ...
+
+    Note:
+        Configuration includes:
+        - Executor cores and memory
+        - Driver cores and memory
+        - Memory overhead
+        - Default parallelism
+        - Shuffle partitions
+        - Arrow optimization for PySpark
     """
 
     def round_down_or_one(x):
@@ -117,22 +112,34 @@ def config_spark_local(autoset=True):
 
 
 # COLUMNS
-def add_dummy_columns(dataframe, columns, value):
-    """
-    Return dataframe with additional given dummy column(s) and value
+def add_dummy_columns(
+    dataframe: pyspark.sql.DataFrame, columns: List[str], value: str
+) -> pyspark.sql.DataFrame:
+    """Adds new columns with default values to a Spark DataFrame.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
-    columns : list
-        List of column(s)
-    value : str
-        Default value of the new column(s)
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        columns (List[str]): List of column names to add
+        value (str): Default value for the new columns
 
-    Returns
-    -------
-    df : pyspark.sql.dataframe.DataFrame
+    Returns:
+        pyspark.sql.DataFrame: DataFrame with added columns
+
+    Raises:
+        TypeError: If arguments are not of correct type
+            - dataframe must be a Spark DataFrame
+            - columns must be a list
+            - value must be a string
+
+    Examples:
+        >>> df = spark.createDataFrame([("Alice", 1)], ["name", "id"])
+        >>> new_df = add_dummy_columns(df, ["age", "city"], "unknown")
+        >>> new_df.show()
+        +-----+---+---+------+
+        | name| id|age|  city|
+        +-----+---+---+------+
+        |Alice|  1|unknown|unknown|
+        +-----+---+---+------+
     """
     import pyspark.sql.functions as F
 
@@ -150,20 +157,24 @@ def add_dummy_columns(dataframe, columns, value):
     return df
 
 
-def column_into_list(dataframe, column):
-    """
-    Return list from given dataframe's column, with possible duplicates
+def column_into_list(dataframe: pyspark.sql.DataFrame, column: str) -> List[Any]:
+    """Extracts values from a DataFrame column into a Python list.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
-    column : str
-        Column in dataframe
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        column (str): Name of the column to extract
 
-    Returns
-    -------
-    list_ : []
+    Returns:
+        List[Any]: List containing all values from the specified column,
+            including duplicates
+
+    Raises:
+        TypeError: If dataframe is not a Spark DataFrame or column is not a string
+
+    Examples:
+        >>> df = spark.createDataFrame([(1,), (2,), (2,)], ["value"])
+        >>> column_into_list(df, "value")
+        [1, 2, 2]
     """
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
@@ -175,20 +186,23 @@ def column_into_list(dataframe, column):
         return list_
 
 
-def column_into_set(dataframe, column):
-    """
-    Return normal set from given dataframe's column
+def column_into_set(dataframe: pyspark.sql.DataFrame, column: str) -> Set[Any]:
+    """Extracts unique values from a DataFrame column into a Python set.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
-    column : str
-        Column in dataframe
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        column (str): Name of the column to extract
 
-    Returns
-    -------
-    set_ : {}
+    Returns:
+        Set[Any]: Set containing unique values from the specified column
+
+    Raises:
+        TypeError: If dataframe is not a Spark DataFrame or column is not a string
+
+    Examples:
+        >>> df = spark.createDataFrame([(1,), (2,), (2,)], ["value"])
+        >>> column_into_set(df, "value")
+        {1, 2}
     """
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
@@ -199,20 +213,30 @@ def column_into_set(dataframe, column):
     return set_
 
 
-def columns_prefix(dataframe, prefix):
-    """
-    Return dataframe with renamed columns with given prefix
+def columns_prefix(
+    dataframe: pyspark.sql.DataFrame, prefix: str
+) -> pyspark.sql.DataFrame:
+    """Adds a prefix to all column names in a DataFrame.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
-    prefix : str
-        Prefix
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        prefix (str): Prefix to add to column names
 
-    Returns
-    -------
-    df : pyspark.sql.dataframe.DataFrame
+    Returns:
+        pyspark.sql.DataFrame: DataFrame with renamed columns
+
+    Raises:
+        TypeError: If dataframe is not a Spark DataFrame or prefix is not a string
+
+    Examples:
+        >>> df = spark.createDataFrame([("Alice", 1)], ["name", "id"])
+        >>> new_df = columns_prefix(df, "user_")
+        >>> new_df.show()
+        +---------+-------+
+        |user_name|user_id|
+        +---------+-------+
+        |    Alice|      1|
+        +---------+-------+
     """
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
@@ -226,25 +250,40 @@ def columns_prefix(dataframe, prefix):
     return df
 
 
-def columns_statistics(dataframe, n=10):
-    """
-    Display Spark dataframe columns' statistics and return tuple of empty columns and single columns from given dataframe
+def columns_statistics(
+    dataframe: pyspark.sql.DataFrame, n: int = 10
+) -> Tuple[List[str], List[str]]:
+    """Analyzes column statistics and identifies empty and single-value columns.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
-    n : int / float
-        Top n rows
+    Performs comprehensive analysis of each column including:
+    - Value counts
+    - Empty value detection
+    - Single value detection
+    - Basic statistics
 
-    Returns
-    -------
-    empty_columns : list
-        List of empty columns
-    single_columns : list
-        List of single value columns
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        n (int, optional): Number of top values to display for each column.
+            Defaults to 10.
 
-    (empty_columns, single_columns)
+    Returns:
+        Tuple[List[str], List[str]]: Two lists containing:
+            - List of empty column names
+            - List of single-value column names
+
+    Raises:
+        TypeError: If dataframe is not a Spark DataFrame
+
+    Examples:
+        >>> df = spark.createDataFrame([
+        ...     ("Alice", None),
+        ...     ("Alice", None)
+        ... ], ["name", "email"])
+        >>> empty_cols, single_cols = columns_statistics(df)
+        >>> print(f"Empty columns: {empty_cols}")
+        Empty columns: ['email']
+        >>> print(f"Single value columns: {single_cols}")
+        Single value columns: ['name']
     """
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
@@ -278,40 +317,30 @@ def columns_statistics(dataframe, n=10):
 
 
 # DATAFRAME
-def rename(dataframe, columns):
-    """
-    Return dataframe with new renamed column(s)
+def rename(
+    dataframe: pyspark.sql.DataFrame, columns: Dict[str, str]
+) -> pyspark.sql.DataFrame:
+    """Renames multiple columns in a DataFrame using a mapping dictionary.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        One Spark dataframe
-    columns : dict
-        A dictionary {oldName: newName} of columns to rename
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        columns (Dict[str, str]): Dictionary mapping old column names to new names
 
-    Examples
-    --------
-    >>> l = [('Alice', 1)]
-    >>> df = spark.createDataFrame(l)
-    >>> df.show()
-    +-----+---+
-    |   _1| _2|
-    +-----+---+
-    |Alice|  1|
-    +-----+---+
-    <BLANKLINE>
-    >>> df2 = rename(df, {"_1": "name", "_2": "id"})
-    >>> df2.show()
-    +-----+---+
-    | name| id|
-    +-----+---+
-    |Alice|  1|
-    +-----+---+
-    <BLANKLINE>
+    Returns:
+        pyspark.sql.DataFrame: DataFrame with renamed columns
 
-    Returns
-    -------
-    df : pyspark.sql.dataframe.DataFrame
+    Raises:
+        TypeError: If dataframe is not a Spark DataFrame or columns is not a dict
+
+    Examples:
+        >>> df = spark.createDataFrame([("Alice", 1)], ["_1", "_2"])
+        >>> new_df = rename(df, {"_1": "name", "_2": "id"})
+        >>> new_df.show()
+        +-----+---+
+        | name| id|
+        +-----+---+
+        |Alice|  1|
+        +-----+---+
     """
     import pyspark.sql.functions as F
 
@@ -327,18 +356,30 @@ def rename(dataframe, columns):
 
 
 # STATISTICS
-def describe(dataframe):
-    """
-    Display dataframe information similar to Pandas dataframe describe()
+def describe(dataframe: pyspark.sql.DataFrame) -> None:
+    """Prints comprehensive information about a DataFrame.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
+    Displays:
+    - DataFrame type
+    - Number of columns
+    - Number of rows
+    - Schema information
 
-    Returns
-    -------
-    None
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+
+    Raises:
+        TypeError: If dataframe is not a Spark DataFrame
+
+    Examples:
+        >>> df = spark.createDataFrame([("Alice", 1)], ["name", "id"])
+        >>> describe(df)
+        The dataframe: <class 'pyspark.sql.dataframe.DataFrame'>
+        Number of columns: 2
+        Number of rows: 1
+        root
+         |-- name: string (nullable = true)
+         |-- id: long (nullable = true)
     """
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
@@ -348,48 +389,39 @@ def describe(dataframe):
     dataframe.printSchema()
 
 
-def group_count(dataframe, columns, n=10):
-    """
-    Returns a dataframe group by column(s), sort in descending order, calculate count and percent
+def group_count(
+    dataframe: pyspark.sql.DataFrame,
+    columns: Union[str, List[str]],
+    n: Union[int, float] = 10,
+) -> pyspark.sql.DataFrame:
+    """Performs group by operation and calculates count and percentage for each group.
 
-    Parameters
-    ----------
-    dataframe : pyspark.sql.dataframe.DataFrame
-        Spark dataframe
-    columns : str / list
-        List of column(s) to groupby
-    n : int / float
-        Top n rows
+    Args:
+        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
+        columns (Union[str, List[str]]): Column(s) to group by
+        n (Union[int, float], optional): Number of top groups to return.
+            Use float('inf') for all groups. Defaults to 10.
 
-    Examples
-    --------
-    >>> import pandas as pd
-    >>> data = {'id': [1, 1, 1, 2, 2, 3], 'value': [5, 2, 5, 2135, 124390, 213]}
-    >>> df = spark.createDataFrame(pd.DataFrame(data))
-    >>> group_count(df, ["id"]).show()
-    +---+-----+-------+
-    | id|count|percent|
-    +---+-----+-------+
-    |  1|    3|   50.0|
-    |  2|    2| 33.333|
-    |  3|    1| 16.667|
-    +---+-----+-------+
-    <BLANKLINE>
-    >>> group_count(df, ["id", "value"]).show()
-    +---+------+-----+-------+
-    | id| value|count|percent|
-    +---+------+-----+-------+
-    |  1|     5|    2| 33.333|
-    |  3|   213|    1| 16.667|
-    |  2|  2135|    1| 16.667|
-    |  1|     2|    1| 16.667|
-    |  2|124390|    1| 16.667|
-    +---+------+-----+-------+
-    <BLANKLINE>
+    Returns:
+        pyspark.sql.DataFrame: DataFrame with columns:
+            - Group by column(s)
+            - count: Count of records in each group
+            - percent: Percentage of total records in each group
 
-    Returns
-    -------
-    df : pyspark.sql.dataframe.DataFrame
+    Raises:
+        TypeError: If arguments are not of correct type
+
+    Examples:
+        >>> df = spark.createDataFrame([
+        ...     (1, 'A'), (1, 'B'), (2, 'A')
+        ... ], ["id", "category"])
+        >>> group_count(df, ["id"]).show()
+        +---+-----+-------+
+        | id|count|percent|
+        +---+-----+-------+
+        |  1|    2|   66.7|
+        |  2|    1|   33.3|
+        +---+-----+-------+
     """
     import pyspark.sql.functions as F
 

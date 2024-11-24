@@ -12,23 +12,37 @@ def send_email(
     html: str,
     smtp_address: str,
 ) -> None:
-    """
-    Send html email
+    """Sends an HTML email using SMTP and logs the operation.
 
-    Parameters
-    ----------
-    logname : str
-        Log
-    message_subject : str
-        Message subject
-    message_sender : str
-        Sender email
-    message_receiver : str
-        Receiver email
-    html : str
-        HTML string
-    smtp_address: str
-        SMTP address
+    Args:
+        logname (str): Path to the log file where email sending operations will be recorded
+        message_subject (str): Subject line of the email
+        message_sender (str): Email address of the sender
+        message_receiver (str): Email address of the recipient
+        html (str): HTML content of the email body
+        smtp_address (str): SMTP server address (e.g., 'smtp.gmail.com:587')
+
+    Raises:
+        TypeError: If any of the input parameters are not strings
+        smtplib.SMTPException: If email sending fails
+        IOError: If log file cannot be accessed or created
+
+    Examples:
+        >>> send_email(
+        ...     logname='email.log',
+        ...     message_subject='Test Email',
+        ...     message_sender='sender@example.com',
+        ...     message_receiver='recipient@example.com',
+        ...     html='<h1>Hello World</h1><p>This is a test email.</p>',
+        ...     smtp_address='smtp.gmail.com:587'
+        ... )
+        # Email sent successfully and logged to email.log
+
+    Note:
+        - All parameters must be strings
+        - The HTML content should be properly formatted HTML
+        - The function will log both successful sends and failures
+        - Make sure the SMTP server address is correctly formatted with port if needed
     """
 
     if all(

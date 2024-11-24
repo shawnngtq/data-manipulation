@@ -7,20 +7,26 @@ def keytab_valid(
     keytab_filepath: str,
     principal_name: str,
 ) -> subprocess.CompletedProcess:
-    """
-    Check keytab validity
+    """Validates a Kerberos keytab file using kinit.
 
-    Parameters
-    ----------
-    keytab_filepath : str
-        Keytab linux filepath
-    principal_name : str
-        Keytab principal name
+    Args:
+        keytab_filepath (str): Path to the Kerberos keytab file.
+        principal_name (str): Kerberos principal name associated with the keytab.
 
-    Returns
-    -------
-    subprocess.CompletedProcess
-        Subprocess object
+    Returns:
+        subprocess.CompletedProcess: Result of the kinit command execution containing:
+            - returncode: 0 if successful, non-zero if failed
+            - stdout: Standard output from the command
+            - stderr: Standard error from the command
+
+    Examples:
+        >>> result = keytab_valid("/path/to/keytab", "user@REALM.COM")
+        >>> result.returncode == 0  # True if keytab is valid
+        True
+
+    Note:
+        Requires a working Kerberos installation with kinit command available.
+        Logs the validation result using loguru logger.
     """
 
     output = subprocess.run(

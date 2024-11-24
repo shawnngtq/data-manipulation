@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.boto3_ &#8212; data_manipulation 0.44 documentation</title>
+    <title>data_manipulation.boto3_ &#8212; data_manipulation 0.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=7ce41efc"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
+    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.boto3_</a></li> 
       </ul>
@@ -50,34 +50,22 @@
     <span class="n">ses_client</span><span class="p">,</span>
     <span class="n">attachment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Send AWS SES email</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends an email using AWS SES service.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    sender : str</span>
-<span class="sd">        sender email</span>
-<span class="sd">    recipient : list</span>
-<span class="sd">        list of recipient emails</span>
-<span class="sd">    subject : str</span>
-<span class="sd">        email subject</span>
-<span class="sd">    body_text : str</span>
-<span class="sd">        email body</span>
-<span class="sd">    body_type : str</span>
-<span class="sd">        email body type</span>
-<span class="sd">    ses_client : _type_</span>
-<span class="sd">        aws ses client</span>
-<span class="sd">    attachment : str, optional</span>
-<span class="sd">        attachment path, by default None</span>
+<span class="sd">    Args:</span>
+<span class="sd">        sender (str): Sender&#39;s email address.</span>
+<span class="sd">        recipient (list): List of recipient email addresses.</span>
+<span class="sd">        subject (str): Email subject line.</span>
+<span class="sd">        body_text (str): Email body content.</span>
+<span class="sd">        body_type (str): MIME type of email body (e.g., &#39;plain&#39;, &#39;html&#39;).</span>
+<span class="sd">        ses_client: AWS SES client instance.</span>
+<span class="sd">        attachment (str, optional): Path to file to attach. Defaults to None.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    dict</span>
-<span class="sd">        aws ses client email response or none</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: AWS SES response dictionary if successful, None if failed.</span>
 
-<span class="sd">    Reference</span>
-<span class="sd">    ---------</span>
-<span class="sd">    - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_raw_email.html</span>
+<span class="sd">    Note:</span>
+<span class="sd">        Reference: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_raw_email.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">email.mime.application</span> <span class="kn">import</span> <span class="n">MIMEApplication</span>
     <span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
@@ -128,20 +116,25 @@
     <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">to_dateframe</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    List s3 bucket files</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lists all files in an S3 bucket.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    bucket : str</span>
-<span class="sd">        bucket name</span>
-<span class="sd">    to_dateframe : bool, optional</span>
-<span class="sd">        to convert to pandas dataframe, by default False</span>
+<span class="sd">    Args:</span>
+<span class="sd">        bucket (str): Name of the S3 bucket.</span>
+<span class="sd">        to_dateframe (bool, optional): Whether to return results as pandas DataFrame. Defaults to False.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list | pandas.DataFrame</span>
-<span class="sd">        default list, pandas.DataFrame if requested</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Union[list, pd.DataFrame]: List of file keys or DataFrame containing file keys.</span>
+<span class="sd">            If to_dateframe is True, returns DataFrame with &#39;key&#39; column.</span>
+<span class="sd">            If to_dateframe is False, returns list of file keys.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; files = list_s3_bucket_files(&#39;my-bucket&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; type(files)</span>
+<span class="sd">        &lt;class &#39;list&#39;&gt;</span>
+
+<span class="sd">        &gt;&gt;&gt; df = list_s3_bucket_files(&#39;my-bucket&#39;, to_dateframe=True)</span>
+<span class="sd">        &gt;&gt;&gt; type(df)</span>
+<span class="sd">        &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">import</span> <span class="nn">boto3</span>
@@ -176,7 +169,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -192,7 +185,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -201,14 +194,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.boto3_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

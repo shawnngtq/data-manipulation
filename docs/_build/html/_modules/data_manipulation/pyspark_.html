@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pyspark_ &#8212; data_manipulation 0.44 documentation</title>
+    <title>data_manipulation.pyspark_ &#8212; data_manipulation 0.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=7ce41efc"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
+    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark_</a></li> 
       </ul>
@@ -37,6 +37,7 @@
 <span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">multiprocessing</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">pyspark</span>
 
@@ -44,45 +45,39 @@
 <span class="c1"># CONFIG</span>
 <div class="viewcode-block" id="config_spark_local">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.config_spark_local">[docs]</a>
-<span class="k">def</span> <span class="nf">config_spark_local</span><span class="p">(</span><span class="n">autoset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Automatically configure Spark local or provide recommendation if not autoset. Reference https://towardsdatascience.com/basics-of-apache-spark-configuration-settings-ca4faff40d45</span>
+<span class="k">def</span> <span class="nf">config_spark_local</span><span class="p">(</span><span class="n">autoset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configures Spark for local execution with optimized settings based on system resources.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    autoset : bool</span>
-<span class="sd">        whether to automatically configure spark</span>
+<span class="sd">    Automatically calculates and sets optimal Spark configuration parameters based on:</span>
+<span class="sd">    - Available CPU cores</span>
+<span class="sd">    - System memory</span>
+<span class="sd">    - Executor allocation</span>
+<span class="sd">    - Memory distribution</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; config_spark_local()</span>
-<span class="sd">    Here is the  current computer specs ...</span>
-<span class="sd">    executor_per_node: 1</span>
-<span class="sd">    spark_executor_instances: 1</span>
-<span class="sd">    total_executor_memory: 30</span>
-<span class="sd">    spark_executor_memory: 27</span>
-<span class="sd">    memory_overhead: 3</span>
-<span class="sd">    spark_default_parallelism: 10</span>
-<span class="sd">    spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...</span>
-<span class="sd">    spark auto-configured ...</span>
-<span class="sd">    config_spark_local exited ...</span>
-<span class="sd">    &gt;&gt;&gt; config_spark_local(autoset=False)</span>
-<span class="sd">    Here is the  current computer specs ...</span>
-<span class="sd">    executor_per_node: 1</span>
-<span class="sd">    spark_executor_instances: 1</span>
-<span class="sd">    total_executor_memory: 30</span>
-<span class="sd">    spark_executor_memory: 27</span>
-<span class="sd">    memory_overhead: 3</span>
-<span class="sd">    spark_default_parallelism: 10</span>
-<span class="sd">    Here is the recommended command to execute:</span>
-<span class="sd">    &lt;BLANKLINE&gt;</span>
-<span class="sd">            spark = pyspark.sql.SparkSession.builder.master(&quot;local&quot;)             .config(&quot;spark.executor.cores&quot;, &quot;5&quot;)             .config(&quot;spark.driver.cores&quot;, &quot;5&quot;)             .config(&quot;spark.executor.instances&quot;, &quot;1&quot;)             .config(&quot;spark.executor.memory&quot;, &quot;27g&quot;)             .config(&quot;spark.driver.memory&quot;, &quot;27g&quot;)             .config(&quot;spark.executor.memoryOverhead&quot;, &quot;3g&quot;)             .config(&quot;spark.default.parallelism&quot;, &quot;10&quot;)             .config(&quot;spark.sql.shuffle.partitions&quot;, &quot;10&quot;)             .getOrCreate()</span>
-<span class="sd">    &lt;BLANKLINE&gt;</span>
-<span class="sd">    config_spark_local exited ...</span>
+<span class="sd">    Args:</span>
+<span class="sd">        autoset (bool, optional): Whether to automatically apply the configuration.</span>
+<span class="sd">            If False, only prints recommended settings. Defaults to True.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; config_spark_local()</span>
+<span class="sd">        Here is the current computer specs ...</span>
+<span class="sd">        executor_per_node: 1</span>
+<span class="sd">        spark_executor_instances: 1</span>
+<span class="sd">        total_executor_memory: 30</span>
+<span class="sd">        spark_executor_memory: 27</span>
+<span class="sd">        memory_overhead: 3</span>
+<span class="sd">        spark_default_parallelism: 10</span>
+<span class="sd">        spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...</span>
+<span class="sd">        spark auto-configured ...</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Configuration includes:</span>
+<span class="sd">        - Executor cores and memory</span>
+<span class="sd">        - Driver cores and memory</span>
+<span class="sd">        - Memory overhead</span>
+<span class="sd">        - Default parallelism</span>
+<span class="sd">        - Shuffle partitions</span>
+<span class="sd">        - Arrow optimization for PySpark</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">round_down_or_one</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -158,22 +153,34 @@
 <span class="c1"># COLUMNS</span>
 <div class="viewcode-block" id="add_dummy_columns">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.add_dummy_columns">[docs]</a>
-<span class="k">def</span> <span class="nf">add_dummy_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return dataframe with additional given dummy column(s) and value</span>
+<span class="k">def</span> <span class="nf">add_dummy_columns</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds new columns with default values to a Spark DataFrame.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
-<span class="sd">    columns : list</span>
-<span class="sd">        List of column(s)</span>
-<span class="sd">    value : str</span>
-<span class="sd">        Default value of the new column(s)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        columns (List[str]): List of column names to add</span>
+<span class="sd">        value (str): Default value for the new columns</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    df : pyspark.sql.dataframe.DataFrame</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pyspark.sql.DataFrame: DataFrame with added columns</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If arguments are not of correct type</span>
+<span class="sd">            - dataframe must be a Spark DataFrame</span>
+<span class="sd">            - columns must be a list</span>
+<span class="sd">            - value must be a string</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(&quot;Alice&quot;, 1)], [&quot;name&quot;, &quot;id&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; new_df = add_dummy_columns(df, [&quot;age&quot;, &quot;city&quot;], &quot;unknown&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; new_df.show()</span>
+<span class="sd">        +-----+---+---+------+</span>
+<span class="sd">        | name| id|age|  city|</span>
+<span class="sd">        +-----+---+---+------+</span>
+<span class="sd">        |Alice|  1|unknown|unknown|</span>
+<span class="sd">        +-----+---+---+------+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
 
@@ -194,20 +201,24 @@
 
 <div class="viewcode-block" id="column_into_list">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.column_into_list">[docs]</a>
-<span class="k">def</span> <span class="nf">column_into_list</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return list from given dataframe&#39;s column, with possible duplicates</span>
+<span class="k">def</span> <span class="nf">column_into_list</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts values from a DataFrame column into a Python list.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
-<span class="sd">    column : str</span>
-<span class="sd">        Column in dataframe</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        column (str): Name of the column to extract</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list_ : []</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List[Any]: List containing all values from the specified column,</span>
+<span class="sd">            including duplicates</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If dataframe is not a Spark DataFrame or column is not a string</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(1,), (2,), (2,)], [&quot;value&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; column_into_list(df, &quot;value&quot;)</span>
+<span class="sd">        [1, 2, 2]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
@@ -222,20 +233,23 @@
 
 <div class="viewcode-block" id="column_into_set">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.column_into_set">[docs]</a>
-<span class="k">def</span> <span class="nf">column_into_set</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return normal set from given dataframe&#39;s column</span>
+<span class="k">def</span> <span class="nf">column_into_set</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts unique values from a DataFrame column into a Python set.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
-<span class="sd">    column : str</span>
-<span class="sd">        Column in dataframe</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        column (str): Name of the column to extract</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    set_ : {}</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Set[Any]: Set containing unique values from the specified column</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If dataframe is not a Spark DataFrame or column is not a string</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(1,), (2,), (2,)], [&quot;value&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; column_into_set(df, &quot;value&quot;)</span>
+<span class="sd">        {1, 2}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
@@ -249,20 +263,30 @@
 
 <div class="viewcode-block" id="columns_prefix">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.columns_prefix">[docs]</a>
-<span class="k">def</span> <span class="nf">columns_prefix</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return dataframe with renamed columns with given prefix</span>
+<span class="k">def</span> <span class="nf">columns_prefix</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a prefix to all column names in a DataFrame.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
-<span class="sd">    prefix : str</span>
-<span class="sd">        Prefix</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        prefix (str): Prefix to add to column names</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    df : pyspark.sql.dataframe.DataFrame</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pyspark.sql.DataFrame: DataFrame with renamed columns</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If dataframe is not a Spark DataFrame or prefix is not a string</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(&quot;Alice&quot;, 1)], [&quot;name&quot;, &quot;id&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; new_df = columns_prefix(df, &quot;user_&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; new_df.show()</span>
+<span class="sd">        +---------+-------+</span>
+<span class="sd">        |user_name|user_id|</span>
+<span class="sd">        +---------+-------+</span>
+<span class="sd">        |    Alice|      1|</span>
+<span class="sd">        +---------+-------+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
@@ -279,25 +303,40 @@
 
 <div class="viewcode-block" id="columns_statistics">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.columns_statistics">[docs]</a>
-<span class="k">def</span> <span class="nf">columns_statistics</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Display Spark dataframe columns&#39; statistics and return tuple of empty columns and single columns from given dataframe</span>
+<span class="k">def</span> <span class="nf">columns_statistics</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyzes column statistics and identifies empty and single-value columns.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
-<span class="sd">    n : int / float</span>
-<span class="sd">        Top n rows</span>
+<span class="sd">    Performs comprehensive analysis of each column including:</span>
+<span class="sd">    - Value counts</span>
+<span class="sd">    - Empty value detection</span>
+<span class="sd">    - Single value detection</span>
+<span class="sd">    - Basic statistics</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    empty_columns : list</span>
-<span class="sd">        List of empty columns</span>
-<span class="sd">    single_columns : list</span>
-<span class="sd">        List of single value columns</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        n (int, optional): Number of top values to display for each column.</span>
+<span class="sd">            Defaults to 10.</span>
 
-<span class="sd">    (empty_columns, single_columns)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple[List[str], List[str]]: Two lists containing:</span>
+<span class="sd">            - List of empty column names</span>
+<span class="sd">            - List of single-value column names</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If dataframe is not a Spark DataFrame</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([</span>
+<span class="sd">        ...     (&quot;Alice&quot;, None),</span>
+<span class="sd">        ...     (&quot;Alice&quot;, None)</span>
+<span class="sd">        ... ], [&quot;name&quot;, &quot;email&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; empty_cols, single_cols = columns_statistics(df)</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Empty columns: {empty_cols}&quot;)</span>
+<span class="sd">        Empty columns: [&#39;email&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; print(f&quot;Single value columns: {single_cols}&quot;)</span>
+<span class="sd">        Single value columns: [&#39;name&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
@@ -334,40 +373,30 @@
 <span class="c1"># DATAFRAME</span>
 <div class="viewcode-block" id="rename">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.rename">[docs]</a>
-<span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return dataframe with new renamed column(s)</span>
+<span class="k">def</span> <span class="nf">rename</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Renames multiple columns in a DataFrame using a mapping dictionary.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        One Spark dataframe</span>
-<span class="sd">    columns : dict</span>
-<span class="sd">        A dictionary {oldName: newName} of columns to rename</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        columns (Dict[str, str]): Dictionary mapping old column names to new names</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; l = [(&#39;Alice&#39;, 1)]</span>
-<span class="sd">    &gt;&gt;&gt; df = spark.createDataFrame(l)</span>
-<span class="sd">    &gt;&gt;&gt; df.show()</span>
-<span class="sd">    +-----+---+</span>
-<span class="sd">    |   _1| _2|</span>
-<span class="sd">    +-----+---+</span>
-<span class="sd">    |Alice|  1|</span>
-<span class="sd">    +-----+---+</span>
-<span class="sd">    &lt;BLANKLINE&gt;</span>
-<span class="sd">    &gt;&gt;&gt; df2 = rename(df, {&quot;_1&quot;: &quot;name&quot;, &quot;_2&quot;: &quot;id&quot;})</span>
-<span class="sd">    &gt;&gt;&gt; df2.show()</span>
-<span class="sd">    +-----+---+</span>
-<span class="sd">    | name| id|</span>
-<span class="sd">    +-----+---+</span>
-<span class="sd">    |Alice|  1|</span>
-<span class="sd">    +-----+---+</span>
-<span class="sd">    &lt;BLANKLINE&gt;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pyspark.sql.DataFrame: DataFrame with renamed columns</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    df : pyspark.sql.dataframe.DataFrame</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If dataframe is not a Spark DataFrame or columns is not a dict</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(&quot;Alice&quot;, 1)], [&quot;_1&quot;, &quot;_2&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; new_df = rename(df, {&quot;_1&quot;: &quot;name&quot;, &quot;_2&quot;: &quot;id&quot;})</span>
+<span class="sd">        &gt;&gt;&gt; new_df.show()</span>
+<span class="sd">        +-----+---+</span>
+<span class="sd">        | name| id|</span>
+<span class="sd">        +-----+---+</span>
+<span class="sd">        |Alice|  1|</span>
+<span class="sd">        +-----+---+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
 
@@ -386,18 +415,30 @@
 <span class="c1"># STATISTICS</span>
 <div class="viewcode-block" id="describe">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.describe">[docs]</a>
-<span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Display dataframe information similar to Pandas dataframe describe()</span>
+<span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints comprehensive information about a DataFrame.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
+<span class="sd">    Displays:</span>
+<span class="sd">    - DataFrame type</span>
+<span class="sd">    - Number of columns</span>
+<span class="sd">    - Number of rows</span>
+<span class="sd">    - Schema information</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    None</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If dataframe is not a Spark DataFrame</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(&quot;Alice&quot;, 1)], [&quot;name&quot;, &quot;id&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; describe(df)</span>
+<span class="sd">        The dataframe: &lt;class &#39;pyspark.sql.dataframe.DataFrame&#39;&gt;</span>
+<span class="sd">        Number of columns: 2</span>
+<span class="sd">        Number of rows: 1</span>
+<span class="sd">        root</span>
+<span class="sd">         |-- name: string (nullable = true)</span>
+<span class="sd">         |-- id: long (nullable = true)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
@@ -410,48 +451,39 @@
 
 <div class="viewcode-block" id="group_count">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pyspark_.group_count">[docs]</a>
-<span class="k">def</span> <span class="nf">group_count</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a dataframe group by column(s), sort in descending order, calculate count and percent</span>
+<span class="k">def</span> <span class="nf">group_count</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">n</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs group by operation and calculates count and percentage for each group.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataframe : pyspark.sql.dataframe.DataFrame</span>
-<span class="sd">        Spark dataframe</span>
-<span class="sd">    columns : str / list</span>
-<span class="sd">        List of column(s) to groupby</span>
-<span class="sd">    n : int / float</span>
-<span class="sd">        Top n rows</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
+<span class="sd">        columns (Union[str, List[str]]): Column(s) to group by</span>
+<span class="sd">        n (Union[int, float], optional): Number of top groups to return.</span>
+<span class="sd">            Use float(&#39;inf&#39;) for all groups. Defaults to 10.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; import pandas as pd</span>
-<span class="sd">    &gt;&gt;&gt; data = {&#39;id&#39;: [1, 1, 1, 2, 2, 3], &#39;value&#39;: [5, 2, 5, 2135, 124390, 213]}</span>
-<span class="sd">    &gt;&gt;&gt; df = spark.createDataFrame(pd.DataFrame(data))</span>
-<span class="sd">    &gt;&gt;&gt; group_count(df, [&quot;id&quot;]).show()</span>
-<span class="sd">    +---+-----+-------+</span>
-<span class="sd">    | id|count|percent|</span>
-<span class="sd">    +---+-----+-------+</span>
-<span class="sd">    |  1|    3|   50.0|</span>
-<span class="sd">    |  2|    2| 33.333|</span>
-<span class="sd">    |  3|    1| 16.667|</span>
-<span class="sd">    +---+-----+-------+</span>
-<span class="sd">    &lt;BLANKLINE&gt;</span>
-<span class="sd">    &gt;&gt;&gt; group_count(df, [&quot;id&quot;, &quot;value&quot;]).show()</span>
-<span class="sd">    +---+------+-----+-------+</span>
-<span class="sd">    | id| value|count|percent|</span>
-<span class="sd">    +---+------+-----+-------+</span>
-<span class="sd">    |  1|     5|    2| 33.333|</span>
-<span class="sd">    |  3|   213|    1| 16.667|</span>
-<span class="sd">    |  2|  2135|    1| 16.667|</span>
-<span class="sd">    |  1|     2|    1| 16.667|</span>
-<span class="sd">    |  2|124390|    1| 16.667|</span>
-<span class="sd">    +---+------+-----+-------+</span>
-<span class="sd">    &lt;BLANKLINE&gt;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pyspark.sql.DataFrame: DataFrame with columns:</span>
+<span class="sd">            - Group by column(s)</span>
+<span class="sd">            - count: Count of records in each group</span>
+<span class="sd">            - percent: Percentage of total records in each group</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    df : pyspark.sql.dataframe.DataFrame</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If arguments are not of correct type</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([</span>
+<span class="sd">        ...     (1, &#39;A&#39;), (1, &#39;B&#39;), (2, &#39;A&#39;)</span>
+<span class="sd">        ... ], [&quot;id&quot;, &quot;category&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; group_count(df, [&quot;id&quot;]).show()</span>
+<span class="sd">        +---+-----+-------+</span>
+<span class="sd">        | id|count|percent|</span>
+<span class="sd">        +---+-----+-------+</span>
+<span class="sd">        |  1|    2|   66.7|</span>
+<span class="sd">        |  2|    1|   33.3|</span>
+<span class="sd">        +---+-----+-------+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">pyspark.sql.functions</span> <span class="k">as</span> <span class="nn">F</span>
 
@@ -481,7 +513,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -497,7 +529,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -506,14 +538,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pyspark_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

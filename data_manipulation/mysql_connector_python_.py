@@ -8,30 +8,29 @@ def create_connection(
     dbname: str,
     user: str,
     password: str,
-    port=3306,
+    port: int = 3306,
 ):
-    """
-    Return MySQL connection
+    """Creates a connection to a MySQL database.
 
-    https://github.com/mysql/mysql-connector-python
+    Args:
+        host (str): Database host address.
+        dbname (str): Database name to connect to.
+        user (str): Username for authentication.
+        password (str): Password for authentication.
+        port (int, optional): Database port number. Defaults to 3306.
 
-    Parameters
-    ----------
-    host : str
-        Database host address
-    dbname : str
-        Database name
-    user : str
-        User used to authenticate
-    password : str
-        Password used to authenticate
-    port : int, optional
-        Connection port number, by default 3306
+    Returns:
+        mysql.connector.connection_cext.CMySQLConnection: Database connection object if successful,
+            None if connection fails.
 
-    Returns
-    -------
-    mysql.connector.connection_cext.CMySQLConnection
-        Connection object
+    Examples:
+        >>> conn = create_connection("localhost", "mydb", "user", "password")
+        >>> isinstance(conn, mysql.connector.connection_cext.CMySQLConnection)
+        True
+
+    Note:
+        Requires mysql-connector-python package.
+        Connection failures are logged using loguru logger.
     """
     import mysql.connector
 
@@ -54,26 +53,29 @@ def execute_query(
     connection,
     sql_query: str,
     data: Union[dict, tuple],
-    commit=True,
+    commit: bool = True,
 ) -> Optional[int]:
-    """
-    Execute and commit MySQL query
+    """Executes a MySQL query with parameters.
 
-    Parameters
-    ----------
-    connection : mysql.connector.connection_cext.CMySQLConnection
-        mysql connection class
-    sql_query : str
-        SQL query
-    data : Union[dict, tuple]
-        _description_
-    commit : bool, optional
-        Make database change persistent, by default True
+    Args:
+        connection (mysql.connector.connection_cext.CMySQLConnection): Active MySQL connection.
+        sql_query (str): SQL query to execute.
+        data (Union[dict, tuple]): Parameters for the SQL query.
+        commit (bool, optional): Whether to commit the transaction. Defaults to True.
 
-    Returns
-    -------
-    Optional[int]
-        Query id should be int
+    Returns:
+        Optional[int]: Last inserted row ID if successful and query was an insert,
+            None if query fails or no insert ID is available.
+
+    Examples:
+        >>> conn = create_connection(...)
+        >>> query = "INSERT INTO users (name) VALUES (%(name)s)"
+        >>> execute_query(conn, query, {"name": "John"})
+        1  # Returns the new user's ID
+
+    Note:
+        Automatically commits transaction if commit=True.
+        Query failures are logged using loguru logger.
     """
     import mysql.connector
 

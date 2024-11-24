@@ -12,34 +12,22 @@ def send_aws_ses_email(
     ses_client,
     attachment: str = None,
 ):
-    """
-    Send AWS SES email
+    """Sends an email using AWS SES service.
 
-    Parameters
-    ----------
-    sender : str
-        sender email
-    recipient : list
-        list of recipient emails
-    subject : str
-        email subject
-    body_text : str
-        email body
-    body_type : str
-        email body type
-    ses_client : _type_
-        aws ses client
-    attachment : str, optional
-        attachment path, by default None
+    Args:
+        sender (str): Sender's email address.
+        recipient (list): List of recipient email addresses.
+        subject (str): Email subject line.
+        body_text (str): Email body content.
+        body_type (str): MIME type of email body (e.g., 'plain', 'html').
+        ses_client: AWS SES client instance.
+        attachment (str, optional): Path to file to attach. Defaults to None.
 
-    Returns
-    -------
-    dict
-        aws ses client email response or none
+    Returns:
+        dict: AWS SES response dictionary if successful, None if failed.
 
-    Reference
-    ---------
-    - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_raw_email.html
+    Note:
+        Reference: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses/client/send_raw_email.html
     """
     from email.mime.application import MIMEApplication
     from email.mime.multipart import MIMEMultipart
@@ -87,20 +75,25 @@ def list_s3_bucket_files(
     bucket: str,
     to_dateframe: bool = False,
 ):
-    """
-    List s3 bucket files
+    """Lists all files in an S3 bucket.
 
-    Parameters
-    ----------
-    bucket : str
-        bucket name
-    to_dateframe : bool, optional
-        to convert to pandas dataframe, by default False
+    Args:
+        bucket (str): Name of the S3 bucket.
+        to_dateframe (bool, optional): Whether to return results as pandas DataFrame. Defaults to False.
 
-    Returns
-    -------
-    list | pandas.DataFrame
-        default list, pandas.DataFrame if requested
+    Returns:
+        Union[list, pd.DataFrame]: List of file keys or DataFrame containing file keys.
+            If to_dateframe is True, returns DataFrame with 'key' column.
+            If to_dateframe is False, returns list of file keys.
+
+    Examples:
+        >>> files = list_s3_bucket_files('my-bucket')
+        >>> type(files)
+        <class 'list'>
+
+        >>> df = list_s3_bucket_files('my-bucket', to_dateframe=True)
+        >>> type(df)
+        <class 'pandas.core.frame.DataFrame'>
     """
 
     import boto3

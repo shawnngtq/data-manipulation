@@ -8,30 +8,38 @@ def create_sqlalchemy_url(
     dbname: str,
     user: str,
     password: str,
-    port=3306,
+    port: int = 3306,
 ) -> sqlalchemy.engine.url.URL:
-    """
-    Create sqlalchemy url
+    """Creates a SQLAlchemy URL object for database connection.
 
-    Parameters
-    ----------
-    drivername : str
-        firebird+kinterbasdb, mssql+pyodbc, mysql+mysqlconnector, mysql+pymysql, oracle+cx_oracle, postgresql+psycopg2, sapdb+pysapdb, sqlite3, teradata+pytds
-    host : str
-        Database host address
-    dbname : str
-        Database name
-    user : str
-        User used to authenticate
-    password : str
-        Password used to authenticate
-    port : int, optional
-        Connection port number, by default 3306
+    Args:
+        drivername (str): Database driver name. Supported options include:
+            - 'mysql+mysqlconnector'
+            - 'mysql+pymysql'
+            - 'postgresql+psycopg2'
+            - 'mssql+pyodbc'
+            - 'oracle+cx_oracle'
+            - 'sqlite3'
+        host (str): Database server hostname or IP address
+        dbname (str): Name of the target database
+        user (str): Database username for authentication
+        password (str): Database password for authentication
+        port (int, optional): Database server port number. Defaults to 3306.
 
-    Returns
-    -------
-    sqlalchemy.engine.url.URL
-        url object
+    Returns:
+        sqlalchemy.engine.url.URL: Configured URL object for database connection
+
+    Examples:
+        >>> url = create_sqlalchemy_url(
+        ...     drivername='postgresql+psycopg2',
+        ...     host='localhost',
+        ...     dbname='mydb',
+        ...     user='admin',
+        ...     password='secret',
+        ...     port=5432
+        ... )
+        >>> str(url)
+        'postgresql+psycopg2://admin:secret@localhost:5432/mydb'
     """
     url = sqlalchemy.engine.url.URL.create(
         drivername=drivername,
@@ -50,30 +58,46 @@ def create_sqlalchemy_engine(
     dbname: str,
     user: str,
     password: str,
-    port=3306,
+    port: int = 3306,
 ) -> sqlalchemy.engine.base.Engine:
-    """
-    Create SQLalchemy engine
+    """Creates and tests a SQLAlchemy engine for database operations.
 
-    Parameters
-    ----------
-    drivername : str
-        firebird+kinterbasdb, mssql+pyodbc, mysql+mysqlconnector, mysql+pymysql, oracle+cx_oracle, postgresql+psycopg2, sapdb+pysapdb, sqlite3, teradata+pytds
-    host : str
-        Database host address
-    dbname : str
-        Database name
-    user : str
-        User used to authenticate
-    password : str
-        Password used to authenticate
-    port : int, optional
-        Connection port number, by default 3306
+    Args:
+        drivername (str): Database driver name. Supported options include:
+            - 'mysql+mysqlconnector'
+            - 'mysql+pymysql'
+            - 'postgresql+psycopg2'
+            - 'mssql+pyodbc'
+            - 'oracle+cx_oracle'
+            - 'sqlite3'
+        host (str): Database server hostname or IP address
+        dbname (str): Name of the target database
+        user (str): Database username for authentication
+        password (str): Database password for authentication
+        port (int, optional): Database server port number. Defaults to 3306.
 
-    Returns
-    -------
-    sqlalchemy.engine.base.Engine
-        engine object
+    Returns:
+        sqlalchemy.engine.base.Engine: Configured database engine object
+
+    Raises:
+        sqlalchemy.exc.SQLAlchemyError: If engine creation or connection test fails
+
+    Examples:
+        >>> engine = create_sqlalchemy_engine(
+        ...     drivername='postgresql+psycopg2',
+        ...     host='localhost',
+        ...     dbname='mydb',
+        ...     user='admin',
+        ...     password='secret',
+        ...     port=5432
+        ... )
+        # Logs "create_sqlalchemy_engine: True" on success
+        # or "create_sqlalchemy_engine: False (error_message)" on failure
+
+    Note:
+        The function automatically tests the connection upon creation and logs
+        the result using loguru. A successful connection will be logged as info,
+        while failures will be logged as errors with the specific exception message.
     """
     url = create_sqlalchemy_url(
         drivername=drivername,

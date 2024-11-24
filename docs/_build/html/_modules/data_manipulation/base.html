@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.base &#8212; data_manipulation 0.44 documentation</title>
+    <title>data_manipulation.base &#8212; data_manipulation 0.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
-    <script src="../../_static/documentation_options.js?v=7ce41efc"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
+    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
       </ul>
@@ -49,33 +49,25 @@
 <span class="k">def</span> <span class="nf">clean_string</span><span class="p">(</span>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">remove_parenthesis</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">remove_brackets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return given string that is strip, uppercase without multiple whitespaces. Optionally, remove parenthesis and brackets. Note that tab, newline, whitespace will be removed</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cleans and standardizes input string.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    string : str</span>
-<span class="sd">        String to clean</span>
-<span class="sd">    remove_parenthesis : bool, optional</span>
-<span class="sd">        To remove parenthesis, by default False</span>
-<span class="sd">    remove_brackets : bool, optional</span>
-<span class="sd">        To remove brackets, by default False</span>
+<span class="sd">    Args:</span>
+<span class="sd">        string (str): String to clean.</span>
+<span class="sd">        remove_parenthesis (bool, optional): Whether to remove content within parentheses. Defaults to False.</span>
+<span class="sd">        remove_brackets (bool, optional): Whether to remove content within square brackets. Defaults to False.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; clean_string(&quot; sHawn  tesT &quot;)</span>
-<span class="sd">    &#39;SHAWN TEST&#39;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;)</span>
-<span class="sd">    &#39;SHAWN ( TE ST )&#39;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;, remove_parenthesis=True)</span>
-<span class="sd">    &#39;SHAWN&#39;</span>
-<span class="sd">    &gt;&gt;&gt; clean_string(&quot;shawn [ te  st ]&quot;, remove_brackets=True)</span>
-<span class="sd">    &#39;SHAWN&#39;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Uppercase cleaned string with standardized spacing.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        Uppercase cleaned string</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; clean_string(&quot; sHawn  tesT &quot;)</span>
+<span class="sd">        &#39;SHAWN TEST&#39;</span>
+<span class="sd">        &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;)</span>
+<span class="sd">        &#39;SHAWN ( TE ST )&#39;</span>
+<span class="sd">        &gt;&gt;&gt; clean_string(&quot;shawn ( te  st )&quot;, remove_parenthesis=True)</span>
+<span class="sd">        &#39;SHAWN&#39;</span>
+<span class="sd">        &gt;&gt;&gt; clean_string(&quot;shawn [ te  st ]&quot;, remove_brackets=True)</span>
+<span class="sd">        &#39;SHAWN&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">remove_parenthesis</span><span class="p">:</span>
@@ -92,23 +84,17 @@
 <div class="viewcode-block" id="get_string_case_combination">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_string_case_combination">[docs]</a>
 <span class="k">def</span> <span class="nf">get_string_case_combination</span><span class="p">(</span><span class="n">str_</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get list of case combination of a string. Reference: https://stackoverflow.com/questions/11144389/find-all-upper-lower-and-mixed-case-combinations-of-a-string</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates all possible case combinations of a string.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    str_ : str</span>
-<span class="sd">        Input string</span>
+<span class="sd">    Args:</span>
+<span class="sd">        str_ (str): Input string to generate combinations for.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_string_case_combination(&quot;abc&quot;)</span>
-<span class="sd">    [&#39;ABC&#39;, &#39;ABc&#39;, &#39;AbC&#39;, &#39;Abc&#39;, &#39;aBC&#39;, &#39;aBc&#39;, &#39;abC&#39;, &#39;abc&#39;]</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of all possible case combinations.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list</span>
-<span class="sd">        Case combinations</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; get_string_case_combination(&quot;abc&quot;)</span>
+<span class="sd">        [&#39;ABC&#39;, &#39;ABc&#39;, &#39;AbC&#39;, &#39;Abc&#39;, &#39;aBC&#39;, &#39;aBc&#39;, &#39;abC&#39;, &#39;abc&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">,</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="n">str_</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">str_</span><span class="o">.</span><span class="n">lower</span><span class="p">()))))</span></div>
@@ -118,18 +104,14 @@
 <div class="viewcode-block" id="get_none_variation">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_none_variation">[docs]</a>
 <span class="k">def</span> <span class="nf">get_none_variation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get List of none variation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a list of common variations of None/null values.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_none_variation()</span>
-<span class="sd">    [None, &#39;NONE&#39;, &#39;NONe&#39;, &#39;NOnE&#39;, &#39;NOne&#39;, &#39;NoNE&#39;, &#39;NoNe&#39;, &#39;NonE&#39;, &#39;None&#39;, &#39;nONE&#39;, &#39;nONe&#39;, &#39;nOnE&#39;, &#39;nOne&#39;, &#39;noNE&#39;, &#39;noNe&#39;, &#39;nonE&#39;, &#39;none&#39;, &#39;NULL&#39;, &#39;NULl&#39;, &#39;NUlL&#39;, &#39;NUll&#39;, &#39;NuLL&#39;, &#39;NuLl&#39;, &#39;NulL&#39;, &#39;Null&#39;, &#39;nULL&#39;, &#39;nULl&#39;, &#39;nUlL&#39;, &#39;nUll&#39;, &#39;nuLL&#39;, &#39;nuLl&#39;, &#39;nulL&#39;, &#39;null&#39;, &#39;NA&#39;, &#39;Na&#39;, &#39;nA&#39;, &#39;na&#39;, &#39;N.A&#39;, &#39;N.a&#39;, &#39;N.A&#39;, &#39;N.a&#39;, &#39;n.A&#39;, &#39;n.a&#39;, &#39;n.A&#39;, &#39;n.a&#39;, &#39;N.A.&#39;, &#39;N.A.&#39;, &#39;N.a.&#39;, &#39;N.a.&#39;, &#39;N.A.&#39;, &#39;N.A.&#39;, &#39;N.a.&#39;, &#39;N.a.&#39;, &#39;n.A.&#39;, &#39;n.A.&#39;, &#39;n.a.&#39;, &#39;n.a.&#39;, &#39;n.A.&#39;, &#39;n.A.&#39;, &#39;n.a.&#39;, &#39;n.a.&#39;, &#39;NAN&#39;, &#39;NAn&#39;, &#39;NaN&#39;, &#39;Nan&#39;, &#39;nAN&#39;, &#39;nAn&#39;, &#39;naN&#39;, &#39;nan&#39;, &#39;NIL&#39;, &#39;NIl&#39;, &#39;NiL&#39;, &#39;Nil&#39;, &#39;nIL&#39;, &#39;nIl&#39;, &#39;niL&#39;, &#39;nil&#39;]</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List containing None and various string representations of null values.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list</span>
-<span class="sd">        None variation</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; get_none_variation()</span>
+<span class="sd">        [None, &#39;NONE&#39;, &#39;NONe&#39;, &#39;NOnE&#39;, &#39;NOne&#39;, &#39;NoNE&#39;, &#39;NoNe&#39;, &#39;NonE&#39;, &#39;None&#39;, &#39;nONE&#39;, &#39;nONe&#39;, &#39;nOnE&#39;, &#39;nOne&#39;, &#39;noNE&#39;, &#39;noNe&#39;, &#39;nonE&#39;, &#39;none&#39;, &#39;NULL&#39;, &#39;NULl&#39;, &#39;NUlL&#39;, &#39;NUll&#39;, &#39;NuLL&#39;, &#39;NuLl&#39;, &#39;NulL&#39;, &#39;Null&#39;, &#39;nULL&#39;, &#39;nULl&#39;, &#39;nUlL&#39;, &#39;nUll&#39;, &#39;nuLL&#39;, &#39;nuLl&#39;, &#39;nulL&#39;, &#39;null&#39;, &#39;NA&#39;, &#39;Na&#39;, &#39;nA&#39;, &#39;na&#39;, &#39;N.A&#39;, &#39;N.a&#39;, &#39;N.A&#39;, &#39;N.a&#39;, &#39;n.A&#39;, &#39;n.a&#39;, &#39;n.A&#39;, &#39;n.a&#39;, &#39;N.A.&#39;, &#39;N.A.&#39;, &#39;N.a.&#39;, &#39;N.a.&#39;, &#39;N.A.&#39;, &#39;N.A.&#39;, &#39;N.a.&#39;, &#39;N.a.&#39;, &#39;n.A.&#39;, &#39;n.A.&#39;, &#39;n.a.&#39;, &#39;n.a.&#39;, &#39;n.A.&#39;, &#39;n.A.&#39;, &#39;n.a.&#39;, &#39;n.a.&#39;, &#39;NAN&#39;, &#39;NAn&#39;, &#39;NaN&#39;, &#39;Nan&#39;, &#39;nAN&#39;, &#39;nAn&#39;, &#39;naN&#39;, &#39;nan&#39;, &#39;NIL&#39;, &#39;NIl&#39;, &#39;NiL&#39;, &#39;Nil&#39;, &#39;nIL&#39;, &#39;nIl&#39;, &#39;niL&#39;, &#39;nil&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">variations</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
@@ -148,6 +130,11 @@
 <div class="viewcode-block" id="get_country_name_variation">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_country_name_variation">[docs]</a>
 <span class="k">def</span> <span class="nf">get_country_name_variation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a dictionary mapping country names to their codes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with country names as keys and country codes as values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">variations</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;AFRICA&quot;</span><span class="p">:</span> <span class="s2">&quot;BW&quot;</span><span class="p">,</span>
         <span class="s2">&quot;BOSNIA&quot;</span><span class="p">:</span> <span class="s2">&quot;BA&quot;</span><span class="p">,</span>
@@ -169,6 +156,11 @@
 <div class="viewcode-block" id="get_country_code_variation">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_country_code_variation">[docs]</a>
 <span class="k">def</span> <span class="nf">get_country_code_variation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a dictionary mapping country codes to their name variations.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with country codes as keys and lists of country name variations as values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">variations</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;BA&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;BOSNIA&quot;</span><span class="p">],</span>
         <span class="s2">&quot;BW&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;AFRICA&quot;</span><span class="p">],</span>
@@ -188,36 +180,22 @@
 <div class="viewcode-block" id="list_tuple_without_none">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_tuple_without_none">[docs]</a>
 <span class="k">def</span> <span class="nf">list_tuple_without_none</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return the given list / tuple without None variation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes None variations from a list or tuple.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    list_tuple : list | tuple</span>
-<span class="sd">        Standard list or tuple</span>
+<span class="sd">    Args:</span>
+<span class="sd">        list_tuple (list | tuple): Input list or tuple to clean.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; list_tuple_without_none([&quot;a&quot;, &quot;none&quot;])</span>
-<span class="sd">    [&#39;a&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; list_tuple_without_none((&quot;a&quot;, &quot;none&quot;))</span>
-<span class="sd">    (&#39;a&#39;,)</span>
-<span class="sd">    &gt;&gt;&gt; list_tuple_without_none(get_none_variation())</span>
-<span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; list_tuple_without_none([&quot;a&quot;, &quot;none&quot;, &quot;&quot;])</span>
-<span class="sd">    [&#39;a&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; list_tuple_without_none((&quot;a&quot;, &quot;none&quot;, &quot;&quot;))</span>
-<span class="sd">    (&#39;a&#39;,)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list | tuple: List or tuple with None variations removed.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list | tuple</span>
-<span class="sd">        List without none variation</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If input is not a list or tuple.</span>
 
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    TypeError</span>
-<span class="sd">        Only list or tuple datatypes</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; list_tuple_without_none([&quot;a&quot;, &quot;none&quot;])</span>
+<span class="sd">        [&#39;a&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; list_tuple_without_none((&quot;a&quot;, &quot;none&quot;))</span>
+<span class="sd">        (&#39;a&#39;,)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">none_variations</span> <span class="o">=</span> <span class="n">get_none_variation</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -233,37 +211,21 @@
 <div class="viewcode-block" id="string_boolean_to_int">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_boolean_to_int">[docs]</a>
 <span class="k">def</span> <span class="nf">string_boolean_to_int</span><span class="p">(</span><span class="n">boolean_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    DEPRECATED from python 3.12 onwards</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts string boolean representations to integers.</span>
 
-<span class="sd">    Return integer from given string boolean. 1 instead of &quot;true&quot;/&quot;True&quot;/&quot;1&quot;. Reference from https://docs.python.org/3/distutils/apiref.html#distutils.util.strtobool</span>
+<span class="sd">    Deprecated: Will be removed in Python 3.12+</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    boolean_str_rep : str</span>
-<span class="sd">        String representation of boolean</span>
+<span class="sd">    Args:</span>
+<span class="sd">        boolean_str_rep (str): String representation of boolean value.</span>
 
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    Do not use eval() as it&#39;s unsafe</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        int: 1 for true values, 0 for false values.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;true&quot;)</span>
-<span class="sd">    1</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;True&quot;)</span>
-<span class="sd">    1</span>
-<span class="sd">    &gt;&gt;&gt; string_boolean_to_int(&quot;1&quot;)</span>
-<span class="sd">    1</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    int</span>
-<span class="sd">        _description_</span>
-
-<span class="sd">    Reference</span>
-<span class="sd">    ---------</span>
-<span class="sd">    - https://docs.python.org/3.10/library/distutils.html</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; string_boolean_to_int(&quot;true&quot;)</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; string_boolean_to_int(&quot;True&quot;)</span>
+<span class="sd">        1</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">distutils.util</span> <span class="kn">import</span> <span class="n">strtobool</span>
 
@@ -275,33 +237,21 @@
 <div class="viewcode-block" id="string_dlt_to_dlt">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_dlt_to_dlt">[docs]</a>
 <span class="k">def</span> <span class="nf">string_dlt_to_dlt</span><span class="p">(</span><span class="n">dlt_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return dictionary/list/tuple from given string representation of dictionary/list/tuple</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts string representation of data structures to actual Python objects.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dlt_str_rep : str</span>
-<span class="sd">        String representation of dictionary/list/tuple</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dlt_str_rep (str): String representation of dictionary/list/tuple.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[1, 2, 3]&quot;)</span>
-<span class="sd">    [1, 2, 3]</span>
-<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[]&quot;)</span>
-<span class="sd">    []</span>
-<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]&quot;)</span>
-<span class="sd">    [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;)</span>
-<span class="sd">    {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
-<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}&quot;)</span>
-<span class="sd">    {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;2&#39;}</span>
-<span class="sd">    &gt;&gt;&gt; string_dlt_to_dlt(&quot;(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)&quot;)</span>
-<span class="sd">    (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict | list | tuple: Converted Python data structure.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    dict | list | tuple</span>
-<span class="sd">        _description_</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; string_dlt_to_dlt(&quot;[1, 2, 3]&quot;)</span>
+<span class="sd">        [1, 2, 3]</span>
+<span class="sd">        &gt;&gt;&gt; string_dlt_to_dlt(&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;)</span>
+<span class="sd">        {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+<span class="sd">        &gt;&gt;&gt; string_dlt_to_dlt(&quot;(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)&quot;)</span>
+<span class="sd">        (&#39;1&#39;, &#39;2&#39;, &#39;3&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
 
@@ -313,29 +263,19 @@
 <div class="viewcode-block" id="string_str_to_str">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.string_str_to_str">[docs]</a>
 <span class="k">def</span> <span class="nf">string_str_to_str</span><span class="p">(</span><span class="n">string_str_rep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return string from given string representation of string</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts string representation to a clean string by removing quotes.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    string_str_rep : str</span>
-<span class="sd">        String representation of string</span>
+<span class="sd">    Args:</span>
+<span class="sd">        string_str_rep (str): String representation to clean.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; string_str_to_str(&quot;&quot;)</span>
-<span class="sd">    &#39;&#39;</span>
-<span class="sd">    &gt;&gt;&gt; string_str_to_str(&#39;test&#39;)</span>
-<span class="sd">    &#39;test&#39;</span>
-<span class="sd">    &gt;&gt;&gt; string_str_to_str(&quot;&#39;test&#39;&quot;)</span>
-<span class="sd">    &#39;test&#39;</span>
-<span class="sd">    &gt;&gt;&gt; string_str_to_str(&#39;&quot;test&quot;&#39;)</span>
-<span class="sd">    &#39;test&#39;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Cleaned string with outer quotes removed.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        _description_</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; string_str_to_str(&quot;&#39;test&#39;&quot;)</span>
+<span class="sd">        &#39;test&#39;</span>
+<span class="sd">        &gt;&gt;&gt; string_str_to_str(&#39;&quot;test&quot;&#39;)</span>
+<span class="sd">        &#39;test&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">str_</span> <span class="o">=</span> <span class="n">string_str_rep</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">str_</span></div>
@@ -345,22 +285,17 @@
 <div class="viewcode-block" id="delete_list_indices">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.delete_list_indices">[docs]</a>
 <span class="k">def</span> <span class="nf">delete_list_indices</span><span class="p">(</span><span class="n">list_</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Delete multiple indices in a list</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deletes multiple indices from a list in-place.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    list_ : list</span>
-<span class="sd">        Original list</span>
-<span class="sd">    indices : list</span>
-<span class="sd">        List of indices to delete</span>
+<span class="sd">    Args:</span>
+<span class="sd">        list_ (list): Original list to modify.</span>
+<span class="sd">        indices (list): List of indices to delete.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; values = [0, 1, 2, 3, 4]</span>
-<span class="sd">    &gt;&gt;&gt; delete_list_indices(values, [1, 3])</span>
-<span class="sd">    &gt;&gt;&gt; values</span>
-<span class="sd">    [0, 2, 4]</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; values = [0, 1, 2, 3, 4]</span>
+<span class="sd">        &gt;&gt;&gt; delete_list_indices(values, [1, 3])</span>
+<span class="sd">        &gt;&gt;&gt; values</span>
+<span class="sd">        [0, 2, 4]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">del</span> <span class="n">list_</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
@@ -371,25 +306,18 @@
 <div class="viewcode-block" id="get_path_files">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.get_path_files">[docs]</a>
 <span class="k">def</span> <span class="nf">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return sorted list of files from given path and keywords</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns sorted list of files from given path that contain specified keywords.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    path : str</span>
-<span class="sd">        File path</span>
-<span class="sd">    keywords : list</span>
-<span class="sd">        List of keywords</span>
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Directory path to search.</span>
+<span class="sd">        keywords (list): List of keywords to match in filenames.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_path_files(&quot;test_base_folder&quot;, [&quot;py&quot;])</span>
-<span class="sd">    [&#39;test1.py&#39;, &#39;test2.py&#39;, &#39;test3.py&#39;, &#39;test4.py&#39;, &#39;test5.py&#39;]</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list: Sorted list of matching filenames.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list</span>
-<span class="sd">        Sorted list</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; get_path_files(&quot;test_base_folder&quot;, [&quot;py&quot;])</span>
+<span class="sd">        [&#39;test1.py&#39;, &#39;test2.py&#39;, &#39;test3.py&#39;, &#39;test4.py&#39;, &#39;test5.py&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">list_</span> <span class="o">=</span> <span class="p">[]</span>
@@ -403,28 +331,15 @@
 <div class="viewcode-block" id="remove_path_file">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.remove_path_file">[docs]</a>
 <span class="k">def</span> <span class="nf">remove_path_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Remove n oldest files from given path and keyword</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes all but the n newest files matching the keyword from the specified path.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    path : str</span>
-<span class="sd">        Directory path</span>
-<span class="sd">    keyword : str</span>
-<span class="sd">        Keyword</span>
-<span class="sd">    n : int, optional</span>
-<span class="sd">        Keep latest n files, by default 2</span>
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Directory path.</span>
+<span class="sd">        keyword (str): Keyword to match in filenames.</span>
+<span class="sd">        n (int, optional): Number of newest files to keep. Defaults to 2.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; get_path_files(&quot;test_base_folder&quot;, [&quot;py&quot;])</span>
-<span class="sd">    [&#39;test1.py&#39;, &#39;test2.py&#39;, &#39;test3.py&#39;, &#39;test4.py&#39;, &#39;test5.py&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; remove_path_file(&quot;test_base_folder&quot;, &quot;.py&quot;)</span>
-<span class="sd">    test_base_folder/test1.py deleted ...</span>
-<span class="sd">    test_base_folder/test2.py deleted ...</span>
-<span class="sd">    test_base_folder/test3.py deleted ...</span>
-<span class="sd">    &gt;&gt;&gt; get_path_files(&quot;test_base_folder&quot;, [&quot;py&quot;])</span>
-<span class="sd">    [&#39;test4.py&#39;, &#39;test5.py&#39;]</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; remove_path_file(&quot;test_base_folder&quot;, &quot;.py&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">to_delete</span> <span class="o">=</span> <span class="n">get_path_files</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">keywords</span><span class="o">=</span><span class="p">[</span><span class="n">keyword</span><span class="p">])[:</span><span class="o">-</span><span class="n">n</span><span class="p">]</span>
@@ -437,21 +352,15 @@
 <div class="viewcode-block" id="list_to_file">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.list_to_file">[docs]</a>
 <span class="k">def</span> <span class="nf">list_to_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">list_</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">newline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Export list to file</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes list contents to a file.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    filepath : str</span>
-<span class="sd">        Filepath</span>
-<span class="sd">    list_ : list</span>
-<span class="sd">        List of values</span>
-<span class="sd">    newline : bool, optional</span>
-<span class="sd">        Add newline to end of file, by default True</span>
+<span class="sd">    Args:</span>
+<span class="sd">        filepath (str): Path to output file.</span>
+<span class="sd">        list_ (list): List of values to write.</span>
+<span class="sd">        newline (bool, optional): Whether to add newline after each item. Defaults to True.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; list_to_file(&quot;test.txt&quot;, [1, 2, 3])</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; list_to_file(&quot;test.txt&quot;, [1, 2, 3])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">list_</span><span class="p">:</span>
@@ -466,20 +375,14 @@
 <div class="viewcode-block" id="create_encode_url">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.create_encode_url">[docs]</a>
 <span class="k">def</span> <span class="nf">create_encode_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">query_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create encoded url</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates an encoded URL with query parameters.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    url : str</span>
-<span class="sd">        base url</span>
-<span class="sd">    query_params : dict, optional</span>
-<span class="sd">        dictionary of url query parameters, by default {}</span>
+<span class="sd">    Args:</span>
+<span class="sd">        url (str): Base URL.</span>
+<span class="sd">        query_params (dict, optional): Dictionary of URL query parameters. Defaults to {}.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    str</span>
-<span class="sd">        encoded url</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Encoded URL with query parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
 
@@ -491,22 +394,16 @@
 <div class="viewcode-block" id="parse_ps_aux">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.base.parse_ps_aux">[docs]</a>
 <span class="k">def</span> <span class="nf">parse_ps_aux</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">list</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parse linux ps aux related-command to list of lists</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses Linux ps aux command output into a list of records.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    ps_aux_commands : str</span>
-<span class="sd">        Linux ps aux</span>
+<span class="sd">    Args:</span>
+<span class="sd">        ps_aux_commands (str): Linux ps aux command string.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; # parse_ps_aux(&quot;ps aux | egrep -i &#39;%cpu|anaconda3&#39; | head&quot;)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        List[list]: List of lists, where each inner list represents a process record.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    List[list]</span>
-<span class="sd">        Each list represent a record</span>
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; # parse_ps_aux(&quot;ps aux | egrep -i &#39;%cpu|anaconda3&#39; | head&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
         <span class="n">ps_aux_commands</span><span class="p">,</span>
@@ -560,7 +457,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
 <search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
@@ -576,7 +473,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -585,14 +482,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.44 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.base</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

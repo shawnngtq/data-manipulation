@@ -5,24 +5,21 @@ from loguru import logger
 
 
 def preprocess(html: str) -> Optional[str]:
-    """
-    Remove whitespaces and newline characters. Reference: https://stackoverflow.com/questions/23241641/how-to-ignore-empty-lines-while-using-next-sibling-in-beautifulsoup4-in-python
+    """Removes whitespaces and newline characters from HTML string.
 
-    Parameters
-    ----------
-    html : str
-        html to be cleared
+    Args:
+        html (str): HTML string to be cleaned.
 
-    Examples
-    --------
-    >>> a = "<html>   <p> Something </p>    </html> "
-    >>> preprocess(a)
-    '<html><p>Something</p></html>'
+    Returns:
+        Optional[str]: Cleaned HTML string with normalized whitespace.
 
-    Returns
-    -------
-    Optional[str]
-        cleaned html
+    Examples:
+        >>> a = "<html>   <p> Something </p>    </html> "
+        >>> preprocess(a)
+        '<html><p>Something</p></html>'
+
+    Note:
+        Reference: https://stackoverflow.com/questions/23241641
     """
 
     # remove leading and trailing whitespaces
@@ -37,29 +34,24 @@ def preprocess(html: str) -> Optional[str]:
     return html
 
 
-def build_soup(url: str, features: str = "lxml", to_preprocess: str = True):
-    """
-    Return Beautifulsoup object from given url
+def build_soup(url: str, features: str = "lxml", to_preprocess: bool = True):
+    """Creates a BeautifulSoup object from a given URL.
 
-    Parameters
-    ----------
-    url : str
-        URL
-    features : str, optional
-        parser to use
-    to_preprocess : str, optional
-        to preprocess?
+    Args:
+        url (str): URL to fetch and parse.
+        features (str, optional): Parser to use. Defaults to "lxml".
+        to_preprocess (bool, optional): Whether to preprocess the HTML. Defaults to True.
 
-    Examples
-    --------
-    >>> a = build_soup("https://google.com")
-    >>> type(a)
-    <class 'bs4.BeautifulSoup'>
+    Returns:
+        Optional[BeautifulSoup]: Parsed BeautifulSoup object, or None if request fails.
 
-    Returns
-    -------
-    Optional[BeautifulSoup]
-        BeautifulSoup parsed by lxml
+    Examples:
+        >>> a = build_soup("https://google.com")
+        >>> type(a)
+        <class 'bs4.BeautifulSoup'>
+
+    Note:
+        Requires requests and beautifulsoup4 packages.
     """
     import requests
     from bs4 import BeautifulSoup

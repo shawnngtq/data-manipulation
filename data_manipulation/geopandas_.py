@@ -1,24 +1,26 @@
 def haversine_np(
     longitude1: float, latitude1: float, longitude2: float, latitude2: float
 ) -> float:
-    """
-    Return the great circle distance between two points on the earth (specified in decimal degrees). All args must be of equal length. Reference from https://stackoverflow.com/a/4913653, https://stackoverflow.com/a/29546836
+    """Calculates the great circle distance between two points on Earth.
 
-    Parameters
-    ----------
-    longitude1 : float
-        Base longitude
-    latitude1 : float
-        Base latitude
-    longitude2 : float
-        Longitude to compare
-    latitude2 : float
-        Latitude to compare
+    Args:
+        longitude1 (float): Longitude of the first point in decimal degrees.
+        latitude1 (float): Latitude of the first point in decimal degrees.
+        longitude2 (float): Longitude of the second point in decimal degrees.
+        latitude2 (float): Latitude of the second point in decimal degrees.
 
-    Returns
-    -------
-    float
-        Kilometer
+    Returns:
+        float: Distance between the points in kilometers.
+
+    Examples:
+        >>> haversine_np(-0.127758, 51.507351, 103.819836, 1.352083)  # London to Singapore
+        10880.39...
+
+    Note:
+        Uses the Haversine formula to calculate great circle distances.
+        Earth radius is assumed to be 6371 km.
+        Reference: https://stackoverflow.com/a/4913653
+        Reference: https://stackoverflow.com/a/29546836
     """
     import numpy as np
 

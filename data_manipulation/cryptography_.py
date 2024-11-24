@@ -5,20 +5,22 @@ from loguru import logger
 
 
 def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
-    """
-    Generate cryptography fernet key
+    """Generates and saves a Fernet encryption key.
 
-    Parameters
-    ----------
-    output_directory : str
-        Linux directory
-    output_filename : str
-        Linux filename
+    Args:
+        output_directory (str): Directory path where the key file will be saved.
+        output_filename (str): Name of the key file to be created.
 
-    Returns
-    -------
-    bytes
-        Fernet key in bytes
+    Returns:
+        bytes: Generated Fernet key in bytes format.
+
+    Raises:
+        Exception: If key generation or file writing fails.
+
+    Examples:
+        >>> key = generate_fernet_key('/path/to/keys', 'encryption.key')
+        >>> isinstance(key, bytes)
+        True
     """
 
     key = None
@@ -36,20 +38,22 @@ def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
 
 
 def encrypt_fernet_file(keypath: str, filepath: str) -> str:
-    """
-    Encrypt file
+    """Encrypts a file using Fernet symmetric encryption.
 
-    Parameters
-    ----------
-    keypath : str
-        keypath
-    filepath : str
-        File path
+    Args:
+        keypath (str): Path to the Fernet key file.
+        filepath (str): Path to the file to be encrypted.
 
-    Returns
-    -------
-    str
-        Encrypted data
+    Returns:
+        str: Encrypted data.
+
+    Raises:
+        TypeError: If keypath or filepath are not strings.
+
+    Examples:
+        >>> encrypted = encrypt_fernet_file('key.txt', 'data.txt')
+        >>> isinstance(encrypted, str)
+        True
     """
     if isinstance(keypath, str) and isinstance(filepath, str):
         fernet = Fernet(open(keypath, "rb").read())
@@ -61,20 +65,22 @@ def encrypt_fernet_file(keypath: str, filepath: str) -> str:
 
 
 def decrypt_fernet_data(keypath: str, filepath: str) -> str:
-    """
-    Decrypt file
+    """Decrypts a file using Fernet symmetric encryption.
 
-    Parameters
-    ----------
-    keypath : str
-        keypath
-    filepath : str
-        File path
+    Args:
+        keypath (str): Path to the Fernet key file.
+        filepath (str): Path to the encrypted file.
 
-    Returns
-    -------
-    str
-        Decrypted data
+    Returns:
+        str: Decrypted data.
+
+    Raises:
+        TypeError: If keypath or filepath are not strings.
+
+    Examples:
+        >>> decrypted = decrypt_fernet_data('key.txt', 'encrypted_data.txt')
+        >>> isinstance(decrypted, str)
+        True
     """
     if isinstance(keypath, str) and isinstance(filepath, str):
         fernet = Fernet(open(keypath, "rb").read())
