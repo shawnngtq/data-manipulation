@@ -1,10 +1,15 @@
 import os
+from pathlib import Path
+from typing import Union
 
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
 from loguru import logger
 
 
-def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
+def generate_fernet_key(
+    output_directory: Union[str, Path],
+    output_filename: str,
+) -> bytes:
     """Generates and saves a Fernet encryption key.
 
     Args:
@@ -22,22 +27,28 @@ def generate_fernet_key(output_directory: str, output_filename: str) -> bytes:
         >>> isinstance(key, bytes)
         True
     """
+    output_dir = Path(output_directory)
+    if not output_dir.is_dir():
+        raise FileNotFoundError(f"Directory not found: {output_directory}")
 
-    key = None
-    if os.path.isdir(output_directory):
-        try:
-            key = Fernet.generate_key()
-            filepath = os.path.join(output_directory, output_filename)
-            f = open(filepath, "wb")
+    try:
+        key = Fernet.generate_key()
+        filepath = output_dir / output_filename
+
+        with open(filepath, "wb") as f:
             f.write(key)
-            f.close()
-            logger.info(f"generate_fernet_key: True")
-        except Exception as e:
-            logger.error(f"generate_fernet_key: False ({e})")
-    return key
+
+        logger.info("Fernet key generated successfully")
+        return key
+    except (PermissionError, OSError) as e:
+        logger.error(f"Failed to generate/save Fernet key: {e}")
+        raise
 
 
-def encrypt_fernet_file(keypath: str, filepath: str) -> str:
+def encrypt_fernet_file(
+    keypath: Union[str, Path],
+    filepath: Union[str, Path],
+) -> bytes:
     """Encrypts a file using Fernet symmetric encryption.
 
     Args:
@@ -55,16 +66,34 @@ def encrypt_fernet_file(keypath: str, filepath: str) -> str:
         >>> isinstance(encrypted, str)
         True
     """
-    if isinstance(keypath, str) and isinstance(filepath, str):
-        fernet = Fernet(open(keypath, "rb").read())
-        data = open(filepath, "rb").read()
-        encrypt_data = fernet.encrypt(data)
-        return encrypt_data
-    else:
-        raise TypeError("Wrong datatype(s)")
+    key_path = Path(keypath)
+    file_path = Path(filepath)
+
+    if not key_path.is_file():
+        raise FileNotFoundError(f"Key file not found: {keypath}")
+    if not file_path.is_file():
+        raise FileNotFoundError(f"Input file not found: {filepath}")
+
+    try:
+        with open(key_path, "rb") as key_file:
+            fernet = Fernet(key_file.read())
+
+        with open(file_path, "rb") as file:
+            data = file.read()
+
+        return fernet.encrypt(data)
+    except (PermissionError, OSError) as e:
+        logger.error(f"File operation failed: {e}")
+        raise
+    except InvalidToken as e:
+        logger.error(f"Invalid encryption key: {e}")
+        raise
 
 
-def decrypt_fernet_data(keypath: str, filepath: str) -> str:
+def decrypt_fernet_data(
+    keypath: Union[str, Path],
+    filepath: Union[str, Path],
+) -> bytes:
     """Decrypts a file using Fernet symmetric encryption.
 
     Args:
@@ -75,20 +104,32 @@ def decrypt_fernet_data(keypath: str, filepath: str) -> str:
         str: Decrypted data.
 
     Raises:
-        TypeError: If keypath or filepath are not strings.
-
-    Examples:
-        >>> decrypted = decrypt_fernet_data('key.txt', 'encrypted_data.txt')
-        >>> isinstance(decrypted, str)
-        True
+        FileNotFoundError: If key file or input file doesn't exist
+        InvalidToken: If the key is invalid or data is corrupted
+        TypeError: If input types are incorrect
     """
-    if isinstance(keypath, str) and isinstance(filepath, str):
-        fernet = Fernet(open(keypath, "rb").read())
-        data = open(filepath, "rb").read()
-        decrypt_data = fernet.decrypt(data)
-        return decrypt_data
-    else:
-        raise TypeError("Wrong datatype(s)")
+    key_path = Path(keypath)
+    file_path = Path(filepath)
+
+    if not key_path.is_file():
+        raise FileNotFoundError(f"Key file not found: {keypath}")
+    if not file_path.is_file():
+        raise FileNotFoundError(f"Input file not found: {filepath}")
+
+    try:
+        with open(key_path, "rb") as key_file:
+            fernet = Fernet(key_file.read())
+
+        with open(file_path, "rb") as file:
+            data = file.read()
+
+        return fernet.decrypt(data)
+    except (PermissionError, OSError) as e:
+        logger.error(f"File operation failed: {e}")
+        raise
+    except InvalidToken as e:
+        logger.error(f"Invalid key or corrupted data: {e}")
+        raise
 
 
 if __name__ == "__main__":
