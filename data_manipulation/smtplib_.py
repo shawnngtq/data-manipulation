@@ -1,7 +1,9 @@
-import logging
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from smtplib import SMTP, SMTPException
+from typing import Optional
+
+from loguru import logger
 
 
 def send_email(
@@ -11,73 +13,67 @@ def send_email(
     message_receiver: str,
     html: str,
     smtp_address: str,
-) -> None:
-    """Sends an HTML email using SMTP and logs the operation.
+    smtp_port: int = 587,
+    smtp_username: Optional[str] = None,
+    smtp_password: Optional[str] = None,
+) -> bool:
+    """Sends an HTML email using SMTP with TLS and logs the operation.
 
     Args:
-        logname (str): Path to the log file where email sending operations will be recorded
+        logname (str): Path to the log file
         message_subject (str): Subject line of the email
         message_sender (str): Email address of the sender
         message_receiver (str): Email address of the recipient
         html (str): HTML content of the email body
-        smtp_address (str): SMTP server address (e.g., 'smtp.gmail.com:587')
+        smtp_address (str): SMTP server address (e.g., 'smtp.gmail.com')
+        smtp_port (int, optional): SMTP server port. Defaults to 587.
+        smtp_username (str, optional): SMTP authentication username
+        smtp_password (str, optional): SMTP authentication password
+
+    Returns:
+        bool: True if email was sent successfully, False otherwise
 
     Raises:
-        TypeError: If any of the input parameters are not strings
-        smtplib.SMTPException: If email sending fails
-        IOError: If log file cannot be accessed or created
-
-    Examples:
-        >>> send_email(
-        ...     logname='email.log',
-        ...     message_subject='Test Email',
-        ...     message_sender='sender@example.com',
-        ...     message_receiver='recipient@example.com',
-        ...     html='<h1>Hello World</h1><p>This is a test email.</p>',
-        ...     smtp_address='smtp.gmail.com:587'
-        ... )
-        # Email sent successfully and logged to email.log
-
-    Note:
-        - All parameters must be strings
-        - The HTML content should be properly formatted HTML
-        - The function will log both successful sends and failures
-        - Make sure the SMTP server address is correctly formatted with port if needed
+        ValueError: If required parameters are empty or invalid
+        SMTPException: If email sending fails
+        IOError: If log file cannot be accessed
     """
-
-    if all(
-        isinstance(i, str)
-        for i in [
-            logname,
-            message_subject,
-            message_sender,
-            message_receiver,
-            html,
-            smtp_address,
-        ]
+    # Input validation
+    if not all(
+        [logname, message_subject, message_sender, message_receiver, html, smtp_address]
     ):
-        logging.basicConfig(
-            filename=logname,
-            level=logging.DEBUG,
-            format="%(asctime)s %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S",
-        )
+        raise ValueError("Required parameters cannot be empty")
 
-        message = MIMEMultipart("alternative")
-        message["Subject"] = message_subject
-        message["From"] = message_sender
-        message["To"] = message_receiver
-        html = MIMEText(html, "html")
-        message.attach(html)
-        try:
-            server = smtplib.SMTP(smtp_address)
-            server.sendmail(message_sender, message_receiver, message.as_string())
-            server.quit()
-            logging.info("Email sent")
-        except Exception as e:
-            logging.error(f"Email not send: {str(e)}")
-    else:
-        raise TypeError("Wrong datatype(s)")
+    # Prepare email message
+    message = MIMEMultipart("alternative")
+    message["Subject"] = message_subject
+    message["From"] = message_sender
+    message["To"] = message_receiver
+    message.attach(MIMEText(html, "html"))
+
+    try:
+        with SMTP(smtp_address, smtp_port) as server:
+            logger.info(f"Connecting to SMTP server: {smtp_address}:{smtp_port}")
+
+            # Enable TLS encryption
+            server.starttls()
+
+            # Authenticate if credentials provided
+            if smtp_username and smtp_password:
+                logger.debug("Attempting SMTP authentication")
+                server.login(smtp_username, smtp_password)
+
+            # Send email
+            server.send_message(message)
+            logger.info(f"Email sent successfully to {message_receiver}")
+            return True
+
+    except SMTPException as e:
+        logger.error(f"SMTP error occurred: {str(e)}")
+        return False
+    except Exception as e:
+        logger.error(f"Unexpected error occurred: {str(e)}")
+        return False
 
 
 if __name__ == "__main__":
