@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.openldap_ &#8212; data_manipulation 0.45 documentation</title>
+    <title>data_manipulation.openldap_ &#8212; data_manipulation 0.46 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
-    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/documentation_options.js?v=ef64108f"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.openldap_</a></li> 
       </ul>
@@ -35,6 +35,19 @@
             
   <h1>Source code for data_manipulation.openldap_</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+
+
+<div class="viewcode-block" id="validate_ldap_uri">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.openldap_.validate_ldap_uri">[docs]</a>
+<span class="k">def</span> <span class="nf">validate_ldap_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate LDAP URI format.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">parsed</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parsed</span><span class="o">.</span><span class="n">scheme</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ldap&quot;</span><span class="p">,</span> <span class="s2">&quot;ldaps&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">parsed</span><span class="o">.</span><span class="n">netloc</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
 
 
 <div class="viewcode-block" id="ldapsearch">
@@ -44,7 +57,7 @@
     <span class="n">ldap_uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">bind_dn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="nb">filter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">search_filter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes an LDAP search query using the ldapsearch command.</span>
 
@@ -53,13 +66,15 @@
 <span class="sd">        ldap_uri (str): LDAP server URI (e.g., &quot;ldap://example.com:389&quot;).</span>
 <span class="sd">        bind_dn (str): Distinguished Name (DN) for binding to the LDAP server.</span>
 <span class="sd">        password (str): Password for authentication.</span>
-<span class="sd">        filter (str): LDAP search filter (e.g., &quot;(objectClass=person)&quot;).</span>
+<span class="sd">        search_filter (str): LDAP search filter (e.g., &quot;(objectClass=person)&quot;).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        subprocess.CompletedProcess: Result of the ldapsearch command execution containing:</span>
-<span class="sd">            - returncode: 0 if successful, non-zero if failed</span>
-<span class="sd">            - stdout: Standard output containing search results</span>
-<span class="sd">            - stderr: Standard error messages if any</span>
+<span class="sd">        subprocess.CompletedProcess: Result of the ldapsearch command execution.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If any input parameters are empty or invalid.</span>
+<span class="sd">        subprocess.SubprocessError: If the ldapsearch command fails to execute.</span>
+<span class="sd">        FileNotFoundError: If ldapsearch command is not available.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; result = ldapsearch(</span>
@@ -71,21 +86,41 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; result.returncode == 0  # True if search was successful</span>
 <span class="sd">        True</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        Requires OpenLDAP client tools to be installed (ldapsearch command).</span>
-<span class="sd">        Command is executed through subprocess with shell=True, use caution with input validation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;ldapsearch -b </span><span class="si">{search_base}</span><span class="s2"> -H </span><span class="si">{ldap_uri}</span><span class="s2"> -D </span><span class="si">{bind_dn}</span><span class="s2"> -w </span><span class="si">{password}</span><span class="s2"> </span><span class="si">{filter}</span><span class="s2">&quot;</span>
-    <span class="p">)</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="n">cmd</span><span class="p">,</span>
-        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">output</span></div>
+    <span class="c1"># Input validation</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">search_base</span><span class="p">,</span> <span class="n">ldap_uri</span><span class="p">,</span> <span class="n">bind_dn</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">search_filter</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All parameters must be non-empty strings&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">validate_ldap_uri</span><span class="p">(</span><span class="n">ldap_uri</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid LDAP URI format: </span><span class="si">{</span><span class="n">ldap_uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Use list arguments instead of shell=True for security</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;ldapsearch&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;-b&quot;</span><span class="p">,</span>
+            <span class="n">search_base</span><span class="p">,</span>
+            <span class="s2">&quot;-H&quot;</span><span class="p">,</span>
+            <span class="n">ldap_uri</span><span class="p">,</span>
+            <span class="s2">&quot;-D&quot;</span><span class="p">,</span>
+            <span class="n">bind_dn</span><span class="p">,</span>
+            <span class="s2">&quot;-w&quot;</span><span class="p">,</span>
+            <span class="n">password</span><span class="p">,</span>
+            <span class="n">search_filter</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">cmd</span><span class="p">,</span>
+            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Don&#39;t raise on non-zero exit</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="s2">&quot;ldapsearch command not found. Please install OpenLDAP client tools.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">SubprocessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">SubprocessError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to execute ldapsearch: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -124,7 +159,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.openldap_</a></li> 
       </ul>

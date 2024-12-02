@@ -100,18 +100,10 @@ data\_manipulation.prometheus\_ module
    :undoc-members:
    :show-inheritance:
 
-data\_manipulation.psycopg\_ module
+data\_manipulation.postgres\_ module
 ------------------------------------
 
-.. automodule:: data_manipulation.psycopg_
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-data\_manipulation.psycopg2\_ module
-------------------------------------
-
-.. automodule:: data_manipulation.psycopg2_
+.. automodule:: data_manipulation.postgres__
    :members:
    :undoc-members:
    :show-inheritance:

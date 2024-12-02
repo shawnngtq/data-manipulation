@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.sqlalchemy_ &#8212; data_manipulation 0.45 documentation</title>
+    <title>data_manipulation.sqlalchemy_ &#8212; data_manipulation 0.46 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
-    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/documentation_options.js?v=ef64108f"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.sqlalchemy_</a></li> 
       </ul>
@@ -35,7 +35,20 @@
             
   <h1>Source code for data_manipulation.sqlalchemy_</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">sqlalchemy</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.engine.url</span> <span class="kn">import</span> <span class="n">URL</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.engine.base</span> <span class="kn">import</span> <span class="n">Engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">SQLAlchemyError</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+
+
+<div class="viewcode-block" id="DatabaseConnectionError">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.sqlalchemy_.DatabaseConnectionError">[docs]</a>
+<span class="k">class</span> <span class="nc">DatabaseConnectionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom exception for database connection errors.&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span></div>
+
 
 
 <div class="viewcode-block" id="create_sqlalchemy_url">
@@ -47,7 +60,8 @@
     <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">URL</span><span class="p">:</span>
+    <span class="n">query</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">URL</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a SQLAlchemy URL object for database connection.</span>
 
 <span class="sd">    Args:</span>
@@ -63,6 +77,8 @@
 <span class="sd">        user (str): Database username for authentication</span>
 <span class="sd">        password (str): Database password for authentication</span>
 <span class="sd">        port (int, optional): Database server port number. Defaults to 3306.</span>
+<span class="sd">        query (Optional[Dict[str, Any]], optional): Additional connection parameters.</span>
+<span class="sd">            Useful for SSL configuration. Defaults to None.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        sqlalchemy.engine.url.URL: Configured URL object for database connection</span>
@@ -79,15 +95,15 @@
 <span class="sd">        &gt;&gt;&gt; str(url)</span>
 <span class="sd">        &#39;postgresql+psycopg2://admin:secret@localhost:5432/mydb&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">URL</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="k">return</span> <span class="n">URL</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">drivername</span><span class="o">=</span><span class="n">drivername</span><span class="p">,</span>
         <span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
         <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
         <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
         <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
         <span class="n">database</span><span class="o">=</span><span class="n">dbname</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">url</span></div>
+        <span class="n">query</span><span class="o">=</span><span class="n">query</span> <span class="ow">or</span> <span class="p">{},</span>
+    <span class="p">)</span></div>
 
 
 
@@ -100,7 +116,12 @@
     <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Engine</span><span class="p">:</span>
+    <span class="n">pool_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">max_overflow</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">pool_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">connect_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">ssl_ca</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Engine</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates and tests a SQLAlchemy engine for database operations.</span>
 
 <span class="sd">    Args:</span>
@@ -116,12 +137,17 @@
 <span class="sd">        user (str): Database username for authentication</span>
 <span class="sd">        password (str): Database password for authentication</span>
 <span class="sd">        port (int, optional): Database server port number. Defaults to 3306.</span>
+<span class="sd">        pool_size (int, optional): The size of the connection pool. Defaults to 5.</span>
+<span class="sd">        max_overflow (int, optional): Maximum number of connections above pool_size. Defaults to 10.</span>
+<span class="sd">        pool_timeout (int, optional): Timeout for getting a connection from pool. Defaults to 30.</span>
+<span class="sd">        connect_timeout (int, optional): Timeout for database connections. Defaults to 10.</span>
+<span class="sd">        ssl_ca (Optional[str], optional): Path to SSL CA certificate. Defaults to None.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        sqlalchemy.engine.base.Engine: Configured database engine object</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        sqlalchemy.exc.SQLAlchemyError: If engine creation or connection test fails</span>
+<span class="sd">        DatabaseConnectionError: If engine creation or connection test fails</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; engine = create_sqlalchemy_engine(</span>
@@ -140,6 +166,18 @@
 <span class="sd">        the result using loguru. A successful connection will be logged as info,</span>
 <span class="sd">        while failures will be logged as errors with the specific exception message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">query_params</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Configure SSL if certificate provided</span>
+    <span class="k">if</span> <span class="n">ssl_ca</span><span class="p">:</span>
+        <span class="n">query_params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;ssl_ca&quot;</span><span class="p">:</span> <span class="n">ssl_ca</span><span class="p">,</span> <span class="s2">&quot;ssl_verify_cert&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">})</span>
+
+    <span class="c1"># Add connection timeout</span>
+    <span class="k">if</span> <span class="s2">&quot;mysql&quot;</span> <span class="ow">in</span> <span class="n">drivername</span><span class="p">:</span>
+        <span class="n">query_params</span><span class="p">[</span><span class="s2">&quot;connect_timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s2">&quot;postgresql&quot;</span> <span class="ow">in</span> <span class="n">drivername</span><span class="p">:</span>
+        <span class="n">query_params</span><span class="p">[</span><span class="s2">&quot;connect_timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">)</span>
+
     <span class="n">url</span> <span class="o">=</span> <span class="n">create_sqlalchemy_url</span><span class="p">(</span>
         <span class="n">drivername</span><span class="o">=</span><span class="n">drivername</span><span class="p">,</span>
         <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
@@ -147,14 +185,43 @@
         <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
         <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
         <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+        <span class="n">query</span><span class="o">=</span><span class="n">query_params</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">create_engine</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">,</span>
+        <span class="n">pool_size</span><span class="o">=</span><span class="n">pool_size</span><span class="p">,</span>
+        <span class="n">max_overflow</span><span class="o">=</span><span class="n">max_overflow</span><span class="p">,</span>
+        <span class="n">pool_timeout</span><span class="o">=</span><span class="n">pool_timeout</span><span class="p">,</span>
+        <span class="n">pool_pre_ping</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Enable connection health checks</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Test connection</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;create_sqlalchemy_engine: True&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;create_sqlalchemy_engine: False (</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;SELECT 1&quot;</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Database connection established successfully&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">SQLAlchemyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Failed to connect to database: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+        <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>  <span class="c1"># Clean up resources</span>
+        <span class="k">raise</span> <span class="n">DatabaseConnectionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
     <span class="k">return</span> <span class="n">engine</span></div>
+
+
+
+<div class="viewcode-block" id="dispose_engine">
+<a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.sqlalchemy_.dispose_engine">[docs]</a>
+<span class="k">def</span> <span class="nf">dispose_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="n">Engine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely dispose of the SQLAlchemy engine and its connection pool.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        engine (Engine): The SQLAlchemy engine to dispose</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">engine</span><span class="p">:</span>
+        <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Database engine disposed successfully&quot;</span><span class="p">)</span></div>
 
 
 
@@ -193,7 +260,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.sqlalchemy_</a></li> 
       </ul>

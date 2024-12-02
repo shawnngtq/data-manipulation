@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.kerberos_ &#8212; data_manipulation 0.45 documentation</title>
+    <title>data_manipulation.kerberos_ &#8212; data_manipulation 0.46 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
-    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/documentation_options.js?v=ef64108f"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.kerberos_</a></li> 
       </ul>
@@ -34,7 +34,9 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.kerberos_</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shlex</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
 
 <span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
 
@@ -44,7 +46,7 @@
 <span class="k">def</span> <span class="nf">keytab_valid</span><span class="p">(</span>
     <span class="n">keytab_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">principal_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validates a Kerberos keytab file using kinit.</span>
 
 <span class="sd">    Args:</span>
@@ -52,35 +54,71 @@
 <span class="sd">        principal_name (str): Kerberos principal name associated with the keytab.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        subprocess.CompletedProcess: Result of the kinit command execution containing:</span>
+<span class="sd">        subprocess.CompletedProcess[str]: Result of the kinit command execution containing:</span>
 <span class="sd">            - returncode: 0 if successful, non-zero if failed</span>
 <span class="sd">            - stdout: Standard output from the command</span>
 <span class="sd">            - stderr: Standard error from the command</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If keytab file doesn&#39;t exist or inputs are invalid</span>
+<span class="sd">        FileNotFoundError: If kinit command is not available</span>
+<span class="sd">        subprocess.SubprocessError: If command execution fails</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; result = keytab_valid(&quot;/path/to/keytab&quot;, &quot;user@REALM.COM&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; result.returncode == 0  # True if keytab is valid</span>
 <span class="sd">        True</span>
 
-<span class="sd">    Note:</span>
-<span class="sd">        Requires a working Kerberos installation with kinit command available.</span>
-<span class="sd">        Logs the validation result using loguru logger.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Input validation</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keytab_filepath</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">principal_name</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Both keytab_filepath and principal_name must be provided&quot;</span><span class="p">)</span>
 
-    <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;kinit -kt </span><span class="si">{</span><span class="n">keytab_filepath</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">principal_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">keytab_filepath</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keytab file not found: </span><span class="si">{</span><span class="n">keytab_filepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Safely quote the arguments</span>
+    <span class="n">safe_keytab</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">keytab_filepath</span><span class="p">)</span>
+    <span class="n">safe_principal</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">principal_name</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Use list form with shell=False for better security</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;kinit&quot;</span><span class="p">,</span> <span class="s2">&quot;-kt&quot;</span><span class="p">,</span> <span class="n">safe_keytab</span><span class="p">,</span> <span class="n">safe_principal</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing command: </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">cmd</span><span class="p">,</span>
+            <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">shell</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Don&#39;t raise on non-zero exit</span>
+        <span class="p">)</span>
+
         <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;keytab_valid: True&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Keytab validation successful&quot;</span><span class="p">,</span>
+                <span class="n">keytab</span><span class="o">=</span><span class="n">keytab_filepath</span><span class="p">,</span>
+                <span class="n">principal</span><span class="o">=</span><span class="n">principal_name</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;keytab_valid: False&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">&quot;Keytab validation failed&quot;</span><span class="p">,</span>
+                <span class="n">keytab</span><span class="o">=</span><span class="n">keytab_filepath</span><span class="p">,</span>
+                <span class="n">principal</span><span class="o">=</span><span class="n">principal_name</span><span class="p">,</span>
+                <span class="n">stderr</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;kinit command not found. Is Kerberos installed?&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">SubprocessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command execution failed: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;keytab_valid: False (</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">output</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error during keytab validation: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span></div>
 
 
 
@@ -119,7 +157,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.kerberos_</a></li> 
       </ul>

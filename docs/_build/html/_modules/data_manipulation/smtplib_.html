@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.smtplib_ &#8212; data_manipulation 0.45 documentation</title>
+    <title>data_manipulation.smtplib_ &#8212; data_manipulation 0.46 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
-    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/documentation_options.js?v=ef64108f"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.smtplib_</a></li> 
       </ul>
@@ -34,10 +34,12 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.smtplib_</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">smtplib</span>
-<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span></span><span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
 <span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">smtplib</span> <span class="kn">import</span> <span class="n">SMTP</span><span class="p">,</span> <span class="n">SMTPException</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
 
 
 <div class="viewcode-block" id="send_email">
@@ -49,73 +51,67 @@
     <span class="n">message_receiver</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">smtp_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends an HTML email using SMTP and logs the operation.</span>
+    <span class="n">smtp_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">587</span><span class="p">,</span>
+    <span class="n">smtp_username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">smtp_password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends an HTML email using SMTP with TLS and logs the operation.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        logname (str): Path to the log file where email sending operations will be recorded</span>
+<span class="sd">        logname (str): Path to the log file</span>
 <span class="sd">        message_subject (str): Subject line of the email</span>
 <span class="sd">        message_sender (str): Email address of the sender</span>
 <span class="sd">        message_receiver (str): Email address of the recipient</span>
 <span class="sd">        html (str): HTML content of the email body</span>
-<span class="sd">        smtp_address (str): SMTP server address (e.g., &#39;smtp.gmail.com:587&#39;)</span>
+<span class="sd">        smtp_address (str): SMTP server address (e.g., &#39;smtp.gmail.com&#39;)</span>
+<span class="sd">        smtp_port (int, optional): SMTP server port. Defaults to 587.</span>
+<span class="sd">        smtp_username (str, optional): SMTP authentication username</span>
+<span class="sd">        smtp_password (str, optional): SMTP authentication password</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if email was sent successfully, False otherwise</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        TypeError: If any of the input parameters are not strings</span>
-<span class="sd">        smtplib.SMTPException: If email sending fails</span>
-<span class="sd">        IOError: If log file cannot be accessed or created</span>
-
-<span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; send_email(</span>
-<span class="sd">        ...     logname=&#39;email.log&#39;,</span>
-<span class="sd">        ...     message_subject=&#39;Test Email&#39;,</span>
-<span class="sd">        ...     message_sender=&#39;sender@example.com&#39;,</span>
-<span class="sd">        ...     message_receiver=&#39;recipient@example.com&#39;,</span>
-<span class="sd">        ...     html=&#39;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;This is a test email.&lt;/p&gt;&#39;,</span>
-<span class="sd">        ...     smtp_address=&#39;smtp.gmail.com:587&#39;</span>
-<span class="sd">        ... )</span>
-<span class="sd">        # Email sent successfully and logged to email.log</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        - All parameters must be strings</span>
-<span class="sd">        - The HTML content should be properly formatted HTML</span>
-<span class="sd">        - The function will log both successful sends and failures</span>
-<span class="sd">        - Make sure the SMTP server address is correctly formatted with port if needed</span>
+<span class="sd">        ValueError: If required parameters are empty or invalid</span>
+<span class="sd">        SMTPException: If email sending fails</span>
+<span class="sd">        IOError: If log file cannot be accessed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span>
-            <span class="n">logname</span><span class="p">,</span>
-            <span class="n">message_subject</span><span class="p">,</span>
-            <span class="n">message_sender</span><span class="p">,</span>
-            <span class="n">message_receiver</span><span class="p">,</span>
-            <span class="n">html</span><span class="p">,</span>
-            <span class="n">smtp_address</span><span class="p">,</span>
-        <span class="p">]</span>
+    <span class="c1"># Input validation</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">logname</span><span class="p">,</span> <span class="n">message_subject</span><span class="p">,</span> <span class="n">message_sender</span><span class="p">,</span> <span class="n">message_receiver</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">smtp_address</span><span class="p">]</span>
     <span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">logname</span><span class="p">,</span>
-            <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-            <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">datefmt</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Required parameters cannot be empty&quot;</span><span class="p">)</span>
 
-        <span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&quot;alternative&quot;</span><span class="p">)</span>
-        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_subject</span>
-        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_sender</span>
-        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_receiver</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span>
-        <span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_address</span><span class="p">)</span>
-            <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">message_sender</span><span class="p">,</span> <span class="n">message_receiver</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
-            <span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Email sent&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Email not send: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Wrong datatype(s)&quot;</span><span class="p">)</span></div>
+    <span class="c1"># Prepare email message</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&quot;alternative&quot;</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_subject</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_sender</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_receiver</span>
+    <span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;html&quot;</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_address</span><span class="p">,</span> <span class="n">smtp_port</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to SMTP server: </span><span class="si">{</span><span class="n">smtp_address</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">smtp_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Enable TLS encryption</span>
+            <span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+
+            <span class="c1"># Authenticate if credentials provided</span>
+            <span class="k">if</span> <span class="n">smtp_username</span> <span class="ow">and</span> <span class="n">smtp_password</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Attempting SMTP authentication&quot;</span><span class="p">)</span>
+                <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">smtp_username</span><span class="p">,</span> <span class="n">smtp_password</span><span class="p">)</span>
+
+            <span class="c1"># Send email</span>
+            <span class="n">server</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Email sent successfully to </span><span class="si">{</span><span class="n">message_receiver</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">except</span> <span class="n">SMTPException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SMTP error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 
 
@@ -154,7 +150,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.smtplib_</a></li> 
       </ul>

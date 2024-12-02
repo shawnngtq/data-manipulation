@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.geopandas_ &#8212; data_manipulation 0.45 documentation</title>
+    <title>data_manipulation.geopandas_ &#8212; data_manipulation 0.46 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
-    <script src="../../_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="../../_static/documentation_options.js?v=ef64108f"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.geopandas_</a></li> 
       </ul>
@@ -34,46 +34,80 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.geopandas_</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+
+<span class="c1"># Type variable for numeric types (float or numpy array)</span>
+<span class="n">NumericType</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;NumericType&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span>
+
+<span class="c1"># Earth&#39;s radius in kilometers</span>
+<span class="n">EARTH_RADIUS_KM</span> <span class="o">=</span> <span class="mf">6371.0</span>
+
+
 <div class="viewcode-block" id="haversine_np">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.geopandas_.haversine_np">[docs]</a>
-<span></span><span class="k">def</span> <span class="nf">haversine_np</span><span class="p">(</span>
-    <span class="n">longitude1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">latitude2</span><span class="p">:</span> <span class="nb">float</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">haversine_np</span><span class="p">(</span>
+    <span class="n">longitude1</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
+    <span class="n">latitude1</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
+    <span class="n">longitude2</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
+    <span class="n">latitude2</span><span class="p">:</span> <span class="n">NumericType</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumericType</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the great circle distance between two points on Earth.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        longitude1 (float): Longitude of the first point in decimal degrees.</span>
-<span class="sd">        latitude1 (float): Latitude of the first point in decimal degrees.</span>
-<span class="sd">        longitude2 (float): Longitude of the second point in decimal degrees.</span>
-<span class="sd">        latitude2 (float): Latitude of the second point in decimal degrees.</span>
+<span class="sd">        longitude1 (float | ndarray): Longitude of the first point(s) in decimal degrees.</span>
+<span class="sd">        latitude1 (float | ndarray): Latitude of the first point(s) in decimal degrees.</span>
+<span class="sd">        longitude2 (float | ndarray): Longitude of the second point(s) in decimal degrees.</span>
+<span class="sd">        latitude2 (float | ndarray): Latitude of the second point(s) in decimal degrees.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        float: Distance between the points in kilometers.</span>
+<span class="sd">        float | ndarray: Distance between the points in kilometers.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If latitude values are outside [-90, 90] or longitude values outside [-180, 180].</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; haversine_np(-0.127758, 51.507351, 103.819836, 1.352083)  # London to Singapore</span>
 <span class="sd">        10880.39...</span>
+<span class="sd">        &gt;&gt;&gt; haversine_np(np.array([-0.127758]), np.array([51.507351]),</span>
+<span class="sd">        ...             np.array([103.819836]), np.array([1.352083]))</span>
+<span class="sd">        array([10880.39...])</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        Uses the Haversine formula to calculate great circle distances.</span>
 <span class="sd">        Earth radius is assumed to be 6371 km.</span>
-<span class="sd">        Reference: https://stackoverflow.com/a/4913653</span>
-<span class="sd">        Reference: https://stackoverflow.com/a/29546836</span>
+<span class="sd">        Supports both scalar and numpy array inputs for vectorized calculations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="c1"># Input validation</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;latitude1&quot;</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;latitude2&quot;</span><span class="p">,</span> <span class="n">latitude2</span><span class="p">)]:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be between -90 and 90 degrees&quot;</span><span class="p">)</span>
 
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;longitude1&quot;</span><span class="p">,</span> <span class="n">longitude1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;longitude2&quot;</span><span class="p">,</span> <span class="n">longitude2</span><span class="p">)]:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">180</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be between -180 and 180 degrees&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert to radians</span>
     <span class="n">lon1</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">lat2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span>
         <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">,</span> <span class="p">[</span><span class="n">longitude1</span><span class="p">,</span> <span class="n">latitude1</span><span class="p">,</span> <span class="n">longitude2</span><span class="p">,</span> <span class="n">latitude2</span><span class="p">]</span>
     <span class="p">)</span>
 
+    <span class="c1"># Haversine formula</span>
     <span class="n">dlon</span> <span class="o">=</span> <span class="n">lon2</span> <span class="o">-</span> <span class="n">lon1</span>
     <span class="n">dlat</span> <span class="o">=</span> <span class="n">lat2</span> <span class="o">-</span> <span class="n">lat1</span>
 
-    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlat</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlon</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="c1"># Optimize by pre-calculating trigonometric functions</span>
+    <span class="n">sin_dlat_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlat</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">sin_dlon_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlon</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">cos_lat1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span>
+    <span class="n">cos_lat2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span>
 
+    <span class="n">a</span> <span class="o">=</span> <span class="n">sin_dlat_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos_lat1</span> <span class="o">*</span> <span class="n">cos_lat2</span> <span class="o">*</span> <span class="n">sin_dlon_2</span><span class="o">**</span><span class="mi">2</span>
     <span class="n">c</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-    <span class="n">km</span> <span class="o">=</span> <span class="mi">6371</span> <span class="o">*</span> <span class="n">c</span>
-    <span class="k">return</span> <span class="n">km</span></div>
+
+    <span class="k">return</span> <span class="n">EARTH_RADIUS_KM</span> <span class="o">*</span> <span class="n">c</span></div>
 
 
 
@@ -112,7 +146,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.46 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.geopandas_</a></li> 
       </ul>

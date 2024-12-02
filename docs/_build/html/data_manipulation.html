@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>data_manipulation package &#8212; data_manipulation 0.45 documentation</title>
+    <title>data_manipulation package &#8212; data_manipulation 0.46 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
-    <script src="_static/documentation_options.js?v=d89c9ae5"></script>
+    <script src="_static/documentation_options.js?v=ef64108f"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="commands.html" title="Commands"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.46 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>  
@@ -52,8 +52,8 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>string</strong> (<em>str</em>) – String to clean.</p></li>
-<li><p><strong>remove_parenthesis</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to remove content within parentheses. Defaults to False.</p></li>
-<li><p><strong>remove_brackets</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to remove content within square brackets. Defaults to False.</p></li>
+<li><p><strong>remove_parenthesis</strong> (<em>bool</em>) – Whether to remove content within parentheses.</p></li>
+<li><p><strong>remove_brackets</strong> (<em>bool</em>) – Whether to remove content within square brackets.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -61,6 +61,9 @@
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If input string is None or empty.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -78,7 +81,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.create_encode_url">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">create_encode_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#create_encode_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.create_encode_url" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">create_encode_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#create_encode_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.create_encode_url" title="Link to this definition">¶</a></dt>
 <dd><p>Creates an encoded URL with query parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -93,12 +96,15 @@
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If URL is invalid.</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.delete_list_indices">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">delete_list_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#delete_list_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.delete_list_indices" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">delete_list_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#delete_list_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.delete_list_indices" title="Link to this definition">¶</a></dt>
 <dd><p>Deletes multiple indices from a list in-place.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -115,6 +121,12 @@
 <span class="go">[0, 2, 4]</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.base.deprecated">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">deprecated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/base.html#deprecated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.deprecated" title="Link to this definition">¶</a></dt>
+<dd><p>Decorator to mark functions as deprecated.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -147,7 +159,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.get_none_variation">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_none_variation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_none_variation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_none_variation" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_none_variation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_none_variation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_none_variation" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a list of common variations of None/null values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -166,7 +178,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.get_path_files">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_path_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_path_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_path_files" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_path_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_path_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_path_files" title="Link to this definition">¶</a></dt>
 <dd><p>Returns sorted list of files from given path that contain specified keywords.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -179,7 +191,7 @@
 <dd class="field-even"><p>Sorted list of matching filenames.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -191,7 +203,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.get_string_case_combination">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_string_case_combination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_string_case_combination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_string_case_combination" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">get_string_case_combination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#get_string_case_combination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.get_string_case_combination" title="Link to this definition">¶</a></dt>
 <dd><p>Generates all possible case combinations of a string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -201,7 +213,7 @@
 <dd class="field-even"><p>List of all possible case combinations.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p>List[str]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -213,7 +225,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.list_to_file">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">list_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#list_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.list_to_file" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">list_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#list_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.list_to_file" title="Link to this definition">¶</a></dt>
 <dd><p>Writes list contents to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -232,17 +244,17 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.list_tuple_without_none">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">list_tuple_without_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tuple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#list_tuple_without_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.list_tuple_without_none" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">list_tuple_without_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_tuple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#list_tuple_without_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.list_tuple_without_none" title="Link to this definition">¶</a></dt>
 <dd><p>Removes None variations from a list or tuple.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>list_tuple</strong> (<em>list</em><em> | </em><em>tuple</em>) – Input list or tuple to clean.</p>
+<dd class="field-odd"><p><strong>list_tuple</strong> – Input list or tuple to clean.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List or tuple with None variations removed.</p>
+<dd class="field-even"><p>Cleaned list or tuple.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list | tuple</p>
+<dd class="field-odd"><p>Union[List, Tuple]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If input is not a list or tuple.</p>
@@ -259,17 +271,17 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.parse_ps_aux">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">parse_ps_aux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ps_aux_commands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#parse_ps_aux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.parse_ps_aux" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">parse_ps_aux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ps_aux_commands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#parse_ps_aux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.parse_ps_aux" title="Link to this definition">¶</a></dt>
 <dd><p>Parses Linux ps aux command output into a list of records.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ps_aux_commands</strong> (<em>str</em>) – Linux ps aux command string.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>List of lists, where each inner list represents a process record.</p>
+<dd class="field-even"><p>List of process records.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List[list]</p>
+<dd class="field-odd"><p>List[List[str]]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -280,8 +292,8 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.remove_path_file">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">remove_path_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#remove_path_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.remove_path_file" title="Link to this definition">¶</a></dt>
-<dd><p>Removes all but the n newest files matching the keyword from the specified path.</p>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">remove_path_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyword</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#remove_path_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.remove_path_file" title="Link to this definition">¶</a></dt>
+<dd><p>Removes all but the n newest files matching the keyword.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -301,7 +313,6 @@
 <dt class="sig sig-object py" id="data_manipulation.base.string_boolean_to_int">
 <span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">string_boolean_to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boolean_str_rep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#string_boolean_to_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.string_boolean_to_int" title="Link to this definition">¶</a></dt>
 <dd><p>Converts string boolean representations to integers.</p>
-<p>Deprecated: Will be removed in Python 3.12+</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>boolean_str_rep</strong> (<em>str</em>) – String representation of boolean value.</p>
@@ -324,7 +335,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.base.string_dlt_to_dlt">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">string_dlt_to_dlt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dlt_str_rep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#string_dlt_to_dlt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.string_dlt_to_dlt" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.base.</span></span><span class="sig-name descname"><span class="pre">string_dlt_to_dlt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dlt_str_rep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span></span></span><a class="reference internal" href="_modules/data_manipulation/base.html#string_dlt_to_dlt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.base.string_dlt_to_dlt" title="Link to this definition">¶</a></dt>
 <dd><p>Converts string representation of data structures to actual Python objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -334,7 +345,7 @@
 <dd class="field-even"><p>Converted Python data structure.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict | list | tuple</p>
+<dd class="field-odd"><p>Union[Dict, List, Tuple]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -377,7 +388,7 @@
 <span id="data-manipulation-beautifulsoup-module"></span><h2>data_manipulation.beautifulsoup_ module<a class="headerlink" href="#module-data_manipulation.beautifulsoup_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.beautifulsoup_.build_soup">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.beautifulsoup_.</span></span><span class="sig-name descname"><span class="pre">build_soup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lxml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/beautifulsoup_.html#build_soup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.beautifulsoup_.build_soup" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.beautifulsoup_.</span></span><span class="sig-name descname"><span class="pre">build_soup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'lxml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BeautifulSoup</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/beautifulsoup_.html#build_soup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.beautifulsoup_.build_soup" title="Link to this definition">¶</a></dt>
 <dd><p>Creates a BeautifulSoup object from a given URL.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -385,6 +396,8 @@
 <li><p><strong>url</strong> (<em>str</em>) – URL to fetch and parse.</p></li>
 <li><p><strong>features</strong> (<em>str</em><em>, </em><em>optional</em>) – Parser to use. Defaults to “lxml”.</p></li>
 <li><p><strong>to_preprocess</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to preprocess the HTML. Defaults to True.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Request timeout in seconds. Defaults to 10.</p></li>
+<li><p><strong>headers</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – Custom headers for the request. Defaults to None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -438,13 +451,14 @@
 <span id="data-manipulation-boto3-module"></span><h2>data_manipulation.boto3_ module<a class="headerlink" href="#module-data_manipulation.boto3_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.boto3_.list_s3_bucket_files">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.boto3_.</span></span><span class="sig-name descname"><span class="pre">list_s3_bucket_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_dateframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/boto3_.html#list_s3_bucket_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.boto3_.list_s3_bucket_files" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.boto3_.</span></span><span class="sig-name descname"><span class="pre">list_s3_bucket_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_dateframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pd.DataFrame</span></span></span><a class="reference internal" href="_modules/data_manipulation/boto3_.html#list_s3_bucket_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.boto3_.list_s3_bucket_files" title="Link to this definition">¶</a></dt>
 <dd><p>Lists all files in an S3 bucket.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>bucket</strong> (<em>str</em>) – Name of the S3 bucket.</p></li>
 <li><p><strong>to_dateframe</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return results as pandas DataFrame. Defaults to False.</p></li>
+<li><p><strong>prefix</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Filter results to files with this prefix. Defaults to None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -456,7 +470,7 @@ If to_dateframe is False, returns list of file keys.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[list, pd.DataFrame]</p>
+<dd class="field-odd"><p>Union[List[str], pd.DataFrame]</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -474,7 +488,7 @@ If to_dateframe is False, returns list of file keys.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.boto3_.send_aws_ses_email">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.boto3_.</span></span><span class="sig-name descname"><span class="pre">send_aws_ses_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attachment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/boto3_.html#send_aws_ses_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.boto3_.send_aws_ses_email" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.boto3_.</span></span><span class="sig-name descname"><span class="pre">send_aws_ses_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ses_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attachment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_attachment_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10485760</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/boto3_.html#send_aws_ses_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.boto3_.send_aws_ses_email" title="Link to this definition">¶</a></dt>
 <dd><p>Sends an email using AWS SES service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -486,6 +500,10 @@ If to_dateframe is False, returns list of file keys.</p>
 <li><p><strong>body_type</strong> (<em>str</em>) – MIME type of email body (e.g., ‘plain’, ‘html’).</p></li>
 <li><p><strong>ses_client</strong> – AWS SES client instance.</p></li>
 <li><p><strong>attachment</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to file to attach. Defaults to None.</p></li>
+<li><p><strong>max_attachment_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum allowed attachment size in bytes.
+Defaults to 10MB.</p></li>
+<li><p><strong>max_retries</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of retry attempts for failed sends.
+Defaults to 3.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -506,7 +524,7 @@ If to_dateframe is False, returns list of file keys.</p>
 <span id="data-manipulation-cryptography-module"></span><h2>data_manipulation.cryptography_ module<a class="headerlink" href="#module-data_manipulation.cryptography_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.cryptography_.decrypt_fernet_data">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.cryptography_.</span></span><span class="sig-name descname"><span class="pre">decrypt_fernet_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/data_manipulation/cryptography_.html#decrypt_fernet_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.cryptography_.decrypt_fernet_data" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.cryptography_.</span></span><span class="sig-name descname"><span class="pre">decrypt_fernet_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/data_manipulation/cryptography_.html#decrypt_fernet_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.cryptography_.decrypt_fernet_data" title="Link to this definition">¶</a></dt>
 <dd><p>Decrypts a file using Fernet symmetric encryption.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -522,20 +540,18 @@ If to_dateframe is False, returns list of file keys.</p>
 <dd class="field-odd"><p>str</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If keypath or filepath are not strings.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If key file or input file doesn’t exist</p></li>
+<li><p><strong>InvalidToken</strong> – If the key is invalid or data is corrupted</p></li>
+<li><p><strong>TypeError</strong> – If input types are incorrect</p></li>
+</ul>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decrypted</span> <span class="o">=</span> <span class="n">decrypt_fernet_data</span><span class="p">(</span><span class="s1">&#39;key.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;encrypted_data.txt&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">decrypted</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.cryptography_.encrypt_fernet_file">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.cryptography_.</span></span><span class="sig-name descname"><span class="pre">encrypt_fernet_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/data_manipulation/cryptography_.html#encrypt_fernet_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.cryptography_.encrypt_fernet_file" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.cryptography_.</span></span><span class="sig-name descname"><span class="pre">encrypt_fernet_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/data_manipulation/cryptography_.html#encrypt_fernet_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.cryptography_.encrypt_fernet_file" title="Link to this definition">¶</a></dt>
 <dd><p>Encrypts a file using Fernet symmetric encryption.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -564,7 +580,7 @@ If to_dateframe is False, returns list of file keys.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.cryptography_.generate_fernet_key">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.cryptography_.</span></span><span class="sig-name descname"><span class="pre">generate_fernet_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/data_manipulation/cryptography_.html#generate_fernet_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.cryptography_.generate_fernet_key" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.cryptography_.</span></span><span class="sig-name descname"><span class="pre">generate_fernet_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/data_manipulation/cryptography_.html#generate_fernet_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.cryptography_.generate_fernet_key" title="Link to this definition">¶</a></dt>
 <dd><p>Generates and saves a Fernet encryption key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -596,11 +612,14 @@ If to_dateframe is False, returns list of file keys.</p>
 <span id="data-manipulation-django-module"></span><h2>data_manipulation.django_ module<a class="headerlink" href="#module-data_manipulation.django_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.django_.django_validate_email">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">django_validate_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#django_validate_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.django_validate_email" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">django_validate_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whitelist_domains</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#django_validate_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.django_validate_email" title="Link to this definition">¶</a></dt>
 <dd><p>Validates an email address using Django’s validator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>email</strong> (<em>str</em>) – Email address to validate.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>email</strong> (<em>str</em>) – Email address to validate.</p></li>
+<li><p><strong>whitelist_domains</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of allowed email domains.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The validated email address if valid, None if invalid.</p>
@@ -612,7 +631,9 @@ If to_dateframe is False, returns list of file keys.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">django_validate_email</span><span class="p">(</span><span class="s2">&quot;valid@email.com&quot;</span><span class="p">)</span>
 <span class="go">&#39;valid@email.com&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">django_validate_email</span><span class="p">(</span><span class="s2">&quot;invalid@email&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">django_validate_email</span><span class="p">(</span><span class="s2">&quot;valid@email.com&quot;</span><span class="p">,</span> <span class="n">whitelist_domains</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;email.com&quot;</span><span class="p">])</span>
+<span class="go">&#39;valid@email.com&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">django_validate_email</span><span class="p">(</span><span class="s2">&quot;valid@email.com&quot;</span><span class="p">,</span> <span class="n">whitelist_domains</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;other.com&quot;</span><span class="p">]))</span>
 <span class="go">None</span>
 </pre></div>
 </div>
@@ -651,11 +672,14 @@ If to_dateframe is False, returns list of file keys.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.django_.django_validate_url">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">django_validate_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#django_validate_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.django_validate_url" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">django_validate_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_schemes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#django_validate_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.django_validate_url" title="Link to this definition">¶</a></dt>
 <dd><p>Validates a URL using Django’s URL validator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – URL to validate.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – URL to validate.</p></li>
+<li><p><strong>allowed_schemes</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – List of allowed URL schemes (e.g., [‘http’, ‘https’]).</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The validated URL if valid, None if invalid.</p>
@@ -664,59 +688,50 @@ If to_dateframe is False, returns list of file keys.</p>
 <dd class="field-odd"><p>Optional[str]</p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">django_validate_url</span><span class="p">(</span><span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span>
-<span class="go">&#39;https://www.example.com&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">django_validate_url</span><span class="p">(</span><span class="s2">&quot;invalid-url&quot;</span><span class="p">))</span>
-<span class="go">None</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.django_.get_django_countries_dict">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">get_django_countries_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#get_django_countries_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.get_django_countries_dict" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">get_django_countries_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#get_django_countries_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.get_django_countries_dict" title="Link to this definition">¶</a></dt>
 <dd><p>Retrieves dictionaries mapping country codes to names and vice versa.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
-<dt>A tuple containing two dictionaries:</dt><dd><ul class="simple">
-<li><p>code_name: Dict mapping country codes to uppercase country names (e.g., “SG”: “SINGAPORE”)</p></li>
-<li><p>name_code: Dict mapping uppercase country names to codes (e.g., “SINGAPORE”: “SG”)</p></li>
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>code_name: Dict mapping country codes to uppercase country names</p></li>
+<li><p>name_code: Dict mapping uppercase country names to codes</p></li>
 </ul>
 </dd>
 </dl>
 </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple[dict, dict]</p>
+<dd class="field-even"><p>Tuple[Dict[str, str], Dict[str, str]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ImportError</strong> – If django-countries package is not installed.</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires django-countries package to be installed.</p>
-</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.django_.init_django">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">init_django</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">django_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#init_django"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.init_django" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.django_.</span></span><span class="sig-name descname"><span class="pre">init_django</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">django_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/django_.html#init_django"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.django_.init_django" title="Link to this definition">¶</a></dt>
 <dd><p>Initializes Django environment for external Python scripts or notebooks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>django_dir</strong> (<em>str</em>) – Path to Django project directory.</p></li>
-<li><p><strong>project_name</strong> (<em>str</em>) – Name of the Django project.</p></li>
+<li><p><strong>project_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Name of the Django project. If None, will check DJANGO_PROJECT env var.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Exception</strong> – If project_name is not provided and DJANGO_PROJECT environment variable is not set.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If project_name is not provided and DJANGO_PROJECT environment variable is not set.</p></li>
+<li><p><strong>ImportError</strong> – If Django cannot be imported or setup fails.</p></li>
+</ul>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Reference: <a class="reference external" href="https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe">https://gist.github.com/codingforentrepreneurs/76e570d759f83d690bf36a8a8fa4cfbe</a></p>
-</div>
 </dd></dl>
 
 </section>
@@ -727,35 +742,40 @@ If to_dateframe is False, returns list of file keys.</p>
 <span id="data-manipulation-geopandas-module"></span><h2>data_manipulation.geopandas_ module<a class="headerlink" href="#module-data_manipulation.geopandas_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.geopandas_.haversine_np">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.geopandas_.</span></span><span class="sig-name descname"><span class="pre">haversine_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/data_manipulation/geopandas_.html#haversine_np"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.geopandas_.haversine_np" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.geopandas_.</span></span><span class="sig-name descname"><span class="pre">haversine_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NumericType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NumericType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">longitude2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NumericType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NumericType</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NumericType</span></span></span><a class="reference internal" href="_modules/data_manipulation/geopandas_.html#haversine_np"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.geopandas_.haversine_np" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates the great circle distance between two points on Earth.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>longitude1</strong> (<em>float</em>) – Longitude of the first point in decimal degrees.</p></li>
-<li><p><strong>latitude1</strong> (<em>float</em>) – Latitude of the first point in decimal degrees.</p></li>
-<li><p><strong>longitude2</strong> (<em>float</em>) – Longitude of the second point in decimal degrees.</p></li>
-<li><p><strong>latitude2</strong> (<em>float</em>) – Latitude of the second point in decimal degrees.</p></li>
+<li><p><strong>longitude1</strong> (<em>float</em><em> | </em><em>ndarray</em>) – Longitude of the first point(s) in decimal degrees.</p></li>
+<li><p><strong>latitude1</strong> (<em>float</em><em> | </em><em>ndarray</em>) – Latitude of the first point(s) in decimal degrees.</p></li>
+<li><p><strong>longitude2</strong> (<em>float</em><em> | </em><em>ndarray</em>) – Longitude of the second point(s) in decimal degrees.</p></li>
+<li><p><strong>latitude2</strong> (<em>float</em><em> | </em><em>ndarray</em>) – Latitude of the second point(s) in decimal degrees.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Distance between the points in kilometers.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>float | ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If latitude values are outside [-90, 90] or longitude values outside [-180, 180].</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">haversine_np</span><span class="p">(</span><span class="o">-</span><span class="mf">0.127758</span><span class="p">,</span> <span class="mf">51.507351</span><span class="p">,</span> <span class="mf">103.819836</span><span class="p">,</span> <span class="mf">1.352083</span><span class="p">)</span>  <span class="c1"># London to Singapore</span>
 <span class="go">10880.39...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">haversine_np</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.127758</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">51.507351</span><span class="p">]),</span>
+<span class="gp">... </span>            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">103.819836</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.352083</span><span class="p">]))</span>
+<span class="go">array([10880.39...])</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Uses the Haversine formula to calculate great circle distances.
 Earth radius is assumed to be 6371 km.
-Reference: <a class="reference external" href="https://stackoverflow.com/a/4913653">https://stackoverflow.com/a/4913653</a>
-Reference: <a class="reference external" href="https://stackoverflow.com/a/29546836">https://stackoverflow.com/a/29546836</a></p>
+Supports both scalar and numpy array inputs for vectorized calculations.</p>
 </div>
 </dd></dl>
 
@@ -764,7 +784,7 @@ Reference: <a class="reference external" href="https://stackoverflow.com/a/29546
 <span id="data-manipulation-kerberos-module"></span><h2>data_manipulation.kerberos_ module<a class="headerlink" href="#module-data_manipulation.kerberos_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.kerberos_.keytab_valid">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.kerberos_.</span></span><span class="sig-name descname"><span class="pre">keytab_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keytab_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">principal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CompletedProcess</span></span></span><a class="reference internal" href="_modules/data_manipulation/kerberos_.html#keytab_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.kerberos_.keytab_valid" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.kerberos_.</span></span><span class="sig-name descname"><span class="pre">keytab_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keytab_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">principal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CompletedProcess</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/kerberos_.html#keytab_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.kerberos_.keytab_valid" title="Link to this definition">¶</a></dt>
 <dd><p>Validates a Kerberos keytab file using kinit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -785,7 +805,14 @@ Reference: <a class="reference external" href="https://stackoverflow.com/a/29546
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>subprocess.CompletedProcess</p>
+<dd class="field-odd"><p>subprocess.CompletedProcess[str]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If keytab file doesn’t exist or inputs are invalid</p></li>
+<li><p><strong>FileNotFoundError</strong> – If kinit command is not available</p></li>
+<li><p><strong>subprocess.SubprocessError</strong> – If command execution fails</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -794,20 +821,22 @@ Reference: <a class="reference external" href="https://stackoverflow.com/a/29546
 <span class="go">True</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires a working Kerberos installation with kinit command available.
-Logs the validation result using loguru logger.</p>
-</div>
 </dd></dl>
 
 </section>
 <section id="module-data_manipulation.mysql_connector_python_">
 <span id="data-manipulation-mysql-connector-python-module"></span><h2>data_manipulation.mysql_connector_python_ module<a class="headerlink" href="#module-data_manipulation.mysql_connector_python_" title="Link to this heading">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.DatabaseError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">DatabaseError</span></span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#DatabaseError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.DatabaseError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Custom exception for database-related errors.</p>
+</dd></dl>
+
 <dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.create_connection">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#create_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.create_connection" title="Link to this definition">¶</a></dt>
-<dd><p>Creates a connection to a MySQL database.</p>
+<dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.create_connection_pool">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">create_connection_pool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#create_connection_pool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.create_connection_pool" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a connection pool for MySQL database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -816,68 +845,74 @@ Logs the validation result using loguru logger.</p>
 <li><p><strong>user</strong> (<em>str</em>) – Username for authentication.</p></li>
 <li><p><strong>password</strong> (<em>str</em>) – Password for authentication.</p></li>
 <li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Database port number. Defaults to 3306.</p></li>
+<li><p><strong>pool_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the connection pool. Defaults to 5.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Database connection object if successful,</dt><dd><p>None if connection fails.</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>Database connection pool object.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>mysql.connector.connection_cext.CMySQLConnection</p>
+<dd class="field-odd"><p>Any</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#data_manipulation.mysql_connector_python_.DatabaseError" title="data_manipulation.mysql_connector_python_.DatabaseError"><strong>DatabaseError</strong></a> – If pool creation fails.</p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">mysql</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">connection_cext</span><span class="o">.</span><span class="n">CMySQLConnection</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires mysql-connector-python package.
-Connection failures are logged using loguru logger.</p>
-</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.execute_query">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#execute_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.execute_query" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#execute_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.execute_query" title="Link to this definition">¶</a></dt>
 <dd><p>Executes a MySQL query with parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>mysql.connector.connection_cext.CMySQLConnection</em>) – Active MySQL connection.</p></li>
+<li><p><strong>connection</strong> (<em>ConnectionType</em>) – Active MySQL connection.</p></li>
 <li><p><strong>sql_query</strong> (<em>str</em>) – SQL query to execute.</p></li>
-<li><p><strong>data</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>tuple</em><em>]</em>) – Parameters for the SQL query.</p></li>
-<li><p><strong>commit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to commit the transaction. Defaults to True.</p></li>
+<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>dict</em><em>, </em><em>tuple</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – Parameters for the SQL query.</p></li>
+<li><p><strong>fetch</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to fetch results. Defaults to False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Last inserted row ID if successful and query was an insert,</dt><dd><p>None if query fails or no insert ID is available.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p>For INSERT: Last inserted row ID</p></li>
+<li><p>For SELECT: List of dictionaries containing the results</p></li>
+<li><p>None for other operations or on failure</p></li>
+</ul>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[int]</p>
+<dd class="field-odd"><p>Union[Optional[int], List[Dict[str, Any]], None]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#data_manipulation.mysql_connector_python_.DatabaseError" title="data_manipulation.mysql_connector_python_.DatabaseError"><strong>DatabaseError</strong></a> – If query execution fails.</p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO users (name) VALUES (</span><span class="si">%(name)s</span><span class="s2">)&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">execute_query</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">})</span>
-<span class="go">1  # Returns the new user&#39;s ID</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Automatically commits transaction if commit=True.
-Query failures are logged using loguru logger.</p>
-</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.mysql_connector_python_.get_connection">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.mysql_connector_python_.</span></span><span class="sig-name descname"><span class="pre">get_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/data_manipulation/mysql_connector_python_.html#get_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.mysql_connector_python_.get_connection" title="Link to this definition">¶</a></dt>
+<dd><p>Context manager for database connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – Database host address.</p></li>
+<li><p><strong>dbname</strong> (<em>str</em>) – Database name to connect to.</p></li>
+<li><p><strong>user</strong> (<em>str</em>) – Username for authentication.</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Password for authentication.</p></li>
+<li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Database port number. Defaults to 3306.</p></li>
+<li><p><strong>use_pool</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use connection pooling. Defaults to False.</p></li>
+<li><p><strong>pool</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em><em>, </em><em>optional</em>) – Existing connection pool.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>ConnectionType</em> – Database connection object.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#data_manipulation.mysql_connector_python_.DatabaseError" title="data_manipulation.mysql_connector_python_.DatabaseError"><strong>DatabaseError</strong></a> – If connection fails.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -885,7 +920,7 @@ Query failures are logged using loguru logger.</p>
 <span id="data-manipulation-openldap-module"></span><h2>data_manipulation.openldap_ module<a class="headerlink" href="#module-data_manipulation.openldap_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.openldap_.ldapsearch">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.openldap_.</span></span><span class="sig-name descname"><span class="pre">ldapsearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ldap_uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bind_dn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CompletedProcess</span></span></span><a class="reference internal" href="_modules/data_manipulation/openldap_.html#ldapsearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.openldap_.ldapsearch" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.openldap_.</span></span><span class="sig-name descname"><span class="pre">ldapsearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ldap_uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bind_dn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CompletedProcess</span></span></span><a class="reference internal" href="_modules/data_manipulation/openldap_.html#ldapsearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.openldap_.ldapsearch" title="Link to this definition">¶</a></dt>
 <dd><p>Executes an LDAP search query using the ldapsearch command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -894,22 +929,21 @@ Query failures are logged using loguru logger.</p>
 <li><p><strong>ldap_uri</strong> (<em>str</em>) – LDAP server URI (e.g., “<a class="reference external" href="ldap://example.com:389">ldap://example.com:389</a>”).</p></li>
 <li><p><strong>bind_dn</strong> (<em>str</em>) – Distinguished Name (DN) for binding to the LDAP server.</p></li>
 <li><p><strong>password</strong> (<em>str</em>) – Password for authentication.</p></li>
-<li><p><strong>filter</strong> (<em>str</em>) – LDAP search filter (e.g., “(objectClass=person)”).</p></li>
+<li><p><strong>search_filter</strong> (<em>str</em>) – LDAP search filter (e.g., “(objectClass=person)”).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Result of the ldapsearch command execution containing:</dt><dd><ul class="simple">
-<li><p>returncode: 0 if successful, non-zero if failed</p></li>
-<li><p>stdout: Standard output containing search results</p></li>
-<li><p>stderr: Standard error messages if any</p></li>
-</ul>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>Result of the ldapsearch command execution.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>subprocess.CompletedProcess</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If any input parameters are empty or invalid.</p></li>
+<li><p><strong>subprocess.SubprocessError</strong> – If the ldapsearch command fails to execute.</p></li>
+<li><p><strong>FileNotFoundError</strong> – If ldapsearch command is not available.</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -924,11 +958,12 @@ Query failures are logged using loguru logger.</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires OpenLDAP client tools to be installed (ldapsearch command).
-Command is executed through subprocess with shell=True, use caution with input validation.</p>
-</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.openldap_.validate_ldap_uri">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.openldap_.</span></span><span class="sig-name descname"><span class="pre">validate_ldap_uri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/data_manipulation/openldap_.html#validate_ldap_uri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.openldap_.validate_ldap_uri" title="Link to this definition">¶</a></dt>
+<dd><p>Validate LDAP URI format.</p>
 </dd></dl>
 
 </section>
@@ -1582,305 +1617,8 @@ Single-value columns may be candidates for removal or conversion to constants.</
 <section id="module-data_manipulation.prometheus_">
 <span id="data-manipulation-prometheus-module"></span><h2>data_manipulation.prometheus_ module<a class="headerlink" href="#module-data_manipulation.prometheus_" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-data_manipulation.psycopg_">
-<span id="data-manipulation-psycopg-module"></span><h2>data_manipulation.psycopg_ module<a class="headerlink" href="#module-data_manipulation.psycopg_" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg_.create_connection">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg_.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5432</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Connection</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg_.html#create_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg_.create_connection" title="Link to this definition">¶</a></dt>
-<dd><p>Creates and returns a connection to a PostgreSQL database.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>host</strong> (<em>str</em>) – Database host address (e.g., ‘localhost’ or IP address)</p></li>
-<li><p><strong>dbname</strong> (<em>str</em>) – Name of the database to connect to</p></li>
-<li><p><strong>user</strong> (<em>str</em>) – Username for database authentication</p></li>
-<li><p><strong>password</strong> (<em>str</em>) – Password for database authentication</p></li>
-<li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Database port number. Defaults to 5432.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Database connection object if successful, None if connection fails</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>psycopg.Connection</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg.OperationalError</strong> – If connection to database fails</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg_.execute_sql">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg_.</span></span><span class="sig-name descname"><span class="pre">execute_sql</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg_.html#execute_sql"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg_.execute_sql" title="Link to this definition">¶</a></dt>
-<dd><p>Executes a SQL query with provided data and optionally commits the transaction.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg.Connection</em>) – Active database connection</p></li>
-<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query string with placeholders for data</p></li>
-<li><p><strong>data</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>tuple</em><em>]</em>) – Data to be inserted into the query placeholders.
-Can be either a dictionary for named parameters or a tuple for positional parameters.</p></li>
-<li><p><strong>commit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to commit the transaction. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg.OperationalError</strong> – If query execution fails</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When using dictionary data, ensure your SQL query uses named parameters (%(name)s)
-rather than positional parameters (%s) to avoid adaptation errors.</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg_.query_to_pandas">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg_.</span></span><span class="sig-name descname"><span class="pre">query_to_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg_.html#query_to_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg_.query_to_pandas" title="Link to this definition">¶</a></dt>
-<dd><p>Executes a SQL query and returns the results as a pandas DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg.Connection</em>) – Active database connection</p></li>
-<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query to execute</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Query results as a pandas DataFrame</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">connection</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">dbname</span><span class="o">=</span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;pass&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">query_to_pandas</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM users LIMIT 5;&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</section>
-<section id="module-data_manipulation.psycopg2_">
-<span id="data-manipulation-psycopg2-module"></span><h2>data_manipulation.psycopg2_ module<a class="headerlink" href="#module-data_manipulation.psycopg2_" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.create_connection">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5432</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">connection</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#create_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.create_connection" title="Link to this definition">¶</a></dt>
-<dd><p>Creates and returns a connection to a PostgreSQL database.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>host</strong> (<em>str</em>) – Database host address (e.g., ‘localhost’ or IP address)</p></li>
-<li><p><strong>dbname</strong> (<em>str</em>) – Name of the database to connect to</p></li>
-<li><p><strong>user</strong> (<em>str</em>) – Username for database authentication</p></li>
-<li><p><strong>password</strong> (<em>str</em>) – Password for database authentication</p></li>
-<li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Database port number. Defaults to 5432.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Database connection object if successful,</dt><dd><p>None if connection fails</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[psycopg2.extensions.connection]</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg2.OperationalError</strong> – If connection to database fails</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">)</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.execute_query">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">execute_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#execute_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.execute_query" title="Link to this definition">¶</a></dt>
-<dd><p>Executes a SQL query with optional parameters and transaction control.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg2.extensions.connection</em>) – Active PostgreSQL connection</p></li>
-<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query string with placeholders for parameters</p></li>
-<li><p><strong>data</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>tuple</em><em>, </em><em>None</em><em>]</em><em>, </em><em>optional</em>) – Parameters for the SQL query.
-Use dict for named parameters (%(name)s) or tuple for positional parameters (%s).
-Defaults to None.</p></li>
-<li><p><strong>commit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to commit the transaction. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Number of rows affected by the query if successful, None if query fails</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[int]</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg2.OperationalError</strong> – If query execution fails</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO users (name, age) VALUES (</span><span class="si">%(name)s</span><span class="s2">, </span><span class="si">%(age)s</span><span class="s2">)&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">execute_query</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">})</span>
-<span class="go">1  # One row inserted</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.execute_values">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">execute_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#execute_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.execute_values" title="Link to this definition">¶</a></dt>
-<dd><p>Efficiently performs bulk insertion of multiple rows into a PostgreSQL table.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg2.extensions.connection</em>) – Active PostgreSQL connection</p></li>
-<li><p><strong>table</strong> (<em>str</em>) – Target table name for insertion</p></li>
-<li><p><strong>columns</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of column names in the target table</p></li>
-<li><p><strong>values</strong> (<em>List</em><em>[</em><em>tuple</em><em>]</em>) – List of value tuples to insert, each tuple corresponding
-to one row of data</p></li>
-<li><p><strong>commit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to commit the transaction. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Number of rows successfully inserted if successful, None if operation fails</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[int]</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg2.OperationalError</strong> – If bulk insertion fails</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vals</span> <span class="o">=</span> <span class="p">[</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;john@example.com&quot;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;Jane Smith&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;jane@example.com&quot;</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">execute_values</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
-<span class="go">2  # Two rows inserted</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.get_table_columns">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">get_table_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#get_table_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.get_table_columns" title="Link to this definition">¶</a></dt>
-<dd><p>Retrieves a list of column names from a specified PostgreSQL table.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg2.extensions.connection</em>) – Active PostgreSQL connection</p></li>
-<li><p><strong>table</strong> (<em>str</em>) – Name of the table to query</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>List of column names in order of their position in the table,</dt><dd><p>None if query fails</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[List[str]]</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg2.OperationalError</strong> – If column information retrieval fails</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">get_table_columns</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s2">&quot;users&quot;</span><span class="p">)</span>
-<span class="go">[&#39;id&#39;, &#39;name&#39;, &#39;email&#39;, &#39;age&#39;, &#39;created_at&#39;]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.get_table_schema">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">get_table_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#get_table_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.get_table_schema" title="Link to this definition">¶</a></dt>
-<dd><p>Retrieves detailed schema information for a specified PostgreSQL table.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg2.extensions.connection</em>) – Active PostgreSQL connection</p></li>
-<li><p><strong>table</strong> (<em>str</em>) – Name of the table to query</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>List of tuples containing column information:</dt><dd><p>(column_name, data_type, character_maximum_length, is_nullable)
-Returns None if query fails</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Optional[List[tuple]]</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>psycopg2.OperationalError</strong> – If schema information retrieval fails</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">get_table_schema</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s2">&quot;users&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column: </span><span class="si">{</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, Type: </span><span class="si">{</span><span class="n">col</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, Max Length: </span><span class="si">{</span><span class="n">col</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">, Nullable: </span><span class="si">{</span><span class="n">col</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="go">Column: id, Type: integer, Max Length: None, Nullable: NO</span>
-<span class="go">Column: name, Type: character varying, Max Length: 255, Nullable: YES</span>
-<span class="go">Column: created_at, Type: timestamp, Max Length: None, Nullable: NO</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="data_manipulation.psycopg2_.query_to_pandas">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.psycopg2_.</span></span><span class="sig-name descname"><span class="pre">query_to_pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sql_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/data_manipulation/psycopg2_.html#query_to_pandas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.psycopg2_.query_to_pandas" title="Link to this definition">¶</a></dt>
-<dd><p>Executes a SQL query and returns the results as a pandas DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>connection</strong> (<em>psycopg2.extensions.connection</em>) – Active PostgreSQL connection</p></li>
-<li><p><strong>sql_query</strong> (<em>str</em>) – SQL query to execute</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Query results converted to a pandas DataFrame</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>psycopg2.OperationalError</strong> – If query execution fails</p></li>
-<li><p><strong>pd.io.sql.DatabaseError</strong> – If DataFrame conversion fails</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;mydb&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">query_to_pandas</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="gp">... </span><span class="s1">    SELECT name, age, email</span>
-<span class="gp">... </span><span class="s1">    FROM users</span>
-<span class="gp">... </span><span class="s1">    WHERE age &gt; 25</span>
-<span class="gp">... </span><span class="s1">    ORDER BY age DESC</span>
-<span class="gp">... </span><span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="go">   name  age           email</span>
-<span class="go">0  John   30  john@example.com</span>
-</pre></div>
-</div>
-</dd></dl>
-
+<section id="data-manipulation-postgres-module">
+<h2>data_manipulation.postgres_ module<a class="headerlink" href="#data-manipulation-postgres-module" title="Link to this heading">¶</a></h2>
 </section>
 <section id="module-data_manipulation.pyspark_">
 <span id="data-manipulation-pyspark-module"></span><h2>data_manipulation.pyspark_ module<a class="headerlink" href="#module-data_manipulation.pyspark_" title="Link to this heading">¶</a></h2>
@@ -2221,56 +1959,51 @@ Use float(‘inf’) for all groups. Defaults to 10.</p></li>
 <span id="data-manipulation-smtplib-module"></span><h2>data_manipulation.smtplib_ module<a class="headerlink" href="#module-data_manipulation.smtplib_" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.smtplib_.send_email">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.smtplib_.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">html</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smtp_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/smtplib_.html#send_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.smtplib_.send_email" title="Link to this definition">¶</a></dt>
-<dd><p>Sends an HTML email using SMTP and logs the operation.</p>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.smtplib_.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">html</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smtp_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smtp_port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">587</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smtp_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smtp_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/data_manipulation/smtplib_.html#send_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.smtplib_.send_email" title="Link to this definition">¶</a></dt>
+<dd><p>Sends an HTML email using SMTP with TLS and logs the operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>logname</strong> (<em>str</em>) – Path to the log file where email sending operations will be recorded</p></li>
+<li><p><strong>logname</strong> (<em>str</em>) – Path to the log file</p></li>
 <li><p><strong>message_subject</strong> (<em>str</em>) – Subject line of the email</p></li>
 <li><p><strong>message_sender</strong> (<em>str</em>) – Email address of the sender</p></li>
 <li><p><strong>message_receiver</strong> (<em>str</em>) – Email address of the recipient</p></li>
 <li><p><strong>html</strong> (<em>str</em>) – HTML content of the email body</p></li>
-<li><p><strong>smtp_address</strong> (<em>str</em>) – SMTP server address (e.g., ‘smtp.gmail.com:587’)</p></li>
+<li><p><strong>smtp_address</strong> (<em>str</em>) – SMTP server address (e.g., ‘smtp.gmail.com’)</p></li>
+<li><p><strong>smtp_port</strong> (<em>int</em><em>, </em><em>optional</em>) – SMTP server port. Defaults to 587.</p></li>
+<li><p><strong>smtp_username</strong> (<em>str</em><em>, </em><em>optional</em>) – SMTP authentication username</p></li>
+<li><p><strong>smtp_password</strong> (<em>str</em><em>, </em><em>optional</em>) – SMTP authentication password</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if email was sent successfully, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>TypeError</strong> – If any of the input parameters are not strings</p></li>
-<li><p><strong>smtplib.SMTPException</strong> – If email sending fails</p></li>
-<li><p><strong>IOError</strong> – If log file cannot be accessed or created</p></li>
+<li><p><strong>ValueError</strong> – If required parameters are empty or invalid</p></li>
+<li><p><strong>SMTPException</strong> – If email sending fails</p></li>
+<li><p><strong>IOError</strong> – If log file cannot be accessed</p></li>
 </ul>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">send_email</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">logname</span><span class="o">=</span><span class="s1">&#39;email.log&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">message_subject</span><span class="o">=</span><span class="s1">&#39;Test Email&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">message_sender</span><span class="o">=</span><span class="s1">&#39;sender@example.com&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">message_receiver</span><span class="o">=</span><span class="s1">&#39;recipient@example.com&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">html</span><span class="o">=</span><span class="s1">&#39;&lt;h1&gt;Hello World&lt;/h1&gt;&lt;p&gt;This is a test email.&lt;/p&gt;&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">smtp_address</span><span class="o">=</span><span class="s1">&#39;smtp.gmail.com:587&#39;</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="go"># Email sent successfully and logged to email.log</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>All parameters must be strings</p></li>
-<li><p>The HTML content should be properly formatted HTML</p></li>
-<li><p>The function will log both successful sends and failures</p></li>
-<li><p>Make sure the SMTP server address is correctly formatted with port if needed</p></li>
-</ul>
-</div>
 </dd></dl>
 
 </section>
 <section id="module-data_manipulation.sqlalchemy_">
 <span id="data-manipulation-sqlalchemy-module"></span><h2>data_manipulation.sqlalchemy_ module<a class="headerlink" href="#module-data_manipulation.sqlalchemy_" title="Link to this heading">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="data_manipulation.sqlalchemy_.DatabaseConnectionError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_manipulation.sqlalchemy_.</span></span><span class="sig-name descname"><span class="pre">DatabaseConnectionError</span></span><a class="reference internal" href="_modules/data_manipulation/sqlalchemy_.html#DatabaseConnectionError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.sqlalchemy_.DatabaseConnectionError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Custom exception for database connection errors.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.sqlalchemy_.create_sqlalchemy_engine">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.sqlalchemy_.</span></span><span class="sig-name descname"><span class="pre">create_sqlalchemy_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drivername</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Engine</span></span></span><a class="reference internal" href="_modules/data_manipulation/sqlalchemy_.html#create_sqlalchemy_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.sqlalchemy_.create_sqlalchemy_engine" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.sqlalchemy_.</span></span><span class="sig-name descname"><span class="pre">create_sqlalchemy_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drivername</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_overflow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connect_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_ca</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Engine</span></span></span><a class="reference internal" href="_modules/data_manipulation/sqlalchemy_.html#create_sqlalchemy_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.sqlalchemy_.create_sqlalchemy_engine" title="Link to this definition">¶</a></dt>
 <dd><p>Creates and tests a SQLAlchemy engine for database operations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2287,6 +2020,11 @@ Use float(‘inf’) for all groups. Defaults to 10.</p></li>
 <li><p><strong>user</strong> (<em>str</em>) – Database username for authentication</p></li>
 <li><p><strong>password</strong> (<em>str</em>) – Database password for authentication</p></li>
 <li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Database server port number. Defaults to 3306.</p></li>
+<li><p><strong>pool_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The size of the connection pool. Defaults to 5.</p></li>
+<li><p><strong>max_overflow</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum number of connections above pool_size. Defaults to 10.</p></li>
+<li><p><strong>pool_timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Timeout for getting a connection from pool. Defaults to 30.</p></li>
+<li><p><strong>connect_timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Timeout for database connections. Defaults to 10.</p></li>
+<li><p><strong>ssl_ca</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Path to SSL CA certificate. Defaults to None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2296,7 +2034,7 @@ Use float(‘inf’) for all groups. Defaults to 10.</p></li>
 <dd class="field-odd"><p>sqlalchemy.engine.base.Engine</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>sqlalchemy.exc.SQLAlchemyError</strong> – If engine creation or connection test fails</p>
+<dd class="field-even"><p><a class="reference internal" href="#data_manipulation.sqlalchemy_.DatabaseConnectionError" title="data_manipulation.sqlalchemy_.DatabaseConnectionError"><strong>DatabaseConnectionError</strong></a> – If engine creation or connection test fails</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -2322,7 +2060,7 @@ while failures will be logged as errors with the specific exception message.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="data_manipulation.sqlalchemy_.create_sqlalchemy_url">
-<span class="sig-prename descclassname"><span class="pre">data_manipulation.sqlalchemy_.</span></span><span class="sig-name descname"><span class="pre">create_sqlalchemy_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drivername</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">URL</span></span></span><a class="reference internal" href="_modules/data_manipulation/sqlalchemy_.html#create_sqlalchemy_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.sqlalchemy_.create_sqlalchemy_url" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.sqlalchemy_.</span></span><span class="sig-name descname"><span class="pre">create_sqlalchemy_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drivername</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dbname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3306</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">URL</span></span></span><a class="reference internal" href="_modules/data_manipulation/sqlalchemy_.html#create_sqlalchemy_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.sqlalchemy_.create_sqlalchemy_url" title="Link to this definition">¶</a></dt>
 <dd><p>Creates a SQLAlchemy URL object for database connection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2339,6 +2077,8 @@ while failures will be logged as errors with the specific exception message.</p>
 <li><p><strong>user</strong> (<em>str</em>) – Database username for authentication</p></li>
 <li><p><strong>password</strong> (<em>str</em>) – Database password for authentication</p></li>
 <li><p><strong>port</strong> (<em>int</em><em>, </em><em>optional</em>) – Database server port number. Defaults to 3306.</p></li>
+<li><p><strong>query</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – Additional connection parameters.
+Useful for SSL configuration. Defaults to None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -2363,6 +2103,17 @@ while failures will be logged as errors with the specific exception message.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="data_manipulation.sqlalchemy_.dispose_engine">
+<span class="sig-prename descclassname"><span class="pre">data_manipulation.sqlalchemy_.</span></span><span class="sig-name descname"><span class="pre">dispose_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Engine</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/data_manipulation/sqlalchemy_.html#dispose_engine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_manipulation.sqlalchemy_.dispose_engine" title="Link to this definition">¶</a></dt>
+<dd><p>Safely dispose of the SQLAlchemy engine and its connection pool.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>engine</strong> (<em>Engine</em>) – The SQLAlchemy engine to dispose</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-data_manipulation">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_manipulation" title="Link to this heading">¶</a></h2>
@@ -2385,6 +2136,7 @@ while failures will be logged as errors with the specific exception message.</p>
 <li><a class="reference internal" href="#data_manipulation.base.clean_string"><code class="docutils literal notranslate"><span class="pre">clean_string()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.create_encode_url"><code class="docutils literal notranslate"><span class="pre">create_encode_url()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.delete_list_indices"><code class="docutils literal notranslate"><span class="pre">delete_list_indices()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.base.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.get_country_code_variation"><code class="docutils literal notranslate"><span class="pre">get_country_code_variation()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.get_country_name_variation"><code class="docutils literal notranslate"><span class="pre">get_country_name_variation()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.base.get_none_variation"><code class="docutils literal notranslate"><span class="pre">get_none_variation()</span></code></a></li>
@@ -2433,12 +2185,15 @@ while failures will be logged as errors with the specific exception message.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation.mysql_connector_python_">data_manipulation.mysql_connector_python_ module</a><ul>
-<li><a class="reference internal" href="#data_manipulation.mysql_connector_python_.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.mysql_connector_python_.DatabaseError"><code class="docutils literal notranslate"><span class="pre">DatabaseError</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.mysql_connector_python_.create_connection_pool"><code class="docutils literal notranslate"><span class="pre">create_connection_pool()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.mysql_connector_python_.execute_query"><code class="docutils literal notranslate"><span class="pre">execute_query()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.mysql_connector_python_.get_connection"><code class="docutils literal notranslate"><span class="pre">get_connection()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation.openldap_">data_manipulation.openldap_ module</a><ul>
 <li><a class="reference internal" href="#data_manipulation.openldap_.ldapsearch"><code class="docutils literal notranslate"><span class="pre">ldapsearch()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.openldap_.validate_ldap_uri"><code class="docutils literal notranslate"><span class="pre">validate_ldap_uri()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation.pandas_">data_manipulation.pandas_ module</a><ul>
@@ -2464,21 +2219,7 @@ while failures will be logged as errors with the specific exception message.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation.prometheus_">data_manipulation.prometheus_ module</a></li>
-<li><a class="reference internal" href="#module-data_manipulation.psycopg_">data_manipulation.psycopg_ module</a><ul>
-<li><a class="reference internal" href="#data_manipulation.psycopg_.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg_.execute_sql"><code class="docutils literal notranslate"><span class="pre">execute_sql()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg_.query_to_pandas"><code class="docutils literal notranslate"><span class="pre">query_to_pandas()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-data_manipulation.psycopg2_">data_manipulation.psycopg2_ module</a><ul>
-<li><a class="reference internal" href="#data_manipulation.psycopg2_.create_connection"><code class="docutils literal notranslate"><span class="pre">create_connection()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg2_.execute_query"><code class="docutils literal notranslate"><span class="pre">execute_query()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg2_.execute_values"><code class="docutils literal notranslate"><span class="pre">execute_values()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg2_.get_table_columns"><code class="docutils literal notranslate"><span class="pre">get_table_columns()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg2_.get_table_schema"><code class="docutils literal notranslate"><span class="pre">get_table_schema()</span></code></a></li>
-<li><a class="reference internal" href="#data_manipulation.psycopg2_.query_to_pandas"><code class="docutils literal notranslate"><span class="pre">query_to_pandas()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#data-manipulation-postgres-module">data_manipulation.postgres_ module</a></li>
 <li><a class="reference internal" href="#module-data_manipulation.pyspark_">data_manipulation.pyspark_ module</a><ul>
 <li><a class="reference internal" href="#data_manipulation.pyspark_.add_dummy_columns"><code class="docutils literal notranslate"><span class="pre">add_dummy_columns()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.pyspark_.column_into_list"><code class="docutils literal notranslate"><span class="pre">column_into_list()</span></code></a></li>
@@ -2496,8 +2237,10 @@ while failures will be logged as errors with the specific exception message.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation.sqlalchemy_">data_manipulation.sqlalchemy_ module</a><ul>
+<li><a class="reference internal" href="#data_manipulation.sqlalchemy_.DatabaseConnectionError"><code class="docutils literal notranslate"><span class="pre">DatabaseConnectionError</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.sqlalchemy_.create_sqlalchemy_engine"><code class="docutils literal notranslate"><span class="pre">create_sqlalchemy_engine()</span></code></a></li>
 <li><a class="reference internal" href="#data_manipulation.sqlalchemy_.create_sqlalchemy_url"><code class="docutils literal notranslate"><span class="pre">create_sqlalchemy_url()</span></code></a></li>
+<li><a class="reference internal" href="#data_manipulation.sqlalchemy_.dispose_engine"><code class="docutils literal notranslate"><span class="pre">dispose_engine()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-data_manipulation">Module contents</a></li>
@@ -2544,7 +2287,7 @@ while failures will be logged as errors with the specific exception message.</p>
         <li class="right" >
           <a href="commands.html" title="Commands"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.45 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">data_manipulation 0.46 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation package</a></li> 
       </ul>
     </div>
