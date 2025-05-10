@@ -1,9 +1,10 @@
+from typing import Any, Dict, Optional
+
 import sqlalchemy
-from sqlalchemy.engine.url import URL
-from sqlalchemy.engine.base import Engine
-from sqlalchemy.exc import SQLAlchemyError
-from typing import Optional, Dict, Any
 from loguru import logger
+from sqlalchemy.engine.base import Engine
+from sqlalchemy.engine.url import URL
+from sqlalchemy.exc import SQLAlchemyError
 
 
 class DatabaseConnectionError(Exception):
@@ -27,7 +28,7 @@ def create_sqlalchemy_url(
         drivername (str): Database driver name. Supported options include:
             - 'mysql+mysqlconnector'
             - 'mysql+pymysql'
-            - 'postgresql+psycopg2'
+            - 'postgresql+psycopg'
             - 'mssql+pyodbc'
             - 'oracle+cx_oracle'
             - 'sqlite3'
@@ -44,7 +45,7 @@ def create_sqlalchemy_url(
 
     Examples:
         >>> url = create_sqlalchemy_url(
-        ...     drivername='postgresql+psycopg2',
+        ...     drivername='postgresql+psycopg',
         ...     host='localhost',
         ...     dbname='mydb',
         ...     user='admin',
@@ -52,7 +53,7 @@ def create_sqlalchemy_url(
         ...     port=5432
         ... )
         >>> str(url)
-        'postgresql+psycopg2://admin:secret@localhost:5432/mydb'
+        'postgresql+psycopg://admin:secret@localhost:5432/mydb'
     """
     return URL.create(
         drivername=drivername,
@@ -84,7 +85,7 @@ def create_sqlalchemy_engine(
         drivername (str): Database driver name. Supported options include:
             - 'mysql+mysqlconnector'
             - 'mysql+pymysql'
-            - 'postgresql+psycopg2'
+            - 'postgresql+psycopg'
             - 'mssql+pyodbc'
             - 'oracle+cx_oracle'
             - 'sqlite3'
@@ -107,7 +108,7 @@ def create_sqlalchemy_engine(
 
     Examples:
         >>> engine = create_sqlalchemy_engine(
-        ...     drivername='postgresql+psycopg2',
+        ...     drivername='postgresql+psycopg',
         ...     host='localhost',
         ...     dbname='mydb',
         ...     user='admin',

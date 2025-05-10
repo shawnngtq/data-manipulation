@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>data_manipulation.pandas_ &#8212; data_manipulation 0.47 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <title>data_manipulation.pandas_ &#8212; data_manipulation 0.48 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=279e0f84" />
-    <script src="../../_static/documentation_options.js?v=4b1c9496"></script>
+    <script src="../../_static/documentation_options.js?v=a3063754"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -22,7 +22,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.47 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.48 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas_</a></li> 
       </ul>
@@ -34,20 +34,20 @@
           <div class="body" role="main">
             
   <h1>Source code for data_manipulation.pandas_</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">loguru</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
 
 
 <span class="c1"># CONFIG</span>
 <div class="viewcode-block" id="config_pandas_display">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.config_pandas_display">[docs]</a>
-<span class="k">def</span> <span class="nf">config_pandas_display</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">config_pandas_display</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configures pandas display settings for better output readability.</span>
 
 <span class="sd">    Sets the following pandas display options:</span>
@@ -70,7 +70,7 @@
 <span class="c1"># JUPYTER</span>
 <div class="viewcode-block" id="is_running_in_jupyter">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.is_running_in_jupyter">[docs]</a>
-<span class="k">def</span> <span class="nf">is_running_in_jupyter</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_running_in_jupyter</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if code is running in a Jupyter notebook environment.</span>
 
 <span class="sd">    Returns:</span>
@@ -83,7 +83,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Check if the IPython module is available</span>
-        <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">IPython</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_ipython</span>
 
         <span class="c1"># Check if we are in a notebook environment</span>
         <span class="k">if</span> <span class="s2">&quot;IPKernelApp&quot;</span> <span class="ow">in</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
@@ -99,7 +99,7 @@
 <span class="c1"># COLUMN</span>
 <div class="viewcode-block" id="add_type_columns">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.add_type_columns">[docs]</a>
-<span class="k">def</span> <span class="nf">add_type_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_type_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds type information columns for each column in the dataframe.</span>
 
 <span class="sd">    Args:</span>
@@ -138,7 +138,7 @@
 
 <div class="viewcode-block" id="series_to_columns">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.series_to_columns">[docs]</a>
-<span class="k">def</span> <span class="nf">series_to_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">series_to_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Expands a column containing dictionaries into separate columns.</span>
 
 <span class="sd">    Args:</span>
@@ -169,7 +169,7 @@
 <span class="c1"># DATAFRAME</span>
 <div class="viewcode-block" id="chunking_dataframe">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.chunking_dataframe">[docs]</a>
-<span class="k">def</span> <span class="nf">chunking_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">chunking_dataframe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Splits a dataframe into smaller chunks of specified size.</span>
 
 <span class="sd">    Args:</span>
@@ -202,7 +202,7 @@
 
 <div class="viewcode-block" id="compare_dataframes">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.compare_dataframes">[docs]</a>
-<span class="k">def</span> <span class="nf">compare_dataframes</span><span class="p">(</span><span class="n">dataframe1</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_dataframes</span><span class="p">(</span><span class="n">dataframe1</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compares two dataframes and prints detailed comparison information.</span>
 
 <span class="sd">    Args:</span>
@@ -270,7 +270,7 @@
 
 <div class="viewcode-block" id="split_dataframe">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.split_dataframe">[docs]</a>
-<span class="k">def</span> <span class="nf">split_dataframe</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_dataframe</span><span class="p">(</span>
     <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Splits a dataframe into two based on specified columns while maintaining a linking ID.</span>
@@ -313,7 +313,7 @@
 
 <div class="viewcode-block" id="split_left_merged_dataframe">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.split_left_merged_dataframe">[docs]</a>
-<span class="k">def</span> <span class="nf">split_left_merged_dataframe</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_left_merged_dataframe</span><span class="p">(</span>
     <span class="n">dataframe1</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">dataframe2</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Splits result of a left merge into matched and unmatched records.</span>
@@ -367,7 +367,7 @@
 <span class="c1">## AGGREGATE</span>
 <div class="viewcode-block" id="aggregate_set_without_none">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.aggregate_set_without_none">[docs]</a>
-<span class="k">def</span> <span class="nf">aggregate_set_without_none</span><span class="p">(</span><span class="n">column</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">nested_set</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">aggregate_set_without_none</span><span class="p">(</span><span class="n">column</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">nested_set</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a set from a series, excluding None values.</span>
 
 <span class="sd">    Args:</span>
@@ -399,7 +399,7 @@
 <span class="c1"># DATA STRUCTURE</span>
 <div class="viewcode-block" id="clean_none">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.clean_none">[docs]</a>
-<span class="k">def</span> <span class="nf">clean_none</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_none</span><span class="p">(</span>
     <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
     <span class="n">nan_to_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">clean_variation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -432,7 +432,7 @@
 
 <div class="viewcode-block" id="compare_all_list_items">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.compare_all_list_items">[docs]</a>
-<span class="k">def</span> <span class="nf">compare_all_list_items</span><span class="p">(</span><span class="n">list_</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_all_list_items</span><span class="p">(</span><span class="n">list_</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a DataFrame comparing all possible pairs of items in a list.</span>
 
 <span class="sd">    Args:</span>
@@ -472,7 +472,7 @@
 
 <div class="viewcode-block" id="dtypes_dictionary">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.dtypes_dictionary">[docs]</a>
-<span class="k">def</span> <span class="nf">dtypes_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dtypes_dictionary</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a dictionary mapping Python types to column names in a DataFrame.</span>
 
 <span class="sd">    Args:</span>
@@ -524,7 +524,7 @@
 <span class="c1"># EXPORT</span>
 <div class="viewcode-block" id="to_excel_keep_url">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.to_excel_keep_url">[docs]</a>
-<span class="k">def</span> <span class="nf">to_excel_keep_url</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_excel_keep_url</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Exports DataFrame to Excel while preserving URLs as clickable links.</span>
 
 <span class="sd">    Handles Excel&#39;s automatic URL conversion and limitations:</span>
@@ -572,7 +572,7 @@
 <span class="c1"># OVERVIEW</span>
 <div class="viewcode-block" id="head_tail">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.head_tail">[docs]</a>
-<span class="k">def</span> <span class="nf">head_tail</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">head_tail</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns first and last n rows of a dataframe.</span>
 
 <span class="sd">    Args:</span>
@@ -596,7 +596,7 @@
 
 <div class="viewcode-block" id="index_marks">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.index_marks">[docs]</a>
-<span class="k">def</span> <span class="nf">index_marks</span><span class="p">(</span><span class="n">n_rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index_marks</span><span class="p">(</span><span class="n">n_rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates indices for splitting data into chunks of specified size.</span>
 
 <span class="sd">    Args:</span>
@@ -632,7 +632,7 @@
 
 <div class="viewcode-block" id="print_dataframe_overview">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.print_dataframe_overview">[docs]</a>
-<span class="k">def</span> <span class="nf">print_dataframe_overview</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">stats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_dataframe_overview</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">stats</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints comprehensive overview of DataFrame contents and statistics.</span>
 
 <span class="sd">    Displays for each column:</span>
@@ -692,7 +692,7 @@
 
 <div class="viewcode-block" id="series_count">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.series_count">[docs]</a>
-<span class="k">def</span> <span class="nf">series_count</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">series_count</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates value counts and percentages for a Series.</span>
 
 <span class="sd">    Enhanced version of series.value_counts() that includes percentage calculations.</span>
@@ -729,7 +729,7 @@
 
 <div class="viewcode-block" id="useless_columns">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.useless_columns">[docs]</a>
-<span class="k">def</span> <span class="nf">useless_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">useless_columns</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Identifies empty and single-value columns in a DataFrame.</span>
 
 <span class="sd">    Args:</span>
@@ -779,7 +779,7 @@
 <span class="c1"># SYSTEM</span>
 <div class="viewcode-block" id="ps_aux_dataframe">
 <a class="viewcode-back" href="../../data_manipulation.html#data_manipulation.pandas_.ps_aux_dataframe">[docs]</a>
-<span class="k">def</span> <span class="nf">ps_aux_dataframe</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ps_aux_dataframe</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts Linux ps aux command output to a DataFrame.</span>
 
 <span class="sd">    Args:</span>
@@ -794,7 +794,7 @@
 <span class="sd">        &gt;&gt;&gt; &#39;PID&#39; in df.columns</span>
 <span class="sd">        True</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">parse_ps_aux</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_ps_aux</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="n">parse_ps_aux</span><span class="p">(</span><span class="n">ps_aux_commands</span><span class="p">)</span>
@@ -806,7 +806,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">doctest</span>
 
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
         <span class="s2">&quot;mkdir -p test_pandas_folder&quot;</span><span class="p">,</span>
@@ -854,14 +854,14 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.47 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">data_manipulation 0.48 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">data_manipulation.pandas_</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright .
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
     </div>
   </body>
 </html>

@@ -34,7 +34,6 @@ DEPENDENCIES = [
     "numpy",
     "pandas",
     "psycopg",
-    "psycopg2",
     "pyspark",
     "python-dotenv",
     "sqlalchemy",
