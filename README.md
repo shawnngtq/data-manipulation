@@ -25,7 +25,7 @@ pip install data-manipulation
 
 ## Dependencies
 
-The dependencies will be installed automatically along with this package, in `setup.py`
+The dependencies will be installed automatically along with this package, using metadata in `pyproject.toml`.
 
 ## License
 

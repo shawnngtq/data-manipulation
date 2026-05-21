@@ -13,25 +13,21 @@ function create_update_docs {
     cd ..
 }
 
-function setup_versioneer {
-    # Setup versioneer
-    versioneer install
-}
-
 function cleanup {
     rm -rf build
     rm -rf dist
     rm -rf data_manipulation.egg-info
     rm -rf data_manipulation-*
     # Build distribution
-    python setup.py sdist bdist_wheel
+    python -m build
+    python -m twine check --strict dist/*
 }
 
 function upload {
     # Upload to Test PyPi
-    # python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+    # python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
     # Upload to PyPi
-    twine upload dist/*
+    python -m twine upload dist/*
 }
 
 "$@"

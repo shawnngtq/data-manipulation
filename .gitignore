@@ -20,6 +20,7 @@ parts/
 sdist/
 var/
 *.egg-info/
+data_manipulation/_version.py
 .installed.cfg
 *.egg
 
@@ -95,3 +96,4 @@ target/
 build.sh
 install_packages.sh
 docs/README*
+.opencode
