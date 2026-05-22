@@ -2,8 +2,17 @@ import os
 from pathlib import Path
 from typing import Union
 
-from cryptography.fernet import Fernet, InvalidToken
-from loguru import logger
+try:
+    from cryptography.fernet import Fernet, InvalidToken
+    HAS_CRYPTOGRAPHY = True
+except ImportError:
+    HAS_CRYPTOGRAPHY = False
+
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 def generate_fernet_key(

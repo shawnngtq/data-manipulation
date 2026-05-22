@@ -2,7 +2,11 @@ import os
 import sys
 from typing import Dict, List, Optional, Tuple
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 def init_django(
@@ -151,12 +155,12 @@ def django_validate_phone(
 
     try:
         return PhoneNumber.from_string(phone).as_e164
-    except:
+    except Exception:
         try:
             return PhoneNumber.from_string(phone, region=region).as_e164
         except Exception as e:
             logger.error(e)
-            return
+            return None
 
 
 if __name__ == "__main__":

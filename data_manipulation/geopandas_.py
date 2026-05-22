@@ -1,10 +1,16 @@
+from __future__ import annotations
+
 from typing import TypeVar
 
-import numpy as np
-from numpy.typing import NDArray
-
-# Type variable for numeric types (float or numpy array)
-NumericType = TypeVar("NumericType", float, NDArray[np.float64])
+try:
+    import numpy as np
+    from numpy.typing import NDArray
+    HAS_NUMPY = True
+    NumericType = TypeVar("NumericType", float, NDArray[np.float64])
+except ImportError:
+    np = None
+    HAS_NUMPY = False
+    NumericType = TypeVar("NumericType", float, float)
 
 # Earth's radius in kilometers
 EARTH_RADIUS_KM = 6371.0

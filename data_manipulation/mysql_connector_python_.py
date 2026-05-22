@@ -1,7 +1,11 @@
 from contextlib import contextmanager
 from typing import TYPE_CHECKING, Any, Dict, Generator, List, Optional, Union
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from mysql.connector.connection import MySQLConnection

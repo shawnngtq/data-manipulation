@@ -1,0 +1,21 @@
+site_name: data_manipulation
+site_author: Shawn Ng
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Commands: commands.md
+  - API Reference: api.md
+  - Changelog: changelog.md

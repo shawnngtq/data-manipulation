@@ -1,7 +1,11 @@
 import re
 from typing import TYPE_CHECKING, Optional
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from bs4 import BeautifulSoup
@@ -31,15 +35,11 @@ def preprocess(html: str) -> Optional[str]:
         Reference: https://stackoverflow.com/questions/23241641
     """
 
-    # remove leading and trailing whitespaces
-    pattern = re.compile("(^[\s]+)|([\s]+$)", re.MULTILINE)
+    pattern = re.compile(r"(^[\s]+)|([\s]+$)", re.MULTILINE)
     html = re.sub(pattern, "", html)
-    # convert newlines to spaces, this preserves newline delimiters
     html = re.sub("\n", " ", html)
-    # remove whitespaces before opening tags
-    html = re.sub("[\s]+<", "<", html)
-    # remove whitespaces after closing tags
-    html = re.sub(">[\s]+", ">", html)
+    html = re.sub(r"[\s]+<", "<", html)
+    html = re.sub(r">[\s]+", ">", html)
     return html
 
 

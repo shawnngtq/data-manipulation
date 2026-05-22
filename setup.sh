@@ -1,16 +1,19 @@
 #!/bin/bash
 
 function create_update_docs {
-    cd docs
-    # Cleanup
-    make clean
-    # rm data_manipulation.rst
-    # rm modules.rst
-    # Generate rst
-    sphinx-apidoc -o . ../data_manipulation/
-    # Generate html
-    make html
-    cd ..
+    # cd docs
+    # # Cleanup
+    # make clean
+    # # rm data_manipulation.rst
+    # # rm modules.rst
+    # # Generate rst
+    # sphinx-apidoc -o . ../data_manipulation/
+    # # Generate html
+    # make html
+    # cd ..
+
+    # Build MkDocs documentation
+    mkdocs build
 }
 
 function cleanup {

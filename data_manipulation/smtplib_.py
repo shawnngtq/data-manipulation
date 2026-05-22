@@ -3,7 +3,11 @@ from email.mime.text import MIMEText
 from smtplib import SMTP, SMTPException
 from typing import Optional
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 def send_email(

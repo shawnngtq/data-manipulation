@@ -1,9 +1,22 @@
+from __future__ import annotations
+
 import math
 import multiprocessing
 import os
 from typing import Any, Dict, List, Set, Tuple, Union
 
-import pyspark
+try:
+    import pyspark
+    HAS_PYSPARK = True
+except ImportError:
+    pyspark = None
+    HAS_PYSPARK = False
+
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 # CONFIG
@@ -48,7 +61,7 @@ def config_spark_local(autoset: bool = True) -> None:
         else:
             return math.floor(x)
 
-    print("Here is the  current computer specs ...")
+    logger.info("Here is the current computer specs ...")
     vcore_per_node = multiprocessing.cpu_count()
     spark_executor_cores = 5
     number_of_nodes = 1
@@ -68,12 +81,12 @@ def config_spark_local(autoset: bool = True) -> None:
     spark_default_parallelism = round_down_or_one(
         spark_executor_instances * spark_executor_cores * 2
     )
-    print(f"executor_per_node: {executor_per_node}")
-    print(f"spark_executor_instances: {spark_executor_instances}")
-    print(f"total_executor_memory: {total_executor_memory}")
-    print(f"spark_executor_memory: {spark_executor_memory}")
-    print(f"memory_overhead: {memory_overhead}")
-    print(f"spark_default_parallelism: {spark_default_parallelism}")
+    logger.info(f"executor_per_node: {executor_per_node}")
+    logger.info(f"spark_executor_instances: {spark_executor_instances}")
+    logger.info(f"total_executor_memory: {total_executor_memory}")
+    logger.info(f"spark_executor_memory: {spark_executor_memory}")
+    logger.info(f"memory_overhead: {memory_overhead}")
+    logger.info(f"spark_default_parallelism: {spark_default_parallelism}")
 
     if autoset:
         spark = (
@@ -89,12 +102,14 @@ def config_spark_local(autoset: bool = True) -> None:
             .getOrCreate()
         )
 
-        print("spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ...")
+        logger.info(
+            "spark.sql.execution.arrow.pyspark.enabled recommended by Koalas ..."
+        )
         spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", True)
         spark.conf.get("spark.sql.execution.arrow.pyspark.enabled")
-        print("spark auto-configured ...")
+        logger.info("spark auto-configured ...")
     else:
-        print("Here is the recommended command to execute:")
+        logger.info("Here is the recommended command to execute:")
         text = f"""
         spark = pyspark.sql.SparkSession.builder.master("local") \
             .config("spark.executor.cores", "{spark_executor_cores}") \
@@ -107,8 +122,8 @@ def config_spark_local(autoset: bool = True) -> None:
             .config("spark.sql.shuffle.partitions", "{spark_default_parallelism}") \
             .getOrCreate()
         """
-        print(text)
-    print("config_spark_local exited ...")
+        logger.info(text)
+    logger.info("config_spark_local exited ...")
 
 
 # COLUMNS
@@ -182,8 +197,10 @@ def column_into_list(dataframe: pyspark.sql.DataFrame, column: str) -> List[Any]
         raise TypeError("Argument must be a str ...")
 
     if column in dataframe.columns:
-        list_ = dataframe.select(column).toPandas()[column].values.tolist()
-        return list_
+        return dataframe.select(column).toPandas()[column].values.tolist()
+    raise ValueError(
+        f"Column '{column}' not found. Available: {list(dataframe.columns)}"
+    )
 
 
 def column_into_set(dataframe: pyspark.sql.DataFrame, column: str) -> Set[Any]:
@@ -293,25 +310,22 @@ def columns_statistics(
 
     for column in dataframe.columns:
         df = group_count(dataframe=dataframe, columns=column, n=n)
-        print(column)
+        logger.info(column)
         df.show(n=n)
 
         if df.count() == 1:
             single_columns.append(column)
-            print(f"!!!!! {column} is a candidate to drop !!!!!\n\n")
+            logger.info(f"!!!!! {column} is a candidate to drop !!!!!")
 
-            if (
-                not df.first()[0]
-                or df.first()[0].casefold() == "none"
-                or df.first()[0].casefold()
-            ):
+            first_val = df.first()[0]
+            if not first_val or first_val.casefold() == "none":
                 empty_columns.append(column)
 
-    print(
-        f"There are {len(single_columns)} of single value columns, they are: {single_columns}"
+    logger.info(
+        f"There are {len(single_columns)} single value columns: {single_columns}"
     )
-    print(
-        f"There are {len(empty_columns)} of null value columns, they are: {empty_columns}"
+    logger.info(
+        f"There are {len(empty_columns)} null value columns: {empty_columns}"
     )
     return empty_columns, single_columns
 
@@ -383,9 +397,9 @@ def describe(dataframe: pyspark.sql.DataFrame) -> None:
     """
     if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
         raise TypeError("Argument must be a Pyspark dataframe ...")
-    print(f"The dataframe: {type(dataframe)}")
-    print(f"Number of columns: {len(dataframe.columns)}")
-    print(f"Number of rows: {dataframe.count()}")
+    logger.info(f"The dataframe: {type(dataframe)}")
+    logger.info(f"Number of columns: {len(dataframe.columns)}")
+    logger.info(f"Number of rows: {dataframe.count()}")
     dataframe.printSchema()
 
 
@@ -433,7 +447,7 @@ def group_count(
     df = dataframe.groupBy(columns).count().orderBy("count", ascending=False)
     row_count = dataframe.count()
     df = df.withColumn(
-        "percent", F.round(F.udf(lambda x: x * 100 / row_count)("count"), 3)
+        "percent", F.round(F.col("count") * 100 / row_count, 3)
     )
     if n != float("inf"):
         df = df.limit(n)

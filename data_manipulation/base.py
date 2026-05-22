@@ -7,7 +7,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 from urllib.parse import urlencode, urlparse, urlunparse
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 def deprecated(func):
@@ -82,27 +86,24 @@ def get_string_case_combination(str_: str) -> List[str]:
     return list(map("".join, itertools.product(*zip(str_.upper(), str_.lower()))))
 
 
-def get_none_variation() -> List[Union[None, str]]:
-    """Returns a list of common variations of None/null values.
+def get_none_variation() -> frozenset:
+    """Returns a frozenset of lowercase None/null string representations.
+
+    Use with .casefold() for case-insensitive membership tests:
+        item.casefold() in get_none_variation()
 
     Returns:
-        list: List containing None and various string representations of null values.
+        frozenset: Frozenset of lowercase null string representations.
 
     Examples:
-        >>> get_none_variation()
-        [None, 'NONE', 'NONe', 'NOnE', 'NOne', 'NoNE', 'NoNe', 'NonE', 'None', 'nONE', 'nONe', 'nOnE', 'nOne', 'noNE', 'noNe', 'nonE', 'none', 'NULL', 'NULl', 'NUlL', 'NUll', 'NuLL', 'NuLl', 'NulL', 'Null', 'nULL', 'nULl', 'nUlL', 'nUll', 'nuLL', 'nuLl', 'nulL', 'null', 'NA', 'Na', 'nA', 'na', 'N.A', 'N.a', 'N.A', 'N.a', 'n.A', 'n.a', 'n.A', 'n.a', 'N.A.', 'N.A.', 'N.a.', 'N.a.', 'N.A.', 'N.A.', 'N.a.', 'N.a.', 'n.A.', 'n.A.', 'n.a.', 'n.a.', 'n.A.', 'n.A.', 'n.a.', 'n.a.', 'NAN', 'NAn', 'NaN', 'Nan', 'nAN', 'nAn', 'naN', 'nan', 'NIL', 'NIl', 'NiL', 'Nil', 'nIL', 'nIl', 'niL', 'nil']
+        >>> "none" in get_none_variation()
+        True
+        >>> "NONE".casefold() in get_none_variation()
+        True
+        >>> "valid".casefold() in get_none_variation()
+        False
     """
-    variations = (
-        [None]
-        + get_string_case_combination("none")
-        + get_string_case_combination("null")
-        + get_string_case_combination("na")
-        + get_string_case_combination("n.a")
-        + get_string_case_combination("n.a.")
-        + get_string_case_combination("nan")
-        + get_string_case_combination("nil")
-    )
-    return variations
+    return frozenset({"none", "null", "na", "n.a", "n.a.", "nan", "nil"})
 
 
 def get_country_name_variation() -> dict:
@@ -172,35 +173,17 @@ def list_tuple_without_none(list_tuple: Union[List, Tuple]) -> Union[List, Tuple
 
     none_variations = get_none_variation()
 
+    def _keep(item: Any) -> bool:
+        if not item:
+            return False
+        if isinstance(item, str):
+            return item.casefold() not in none_variations
+        return True
+
     if isinstance(list_tuple, list):
-        return [item for item in list_tuple if item and item not in none_variations]
-    return tuple(item for item in list_tuple if item and item not in none_variations)
+        return [item for item in list_tuple if _keep(item)]
+    return tuple(item for item in list_tuple if _keep(item))
 
-
-@deprecated
-def string_boolean_to_int(boolean_str_rep: str) -> int:
-    """Converts string boolean representations to integers.
-
-    Args:
-        boolean_str_rep (str): String representation of boolean value.
-
-    Returns:
-        int: 1 for true values, 0 for false values.
-
-    Examples:
-        >>> string_boolean_to_int("true")
-        1
-        >>> string_boolean_to_int("True")
-        1
-    """
-    try:
-        from distutils.util import strtobool
-
-        return strtobool(string_str_to_str(boolean_str_rep))
-    except ValueError as e:
-        raise ValueError(
-            f"Invalid boolean string representation: {boolean_str_rep}"
-        ) from e
 
 
 def string_dlt_to_dlt(dlt_str_rep: str) -> Union[Dict, List, Tuple]:
@@ -417,9 +400,14 @@ def parse_ps_aux(ps_aux_commands: str) -> List[List[str]]:
             check=True,
         )
         lines = output.stdout.strip().split("\n")
-        if not lines:
+        if not lines or not lines[0]:
             return []
 
+        if "PID" not in lines[0] and "USER" not in lines[0]:
+            logger.warning(
+                "ps output header looks unexpected; "
+                "column split may be incorrect"
+            )
         n_columns = len(lines[0].split()) - 1
         return [line.split(None, n_columns) for line in lines if line]
     except subprocess.SubprocessError as e:

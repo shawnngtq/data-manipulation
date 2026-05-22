@@ -1,7 +1,11 @@
 import os
 from typing import Any, Dict, List, Optional, Union
 
-from loguru import logger
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 # Constants - now serving as defaults
 DEFAULT_MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024  # 10MB

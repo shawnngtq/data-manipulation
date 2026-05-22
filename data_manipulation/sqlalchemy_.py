@@ -1,10 +1,22 @@
+from __future__ import annotations
+
 from typing import Any, Dict, Optional
 
-import sqlalchemy
-from loguru import logger
-from sqlalchemy.engine.base import Engine
-from sqlalchemy.engine.url import URL
-from sqlalchemy.exc import SQLAlchemyError
+try:
+    import sqlalchemy
+    from sqlalchemy.engine.base import Engine
+    from sqlalchemy.engine.url import URL
+    from sqlalchemy.exc import SQLAlchemyError
+    HAS_SQLALCHEMY = True
+except ImportError:
+    sqlalchemy = None
+    HAS_SQLALCHEMY = False
+
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 class DatabaseConnectionError(Exception):
@@ -130,9 +142,7 @@ def create_sqlalchemy_engine(
         query_params.update({"ssl_ca": ssl_ca, "ssl_verify_cert": "true"})
 
     # Add connection timeout
-    if "mysql" in drivername:
-        query_params["connect_timeout"] = str(connect_timeout)
-    elif "postgresql" in drivername:
+    if "mysql" in drivername or "postgresql" in drivername:
         query_params["connect_timeout"] = str(connect_timeout)
 
     url = create_sqlalchemy_url(

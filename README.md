@@ -5,6 +5,7 @@
   - [Where to get it](#where-to-get-it)
   - [Dependencies](#dependencies)
   - [License](#license)
+  - [Maintainer Release](#maintainer-release)
   - [Getting Help](#getting-help)
   - [Discussion and Development](#discussion-and-development)
   - [Contributing to data manipulation](#contributing-to-data-manipulation)
@@ -30,6 +31,10 @@ The dependencies will be installed automatically along with this package, using 
 ## License
 
 [BSD 3](LICENSE)
+
+## Maintainer Release
+
+Release and deployment steps are documented in [RELEASE.md](RELEASE.md).
 
 ## Getting Help
 

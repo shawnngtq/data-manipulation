@@ -1,31 +1,37 @@
+from __future__ import annotations
+
 import subprocess
 from itertools import combinations
 from typing import Any, Dict, List, Tuple
 
-import numpy as np
-import pandas as pd
-from IPython.display import display
-from loguru import logger
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    np = None
+    HAS_NUMPY = False
 
+try:
+    import pandas as pd
+    HAS_PANDAS = True
+except ImportError:
+    pd = None
+    HAS_PANDAS = False
 
-# CONFIG
-def config_pandas_display() -> None:
-    """Configures pandas display settings for better output readability.
+try:
+    from IPython.display import display
+    HAS_IPYTHON = True
+except ImportError:
+    HAS_IPYTHON = False
 
-    Sets the following pandas display options:
-        - display.max_columns: 500
-        - display.max_colwidth: 500
-        - display.expand_frame_repr: True
+    def display(obj):
+        print(obj)
 
-    Note:
-        Modifies global pandas settings.
-    """
-    global pd
-    pd.set_option("display.max_columns", 500)
-    # pd.set_option("display.max_colwidth", -1)
-    pd.set_option("display.max_colwidth", 500)
-    # pd.set_option("display.max_rows", 200)
-    pd.set_option("display.expand_frame_repr", True)
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 
 # JUPYTER
@@ -149,34 +155,39 @@ def chunking_dataframe(dataframe: pd.DataFrame, chunk_size: int) -> List[pd.Data
     return list_
 
 
-def compare_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame) -> None:
+def compare_dataframes(
+    dataframe1: pd.DataFrame, dataframe2: pd.DataFrame
+) -> Dict[str, Any]:
     """Compares two dataframes and prints detailed comparison information.
 
     Args:
         dataframe1 (pd.DataFrame): First DataFrame to compare.
         dataframe2 (pd.DataFrame): Second DataFrame to compare.
 
+    Returns:
+        Dict[str, Any]: Comparison summary with keys ``same_length``,
+            ``df1_length``, ``df2_length``, and ``columns`` (per-column
+            dict of ``df1_non_null``, ``df2_non_null``, ``same``).
+
     Raises:
         TypeError: If either input is not a pandas DataFrame.
-
-    Note:
-        Prints comparison results including:
-        - Row counts
-        - Column-wise comparison of non-null values
-        - Detailed analysis of differences when counts don't match
     """
     if not all(isinstance(x, pd.DataFrame) for x in [dataframe1, dataframe2]):
         raise TypeError("Arguments 1 & 2 must be pandas dataframes ...")
 
+    df1_len = len(dataframe1)
+    df2_len = len(dataframe2)
     print("=" * len("Dataframe length"))
     print("Dataframe length")
     print("=" * len("Dataframe length"))
-    print(f"df1 length: {len(dataframe1)}")
-    print(f"df2 length: {len(dataframe2)}")
-    print(f"same df length: {len(dataframe1) == len(dataframe2)}\n")
+    print(f"df1 length: {df1_len}")
+    print(f"df2 length: {df2_len}")
+    print(f"same df length: {df1_len == df2_len}\n")
     print("----------------")
     print("COMPARE COLUMNS")
     print("----------------")
+
+    columns_summary: Dict[str, Dict[str, Any]] = {}
     for column in dataframe1.columns:
         pd_df = dataframe1[dataframe1[column].notnull()]
         pd_df2 = None
@@ -187,8 +198,15 @@ def compare_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame) -> No
         except KeyError:
             logger.error(f"df2 {column}: does not exist")
 
+        col_entry: Dict[str, Any] = {
+            "df1_non_null": len(pd_df),
+            "df2_non_null": len(pd_df2) if pd_df2 is not None else None,
+            "same": None,
+        }
+
         if pd_df2 is not None:
             print(f"df2 non-null {column}: {len(pd_df2)}")
+            col_entry["same"] = len(pd_df) == len(pd_df2)
 
             if len(pd_df) == len(pd_df2):
                 print("df1 & df2 has the same length")
@@ -200,7 +218,7 @@ def compare_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame) -> No
                 string_count = len(dataframe1[dataframe1[column].isin(strings)])
                 empty_string_count = len(dataframe1[dataframe1[column].str.len() == 0])
                 non_null_count = (
-                    len(dataframe1) - null_count - string_count - empty_string_count
+                    df1_len - null_count - string_count - empty_string_count
                 )
                 print(
                     f"""
@@ -212,6 +230,14 @@ def compare_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame) -> No
                 == df2 ({len(pd_df2)}): {non_null_count == len(pd_df2)}
                 """
                 )
+        columns_summary[column] = col_entry
+
+    return {
+        "same_length": df1_len == df2_len,
+        "df1_length": df1_len,
+        "df2_length": df2_len,
+        "columns": columns_summary,
+    }
 
 
 def split_dataframe(
@@ -334,36 +360,6 @@ def aggregate_set_without_none(column: pd.Series, nested_set: bool = False) -> s
 
 
 # DATA STRUCTURE
-def clean_none(
-    dataframe: pd.DataFrame,
-    nan_to_none: bool = True,
-    clean_variation: bool = True,
-    none_variations: List[str] = [],
-) -> pd.DataFrame:
-    """Standardizes None values in a dataframe.
-
-    Args:
-        dataframe (pd.DataFrame): Input DataFrame.
-        nan_to_none (bool, optional): Convert NaN to None. Defaults to True.
-        clean_variation (bool, optional): Clean common None variations. Defaults to True.
-        none_variations (List[str], optional): Additional None variations to clean. Defaults to [].
-
-    Returns:
-        pd.DataFrame: DataFrame with standardized None values.
-
-    Note:
-        Deprecated as of pandas 1.3.0.
-    """
-    df = dataframe.copy()
-    df = df.replace(r"^\s*$", np.nan, regex=True)
-    if nan_to_none:
-        df = df.replace(np.NaN, None, inplace=True)
-    if clean_variation:
-        df = df.replace(none_variations, np.nan)
-    df = df.where(pd.notnull(df), None)
-    return df
-
-
 def compare_all_list_items(list_: List[Any]) -> pd.DataFrame:
     """Creates a DataFrame comparing all possible pairs of items in a list.
 
@@ -439,7 +435,7 @@ def dtypes_dictionary(dataframe: pd.DataFrame) -> Dict[type, List[str]]:
         raise ValueError("Argument can't be a empty dataframe ...")
 
     dict_ = {}
-    for index, value in dataframe.loc[0].iteritems():
+    for index, value in dataframe.loc[0].items():
         dtype = type(value)
         if dtype not in dict_:
             dict_[dtype] = [index]
@@ -549,7 +545,9 @@ def index_marks(n_rows: int, chunk_size: int) -> range:
     return range_
 
 
-def print_dataframe_overview(dataframe: pd.DataFrame, stats: bool = False) -> None:
+def print_dataframe_overview(
+    dataframe: pd.DataFrame, stats: bool = False
+) -> Dict[str, Dict[str, Any]]:
     """Prints comprehensive overview of DataFrame contents and statistics.
 
     Displays for each column:
@@ -561,6 +559,10 @@ def print_dataframe_overview(dataframe: pd.DataFrame, stats: bool = False) -> No
     Args:
         dataframe (pd.DataFrame): DataFrame to analyze
         stats (bool, optional): Whether to include min/max statistics. Defaults to False.
+
+    Returns:
+        Dict[str, Dict[str, Any]]: Per-column summary with keys
+            ``unique``, ``null_count``, and ``value_counts``.
 
     Raises:
         TypeError: If input is not a pandas DataFrame
@@ -591,19 +593,30 @@ def print_dataframe_overview(dataframe: pd.DataFrame, stats: bool = False) -> No
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a dataframe ...")
 
+    result: Dict[str, Dict[str, Any]] = {}
     for column in dataframe.columns:
         print("=" * 30)
         print(column)
         print("=" * 30)
         try:
-            print(f"Unique elements: {dataframe[column].nunique()}")
-            print(f"Null elements: {len(dataframe[dataframe[column].isnull()])}")
+            unique = dataframe[column].nunique()
+            null_count = len(dataframe[dataframe[column].isnull()])
+            print(f"Unique elements: {unique}")
+            print(f"Null elements: {null_count}")
             if stats:
                 print(f"Minimum: {min(dataframe[column])}")
                 print(f"Maximum: {max(dataframe[column])}")
-            display(series_count(dataframe[column]).head(20))
-        except:
+            vc = series_count(dataframe[column]).head(20)
+            display(vc)
+            result[column] = {
+                "unique": unique,
+                "null_count": null_count,
+                "value_counts": vc,
+            }
+        except Exception:
             logger.error(f"Unable to get value_counts of {column} ...\n")
+            result[column] = {}
+    return result
 
 
 def series_count(series: pd.Series) -> pd.DataFrame:

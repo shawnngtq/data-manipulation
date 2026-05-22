@@ -1,7 +1,19 @@
+from __future__ import annotations
+
 from typing import Any, List, Optional, Union
 
-import pandas as pd
-from loguru import logger
+try:
+    import pandas as pd
+    HAS_PANDAS = True
+except ImportError:
+    pd = None
+    HAS_PANDAS = False
+
+try:
+    from loguru import logger
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
 
 try:
     import psycopg
