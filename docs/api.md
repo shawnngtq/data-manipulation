@@ -1,3 +1,5 @@
+<!-- This file is rendered by MkDocs + mkdocstrings. View the built docs for formatted output. -->
+
 # API Reference
 
 ## base

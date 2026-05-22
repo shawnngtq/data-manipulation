@@ -4,11 +4,15 @@ site_author: Shawn Ng
 theme:
   name: material
 
+hooks:
+  - docs/hooks.py
+
 plugins:
   - search
   - mkdocstrings:
       handlers:
         python:
+          paths: [.]
           options:
             docstring_style: google
             show_source: true
