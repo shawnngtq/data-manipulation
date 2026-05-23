@@ -51,15 +51,15 @@ coverage.xml
 # Django stuff:
 *.log
 
-# Sphinx documentation
-# docs/_build/
-!docs/build
+# MkDocs documentation
+/site/
 
 # PyBuilder
 target/
 
 # DotEnv configuration
 .env
+.pypirc
 
 # Database
 *.db
@@ -93,7 +93,8 @@ target/
 .mypy_cache/
 
 # custom
-build.sh
-install_packages.sh
-docs/README*
 .opencode
+.specstory
+build.sh
+docs/README*
+install_packages.sh
