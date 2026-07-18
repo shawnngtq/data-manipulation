@@ -1,6 +1,6 @@
 """Shared pytest fixtures for the data_manipulation test suite.
 
-Heavy/optional third-party libraries (pyspark, django, …) are pulled in lazily
+Heavy/optional third-party libraries (pyspark, …) are pulled in lazily
 via ``pytest.importorskip`` so the suite degrades to skips instead of errors when
 a dependency is not installed.
 """
@@ -34,15 +34,3 @@ def spark():
     session.sparkContext.setLogLevel("ERROR")
     yield session
     session.stop()
-
-
-@pytest.fixture(scope="session")
-def django_settings():
-    """Minimal configured Django, or skip if Django is absent."""
-    django = pytest.importorskip("django")
-    from django.conf import settings
-
-    if not settings.configured:
-        settings.configure(INSTALLED_APPS=[], USE_I18N=False)
-        django.setup()
-    return settings

@@ -16,7 +16,6 @@ collect_ignore = [
     "data_manipulation/boto3_.py",
     "data_manipulation/kerberos_.py",
     "data_manipulation/openldap_.py",
-    "data_manipulation/django_.py",
     "data_manipulation/cryptography_.py",
     "data_manipulation/mysql_connector_python_.py",
     "data_manipulation/postgres_.py",

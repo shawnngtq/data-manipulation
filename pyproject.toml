@@ -27,7 +27,6 @@ dependencies = [
     "beautifulsoup4",
     "boto3",
     "cryptography",
-    "django",
     "flask",
     "ipython",
     "loguru",

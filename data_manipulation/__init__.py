@@ -3,7 +3,6 @@ from data_manipulation import (
     beautifulsoup_,
     boto3_,
     cryptography_,
-    django_,
     kerberos_,
     mysql_connector_python_,
     openldap_,
