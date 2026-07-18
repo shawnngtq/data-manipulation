@@ -4,6 +4,14 @@
 
 ### Removed
 
+- **`django_` module** - removed entirely (breaking change). The Django helpers
+  (`init_django`, `get_django_countries_dict`, `django_validate_email`,
+  `django_validate_url`, `django_validate_phone`) now live in the
+  [`django-util`](https://github.com/shawnngtq/django-util) package:
+  `django_util.utility` (`init_django`, `get_django_countries_dict`) and
+  `django_util.validators` (the `django_validate_*` functions). `data_manipulation`
+  no longer depends on Django. This warrants a major version bump on release.
+
 - **`pandas_.clean_none()`** - function has been removed.
   Migrate to pandas built-ins:
 

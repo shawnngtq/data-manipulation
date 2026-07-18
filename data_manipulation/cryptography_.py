@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
-from typing import Union
 
 try:
     from cryptography.fernet import Fernet, InvalidToken
+
     HAS_CRYPTOGRAPHY = True
 except ImportError:
     HAS_CRYPTOGRAPHY = False
@@ -12,11 +12,12 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
 def generate_fernet_key(
-    output_directory: Union[str, Path],
+    output_directory: str | Path,
     output_filename: str,
 ) -> bytes:
     """Generates and saves a Fernet encryption key.
@@ -32,7 +33,7 @@ def generate_fernet_key(
         Exception: If key generation or file writing fails.
 
     Examples:
-        >>> key = generate_fernet_key('/path/to/keys', 'encryption.key')
+        >>> key = generate_fernet_key("/path/to/keys", "encryption.key")
         >>> isinstance(key, bytes)
         True
     """
@@ -55,8 +56,8 @@ def generate_fernet_key(
 
 
 def encrypt_fernet_file(
-    keypath: Union[str, Path],
-    filepath: Union[str, Path],
+    keypath: str | Path,
+    filepath: str | Path,
 ) -> bytes:
     """Encrypts a file using Fernet symmetric encryption.
 
@@ -65,14 +66,14 @@ def encrypt_fernet_file(
         filepath (str): Path to the file to be encrypted.
 
     Returns:
-        str: Encrypted data.
+        bytes: Encrypted data.
 
     Raises:
         TypeError: If keypath or filepath are not strings.
 
     Examples:
-        >>> encrypted = encrypt_fernet_file('key.txt', 'data.txt')
-        >>> isinstance(encrypted, str)
+        >>> encrypted = encrypt_fernet_file("key.txt", "data.txt")  # doctest: +SKIP
+        >>> isinstance(encrypted, bytes)  # doctest: +SKIP
         True
     """
     key_path = Path(keypath)
@@ -100,8 +101,8 @@ def encrypt_fernet_file(
 
 
 def decrypt_fernet_data(
-    keypath: Union[str, Path],
-    filepath: Union[str, Path],
+    keypath: str | Path,
+    filepath: str | Path,
 ) -> bytes:
     """Decrypts a file using Fernet symmetric encryption.
 
@@ -110,7 +111,7 @@ def decrypt_fernet_data(
         filepath (str): Path to the encrypted file.
 
     Returns:
-        str: Decrypted data.
+        bytes: Decrypted data.
 
     Raises:
         FileNotFoundError: If key file or input file doesn't exist
@@ -139,9 +140,3 @@ def decrypt_fernet_data(
     except InvalidToken as e:
         logger.error(f"Invalid key or corrupted data: {e}")
         raise
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

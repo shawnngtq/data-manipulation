@@ -1,12 +1,12 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP, SMTPException
-from typing import Optional
 
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -18,8 +18,8 @@ def send_email(
     html: str,
     smtp_address: str,
     smtp_port: int = 587,
-    smtp_username: Optional[str] = None,
-    smtp_password: Optional[str] = None,
+    smtp_username: str | None = None,
+    smtp_password: str | None = None,
 ) -> bool:
     """Sends an HTML email using SMTP with TLS and logs the operation.
 
@@ -44,7 +44,14 @@ def send_email(
     """
     # Input validation
     if not all(
-        [logname, message_subject, message_sender, message_receiver, html, smtp_address]
+        [
+            logname,
+            message_subject,
+            message_sender,
+            message_receiver,
+            html,
+            smtp_address,
+        ]
     ):
         raise ValueError("Required parameters cannot be empty")
 
@@ -57,7 +64,9 @@ def send_email(
 
     try:
         with SMTP(smtp_address, smtp_port) as server:
-            logger.info(f"Connecting to SMTP server: {smtp_address}:{smtp_port}")
+            logger.info(
+                f"Connecting to SMTP server: {smtp_address}:{smtp_port}"
+            )
 
             # Enable TLS encryption
             server.starttls()
@@ -78,9 +87,3 @@ def send_email(
     except Exception as e:
         logger.error(f"Unexpected error occurred: {str(e)}")
         return False
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

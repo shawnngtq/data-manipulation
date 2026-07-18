@@ -3,10 +3,11 @@ from __future__ import annotations
 import math
 import multiprocessing
 import os
-from typing import Any, Dict, List, Set, Tuple, Union
+from typing import Any
 
 try:
     import pyspark
+
     HAS_PYSPARK = True
 except ImportError:
     pyspark = None
@@ -16,6 +17,7 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -69,7 +71,9 @@ def config_spark_local(autoset: bool = True) -> None:
         os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / (1024.0**3)
     )
 
-    executor_per_node = round_down_or_one((vcore_per_node - 1) / spark_executor_cores)
+    executor_per_node = round_down_or_one(
+        (vcore_per_node - 1) / spark_executor_cores
+    )
     spark_executor_instances = round_down_or_one(
         (executor_per_node * number_of_nodes) - 1
     )
@@ -97,8 +101,12 @@ def config_spark_local(autoset: bool = True) -> None:
             .config("spark.executor.memory", f"{spark_executor_memory}g")
             .config("spark.driver.memory", f"{spark_executor_memory}g")
             .config("spark.executor.memoryOverhead", f"{memory_overhead}g")
-            .config("spark.default.parallelism", str(spark_default_parallelism))
-            .config("spark.sql.shuffle.partitions", str(spark_default_parallelism))
+            .config(
+                "spark.default.parallelism", str(spark_default_parallelism)
+            )
+            .config(
+                "spark.sql.shuffle.partitions", str(spark_default_parallelism)
+            )
             .getOrCreate()
         )
 
@@ -128,13 +136,13 @@ def config_spark_local(autoset: bool = True) -> None:
 
 # COLUMNS
 def add_dummy_columns(
-    dataframe: pyspark.sql.DataFrame, columns: List[str], value: str
+    dataframe: pyspark.sql.DataFrame, columns: list[str], value: str
 ) -> pyspark.sql.DataFrame:
     """Adds new columns with default values to a Spark DataFrame.
 
     Args:
         dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
-        columns (List[str]): List of column names to add
+        columns (list[str]): List of column names to add
         value (str): Default value for the new columns
 
     Returns:
@@ -172,7 +180,9 @@ def add_dummy_columns(
     return df
 
 
-def column_into_list(dataframe: pyspark.sql.DataFrame, column: str) -> List[Any]:
+def column_into_list(
+    dataframe: pyspark.sql.DataFrame, column: str
+) -> list[Any]:
     """Extracts values from a DataFrame column into a Python list.
 
     Args:
@@ -180,7 +190,7 @@ def column_into_list(dataframe: pyspark.sql.DataFrame, column: str) -> List[Any]
         column (str): Name of the column to extract
 
     Returns:
-        List[Any]: List containing all values from the specified column,
+        list[Any]: List containing all values from the specified column,
             including duplicates
 
     Raises:
@@ -201,33 +211,6 @@ def column_into_list(dataframe: pyspark.sql.DataFrame, column: str) -> List[Any]
     raise ValueError(
         f"Column '{column}' not found. Available: {list(dataframe.columns)}"
     )
-
-
-def column_into_set(dataframe: pyspark.sql.DataFrame, column: str) -> Set[Any]:
-    """Extracts unique values from a DataFrame column into a Python set.
-
-    Args:
-        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
-        column (str): Name of the column to extract
-
-    Returns:
-        Set[Any]: Set containing unique values from the specified column
-
-    Raises:
-        TypeError: If dataframe is not a Spark DataFrame or column is not a string
-
-    Examples:
-        >>> df = spark.createDataFrame([(1,), (2,), (2,)], ["value"])
-        >>> column_into_set(df, "value")
-        {1, 2}
-    """
-    if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
-        raise TypeError("Argument must be a Pyspark dataframe ...")
-    if not isinstance(column, str):
-        raise TypeError("Argument must be a str ...")
-
-    set_ = set(column_into_list(dataframe, column))
-    return set_
 
 
 def columns_prefix(
@@ -269,7 +252,7 @@ def columns_prefix(
 
 def columns_statistics(
     dataframe: pyspark.sql.DataFrame, n: int = 10
-) -> Tuple[List[str], List[str]]:
+) -> tuple[list[str], list[str]]:
     """Analyzes column statistics and identifies empty and single-value columns.
 
     Performs comprehensive analysis of each column including:
@@ -284,7 +267,7 @@ def columns_statistics(
             Defaults to 10.
 
     Returns:
-        Tuple[List[str], List[str]]: Two lists containing:
+        tuple[list[str], list[str]]: Two lists containing:
             - List of empty column names
             - List of single-value column names
 
@@ -292,10 +275,7 @@ def columns_statistics(
         TypeError: If dataframe is not a Spark DataFrame
 
     Examples:
-        >>> df = spark.createDataFrame([
-        ...     ("Alice", None),
-        ...     ("Alice", None)
-        ... ], ["name", "email"])
+        >>> df = spark.createDataFrame([("Alice", None), ("Alice", None)], ["name", "email"])
         >>> empty_cols, single_cols = columns_statistics(df)
         >>> print(f"Empty columns: {empty_cols}")
         Empty columns: ['email']
@@ -331,44 +311,6 @@ def columns_statistics(
 
 
 # DATAFRAME
-def rename(
-    dataframe: pyspark.sql.DataFrame, columns: Dict[str, str]
-) -> pyspark.sql.DataFrame:
-    """Renames multiple columns in a DataFrame using a mapping dictionary.
-
-    Args:
-        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
-        columns (Dict[str, str]): Dictionary mapping old column names to new names
-
-    Returns:
-        pyspark.sql.DataFrame: DataFrame with renamed columns
-
-    Raises:
-        TypeError: If dataframe is not a Spark DataFrame or columns is not a dict
-
-    Examples:
-        >>> df = spark.createDataFrame([("Alice", 1)], ["_1", "_2"])
-        >>> new_df = rename(df, {"_1": "name", "_2": "id"})
-        >>> new_df.show()
-        +-----+---+
-        | name| id|
-        +-----+---+
-        |Alice|  1|
-        +-----+---+
-    """
-    import pyspark.sql.functions as F
-
-    if not isinstance(dataframe, pyspark.sql.dataframe.DataFrame):
-        raise TypeError("Argument must be a Pyspark dataframe ...")
-    if not isinstance(columns, dict):
-        raise TypeError("Argument must be a dict ...")
-
-    df = dataframe.select(
-        [F.col(c).alias(columns.get(c, c)) for c in dataframe.columns]
-    )
-    return df
-
-
 # STATISTICS
 def describe(dataframe: pyspark.sql.DataFrame) -> None:
     """Prints comprehensive information about a DataFrame.
@@ -405,15 +347,15 @@ def describe(dataframe: pyspark.sql.DataFrame) -> None:
 
 def group_count(
     dataframe: pyspark.sql.DataFrame,
-    columns: Union[str, List[str]],
-    n: Union[int, float] = 10,
+    columns: str | list[str],
+    n: int | float = 10,
 ) -> pyspark.sql.DataFrame:
     """Performs group by operation and calculates count and percentage for each group.
 
     Args:
         dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
-        columns (Union[str, List[str]]): Column(s) to group by
-        n (Union[int, float], optional): Number of top groups to return.
+        columns (str | list[str]): Column(s) to group by
+        n (int | float, optional): Number of top groups to return.
             Use float('inf') for all groups. Defaults to 10.
 
     Returns:
@@ -426,9 +368,7 @@ def group_count(
         TypeError: If arguments are not of correct type
 
     Examples:
-        >>> df = spark.createDataFrame([
-        ...     (1, 'A'), (1, 'B'), (2, 'A')
-        ... ], ["id", "category"])
+        >>> df = spark.createDataFrame([(1, "A"), (1, "B"), (2, "A")], ["id", "category"])
         >>> group_count(df, ["id"]).show()
         +---+-----+-------+
         | id|count|percent|
@@ -446,15 +386,7 @@ def group_count(
 
     df = dataframe.groupBy(columns).count().orderBy("count", ascending=False)
     row_count = dataframe.count()
-    df = df.withColumn(
-        "percent", F.round(F.col("count") * 100 / row_count, 3)
-    )
+    df = df.withColumn("percent", F.round(F.col("count") * 100 / row_count, 3))
     if n != float("inf"):
         df = df.limit(n)
     return df
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

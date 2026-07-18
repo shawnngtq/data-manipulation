@@ -7,7 +7,7 @@ name = "data_manipulation"
 dynamic = ["version"]
 description = "Powerful data manipulation"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.14"
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
 authors = [
@@ -19,10 +19,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Cython",
     "Topic :: Scientific/Engineering",
 ]
@@ -30,9 +27,7 @@ dependencies = [
     "beautifulsoup4",
     "boto3",
     "cryptography",
-    "django",
     "flask",
-    "geopandas",
     "ipython",
     "loguru",
     "mysql-connector-python",
@@ -44,6 +39,12 @@ dependencies = [
     "sqlalchemy",
 ]
 
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-mock",
+]
+
 [project.urls]
 Homepage = "https://github.com/shawnngtq/data-manipulation"
 
@@ -53,6 +54,17 @@ include = ["data_manipulation", "data_manipulation.*"]
 [tool.setuptools_scm]
 version_file = "data_manipulation/_version.py"
 fallback_version = "0.0.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "data_manipulation"]
+addopts = "--doctest-modules --import-mode=importlib"
+pythonpath = ["."]
+norecursedirs = ["site", "docs", "build", "dist", "*.egg-info", ".git", ".venv"]
+doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
+markers = [
+    "spark: requires a local PySpark session",
+    "integration: requires an external service (DB/AWS/LDAP/SMTP/Kerberos/network)",
+]
 
 [tool.ruff]
 line-length = 79

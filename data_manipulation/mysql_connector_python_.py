@@ -1,17 +1,22 @@
+from collections.abc import Generator
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Any, Dict, Generator, List, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from mysql.connector.connection import MySQLConnection
-    from mysql.connector.pooling import MySQLConnectionPool, PooledMySQLConnection
+    from mysql.connector.pooling import (
+        MySQLConnectionPool,
+        PooledMySQLConnection,
+    )
 
-    ConnectionType = Union[MySQLConnection, PooledMySQLConnection]
+    ConnectionType = MySQLConnection | PooledMySQLConnection
 else:
     ConnectionType = Any
 
@@ -50,11 +55,11 @@ def create_connection_pool(
         import mysql.connector
         from mysql.connector import Error as MySQLError
         from mysql.connector import pooling
-    except ImportError:
+    except ImportError as error:
         raise ImportError(
             "mysql-connector-python is required. "
             "Please install it with: pip install mysql-connector-python"
-        )
+        ) from error
 
     try:
         pool_config = {
@@ -69,7 +74,7 @@ def create_connection_pool(
         return pooling.MySQLConnectionPool(**pool_config)
     except MySQLError as e:
         logger.error(f"Failed to create connection pool: {e}")
-        raise DatabaseError(f"Connection pool creation failed: {e}")
+        raise DatabaseError(f"Connection pool creation failed: {e}") from e
 
 
 @contextmanager
@@ -80,8 +85,8 @@ def get_connection(
     password: str,
     port: int = 3306,
     use_pool: bool = False,
-    pool: Optional[Any] = None,
-) -> Generator[ConnectionType, None, None]:
+    pool: Any | None = None,
+) -> Generator[ConnectionType]:
     """Context manager for database connections.
 
     Args:
@@ -91,7 +96,7 @@ def get_connection(
         password (str): Password for authentication.
         port (int, optional): Database port number. Defaults to 3306.
         use_pool (bool, optional): Whether to use connection pooling. Defaults to False.
-        pool (Optional[Any], optional): Existing connection pool.
+        pool (Any | None, optional): Existing connection pool.
 
     Yields:
         ConnectionType: Database connection object.
@@ -102,11 +107,11 @@ def get_connection(
     try:
         import mysql.connector
         from mysql.connector import Error as MySQLError
-    except ImportError:
+    except ImportError as error:
         raise ImportError(
             "mysql-connector-python is required. "
             "Please install it with: pip install mysql-connector-python"
-        )
+        ) from error
 
     connection = None
     try:
@@ -124,7 +129,7 @@ def get_connection(
         yield connection
     except MySQLError as e:
         logger.error(f"Database connection error: {e}")
-        raise DatabaseError(f"Failed to connect to database: {e}")
+        raise DatabaseError(f"Failed to connect to database: {e}") from e
     finally:
         if (
             connection
@@ -138,19 +143,19 @@ def get_connection(
 def execute_query(
     connection: ConnectionType,
     sql_query: str,
-    data: Optional[Union[dict, tuple]] = None,
+    data: dict | tuple | None = None,
     fetch: bool = False,
-) -> Union[Optional[int], List[Dict[str, Any]], None]:
+) -> int | list[dict[str, Any]] | None:
     """Executes a MySQL query with parameters.
 
     Args:
         connection (ConnectionType): Active MySQL connection.
         sql_query (str): SQL query to execute.
-        data (Optional[Union[dict, tuple]], optional): Parameters for the SQL query.
+        data (dict | tuple | None, optional): Parameters for the SQL query.
         fetch (bool, optional): Whether to fetch results. Defaults to False.
 
     Returns:
-        Union[Optional[int], List[Dict[str, Any]], None]:
+        int | list[dict[str, Any]] | None:
             - For INSERT: Last inserted row ID
             - For SELECT: List of dictionaries containing the results
             - None for other operations or on failure
@@ -160,13 +165,16 @@ def execute_query(
     """
     try:
         from mysql.connector import Error as MySQLError
-    except ImportError:
+    except ImportError as error:
         raise ImportError(
             "mysql-connector-python is required. "
             "Please install it with: pip install mysql-connector-python"
-        )
+        ) from error
 
-    if not hasattr(connection, "is_connected") or not connection.is_connected():
+    if (
+        not hasattr(connection, "is_connected")
+        or not connection.is_connected()
+    ):
         raise DatabaseError("Database connection is not active")
 
     cursor = connection.cursor(dictionary=True)
@@ -187,15 +195,9 @@ def execute_query(
     except MySQLError as e:
         connection.rollback()
         logger.error(f"Query execution error: {e}")
-        raise DatabaseError(f"Query execution failed: {e}")
+        raise DatabaseError(f"Query execution failed: {e}") from e
     finally:
         cursor.close()
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()
 
     # Usage example:
     """

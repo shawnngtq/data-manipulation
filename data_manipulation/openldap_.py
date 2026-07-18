@@ -41,7 +41,7 @@ def ldapsearch(
         ...     "ldap://ldap.example.com",
         ...     "cn=admin,dc=example,dc=com",
         ...     "password",
-        ...     "(objectClass=person)"
+        ...     "(objectClass=person)",
         ... )
         >>> result.returncode == 0  # True if search was successful
         True
@@ -74,15 +74,11 @@ def ldapsearch(
             text=True,
             check=False,  # Don't raise on non-zero exit
         )
-    except FileNotFoundError:
+    except FileNotFoundError as error:
         raise FileNotFoundError(
             "ldapsearch command not found. Please install OpenLDAP client tools."
-        )
+        ) from error
     except subprocess.SubprocessError as e:
-        raise subprocess.SubprocessError(f"Failed to execute ldapsearch: {str(e)}")
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()
+        raise subprocess.SubprocessError(
+            f"Failed to execute ldapsearch: {str(e)}"
+        ) from e
