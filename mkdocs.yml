@@ -26,7 +26,6 @@ nav:
     - boto3_: api/boto3_.md
     - cryptography_: api/cryptography_.md
     - django_: api/django_.md
-    - geopandas_: api/geopandas_.md
     - kerberos_: api/kerberos_.md
     - mysql_connector_python_: api/mysql_connector_python_.md
     - pandas_: api/pandas_.md

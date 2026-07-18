@@ -32,7 +32,6 @@ dependencies = [
     "cryptography",
     "django",
     "flask",
-    "geopandas",
     "ipython",
     "loguru",
     "mysql-connector-python",
@@ -44,6 +43,12 @@ dependencies = [
     "sqlalchemy",
 ]
 
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-mock",
+]
+
 [project.urls]
 Homepage = "https://github.com/shawnngtq/data-manipulation"
 
@@ -53,6 +58,17 @@ include = ["data_manipulation", "data_manipulation.*"]
 [tool.setuptools_scm]
 version_file = "data_manipulation/_version.py"
 fallback_version = "0.0.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "data_manipulation"]
+addopts = "--doctest-modules --import-mode=importlib"
+pythonpath = ["."]
+norecursedirs = ["site", "docs", "build", "dist", "*.egg-info", ".git", ".venv"]
+doctest_optionflags = ["NORMALIZE_WHITESPACE", "ELLIPSIS"]
+markers = [
+    "spark: requires a local PySpark session",
+    "integration: requires an external service (DB/AWS/LDAP/SMTP/Kerberos/network)",
+]
 
 [tool.ruff]
 line-length = 79

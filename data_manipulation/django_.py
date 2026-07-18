@@ -1,11 +1,12 @@
 import os
 import sys
-from typing import Dict, List, Optional, Tuple
+from typing import Optional
 
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -37,7 +38,9 @@ def init_django(
 
     try:
         sys.path.insert(0, django_dir)
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"{project_name}.settings")
+        os.environ.setdefault(
+            "DJANGO_SETTINGS_MODULE", f"{project_name}.settings"
+        )
         os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
         django.setup()
     except Exception as e:
@@ -45,7 +48,7 @@ def init_django(
         raise
 
 
-def get_django_countries_dict() -> Tuple[Dict[str, str], Dict[str, str]]:
+def get_django_countries_dict() -> tuple[dict[str, str], dict[str, str]]:
     """Retrieves dictionaries mapping country codes to names and vice versa.
 
     Returns:
@@ -69,7 +72,7 @@ def get_django_countries_dict() -> Tuple[Dict[str, str], Dict[str, str]]:
 
 def django_validate_email(
     email: str,
-    whitelist_domains: Optional[List[str]] = None,
+    whitelist_domains: Optional[list[str]] = None,
 ) -> Optional[str]:
     """Validates an email address using Django's validator.
 
@@ -105,7 +108,7 @@ def django_validate_email(
 
 def django_validate_url(
     url: str,
-    allowed_schemes: Optional[List[str]] = None,
+    allowed_schemes: Optional[list[str]] = None,
 ) -> Optional[str]:
     """Validates a URL using Django's URL validator.
 
@@ -119,7 +122,9 @@ def django_validate_url(
     from django.core.validators import URLValidator
 
     validator = URLValidator(
-        schemes=allowed_schemes if allowed_schemes else ["http", "https", "ftp", "ftps"]
+        schemes=allowed_schemes
+        if allowed_schemes
+        else ["http", "https", "ftp", "ftps"]
     )
     try:
         validator(url)
@@ -161,9 +166,3 @@ def django_validate_phone(
         except Exception as e:
             logger.error(e)
             return None
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

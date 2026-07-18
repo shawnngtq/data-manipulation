@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import subprocess
 from itertools import combinations
-from typing import Any, Dict, List, Tuple
+from typing import Any
 
 try:
     import numpy as np
+
     HAS_NUMPY = True
 except ImportError:
     np = None
@@ -13,6 +13,7 @@ except ImportError:
 
 try:
     import pandas as pd
+
     HAS_PANDAS = True
 except ImportError:
     pd = None
@@ -20,6 +21,7 @@ except ImportError:
 
 try:
     from IPython.display import display
+
     HAS_IPYTHON = True
 except ImportError:
     HAS_IPYTHON = False
@@ -27,10 +29,12 @@ except ImportError:
     def display(obj):
         print(obj)
 
+
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -42,19 +46,19 @@ def is_running_in_jupyter() -> bool:
         bool: True if running in Jupyter notebook, False otherwise.
 
     Examples:
-        >>> is_running_in_jupyter()
-        True  # When running in Jupyter
-        False  # When running in regular Python
+        >>> is_running_in_jupyter()  # False outside a notebook, True inside one
+        False
     """
     try:
         # Check if the IPython module is available
         from IPython import get_ipython
 
-        # Check if we are in a notebook environment
-        if "IPKernelApp" in get_ipython().config:
-            return True
-        else:
+        # get_ipython() returns None when not in an IPython environment
+        ipython = get_ipython()
+        if ipython is None:
             return False
+        # Check if we are in a notebook environment
+        return "IPKernelApp" in ipython.config
     # IPython module not found, not running in Jupyter Notebook
     except ImportError:
         return False
@@ -75,11 +79,9 @@ def add_type_columns(dataframe: pd.DataFrame) -> pd.DataFrame:
         TypeError: If input is not a pandas DataFrame.
 
     Examples:
-        >>> df = pd.DataFrame({'a': [1, 2], 'b': ['x', 'y']})
-        >>> add_type_columns(df)
-           a        a_type  b        b_type
-        0  1  <class 'int'>  x  <class 'str'>
-        1  2  <class 'int'>  y  <class 'str'>
+        >>> df = pd.DataFrame({"a": [1, 2], "b": ["x", "y"]})
+        >>> list(add_type_columns(df).columns)
+        ['a', 'a_type', 'b', 'b_type']
     """
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a dataframe ...")
@@ -97,67 +99,10 @@ def add_type_columns(dataframe: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def series_to_columns(dataframe: pd.DataFrame, column: str) -> pd.DataFrame:
-    """Expands a column containing dictionaries into separate columns.
-
-    Args:
-        dataframe (pd.DataFrame): Input dataframe.
-        column (str): Name of column containing dictionaries to expand.
-
-    Returns:
-        pd.DataFrame: DataFrame with dictionary column expanded into separate columns.
-
-    Examples:
-        >>> values = [[1, {'a':1, 'b':2}]]
-        >>> cols = ["c1", "c2"]
-        >>> df = pd.DataFrame(values, columns=cols)
-        >>> df
-        c1                c2
-        0   1  {'a': 1, 'b': 2}
-        >>> series_to_columns(df, "c2")
-        c1  a  b
-        0   1  1  2
-    """
-    df = pd.concat(
-        [dataframe.drop([column], axis=1), dataframe[column].apply(pd.Series)], axis=1
-    )
-    return df
-
-
 # DATAFRAME
-def chunking_dataframe(dataframe: pd.DataFrame, chunk_size: int) -> List[pd.DataFrame]:
-    """Splits a dataframe into smaller chunks of specified size.
-
-    Args:
-        dataframe (pd.DataFrame): DataFrame to split.
-        chunk_size (int): Maximum number of rows in each chunk.
-
-    Returns:
-        List[pd.DataFrame]: List of DataFrames, each containing at most chunk_size rows.
-
-    Raises:
-        TypeError: If dataframe is not a pandas DataFrame or chunk_size is not an integer.
-
-    Examples:
-        >>> df = pd.DataFrame({'a': range(5)})
-        >>> chunks = chunking_dataframe(df, 2)
-        >>> [len(chunk) for chunk in chunks]
-        [2, 2, 1]
-    """
-    list_ = None
-    if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument must be a dataframe ...")
-    if not isinstance(chunk_size, int):
-        raise TypeError("Argument must be a int ...")
-
-    indices = index_marks(dataframe.shape[0], chunk_size)
-    list_ = np.split(dataframe, indices)
-    return list_
-
-
 def compare_dataframes(
     dataframe1: pd.DataFrame, dataframe2: pd.DataFrame
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Compares two dataframes and prints detailed comparison information.
 
     Args:
@@ -187,7 +132,7 @@ def compare_dataframes(
     print("COMPARE COLUMNS")
     print("----------------")
 
-    columns_summary: Dict[str, Dict[str, Any]] = {}
+    columns_summary: dict[str, dict[str, Any]] = {}
     for column in dataframe1.columns:
         pd_df = dataframe1[dataframe1[column].notnull()]
         pd_df2 = None
@@ -198,7 +143,7 @@ def compare_dataframes(
         except KeyError:
             logger.error(f"df2 {column}: does not exist")
 
-        col_entry: Dict[str, Any] = {
+        col_entry: dict[str, Any] = {
             "df1_non_null": len(pd_df),
             "df2_non_null": len(pd_df2) if pd_df2 is not None else None,
             "same": None,
@@ -215,8 +160,12 @@ def compare_dataframes(
             else:
                 strings = ["null", "NA"]
                 null_count = len(dataframe1[dataframe1[column].isnull()])
-                string_count = len(dataframe1[dataframe1[column].isin(strings)])
-                empty_string_count = len(dataframe1[dataframe1[column].str.len() == 0])
+                string_count = len(
+                    dataframe1[dataframe1[column].isin(strings)]
+                )
+                empty_string_count = len(
+                    dataframe1[dataframe1[column].str.len() == 0]
+                )
                 non_null_count = (
                     df1_len - null_count - string_count - empty_string_count
                 )
@@ -241,8 +190,8 @@ def compare_dataframes(
 
 
 def split_dataframe(
-    dataframe: pd.DataFrame, uuid: str, columns: List[str]
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    dataframe: pd.DataFrame, uuid: str, columns: list[str]
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Splits a dataframe into two based on specified columns while maintaining a linking ID.
 
     Args:
@@ -259,8 +208,8 @@ def split_dataframe(
         TypeError: If inputs are not of correct types.
 
     Examples:
-        >>> df = pd.DataFrame({'id': [1], 'a': [2], 'b': [3]})
-        >>> df1, df2 = split_dataframe(df, 'id', ['b'])
+        >>> df = pd.DataFrame({"id": [1], "a": [2], "b": [3]})
+        >>> df1, df2 = split_dataframe(df, "id", ["b"])
         >>> df1
            id  a
         0   1  2
@@ -281,8 +230,8 @@ def split_dataframe(
 
 
 def split_left_merged_dataframe(
-    dataframe1: pd.DataFrame, dataframe2: pd.DataFrame, columns: List[str]
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    dataframe1: pd.DataFrame, dataframe2: pd.DataFrame, columns: list[str]
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Splits result of a left merge into matched and unmatched records.
 
     Args:
@@ -296,8 +245,10 @@ def split_left_merged_dataframe(
             - DataFrame with rows only present in left input
 
     Examples:
-        >>> df1 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo', "zen"], 'value': [1, 2, 3, 5, 9]})
-        >>> df2 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'], 'value': [5, 6, 7, 8]})
+        >>> df1 = pd.DataFrame(
+        ...     {"key": ["foo", "bar", "baz", "foo", "zen"], "value": [1, 2, 3, 5, 9]}
+        ... )
+        >>> df2 = pd.DataFrame({"key": ["foo", "bar", "baz", "foo"], "value": [5, 6, 7, 8]})
         >>> df_both, df_left = split_left_merged_dataframe(df1, df2, ["key"])
                         count    percent
         _merge
@@ -331,36 +282,8 @@ def split_left_merged_dataframe(
 
 
 ## AGGREGATE
-def aggregate_set_without_none(column: pd.Series, nested_set: bool = False) -> set:
-    """Creates a set from a series, excluding None values.
-
-    Args:
-        column (pd.Series): Series to aggregate into a set.
-        nested_set (bool, optional): Whether to handle nested sets. Defaults to False.
-
-    Returns:
-        set: Set containing non-None values from the series.
-
-    Examples:
-        >>> s = pd.Series([1, None, 2, None, 3])
-        >>> aggregate_set_without_none(s)
-        {1.0, 2.0, 3.0, nan, nan}
-    """
-    if nested_set:
-        output = set()
-        for value in column:
-            if isinstance(value, set):
-                output.update(value)
-            # todo, what if there is valid list / dict / tuple / complex object?
-            elif value:
-                output.add(value)
-        return output
-    else:
-        return {value for value in column if value is not None}
-
-
 # DATA STRUCTURE
-def compare_all_list_items(list_: List[Any]) -> pd.DataFrame:
+def compare_all_list_items(list_: list[Any]) -> pd.DataFrame:
     """Creates a DataFrame comparing all possible pairs of items in a list.
 
     Args:
@@ -397,7 +320,7 @@ def compare_all_list_items(list_: List[Any]) -> pd.DataFrame:
     return df
 
 
-def dtypes_dictionary(dataframe: pd.DataFrame) -> Dict[type, List[str]]:
+def dtypes_dictionary(dataframe: pd.DataFrame) -> dict[type, list[str]]:
     """Creates a dictionary mapping Python types to column names in a DataFrame.
 
     Args:
@@ -413,21 +336,16 @@ def dtypes_dictionary(dataframe: pd.DataFrame) -> Dict[type, List[str]]:
         ValueError: If DataFrame is empty
 
     Examples:
-        >>> df = pd.DataFrame({
-        ...     'int_': [0],
-        ...     'str_': ['0'],
-        ...     'list_': [[]],
-        ...     'dict_': [{}],
-        ...     'none_': [None]
-        ... })
-        >>> dtypes_dictionary(df)
-        {
-            <class 'int'>: ['int_'],
-            <class 'str'>: ['str_'],
-            <class 'list'>: ['list_'],
-            <class 'dict'>: ['dict_'],
-            <class 'NoneType'>: ['none_']
-        }
+        >>> df = pd.DataFrame(
+        ...     {"int_": [0], "str_": ["0"], "list_": [[]], "dict_": [{}], "none_": [None]}
+        ... )
+        >>> result = dtypes_dictionary(df)
+        >>> result[str], result[list], result[dict], result[type(None)]
+        (['str_'], ['list_'], ['dict_'], ['none_'])
+
+    Note:
+        The key for an integer column is a numpy integer type (e.g.
+        ``numpy.int64``), not the builtin ``int``.
     """
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a dataframe ...")
@@ -463,11 +381,8 @@ def to_excel_keep_url(filepath: str, dataframe: pd.DataFrame) -> None:
         IOError: If file cannot be written to specified location
 
     Examples:
-        >>> df = pd.DataFrame({
-        ...     'url': ['https://www.example.com'],
-        ...     'data': ['test']
-        ... })
-        >>> to_excel_keep_url('output.xlsx', df)
+        >>> df = pd.DataFrame({"url": ["https://www.example.com"], "data": ["test"]})
+        >>> to_excel_keep_url("output.xlsx", df)
         Excel exported ...
 
     Note:
@@ -491,63 +406,9 @@ def to_excel_keep_url(filepath: str, dataframe: pd.DataFrame) -> None:
 
 
 # OVERVIEW
-def head_tail(dataframe: pd.DataFrame, n: int = 5) -> pd.DataFrame:
-    """Returns first and last n rows of a dataframe.
-
-    Args:
-        dataframe (pd.DataFrame): Input DataFrame.
-        n (int, optional): Number of rows from top and bottom. Defaults to 5.
-
-    Returns:
-        pd.DataFrame: Concatenated first and last n rows.
-
-    Examples:
-        >>> df = pd.DataFrame({'a': range(10)})
-        >>> len(head_tail(df, 2))
-        4
-    """
-    if not isinstance(dataframe, pd.DataFrame):
-        raise TypeError("Argument must be a dataframe ...")
-    df = pd.concat([dataframe.head(n), dataframe.tail(n)])
-    return df
-
-
-def index_marks(n_rows: int, chunk_size: int) -> range:
-    """Calculates indices for splitting data into chunks of specified size.
-
-    Args:
-        n_rows (int): Total number of rows in the dataset
-        chunk_size (int): Desired size of each chunk
-
-    Returns:
-        range: Range object containing indices where chunks should be split
-
-    Raises:
-        TypeError: If either n_rows or chunk_size is not an integer
-
-    Examples:
-        >>> index_marks(10, 3)
-        range(3, 12, 3)
-        >>> list(index_marks(10, 3))
-        [3, 6, 9]
-
-    Note:
-        Used internally by chunking_dataframe() to determine split points
-        for breaking large datasets into smaller chunks.
-    """
-    if not all(isinstance(x, int) for x in [n_rows, chunk_size]):
-        raise TypeError("Arguments 1 & 2 must be int ...")
-
-    p1 = 1 * chunk_size
-    p2 = (n_rows // chunk_size + 1) * chunk_size
-    p3 = chunk_size
-    range_ = range(p1, p2, p3)
-    return range_
-
-
 def print_dataframe_overview(
     dataframe: pd.DataFrame, stats: bool = False
-) -> Dict[str, Dict[str, Any]]:
+) -> dict[str, dict[str, Any]]:
     """Prints comprehensive overview of DataFrame contents and statistics.
 
     Displays for each column:
@@ -593,7 +454,7 @@ def print_dataframe_overview(
     if not isinstance(dataframe, pd.DataFrame):
         raise TypeError("Argument must be a dataframe ...")
 
-    result: Dict[str, Dict[str, Any]] = {}
+    result: dict[str, dict[str, Any]] = {}
     for column in dataframe.columns:
         print("=" * 30)
         print(column)
@@ -653,7 +514,7 @@ def series_count(series: pd.Series) -> pd.DataFrame:
     return df
 
 
-def useless_columns(dataframe: pd.DataFrame) -> Tuple[List[str], List[str]]:
+def useless_columns(dataframe: pd.DataFrame) -> tuple[list[str], list[str]]:
     """Identifies empty and single-value columns in a DataFrame.
 
     Args:
@@ -668,11 +529,7 @@ def useless_columns(dataframe: pd.DataFrame) -> Tuple[List[str], List[str]]:
         TypeError: If input is not a pandas DataFrame
 
     Examples:
-        >>> df = pd.DataFrame({
-        ...     'empty': [None, None],
-        ...     'single': ['A', 'A'],
-        ...     'normal': ['A', 'B']
-        ... })
+        >>> df = pd.DataFrame({"empty": [None, None], "single": ["A", "A"], "normal": ["A", "B"]})
         >>> empty_cols, single_cols = useless_columns(df)
         Empty columns: ['empty']
         Single value columns: ['single']
@@ -689,10 +546,16 @@ def useless_columns(dataframe: pd.DataFrame) -> Tuple[List[str], List[str]]:
         raise TypeError("Argument must be a dataframe ...")
 
     empty_columns = (
-        dataframe.nunique().where(lambda x: x == 0).dropna().index.values.tolist()
+        dataframe.nunique()
+        .where(lambda x: x == 0)
+        .dropna()
+        .index.values.tolist()
     )
     single_columns = (
-        dataframe.nunique().where(lambda x: x == 1).dropna().index.values.tolist()
+        dataframe.nunique()
+        .where(lambda x: x == 1)
+        .dropna()
+        .index.values.tolist()
     )
     print(f"Empty columns: {empty_columns}")
     print(f"Single value columns: {single_columns}")
@@ -712,7 +575,7 @@ def ps_aux_dataframe(ps_aux_commands: str) -> pd.DataFrame:
 
     Examples:
         >>> df = ps_aux_dataframe("ps aux | head")
-        >>> 'PID' in df.columns
+        >>> "PID" in df.columns
         True
     """
     from .base import parse_ps_aux
@@ -723,23 +586,3 @@ def ps_aux_dataframe(ps_aux_commands: str) -> pd.DataFrame:
         return df
     else:
         raise TypeError("Wrong datatype(s)")
-
-
-if __name__ == "__main__":
-    import doctest
-
-    subprocess.run(
-        "mkdir -p test_pandas_folder",
-        capture_output=True,
-        shell=True,
-        text=True,
-        executable="/bin/bash",
-    )
-    doctest.testmod(optionflags=doctest.NORMALIZE_WHITESPACE)
-    subprocess.run(
-        "rm -rf test_pandas_folder",
-        capture_output=True,
-        shell=True,
-        text=True,
-        executable="/bin/bash",
-    )

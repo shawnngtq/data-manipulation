@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+from typing import Any
 
 try:
     import sqlalchemy
     from sqlalchemy.engine.base import Engine
     from sqlalchemy.engine.url import URL
     from sqlalchemy.exc import SQLAlchemyError
+
     HAS_SQLALCHEMY = True
 except ImportError:
     sqlalchemy = None
@@ -16,6 +17,7 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -32,7 +34,7 @@ def create_sqlalchemy_url(
     user: str,
     password: str,
     port: int = 3306,
-    query: Optional[Dict[str, Any]] = None,
+    query: dict[str, Any] | None = None,
 ) -> URL:
     """Creates a SQLAlchemy URL object for database connection.
 
@@ -57,14 +59,14 @@ def create_sqlalchemy_url(
 
     Examples:
         >>> url = create_sqlalchemy_url(
-        ...     drivername='postgresql+psycopg',
-        ...     host='localhost',
-        ...     dbname='mydb',
-        ...     user='admin',
-        ...     password='secret',
-        ...     port=5432
+        ...     drivername="postgresql+psycopg",
+        ...     host="localhost",
+        ...     dbname="mydb",
+        ...     user="admin",
+        ...     password="secret",
+        ...     port=5432,
         ... )
-        >>> str(url)
+        >>> url.render_as_string(hide_password=False)
         'postgresql+psycopg://admin:secret@localhost:5432/mydb'
     """
     return URL.create(
@@ -89,7 +91,7 @@ def create_sqlalchemy_engine(
     max_overflow: int = 10,
     pool_timeout: int = 30,
     connect_timeout: int = 10,
-    ssl_ca: Optional[str] = None,
+    ssl_ca: str | None = None,
 ) -> Engine:
     """Creates and tests a SQLAlchemy engine for database operations.
 
@@ -119,13 +121,13 @@ def create_sqlalchemy_engine(
         DatabaseConnectionError: If engine creation or connection test fails
 
     Examples:
-        >>> engine = create_sqlalchemy_engine(
-        ...     drivername='postgresql+psycopg',
-        ...     host='localhost',
-        ...     dbname='mydb',
-        ...     user='admin',
-        ...     password='secret',
-        ...     port=5432
+        >>> engine = create_sqlalchemy_engine(  # doctest: +SKIP
+        ...     drivername="postgresql+psycopg",
+        ...     host="localhost",
+        ...     dbname="mydb",
+        ...     user="admin",
+        ...     password="secret",
+        ...     port=5432,
         ... )
         # Logs "create_sqlalchemy_engine: True" on success
         # or "create_sqlalchemy_engine: False (error_message)" on failure
@@ -175,20 +177,3 @@ def create_sqlalchemy_engine(
         raise DatabaseConnectionError(error_msg) from e
 
     return engine
-
-
-def dispose_engine(engine: Engine) -> None:
-    """Safely dispose of the SQLAlchemy engine and its connection pool.
-
-    Args:
-        engine (Engine): The SQLAlchemy engine to dispose
-    """
-    if engine:
-        engine.dispose()
-        logger.info("Database engine disposed successfully")
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

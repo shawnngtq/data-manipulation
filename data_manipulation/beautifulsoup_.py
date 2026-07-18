@@ -5,6 +5,7 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
@@ -63,8 +64,8 @@ def build_soup(
         Optional[BeautifulSoup]: Parsed BeautifulSoup object, or None if request fails.
 
     Examples:
-        >>> a = build_soup("https://google.com")
-        >>> type(a)
+        >>> a = build_soup("https://google.com")  # doctest: +SKIP
+        >>> type(a)  # doctest: +SKIP
         <class 'bs4.BeautifulSoup'>
 
     Note:
@@ -83,18 +84,16 @@ def build_soup(
 
     try:
         with requests.Session() as session:
-            response = session.get(url, headers=request_headers, timeout=timeout)
+            response = session.get(
+                url, headers=request_headers, timeout=timeout
+            )
             response.raise_for_status()
 
-            html_content = preprocess(response.text) if to_preprocess else response.text
+            html_content = (
+                preprocess(response.text) if to_preprocess else response.text
+            )
             return BeautifulSoup(html_content, features=features)
 
     except requests.RequestException as e:
         logger.error(f"Failed to fetch URL {url}: {str(e)}")
         return None
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

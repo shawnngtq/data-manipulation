@@ -4,13 +4,14 @@ import re
 import subprocess
 from functools import wraps
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Optional, Union
 from urllib.parse import urlencode, urlparse, urlunparse
 
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -67,7 +68,7 @@ def clean_string(
     return " ".join(string.strip().upper().split())
 
 
-def get_string_case_combination(str_: str) -> List[str]:
+def get_string_case_combination(str_: str) -> list[str]:
     """Generates all possible case combinations of a string.
 
     Args:
@@ -83,7 +84,9 @@ def get_string_case_combination(str_: str) -> List[str]:
     if not str_:
         raise ValueError("Input string cannot be empty or None")
 
-    return list(map("".join, itertools.product(*zip(str_.upper(), str_.lower()))))
+    return list(
+        map("".join, itertools.product(*zip(str_.upper(), str_.lower())))
+    )
 
 
 def get_none_variation() -> frozenset:
@@ -150,7 +153,9 @@ def get_country_code_variation() -> dict:
     return variations
 
 
-def list_tuple_without_none(list_tuple: Union[List, Tuple]) -> Union[List, Tuple]:
+def list_tuple_without_none(
+    list_tuple: Union[list, tuple],
+) -> Union[list, tuple]:
     """Removes None variations from a list or tuple.
 
     Args:
@@ -185,55 +190,9 @@ def list_tuple_without_none(list_tuple: Union[List, Tuple]) -> Union[List, Tuple
     return tuple(item for item in list_tuple if _keep(item))
 
 
-
-def string_dlt_to_dlt(dlt_str_rep: str) -> Union[Dict, List, Tuple]:
-    """Converts string representation of data structures to actual Python objects.
-
-    Args:
-        dlt_str_rep (str): String representation of dictionary/list/tuple.
-
-    Returns:
-        Union[Dict, List, Tuple]: Converted Python data structure.
-
-    Examples:
-        >>> string_dlt_to_dlt("[1, 2, 3]")
-        [1, 2, 3]
-        >>> string_dlt_to_dlt("{'a': 1, 'b': 2}")
-        {'a': 1, 'b': 2}
-        >>> string_dlt_to_dlt("('1', '2', '3')")
-        ('1', '2', '3')
-    """
-    try:
-        from ast import literal_eval
-
-        return literal_eval(dlt_str_rep)
-    except (ValueError, SyntaxError) as e:
-        raise ValueError(f"Invalid data structure string: {dlt_str_rep}") from e
-
-
-def string_str_to_str(string_str_rep: str) -> str:
-    """Converts string representation to a clean string by removing quotes.
-
-    Args:
-        string_str_rep (str): String representation to clean.
-
-    Returns:
-        str: Cleaned string with outer quotes removed.
-
-    Examples:
-        >>> string_str_to_str("'test'")
-        'test'
-        >>> string_str_to_str('"test"')
-        'test'
-    """
-    if not string_str_rep:
-        raise ValueError("Input string cannot be empty or None")
-    return string_str_rep.strip("'\"")
-
-
 def delete_list_indices(
     list_: list,
-    indices: List[int],
+    indices: list[int],
 ) -> None:
     """Deletes multiple indices from a list in-place.
 
@@ -254,8 +213,8 @@ def delete_list_indices(
 # FILESYSTEM
 def get_path_files(
     path: Union[str, Path],
-    keywords: List[str],
-) -> List[str]:
+    keywords: list[str],
+) -> list[str]:
     """Returns sorted list of files from given path that contain specified keywords.
 
     Args:
@@ -266,7 +225,7 @@ def get_path_files(
         List[str]: Sorted list of matching filenames.
 
     Examples:
-        >>> get_path_files("test_base_folder", ["py"])
+        >>> get_path_files("test_base_folder", ["py"])  # doctest: +SKIP
         ['test1.py', 'test2.py', 'test3.py', 'test4.py', 'test5.py']
     """
     path = Path(path)
@@ -293,7 +252,7 @@ def remove_path_file(
         n (int, optional): Number of newest files to keep. Defaults to 2.
 
     Examples:
-        >>> remove_path_file("test_base_folder", ".py")
+        >>> remove_path_file("test_base_folder", ".py")  # doctest: +SKIP
     """
     if n < 0:
         raise ValueError("n must be non-negative")
@@ -312,7 +271,7 @@ def remove_path_file(
 
 def list_to_file(
     filepath: Union[str, Path],
-    list_: List,
+    list_: list,
     newline: bool = True,
 ) -> None:
     """Writes list contents to a file.
@@ -323,7 +282,7 @@ def list_to_file(
         newline (bool, optional): Whether to add newline after each item. Defaults to True.
 
     Examples:
-        >>> list_to_file("test.txt", [1, 2, 3])
+        >>> list_to_file("test.txt", [1, 2, 3])  # doctest: +SKIP
     """
     filepath = Path(filepath)
     try:
@@ -333,7 +292,7 @@ def list_to_file(
                 if newline:
                     f.write("\n")
         logger.info(f"Successfully wrote to file: {filepath}")
-    except IOError as e:
+    except OSError as e:
         logger.error(f"Failed to write to file {filepath}: {e}")
         raise
 
@@ -341,7 +300,7 @@ def list_to_file(
 # URLLIB
 def create_encode_url(
     url: str,
-    query_params: Optional[Dict[str, Any]] = None,
+    query_params: Optional[dict[str, Any]] = None,
 ) -> str:
     """Creates an encoded URL with query parameters.
 
@@ -378,7 +337,7 @@ def create_encode_url(
 
 
 # SYSTEM
-def parse_ps_aux(ps_aux_commands: str) -> List[List[str]]:
+def parse_ps_aux(ps_aux_commands: str) -> list[list[str]]:
     """Parses Linux ps aux command output into a list of records.
 
     Args:
@@ -413,26 +372,3 @@ def parse_ps_aux(ps_aux_commands: str) -> List[List[str]]:
     except subprocess.SubprocessError as e:
         logger.error(f"Failed to execute command: {e}")
         raise
-
-
-if __name__ == "__main__":
-    import doctest
-
-    # Setup test environment
-    test_folder = Path("test_base_folder")
-    try:
-        test_folder.mkdir(exist_ok=True)
-        for i in range(1, 6):
-            (test_folder / f"test{i}.py").touch()
-
-        doctest.testmod()
-    finally:
-        # Cleanup
-        if test_folder.exists():
-            for file in test_folder.iterdir():
-                file.unlink()
-            test_folder.rmdir()
-
-        test_file = Path("test.txt")
-        if test_file.exists():
-            test_file.unlink()

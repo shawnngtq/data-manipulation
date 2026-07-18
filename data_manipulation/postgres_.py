@@ -1,18 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, List, Optional, Union
-
-try:
-    import pandas as pd
-    HAS_PANDAS = True
-except ImportError:
-    pd = None
-    HAS_PANDAS = False
+from typing import Union
 
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 try:
@@ -29,7 +23,9 @@ except ImportError as e:
         PSYCOPG2_AVAILABLE = False
 
 # Type alias for connection objects
-PostgresConnection = Union["psycopg.Connection", "psycopg2.extensions.connection"]
+PostgresConnection = Union[
+    "psycopg.Connection", "psycopg2.extensions.connection"
+]
 
 
 def create_connection(
@@ -39,7 +35,7 @@ def create_connection(
     password: str,
     port: int = 5432,
     use_psycopg2: bool = False,
-) -> Optional[PostgresConnection]:
+) -> PostgresConnection | None:
     """Creates and returns a connection to a PostgreSQL database.
 
     Args:
@@ -54,9 +50,7 @@ def create_connection(
         Optional[PostgresConnection]: Database connection object if successful, None if fails
     """
     connection = None
-    connection_string = (
-        f"host={host} port={port} dbname={dbname} user={user} password={password}"
-    )
+    connection_string = f"host={host} port={port} dbname={dbname} user={user} password={password}"
 
     try:
         if use_psycopg2 and PSYCOPG2_AVAILABLE:
@@ -75,9 +69,9 @@ def create_connection(
 def execute_query(
     connection: PostgresConnection,
     sql_query: str,
-    data: Union[dict, tuple, None] = None,
+    data: dict | tuple | None = None,
     commit: bool = True,
-) -> Optional[int]:
+) -> int | None:
     """Executes a SQL query with optional parameters.
 
     Args:
@@ -107,10 +101,10 @@ def execute_query(
 def execute_values(
     connection: PostgresConnection,
     table: str,
-    columns: List[str],
-    values: List[tuple],
+    columns: list[str],
+    values: list[tuple],
     commit: bool = True,
-) -> Optional[int]:
+) -> int | None:
     """Efficiently performs bulk insertion of multiple rows.
 
     Args:
@@ -145,7 +139,7 @@ def execute_values(
 
 def get_table_info(
     connection: PostgresConnection, table: str, info_type: str = "columns"
-) -> Optional[Union[List[str], List[tuple]]]:
+) -> list[str] | list[tuple] | None:
     """Retrieves table information (columns or schema).
 
     Args:
@@ -174,25 +168,3 @@ def get_table_info(
     except Exception as e:
         logger.error(f"Table info retrieval error: {e}")
         return None
-
-
-def query_to_pandas(
-    connection: PostgresConnection,
-    sql_query: str,
-) -> pd.DataFrame:
-    """Executes a SQL query and returns results as a pandas DataFrame.
-
-    Args:
-        connection: Active PostgreSQL connection
-        sql_query (str): SQL query to execute
-
-    Returns:
-        pd.DataFrame: Query results as a pandas DataFrame
-    """
-    return pd.read_sql(sql=sql_query, con=connection)
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

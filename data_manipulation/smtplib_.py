@@ -7,6 +7,7 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -44,7 +45,14 @@ def send_email(
     """
     # Input validation
     if not all(
-        [logname, message_subject, message_sender, message_receiver, html, smtp_address]
+        [
+            logname,
+            message_subject,
+            message_sender,
+            message_receiver,
+            html,
+            smtp_address,
+        ]
     ):
         raise ValueError("Required parameters cannot be empty")
 
@@ -57,7 +65,9 @@ def send_email(
 
     try:
         with SMTP(smtp_address, smtp_port) as server:
-            logger.info(f"Connecting to SMTP server: {smtp_address}:{smtp_port}")
+            logger.info(
+                f"Connecting to SMTP server: {smtp_address}:{smtp_port}"
+            )
 
             # Enable TLS encryption
             server.starttls()
@@ -78,9 +88,3 @@ def send_email(
     except Exception as e:
         logger.error(f"Unexpected error occurred: {str(e)}")
         return False
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

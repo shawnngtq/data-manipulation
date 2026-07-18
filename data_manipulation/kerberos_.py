@@ -6,6 +6,7 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 
@@ -38,7 +39,9 @@ def keytab_valid(
     """
     # Input validation
     if not keytab_filepath or not principal_name:
-        raise ValueError("Both keytab_filepath and principal_name must be provided")
+        raise ValueError(
+            "Both keytab_filepath and principal_name must be provided"
+        )
 
     if not os.path.isfile(keytab_filepath):
         raise ValueError(f"Keytab file not found: {keytab_filepath}")
@@ -85,9 +88,3 @@ def keytab_valid(
     except Exception as e:
         logger.error(f"Unexpected error during keytab validation: {str(e)}")
         raise
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

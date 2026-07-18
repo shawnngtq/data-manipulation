@@ -1,10 +1,14 @@
 import os
-from typing import Any, Dict, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Optional, Union
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
 
 # Constants - now serving as defaults
@@ -14,7 +18,7 @@ DEFAULT_MAX_RETRIES = 3
 
 def send_aws_ses_email(
     sender: str,
-    recipient: List[str],
+    recipient: list[str],
     subject: str,
     body_text: str,
     body_type: str,
@@ -22,7 +26,7 @@ def send_aws_ses_email(
     attachment: Optional[str] = None,
     max_attachment_size: int = DEFAULT_MAX_ATTACHMENT_SIZE,
     max_retries: int = DEFAULT_MAX_RETRIES,
-) -> Optional[Dict[str, Any]]:
+) -> Optional[dict[str, Any]]:
     """Sends an email using AWS SES service.
 
     Args:
@@ -86,7 +90,7 @@ def send_aws_ses_email(
             # Check file size with parameterized max size
             if os.path.getsize(attachment) > max_attachment_size:
                 logger.error(
-                    f"Attachment size exceeds maximum allowed size of {max_attachment_size/1024/1024}MB"
+                    f"Attachment size exceeds maximum allowed size of {max_attachment_size / 1024 / 1024}MB"
                 )
                 return None
 
@@ -98,7 +102,7 @@ def send_aws_ses_email(
                     filename=os.path.basename(attachment),
                 )
                 msg.attach(part)
-        except (IOError, OSError) as e:
+        except OSError as e:
             logger.error(f"Error processing attachment: {str(e)}")
             return None
 
@@ -126,7 +130,7 @@ def list_s3_bucket_files(
     bucket: str,
     to_dateframe: bool = False,
     prefix: Optional[str] = None,
-) -> Union[List[str], "pd.DataFrame"]:
+) -> Union[list[str], "pd.DataFrame"]:
     """Lists all files in an S3 bucket.
 
     Args:
@@ -140,11 +144,11 @@ def list_s3_bucket_files(
             If to_dateframe is False, returns list of file keys.
 
     Examples:
-        >>> files = list_s3_bucket_files('my-bucket')
+        >>> files = list_s3_bucket_files("my-bucket")
         >>> type(files)
         <class 'list'>
 
-        >>> df = list_s3_bucket_files('my-bucket', to_dateframe=True)
+        >>> df = list_s3_bucket_files("my-bucket", to_dateframe=True)
         >>> type(df)
         <class 'pandas.core.frame.DataFrame'>
     """
@@ -180,9 +184,3 @@ def list_s3_bucket_files(
 
         return pd.DataFrame(keys, columns=["key"])
     return keys
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

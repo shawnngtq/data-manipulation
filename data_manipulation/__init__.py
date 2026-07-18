@@ -4,7 +4,6 @@ from data_manipulation import (
     boto3_,
     cryptography_,
     django_,
-    geopandas_,
     kerberos_,
     mysql_connector_python_,
     openldap_,
