@@ -1,7 +1,6 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP, SMTPException
-from typing import Optional
 
 try:
     from loguru import logger
@@ -19,8 +18,8 @@ def send_email(
     html: str,
     smtp_address: str,
     smtp_port: int = 587,
-    smtp_username: Optional[str] = None,
-    smtp_password: Optional[str] = None,
+    smtp_username: str | None = None,
+    smtp_password: str | None = None,
 ) -> bool:
     """Sends an HTML email using SMTP with TLS and logs the operation.
 

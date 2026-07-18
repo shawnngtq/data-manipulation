@@ -142,7 +142,7 @@ def add_dummy_columns(
 
     Args:
         dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
-        columns (List[str]): List of column names to add
+        columns (list[str]): List of column names to add
         value (str): Default value for the new columns
 
     Returns:
@@ -190,7 +190,7 @@ def column_into_list(
         column (str): Name of the column to extract
 
     Returns:
-        List[Any]: List containing all values from the specified column,
+        list[Any]: List containing all values from the specified column,
             including duplicates
 
     Raises:
@@ -267,7 +267,7 @@ def columns_statistics(
             Defaults to 10.
 
     Returns:
-        Tuple[List[str], List[str]]: Two lists containing:
+        tuple[list[str], list[str]]: Two lists containing:
             - List of empty column names
             - List of single-value column names
 
@@ -354,8 +354,8 @@ def group_count(
 
     Args:
         dataframe (pyspark.sql.DataFrame): Input Spark DataFrame
-        columns (Union[str, List[str]]): Column(s) to group by
-        n (Union[int, float], optional): Number of top groups to return.
+        columns (str | list[str]): Column(s) to group by
+        n (int | float, optional): Number of top groups to return.
             Use float('inf') for all groups. Defaults to 10.
 
     Returns:

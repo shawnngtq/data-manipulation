@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import re
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 try:
     from loguru import logger
@@ -18,14 +20,14 @@ DEFAULT_HEADERS = {
 }
 
 
-def preprocess(html: str) -> Optional[str]:
+def preprocess(html: str) -> str | None:
     """Removes whitespaces and newline characters from HTML string.
 
     Args:
         html (str): HTML string to be cleaned.
 
     Returns:
-        Optional[str]: Cleaned HTML string with normalized whitespace.
+        str | None: Cleaned HTML string with normalized whitespace.
 
     Examples:
         >>> a = "<html>   <p> Something </p>    </html> "
@@ -49,8 +51,8 @@ def build_soup(
     features: str = "lxml",
     to_preprocess: bool = True,
     timeout: int = DEFAULT_TIMEOUT,
-    headers: Optional[dict] = None,
-) -> "Optional[BeautifulSoup]":
+    headers: dict | None = None,
+) -> BeautifulSoup | None:
     """Creates a BeautifulSoup object from a given URL.
 
     Args:
@@ -58,10 +60,10 @@ def build_soup(
         features (str, optional): Parser to use. Defaults to "lxml".
         to_preprocess (bool, optional): Whether to preprocess the HTML. Defaults to True.
         timeout (int, optional): Request timeout in seconds. Defaults to 10.
-        headers (Optional[dict], optional): Custom headers for the request. Defaults to None.
+        headers (dict | None, optional): Custom headers for the request. Defaults to None.
 
     Returns:
-        Optional[BeautifulSoup]: Parsed BeautifulSoup object, or None if request fails.
+        BeautifulSoup | None: Parsed BeautifulSoup object, or None if request fails.
 
     Examples:
         >>> a = build_soup("https://google.com")  # doctest: +SKIP

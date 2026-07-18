@@ -51,7 +51,7 @@ def create_sqlalchemy_url(
         user (str): Database username for authentication
         password (str): Database password for authentication
         port (int, optional): Database server port number. Defaults to 3306.
-        query (Optional[Dict[str, Any]], optional): Additional connection parameters.
+        query (dict[str, Any] | None, optional): Additional connection parameters.
             Useful for SSL configuration. Defaults to None.
 
     Returns:
@@ -112,7 +112,7 @@ def create_sqlalchemy_engine(
         max_overflow (int, optional): Maximum number of connections above pool_size. Defaults to 10.
         pool_timeout (int, optional): Timeout for getting a connection from pool. Defaults to 30.
         connect_timeout (int, optional): Timeout for database connections. Defaults to 10.
-        ssl_ca (Optional[str], optional): Path to SSL CA certificate. Defaults to None.
+        ssl_ca (str | None, optional): Path to SSL CA certificate. Defaults to None.
 
     Returns:
         sqlalchemy.engine.base.Engine: Configured database engine object

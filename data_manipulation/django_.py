@@ -1,6 +1,5 @@
 import os
 import sys
-from typing import Optional
 
 try:
     from loguru import logger
@@ -12,13 +11,13 @@ except ImportError:
 
 def init_django(
     django_dir: str,
-    project_name: Optional[str] = None,
+    project_name: str | None = None,
 ) -> None:
     """Initializes Django environment for external Python scripts or notebooks.
 
     Args:
         django_dir (str): Path to Django project directory.
-        project_name (Optional[str]): Name of the Django project. If None, will check DJANGO_PROJECT env var.
+        project_name (str | None): Name of the Django project. If None, will check DJANGO_PROJECT env var.
 
     Raises:
         ValueError: If project_name is not provided and DJANGO_PROJECT environment variable is not set.
@@ -52,7 +51,7 @@ def get_django_countries_dict() -> tuple[dict[str, str], dict[str, str]]:
     """Retrieves dictionaries mapping country codes to names and vice versa.
 
     Returns:
-        Tuple[Dict[str, str], Dict[str, str]]: A tuple containing:
+        tuple[dict[str, str], dict[str, str]]: A tuple containing:
             - code_name: Dict mapping country codes to uppercase country names
             - name_code: Dict mapping uppercase country names to codes
 
@@ -72,16 +71,16 @@ def get_django_countries_dict() -> tuple[dict[str, str], dict[str, str]]:
 
 def django_validate_email(
     email: str,
-    whitelist_domains: Optional[list[str]] = None,
-) -> Optional[str]:
+    whitelist_domains: list[str] | None = None,
+) -> str | None:
     """Validates an email address using Django's validator.
 
     Args:
         email (str): Email address to validate.
-        whitelist_domains (Optional[List[str]]): List of allowed email domains.
+        whitelist_domains (list[str] | None): List of allowed email domains.
 
     Returns:
-        Optional[str]: The validated email address if valid, None if invalid.
+        str | None: The validated email address if valid, None if invalid.
 
     Examples:
         >>> django_validate_email("valid@email.com")
@@ -108,16 +107,16 @@ def django_validate_email(
 
 def django_validate_url(
     url: str,
-    allowed_schemes: Optional[list[str]] = None,
-) -> Optional[str]:
+    allowed_schemes: list[str] | None = None,
+) -> str | None:
     """Validates a URL using Django's URL validator.
 
     Args:
         url (str): URL to validate.
-        allowed_schemes (Optional[List[str]]): List of allowed URL schemes (e.g., ['http', 'https']).
+        allowed_schemes (list[str] | None): List of allowed URL schemes (e.g., ['http', 'https']).
 
     Returns:
-        Optional[str]: The validated URL if valid, None if invalid.
+        str | None: The validated URL if valid, None if invalid.
     """
     from django.core.validators import URLValidator
 
@@ -136,16 +135,16 @@ def django_validate_url(
 
 def django_validate_phone(
     phone: str,
-    region: Optional[str] = None,
-) -> Optional[str]:
+    region: str | None = None,
+) -> str | None:
     """Validates and formats a phone number using Django's phone number field.
 
     Args:
         phone (str): Phone number to validate.
-        region (Optional[str], optional): Region code for parsing local numbers. Defaults to None.
+        region (str | None, optional): Region code for parsing local numbers. Defaults to None.
 
     Returns:
-        Optional[str]: The phone number in E.164 format if valid, None if invalid.
+        str | None: The phone number in E.164 format if valid, None if invalid.
 
     Examples:
         >>> django_validate_phone("+1234567890")

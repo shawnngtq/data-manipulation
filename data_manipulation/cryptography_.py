@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from typing import Union
 
 try:
     from cryptography.fernet import Fernet, InvalidToken
@@ -18,7 +17,7 @@ except ImportError:
 
 
 def generate_fernet_key(
-    output_directory: Union[str, Path],
+    output_directory: str | Path,
     output_filename: str,
 ) -> bytes:
     """Generates and saves a Fernet encryption key.
@@ -57,8 +56,8 @@ def generate_fernet_key(
 
 
 def encrypt_fernet_file(
-    keypath: Union[str, Path],
-    filepath: Union[str, Path],
+    keypath: str | Path,
+    filepath: str | Path,
 ) -> bytes:
     """Encrypts a file using Fernet symmetric encryption.
 
@@ -102,8 +101,8 @@ def encrypt_fernet_file(
 
 
 def decrypt_fernet_data(
-    keypath: Union[str, Path],
-    filepath: Union[str, Path],
+    keypath: str | Path,
+    filepath: str | Path,
 ) -> bytes:
     """Decrypts a file using Fernet symmetric encryption.
 

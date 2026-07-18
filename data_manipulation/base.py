@@ -4,7 +4,7 @@ import re
 import subprocess
 from functools import wraps
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any
 from urllib.parse import urlencode, urlparse, urlunparse
 
 try:
@@ -75,7 +75,7 @@ def get_string_case_combination(str_: str) -> list[str]:
         str_ (str): Input string to generate combinations for.
 
     Returns:
-        List[str]: List of all possible case combinations.
+        list[str]: List of all possible case combinations.
 
     Examples:
         >>> get_string_case_combination("abc")
@@ -85,7 +85,10 @@ def get_string_case_combination(str_: str) -> list[str]:
         raise ValueError("Input string cannot be empty or None")
 
     return list(
-        map("".join, itertools.product(*zip(str_.upper(), str_.lower())))
+        map(
+            "".join,
+            itertools.product(*zip(str_.upper(), str_.lower(), strict=True)),
+        )
     )
 
 
@@ -154,15 +157,15 @@ def get_country_code_variation() -> dict:
 
 
 def list_tuple_without_none(
-    list_tuple: Union[list, tuple],
-) -> Union[list, tuple]:
+    list_tuple: list | tuple,
+) -> list | tuple:
     """Removes None variations from a list or tuple.
 
     Args:
         list_tuple: Input list or tuple to clean.
 
     Returns:
-        Union[List, Tuple]: Cleaned list or tuple.
+        list | tuple: Cleaned list or tuple.
 
     Raises:
         TypeError: If input is not a list or tuple.
@@ -212,7 +215,7 @@ def delete_list_indices(
 
 # FILESYSTEM
 def get_path_files(
-    path: Union[str, Path],
+    path: str | Path,
     keywords: list[str],
 ) -> list[str]:
     """Returns sorted list of files from given path that contain specified keywords.
@@ -222,7 +225,7 @@ def get_path_files(
         keywords (list): List of keywords to match in filenames.
 
     Returns:
-        List[str]: Sorted list of matching filenames.
+        list[str]: Sorted list of matching filenames.
 
     Examples:
         >>> get_path_files("test_base_folder", ["py"])  # doctest: +SKIP
@@ -240,7 +243,7 @@ def get_path_files(
 
 
 def remove_path_file(
-    path: Union[str, Path],
+    path: str | Path,
     keyword: str,
     n: int = 2,
 ) -> None:
@@ -270,7 +273,7 @@ def remove_path_file(
 
 
 def list_to_file(
-    filepath: Union[str, Path],
+    filepath: str | Path,
     list_: list,
     newline: bool = True,
 ) -> None:
@@ -300,7 +303,7 @@ def list_to_file(
 # URLLIB
 def create_encode_url(
     url: str,
-    query_params: Optional[dict[str, Any]] = None,
+    query_params: dict[str, Any] | None = None,
 ) -> str:
     """Creates an encoded URL with query parameters.
 
@@ -344,7 +347,7 @@ def parse_ps_aux(ps_aux_commands: str) -> list[list[str]]:
         ps_aux_commands (str): Linux ps aux command string.
 
     Returns:
-        List[List[str]]: List of process records.
+        list[list[str]]: List of process records.
 
     Examples:
         >>> # parse_ps_aux("ps aux | egrep -i '%cpu|anaconda3' | head")

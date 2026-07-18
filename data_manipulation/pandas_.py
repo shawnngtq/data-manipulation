@@ -110,7 +110,7 @@ def compare_dataframes(
         dataframe2 (pd.DataFrame): Second DataFrame to compare.
 
     Returns:
-        Dict[str, Any]: Comparison summary with keys ``same_length``,
+        dict[str, Any]: Comparison summary with keys ``same_length``,
             ``df1_length``, ``df2_length``, and ``columns`` (per-column
             dict of ``df1_non_null``, ``df2_non_null``, ``same``).
 
@@ -197,10 +197,10 @@ def split_dataframe(
     Args:
         dataframe (pd.DataFrame): Input DataFrame to split.
         uuid (str): Name of the column containing unique identifiers.
-        columns (List[str]): List of column names to split into second DataFrame.
+        columns (list[str]): List of column names to split into second DataFrame.
 
     Returns:
-        Tuple[pd.DataFrame, pd.DataFrame]: Tuple containing:
+        tuple[pd.DataFrame, pd.DataFrame]: Tuple containing:
             - First DataFrame with specified columns removed
             - Second DataFrame with only specified columns and uuid
 
@@ -237,10 +237,10 @@ def split_left_merged_dataframe(
     Args:
         dataframe1 (pd.DataFrame): Left DataFrame for merge.
         dataframe2 (pd.DataFrame): Right DataFrame for merge.
-        columns (List[str]): Columns to merge on.
+        columns (list[str]): Columns to merge on.
 
     Returns:
-        Tuple[pd.DataFrame, pd.DataFrame]: Tuple containing:
+        tuple[pd.DataFrame, pd.DataFrame]: Tuple containing:
             - DataFrame with rows that matched in both inputs
             - DataFrame with rows only present in left input
 
@@ -287,7 +287,7 @@ def compare_all_list_items(list_: list[Any]) -> pd.DataFrame:
     """Creates a DataFrame comparing all possible pairs of items in a list.
 
     Args:
-        list_ (List[Any]): Input list containing items to compare
+        list_ (list[Any]): Input list containing items to compare
 
     Returns:
         pd.DataFrame: DataFrame with columns:
@@ -327,7 +327,7 @@ def dtypes_dictionary(dataframe: pd.DataFrame) -> dict[type, list[str]]:
         dataframe (pd.DataFrame): Input DataFrame to analyze
 
     Returns:
-        Dict[type, List[str]]: Dictionary where:
+        dict[type, list[str]]: Dictionary where:
             - keys are Python types (e.g., str, int, float)
             - values are lists of column names with that type
 
@@ -422,7 +422,7 @@ def print_dataframe_overview(
         stats (bool, optional): Whether to include min/max statistics. Defaults to False.
 
     Returns:
-        Dict[str, Dict[str, Any]]: Per-column summary with keys
+        dict[str, dict[str, Any]]: Per-column summary with keys
             ``unique``, ``null_count``, and ``value_counts``.
 
     Raises:
@@ -521,7 +521,7 @@ def useless_columns(dataframe: pd.DataFrame) -> tuple[list[str], list[str]]:
         dataframe (pd.DataFrame): DataFrame to analyze
 
     Returns:
-        Tuple[List[str], List[str]]: Two lists containing:
+        tuple[list[str], list[str]]: Two lists containing:
             - List of column names that are completely empty
             - List of column names that contain only a single unique value
 

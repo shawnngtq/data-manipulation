@@ -1,6 +1,6 @@
 from collections.abc import Generator
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Any, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 try:
     from loguru import logger
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
         PooledMySQLConnection,
     )
 
-    ConnectionType = Union[MySQLConnection, PooledMySQLConnection]
+    ConnectionType = MySQLConnection | PooledMySQLConnection
 else:
     ConnectionType = Any
 
@@ -85,8 +85,8 @@ def get_connection(
     password: str,
     port: int = 3306,
     use_pool: bool = False,
-    pool: Optional[Any] = None,
-) -> Generator[ConnectionType, None, None]:
+    pool: Any | None = None,
+) -> Generator[ConnectionType]:
     """Context manager for database connections.
 
     Args:
@@ -96,7 +96,7 @@ def get_connection(
         password (str): Password for authentication.
         port (int, optional): Database port number. Defaults to 3306.
         use_pool (bool, optional): Whether to use connection pooling. Defaults to False.
-        pool (Optional[Any], optional): Existing connection pool.
+        pool (Any | None, optional): Existing connection pool.
 
     Yields:
         ConnectionType: Database connection object.
@@ -143,19 +143,19 @@ def get_connection(
 def execute_query(
     connection: ConnectionType,
     sql_query: str,
-    data: Optional[Union[dict, tuple]] = None,
+    data: dict | tuple | None = None,
     fetch: bool = False,
-) -> Union[Optional[int], list[dict[str, Any]], None]:
+) -> int | list[dict[str, Any]] | None:
     """Executes a MySQL query with parameters.
 
     Args:
         connection (ConnectionType): Active MySQL connection.
         sql_query (str): SQL query to execute.
-        data (Optional[Union[dict, tuple]], optional): Parameters for the SQL query.
+        data (dict | tuple | None, optional): Parameters for the SQL query.
         fetch (bool, optional): Whether to fetch results. Defaults to False.
 
     Returns:
-        Union[Optional[int], List[Dict[str, Any]], None]:
+        int | list[dict[str, Any]] | None:
             - For INSERT: Last inserted row ID
             - For SELECT: List of dictionaries containing the results
             - None for other operations or on failure

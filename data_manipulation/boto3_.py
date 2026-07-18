@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import os
-from typing import TYPE_CHECKING, Any, Optional, Union
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -23,10 +25,10 @@ def send_aws_ses_email(
     body_text: str,
     body_type: str,
     ses_client: Any,
-    attachment: Optional[str] = None,
+    attachment: str | None = None,
     max_attachment_size: int = DEFAULT_MAX_ATTACHMENT_SIZE,
     max_retries: int = DEFAULT_MAX_RETRIES,
-) -> Optional[dict[str, Any]]:
+) -> dict[str, Any] | None:
     """Sends an email using AWS SES service.
 
     Args:
@@ -129,17 +131,17 @@ def send_aws_ses_email(
 def list_s3_bucket_files(
     bucket: str,
     to_dateframe: bool = False,
-    prefix: Optional[str] = None,
-) -> Union[list[str], "pd.DataFrame"]:
+    prefix: str | None = None,
+) -> list[str] | pd.DataFrame:
     """Lists all files in an S3 bucket.
 
     Args:
         bucket (str): Name of the S3 bucket.
         to_dateframe (bool, optional): Whether to return results as pandas DataFrame. Defaults to False.
-        prefix (Optional[str], optional): Filter results to files with this prefix. Defaults to None.
+        prefix (str | None, optional): Filter results to files with this prefix. Defaults to None.
 
     Returns:
-        Union[List[str], pd.DataFrame]: List of file keys or DataFrame containing file keys.
+        list[str] | pd.DataFrame: List of file keys or DataFrame containing file keys.
             If to_dateframe is True, returns DataFrame with 'key' column.
             If to_dateframe is False, returns list of file keys.
 
