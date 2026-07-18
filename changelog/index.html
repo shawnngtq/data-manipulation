@@ -251,33 +251,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../commands/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Commands
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
     
     
     
@@ -287,10 +260,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -308,8 +281,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -822,7 +795,7 @@
   <a href="#fixed-previous-pass-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fixed (previous pass — reference)
+        Fixed (previous pass - reference)
       
     </span>
   </a>
@@ -906,7 +879,7 @@
   <a href="#fixed-previous-pass-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fixed (previous pass — reference)
+        Fixed (previous pass - reference)
       
     </span>
   </a>
@@ -939,88 +912,86 @@
 <h2 id="unreleased">[Unreleased]</h2>
 <h3 id="removed">Removed</h3>
 <ul>
-<li>
-<p><strong><code>pandas_.clean_none()</code></strong> — function has been removed.
-  Migrate to pandas built-ins:
-  <code>python
+<li><strong><code>pandas_.clean_none()</code></strong> - function has been removed.
+  Migrate to pandas built-ins:</li>
+</ul>
+<p><code>python
   df = df.replace(r"^\s*$", np.nan, regex=True)
   df = df.where(pd.notnull(df), None)</code></p>
-</li>
-<li>
-<p><strong><code>pandas_.config_pandas_display()</code></strong> — function has been removed.
-  Set display options directly:
-  <code>python
+<ul>
+<li><strong><code>pandas_.config_pandas_display()</code></strong> - function has been removed.
+  Set display options directly:</li>
+</ul>
+<p><code>python
   pd.set_option("display.max_columns", 500)
   pd.set_option("display.max_colwidth", 500)
   pd.set_option("display.expand_frame_repr", True)</code></p>
-</li>
-<li>
-<p><strong><code>prometheus_</code> module</strong> — was an empty placeholder; removed from
-  the public API and from <code>__init__</code> imports.</p>
-</li>
+<ul>
+<li><strong><code>prometheus_</code> module</strong> - was an empty placeholder; removed from
+  the public API and from <code>__init__</code> imports.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
-<li>
-<p><strong><code>base.get_none_variation()</code></strong> — now returns a <code>frozenset</code> of 7
+<li><strong><code>base.get_none_variation()</code></strong> - now returns a <code>frozenset</code> of 7
   lowercase canonical strings instead of a 72-item list of case
-  permutations. Use <code>.casefold()</code> for membership checks:
-  <code>python
+  permutations. Use <code>.casefold()</code> for membership checks:</li>
+</ul>
+<p><code>python
   # before
   if value in get_none_variation():
       ...
   # after
   if isinstance(value, str) and value.casefold() in get_none_variation():
       ...</code></p>
-</li>
+<ul>
 <li>
-<p><strong><code>pyspark_.group_count()</code></strong> — the <code>percent</code> column is now computed
+<p><strong><code>pyspark_.group_count()</code></strong> - the <code>percent</code> column is now computed
   as a native Spark column expression instead of a Python UDF.
   Behaviour is identical; performance improves on large datasets.</p>
 </li>
 <li>
-<p><strong><code>pyspark_.column_into_list()</code></strong> — raises <code>ValueError</code> (with the
+<p><strong><code>pyspark_.column_into_list()</code></strong> - raises <code>ValueError</code> (with the
   list of available columns) when the requested column does not exist.
   Previously returned <code>None</code> silently.</p>
 </li>
 <li>
-<p><strong><code>pandas_.print_dataframe_overview()</code></strong> — now returns a
+<p><strong><code>pandas_.print_dataframe_overview()</code></strong> - now returns a
   <code>Dict[str, Dict[str, Any]]</code> of per-column stats (<code>unique</code>,
   <code>null_count</code>, <code>value_counts</code>). Still prints to stdout as before;
   existing call sites are unaffected.</p>
 </li>
 <li>
-<p><strong><code>pandas_.compare_dataframes()</code></strong> — now returns a comparison
+<p><strong><code>pandas_.compare_dataframes()</code></strong> - now returns a comparison
   summary dict (<code>same_length</code>, <code>df1_length</code>, <code>df2_length</code>, <code>columns</code>).
   Still prints to stdout as before; existing call sites are unaffected.</p>
 </li>
 <li>
-<p><strong><code>pyspark_</code> module</strong> — all <code>print()</code> calls replaced with
+<p><strong><code>pyspark_</code> module</strong> - all <code>print()</code> calls replaced with
   <code>logger.info()</code> / <code>logger.debug()</code>. Output is now routed through
   the standard logging pipeline and can be silenced or redirected.</p>
 </li>
 <li>
-<p><strong><code>sqlalchemy_.create_sqlalchemy_engine()</code></strong> — duplicate
+<p><strong><code>sqlalchemy_.create_sqlalchemy_engine()</code></strong> - duplicate
   <code>if/elif</code> timeout branches (both setting the same value) consolidated
   into a single condition.</p>
 </li>
 <li>
-<p><strong><code>django_.django_validate_phone()</code></strong> — now has an explicit
+<p><strong><code>django_.django_validate_phone()</code></strong> - now has an explicit
   <code>return None</code> on failure instead of a bare <code>return</code>.</p>
 </li>
 </ul>
-<h3 id="fixed-previous-pass-reference">Fixed (previous pass — reference)</h3>
+<h3 id="fixed-previous-pass-reference">Fixed (previous pass - reference)</h3>
 <ul>
-<li><code>pyspark_.columns_statistics()</code> — always-true condition in empty-column
+<li><code>pyspark_.columns_statistics()</code> - always-true condition in empty-column
   detection (third clause was truthy for any non-empty string).</li>
-<li><code>pandas_.dtypes_dictionary()</code> — <code>.iteritems()</code> removed in pandas 2.0;
+<li><code>pandas_.dtypes_dictionary()</code> - <code>.iteritems()</code> removed in pandas 2.0;
   replaced with <code>.items()</code>.</li>
 <li>Bare <code>except:</code> replaced with <code>except Exception:</code> in <code>pandas_</code> and
   <code>django_</code>.</li>
-<li><code>base.string_boolean_to_int()</code> — removed (used <code>distutils</code>, dropped
+<li><code>base.string_boolean_to_int()</code> - removed (used <code>distutils</code>, dropped
   in Python 3.12).</li>
-<li><code>flask_.py</code> — deleted (was entirely commented-out dead code).</li>
-<li><code>beautifulsoup_.preprocess()</code> — fixed mixed tabs/spaces and invalid
+<li><code>flask_.py</code> - deleted (was entirely commented-out dead code).</li>
+<li><code>beautifulsoup_.preprocess()</code> - fixed mixed tabs/spaces and invalid
   <code>\s</code> escape sequences.</li>
 <li>All modules now guard third-party imports with <code>try/except</code>; the
   package imports cleanly even when optional dependencies are missing.</li>
