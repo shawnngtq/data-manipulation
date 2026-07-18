@@ -495,62 +495,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../kerberos_/" class="md-nav__link">
         
   
@@ -1002,7 +946,7 @@
                 <code>headers</code>
             </td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="dict">dict</span>]</code>
+                  <code><span title="dict">dict</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1028,11 +972,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="bs4.BeautifulSoup">BeautifulSoup</span>]</code>
+                  <code><span title="bs4.BeautifulSoup">BeautifulSoup</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional[BeautifulSoup]: Parsed BeautifulSoup object, or None if request fails.</p>
+                <p>BeautifulSoup | None: Parsed BeautifulSoup object, or None if request fails.</p>
               </div>
             </td>
           </tr>
@@ -1054,61 +998,65 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/beautifulsoup_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">build_soup</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">build_soup</span><span class="p">(</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">features</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lxml&quot;</span><span class="p">,</span>
     <span class="n">to_preprocess</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span>
-    <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Optional[BeautifulSoup]&quot;</span><span class="p">:</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BeautifulSoup</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a BeautifulSoup object from a given URL.</span>
 
 <span class="sd">    Args:</span>
@@ -1116,14 +1064,14 @@
 <span class="sd">        features (str, optional): Parser to use. Defaults to &quot;lxml&quot;.</span>
 <span class="sd">        to_preprocess (bool, optional): Whether to preprocess the HTML. Defaults to True.</span>
 <span class="sd">        timeout (int, optional): Request timeout in seconds. Defaults to 10.</span>
-<span class="sd">        headers (Optional[dict], optional): Custom headers for the request. Defaults to None.</span>
+<span class="sd">        headers (dict | None, optional): Custom headers for the request. Defaults to None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Optional[BeautifulSoup]: Parsed BeautifulSoup object, or None if request fails.</span>
+<span class="sd">        BeautifulSoup | None: Parsed BeautifulSoup object, or None if request fails.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; a = build_soup(&quot;https://google.com&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; type(a)</span>
+<span class="sd">        &gt;&gt;&gt; a = build_soup(&quot;https://google.com&quot;)  # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; type(a)  # doctest: +SKIP</span>
 <span class="sd">        &lt;class &#39;bs4.BeautifulSoup&#39;&gt;</span>
 
 <span class="sd">    Note:</span>
@@ -1142,10 +1090,14 @@
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">request_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">request_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
+            <span class="p">)</span>
             <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 
-            <span class="n">html_content</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">if</span> <span class="n">to_preprocess</span> <span class="k">else</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">html_content</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">preprocess</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">if</span> <span class="n">to_preprocess</span> <span class="k">else</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+            <span class="p">)</span>
             <span class="k">return</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html_content</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -1213,11 +1165,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+                  <code><span title="str">str</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional[str]: Cleaned HTML string with normalized whitespace.</p>
+                <p>str | None: Cleaned HTML string with normalized whitespace.</p>
               </div>
             </td>
           </tr>
@@ -1239,10 +1191,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/beautifulsoup_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
@@ -1262,14 +1211,17 @@
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">preprocess</span><span class="p">(</span><span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">preprocess</span><span class="p">(</span><span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes whitespaces and newline characters from HTML string.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        html (str): HTML string to be cleaned.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Optional[str]: Cleaned HTML string with normalized whitespace.</span>
+<span class="sd">        str | None: Cleaned HTML string with normalized whitespace.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; a = &quot;&lt;html&gt;   &lt;p&gt; Something &lt;/p&gt;    &lt;/html&gt; &quot;</span>

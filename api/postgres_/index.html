@@ -415,62 +415,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../kerberos_/" class="md-nav__link">
         
   
@@ -697,17 +641,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#data_manipulation.postgres_.query_to_pandas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        query_to_pandas
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -916,17 +849,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#data_manipulation.postgres_.query_to_pandas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        query_to_pandas
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1110,11 +1032,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="data_manipulation.postgres_.PostgresConnection">PostgresConnection</span>]</code>
+                  <code><span title="data_manipulation.postgres_.PostgresConnection">PostgresConnection</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional[PostgresConnection]: Database connection object if successful, None if fails</p>
+                <p>PostgresConnection | None: Database connection object if successful, None if fails</p>
               </div>
             </td>
           </tr>
@@ -1124,7 +1046,15 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/postgres_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
@@ -1151,24 +1081,14 @@
 <span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_connection</span><span class="p">(</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_connection</span><span class="p">(</span>
     <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">dbname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5432</span><span class="p">,</span>
     <span class="n">use_psycopg2</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PostgresConnection</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PostgresConnection</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates and returns a connection to a PostgreSQL database.</span>
 
 <span class="sd">    Args:</span>
@@ -1180,12 +1100,10 @@
 <span class="sd">        use_psycopg2 (bool, optional): Whether to use psycopg2 instead of psycopg. Defaults to False.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Optional[PostgresConnection]: Database connection object if successful, None if fails</span>
+<span class="sd">        PostgresConnection | None: Database connection object if successful, None if fails</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">connection</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">connection_string</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;host=</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> port=</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2"> dbname=</span><span class="si">{</span><span class="n">dbname</span><span class="si">}</span><span class="s2"> user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2"> password=</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="p">)</span>
+    <span class="n">connection_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;host=</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2"> port=</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2"> dbname=</span><span class="si">{</span><span class="n">dbname</span><span class="si">}</span><span class="s2"> user=</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2"> password=</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">use_psycopg2</span> <span class="ow">and</span> <span class="n">PSYCOPG2_AVAILABLE</span><span class="p">:</span>
@@ -1267,7 +1185,7 @@
                 <code>data</code>
             </td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="dict">dict</span>, <span title="tuple">tuple</span>, None]</code>
+                  <code><span title="dict">dict</span> | <span title="tuple">tuple</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1309,11 +1227,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+                  <code><span title="int">int</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional[int]: Number of rows affected if successful, None if fails</p>
+                <p>int | None: Number of rows affected if successful, None if fails</p>
               </div>
             </td>
           </tr>
@@ -1323,41 +1241,41 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/postgres_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">execute_query</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">execute_query</span><span class="p">(</span>
     <span class="n">connection</span><span class="p">:</span> <span class="n">PostgresConnection</span><span class="p">,</span>
     <span class="n">sql_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">commit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes a SQL query with optional parameters.</span>
 
 <span class="sd">    Args:</span>
@@ -1367,7 +1285,7 @@
 <span class="sd">        commit (bool, optional): Whether to commit the transaction. Defaults to True.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Optional[int]: Number of rows affected if successful, None if fails</span>
+<span class="sd">        int | None: Number of rows affected if successful, None if fails</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
@@ -1450,7 +1368,7 @@
                 <code>columns</code>
             </td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="str">str</span>]</code>
+                  <code><span title="list">list</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1466,7 +1384,7 @@
                 <code>values</code>
             </td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="tuple">tuple</span>]</code>
+                  <code><span title="list">list</span>[<span title="tuple">tuple</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1508,11 +1426,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+                  <code><span title="int">int</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional[int]: Number of rows inserted if successful, None if fails</p>
+                <p>int | None: Number of rows inserted if successful, None if fails</p>
               </div>
             </td>
           </tr>
@@ -1522,7 +1440,17 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/postgres_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
@@ -1548,34 +1476,24 @@
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">execute_values</span><span class="p">(</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">execute_values</span><span class="p">(</span>
     <span class="n">connection</span><span class="p">:</span> <span class="n">PostgresConnection</span><span class="p">,</span>
     <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-    <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">],</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">],</span>
     <span class="n">commit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Efficiently performs bulk insertion of multiple rows.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        connection: Active PostgreSQL connection</span>
 <span class="sd">        table (str): Target table name</span>
-<span class="sd">        columns (List[str]): List of column names</span>
-<span class="sd">        values (List[tuple]): List of value tuples to insert</span>
+<span class="sd">        columns (list[str]): List of column names</span>
+<span class="sd">        values (list[tuple]): List of value tuples to insert</span>
 <span class="sd">        commit (bool, optional): Whether to commit. Defaults to True.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Optional[int]: Number of rows inserted if successful, None if fails</span>
+<span class="sd">        int | None: Number of rows inserted if successful, None if fails</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">connection</span><span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;execute_values is only supported with psycopg2&quot;</span><span class="p">)</span>
@@ -1689,11 +1607,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="str">str</span>], <span title="typing.List">List</span>[<span title="tuple">tuple</span>]]]</code>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | <span title="list">list</span>[<span title="tuple">tuple</span>] | None</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Optional[Union[List[str], List[tuple]]]: Requested table information or None if fails</p>
+                <p>list[str] | list[tuple] | None: Requested table information or None if fails</p>
               </div>
             </td>
           </tr>
@@ -1703,7 +1621,17 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/postgres_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">146</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
 <span class="normal">147</span>
 <span class="normal">148</span>
 <span class="normal">149</span>
@@ -1723,19 +1651,9 @@
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_table_info</span><span class="p">(</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_table_info</span><span class="p">(</span>
     <span class="n">connection</span><span class="p">:</span> <span class="n">PostgresConnection</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">info_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;columns&quot;</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieves table information (columns or schema).</span>
 
 <span class="sd">    Args:</span>
@@ -1744,7 +1662,7 @@
 <span class="sd">        info_type (str): Type of information to retrieve (&#39;columns&#39; or &#39;schema&#39;)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Optional[Union[List[str], List[tuple]]]: Requested table information or None if fails</span>
+<span class="sd">        list[str] | list[tuple] | None: Requested table information or None if fails</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
@@ -1764,125 +1682,6 @@
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table info retrieval error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="data_manipulation.postgres_.query_to_pandas" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">query_to_pandas</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">sql_query</span><span class="p">)</span></code>
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Executes a SQL query and returns results as a pandas DataFrame.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>connection</code>
-            </td>
-            <td>
-                  <code><span title="data_manipulation.postgres_.PostgresConnection">PostgresConnection</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Active PostgreSQL connection</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>sql_query</code>
-            </td>
-            <td>
-                  <code><span title="str">str</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>SQL query to execute</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><span title="pandas.DataFrame">DataFrame</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>pd.DataFrame: Query results as a pandas DataFrame</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>data_manipulation/postgres_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">query_to_pandas</span><span class="p">(</span>
-    <span class="n">connection</span><span class="p">:</span> <span class="n">PostgresConnection</span><span class="p">,</span>
-    <span class="n">sql_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes a SQL query and returns results as a pandas DataFrame.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        connection: Active PostgreSQL connection</span>
-<span class="sd">        sql_query (str): SQL query to execute</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        pd.DataFrame: Query results as a pandas DataFrame</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="n">sql_query</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">connection</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

@@ -411,62 +411,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../api/kerberos_/" class="md-nav__link">
         
   
@@ -912,8 +856,19 @@
 <h2 id="unreleased">[Unreleased]</h2>
 <h3 id="removed">Removed</h3>
 <ul>
-<li><strong><code>pandas_.clean_none()</code></strong> - function has been removed.
-  Migrate to pandas built-ins:</li>
+<li>
+<p><strong><code>django_</code> module</strong> - removed entirely (breaking change). The Django helpers
+  (<code>init_django</code>, <code>get_django_countries_dict</code>, <code>django_validate_email</code>,
+  <code>django_validate_url</code>, <code>django_validate_phone</code>) now live in the
+  <a href="https://github.com/shawnngtq/django-util"><code>django-util</code></a> package:
+  <code>django_util.utility</code> (<code>init_django</code>, <code>get_django_countries_dict</code>) and
+  <code>django_util.validators</code> (the <code>django_validate_*</code> functions). <code>data_manipulation</code>
+  no longer depends on Django. This warrants a major version bump on release.</p>
+</li>
+<li>
+<p><strong><code>pandas_.clean_none()</code></strong> - function has been removed.
+  Migrate to pandas built-ins:</p>
+</li>
 </ul>
 <p><code>python
   df = df.replace(r"^\s*$", np.nan, regex=True)

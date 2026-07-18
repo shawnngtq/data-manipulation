@@ -415,62 +415,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../kerberos_/" class="md-nav__link">
         
   
@@ -1194,7 +1138,16 @@
 <span class="normal">77</span>
 <span class="normal">78</span>
 <span class="normal">79</span>
-<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">send_email</span><span class="p">(</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">send_email</span><span class="p">(</span>
     <span class="n">logname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">message_subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">message_sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -1202,8 +1155,8 @@
     <span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">smtp_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">smtp_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">587</span><span class="p">,</span>
-    <span class="n">smtp_username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">smtp_password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">smtp_username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">smtp_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends an HTML email using SMTP with TLS and logs the operation.</span>
 
@@ -1228,7 +1181,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Input validation</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">logname</span><span class="p">,</span> <span class="n">message_subject</span><span class="p">,</span> <span class="n">message_sender</span><span class="p">,</span> <span class="n">message_receiver</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">smtp_address</span><span class="p">]</span>
+        <span class="p">[</span>
+            <span class="n">logname</span><span class="p">,</span>
+            <span class="n">message_subject</span><span class="p">,</span>
+            <span class="n">message_sender</span><span class="p">,</span>
+            <span class="n">message_receiver</span><span class="p">,</span>
+            <span class="n">html</span><span class="p">,</span>
+            <span class="n">smtp_address</span><span class="p">,</span>
+        <span class="p">]</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Required parameters cannot be empty&quot;</span><span class="p">)</span>
 
@@ -1241,7 +1201,9 @@
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">SMTP</span><span class="p">(</span><span class="n">smtp_address</span><span class="p">,</span> <span class="n">smtp_port</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to SMTP server: </span><span class="si">{</span><span class="n">smtp_address</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">smtp_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Connecting to SMTP server: </span><span class="si">{</span><span class="n">smtp_address</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">smtp_port</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
 
             <span class="c1"># Enable TLS encryption</span>
             <span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>

@@ -415,62 +415,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../kerberos_/" class="md-nav__link">
         
   
@@ -704,17 +648,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data_manipulation.pyspark_.column_into_set" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        column_into_set
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#data_manipulation.pyspark_.columns_prefix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -763,17 +696,6 @@
     <span class="md-ellipsis">
       
         group_count
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data_manipulation.pyspark_.rename" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        rename
       
     </span>
   </a>
@@ -939,17 +861,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data_manipulation.pyspark_.column_into_set" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        column_into_set
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#data_manipulation.pyspark_.columns_prefix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -998,17 +909,6 @@
     <span class="md-ellipsis">
       
         group_count
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data_manipulation.pyspark_.rename" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        rename
       
     </span>
   </a>
@@ -1108,7 +1008,7 @@
                 <code>columns</code>
             </td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="str">str</span>]</code>
+                  <code><span title="list">list</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1202,15 +1102,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
@@ -1244,14 +1136,22 @@
 <span class="normal">169</span>
 <span class="normal">170</span>
 <span class="normal">171</span>
-<span class="normal">172</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_dummy_columns</span><span class="p">(</span>
-    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add_dummy_columns</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds new columns with default values to a Spark DataFrame.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
-<span class="sd">        columns (List[str]): List of column names to add</span>
+<span class="sd">        columns (list[str]): List of column names to add</span>
 <span class="sd">        value (str): Default value for the new columns</span>
 
 <span class="sd">    Returns:</span>
@@ -1365,11 +1265,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.List">List</span>[<span title="typing.Any">Any</span>]</code>
+                  <code><span title="list">list</span>[<span title="typing.Any">Any</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>List[Any]: List containing all values from the specified column,
+                <p>list[Any]: List containing all values from the specified column,
 including duplicates</p>
               </div>
             </td>
@@ -1410,15 +1310,7 @@ including duplicates</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">183</span>
 <span class="normal">184</span>
 <span class="normal">185</span>
 <span class="normal">186</span>
@@ -1438,7 +1330,19 @@ including duplicates</p>
 <span class="normal">200</span>
 <span class="normal">201</span>
 <span class="normal">202</span>
-<span class="normal">203</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">column_into_list</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">column_into_list</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts values from a DataFrame column into a Python list.</span>
 
 <span class="sd">    Args:</span>
@@ -1446,7 +1350,7 @@ including duplicates</p>
 <span class="sd">        column (str): Name of the column to extract</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        List[Any]: List containing all values from the specified column,</span>
+<span class="sd">        list[Any]: List containing all values from the specified column,</span>
 <span class="sd">            including duplicates</span>
 
 <span class="sd">    Raises:</span>
@@ -1467,177 +1371,6 @@ including duplicates</p>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">&#39; not found. Available: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="data_manipulation.pyspark_.column_into_set" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">column_into_set</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span></code>
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Extracts unique values from a DataFrame column into a Python set.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>dataframe</code>
-            </td>
-            <td>
-                  <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Input Spark DataFrame</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>column</code>
-            </td>
-            <td>
-                  <code><span title="str">str</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Name of the column to extract</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><span title="typing.Set">Set</span>[<span title="typing.Any">Any</span>]</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Set[Any]: Set containing unique values from the specified column</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-<p><span class="doc-section-title">Raises:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><span title="TypeError">TypeError</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>If dataframe is not a Spark DataFrame or column is not a string</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)],</span> <span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">column_into_set</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
-<span class="go">{1, 2}</span>
-</code></pre></div>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">column_into_set</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extracts unique values from a DataFrame column into a Python set.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
-<span class="sd">        column (str): Name of the column to extract</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Set[Any]: Set containing unique values from the specified column</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        TypeError: If dataframe is not a Spark DataFrame or column is not a string</span>
-
-<span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(1,), (2,), (2,)], [&quot;value&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; column_into_set(df, &quot;value&quot;)</span>
-<span class="sd">        {1, 2}</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a str ...&quot;</span><span class="p">)</span>
-
-    <span class="n">set_</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">column_into_list</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">column</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">set_</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1765,7 +1498,24 @@ including duplicates</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">233</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
 <span class="normal">234</span>
 <span class="normal">235</span>
 <span class="normal">236</span>
@@ -1782,24 +1532,7 @@ including duplicates</p>
 <span class="normal">247</span>
 <span class="normal">248</span>
 <span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">columns_prefix</span><span class="p">(</span>
+<span class="normal">250</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">columns_prefix</span><span class="p">(</span>
     <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a prefix to all column names in a DataFrame.</span>
@@ -1918,11 +1651,11 @@ Defaults to 10.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Tuple">Tuple</span>[<span title="typing.List">List</span>[<span title="str">str</span>], <span title="typing.List">List</span>[<span title="str">str</span>]]</code>
+                  <code><span title="tuple">tuple</span>[<span title="list">list</span>[<span title="str">str</span>], <span title="list">list</span>[<span title="str">str</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Tuple[List[str], List[str]]: Two lists containing:
+                <p>tuple[list[str], list[str]]: Two lists containing:
 - List of empty column names
 - List of single-value column names</p>
               </div>
@@ -1956,10 +1689,7 @@ Defaults to 10.</p>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">])</span>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">empty_cols</span><span class="p">,</span> <span class="n">single_cols</span> <span class="o">=</span> <span class="n">columns_statistics</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Empty columns: </span><span class="si">{</span><span class="n">empty_cols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="go">Empty columns: [&#39;email&#39;]</span>
@@ -1970,7 +1700,24 @@ Defaults to 10.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">270</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
 <span class="normal">271</span>
 <span class="normal">272</span>
 <span class="normal">273</span>
@@ -2010,29 +1757,9 @@ Defaults to 10.</p>
 <span class="normal">307</span>
 <span class="normal">308</span>
 <span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">columns_statistics</span><span class="p">(</span>
+<span class="normal">310</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">columns_statistics</span><span class="p">(</span>
     <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyzes column statistics and identifies empty and single-value columns.</span>
 
 <span class="sd">    Performs comprehensive analysis of each column including:</span>
@@ -2047,7 +1774,7 @@ Defaults to 10.</p>
 <span class="sd">            Defaults to 10.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Tuple[List[str], List[str]]: Two lists containing:</span>
+<span class="sd">        tuple[list[str], list[str]]: Two lists containing:</span>
 <span class="sd">            - List of empty column names</span>
 <span class="sd">            - List of single-value column names</span>
 
@@ -2055,10 +1782,7 @@ Defaults to 10.</p>
 <span class="sd">        TypeError: If dataframe is not a Spark DataFrame</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([</span>
-<span class="sd">        ...     (&quot;Alice&quot;, None),</span>
-<span class="sd">        ...     (&quot;Alice&quot;, None)</span>
-<span class="sd">        ... ], [&quot;name&quot;, &quot;email&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(&quot;Alice&quot;, None), (&quot;Alice&quot;, None)], [&quot;name&quot;, &quot;email&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; empty_cols, single_cols = columns_statistics(df)</span>
 <span class="sd">        &gt;&gt;&gt; print(f&quot;Empty columns: {empty_cols}&quot;)</span>
 <span class="sd">        Empty columns: [&#39;email&#39;]</span>
@@ -2175,9 +1899,7 @@ If False, only prints recommended settings. Defaults to True.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 25</span>
 <span class="normal"> 26</span>
 <span class="normal"> 27</span>
 <span class="normal"> 28</span>
@@ -2278,7 +2000,15 @@ If False, only prints recommended settings. Defaults to True.</p>
 <span class="normal">123</span>
 <span class="normal">124</span>
 <span class="normal">125</span>
-<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">config_spark_local</span><span class="p">(</span><span class="n">autoset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">config_spark_local</span><span class="p">(</span><span class="n">autoset</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Configures Spark for local execution with optimized settings based on system resources.</span>
 
 <span class="sd">    Automatically calculates and sets optimal Spark configuration parameters based on:</span>
@@ -2327,7 +2057,9 @@ If False, only prints recommended settings. Defaults to True.</p>
         <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="s2">&quot;SC_PAGE_SIZE&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="s2">&quot;SC_PHYS_PAGES&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1024.0</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="n">executor_per_node</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">((</span><span class="n">vcore_per_node</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">spark_executor_cores</span><span class="p">)</span>
+    <span class="n">executor_per_node</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">vcore_per_node</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">spark_executor_cores</span>
+    <span class="p">)</span>
     <span class="n">spark_executor_instances</span> <span class="o">=</span> <span class="n">round_down_or_one</span><span class="p">(</span>
         <span class="p">(</span><span class="n">executor_per_node</span> <span class="o">*</span> <span class="n">number_of_nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="p">)</span>
@@ -2355,8 +2087,12 @@ If False, only prints recommended settings. Defaults to True.</p>
             <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memory&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark_executor_memory</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span>
             <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.memory&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark_executor_memory</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span>
             <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memoryOverhead&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">memory_overhead</span><span class="si">}</span><span class="s2">g&quot;</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.default.parallelism&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">))</span>
-            <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                <span class="s2">&quot;spark.default.parallelism&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="o">.</span><span class="n">config</span><span class="p">(</span>
+                <span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">spark_default_parallelism</span><span class="p">)</span>
+            <span class="p">)</span>
             <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
         <span class="p">)</span>
 
@@ -2475,37 +2211,37 @@ If False, only prints recommended settings. Defaults to True.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints comprehensive information about a DataFrame.</span>
 
 <span class="sd">    Displays:</span>
@@ -2588,7 +2324,7 @@ If False, only prints recommended settings. Defaults to True.</p>
                 <code>columns</code>
             </td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="typing.List">List</span>[<span title="str">str</span>]]</code>
+                  <code><span title="str">str</span> | <span title="list">list</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2604,7 +2340,7 @@ If False, only prints recommended settings. Defaults to True.</p>
                 <code>n</code>
             </td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="int">int</span>, <span title="float">float</span>]</code>
+                  <code><span title="int">int</span> | <span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2670,9 +2406,7 @@ Use float('inf') for all groups. Defaults to 10.</p>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">])</span>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="go">+---+-----+-------+</span>
 <span class="go">| id|count|percent|</span>
@@ -2685,245 +2419,7 @@ Use float('inf') for all groups. Defaults to 10.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
-<span class="normal">443</span>
-<span class="normal">444</span>
-<span class="normal">445</span>
-<span class="normal">446</span>
-<span class="normal">447</span>
-<span class="normal">448</span>
-<span class="normal">449</span>
-<span class="normal">450</span>
-<span class="normal">451</span>
-<span class="normal">452</span>
-<span class="normal">453</span>
-<span class="normal">454</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">group_count</span><span class="p">(</span>
-    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
-    <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
-    <span class="n">n</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs group by operation and calculates count and percentage for each group.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
-<span class="sd">        columns (Union[str, List[str]]): Column(s) to group by</span>
-<span class="sd">        n (Union[int, float], optional): Number of top groups to return.</span>
-<span class="sd">            Use float(&#39;inf&#39;) for all groups. Defaults to 10.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        pyspark.sql.DataFrame: DataFrame with columns:</span>
-<span class="sd">            - Group by column(s)</span>
-<span class="sd">            - count: Count of records in each group</span>
-<span class="sd">            - percent: Percentage of total records in each group</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        TypeError: If arguments are not of correct type</span>
-
-<span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([</span>
-<span class="sd">        ...     (1, &#39;A&#39;), (1, &#39;B&#39;), (2, &#39;A&#39;)</span>
-<span class="sd">        ... ], [&quot;id&quot;, &quot;category&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; group_count(df, [&quot;id&quot;]).show()</span>
-<span class="sd">        +---+-----+-------+</span>
-<span class="sd">        | id|count|percent|</span>
-<span class="sd">        +---+-----+-------+</span>
-<span class="sd">        |  1|    2|   66.7|</span>
-<span class="sd">        |  2|    1|   33.3|</span>
-<span class="sd">        +---+-----+-------+</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a list ...&quot;</span><span class="p">)</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">row_count</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-        <span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">row_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">):</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="data_manipulation.pyspark_.rename" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">rename</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span></code>
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Renames multiple columns in a DataFrame using a mapping dictionary.</p>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>dataframe</code>
-            </td>
-            <td>
-                  <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Input Spark DataFrame</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>columns</code>
-            </td>
-            <td>
-                  <code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="str">str</span>]</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Dictionary mapping old column names to new names</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>pyspark.sql.DataFrame: DataFrame with renamed columns</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-<p><span class="doc-section-title">Raises:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code><span title="TypeError">TypeError</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>If dataframe is not a Spark DataFrame or columns is not a dict</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="s2">&quot;_1&quot;</span><span class="p">,</span> <span class="s2">&quot;_2&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">new_df</span> <span class="o">=</span> <span class="n">rename</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;_1&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;_2&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">new_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="go">+-----+---+</span>
-<span class="go">| name| id|</span>
-<span class="go">+-----+---+</span>
-<span class="go">|Alice|  1|</span>
-<span class="go">+-----+---+</span>
-</code></pre></div>
-
-
-            <details class="mkdocstrings-source">
-              <summary>Source code in <code>data_manipulation/pyspark_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">348</span>
 <span class="normal">349</span>
 <span class="normal">350</span>
 <span class="normal">351</span>
@@ -2944,41 +2440,73 @@ Use float('inf') for all groups. Defaults to 10.</p>
 <span class="normal">366</span>
 <span class="normal">367</span>
 <span class="normal">368</span>
-<span class="normal">369</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">rename</span><span class="p">(</span>
-    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">group_count</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">:</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Renames multiple columns in a DataFrame using a mapping dictionary.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs group by operation and calculates count and percentage for each group.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        dataframe (pyspark.sql.DataFrame): Input Spark DataFrame</span>
-<span class="sd">        columns (Dict[str, str]): Dictionary mapping old column names to new names</span>
+<span class="sd">        columns (str | list[str]): Column(s) to group by</span>
+<span class="sd">        n (int | float, optional): Number of top groups to return.</span>
+<span class="sd">            Use float(&#39;inf&#39;) for all groups. Defaults to 10.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        pyspark.sql.DataFrame: DataFrame with renamed columns</span>
+<span class="sd">        pyspark.sql.DataFrame: DataFrame with columns:</span>
+<span class="sd">            - Group by column(s)</span>
+<span class="sd">            - count: Count of records in each group</span>
+<span class="sd">            - percent: Percentage of total records in each group</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        TypeError: If dataframe is not a Spark DataFrame or columns is not a dict</span>
+<span class="sd">        TypeError: If arguments are not of correct type</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(&quot;Alice&quot;, 1)], [&quot;_1&quot;, &quot;_2&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; new_df = rename(df, {&quot;_1&quot;: &quot;name&quot;, &quot;_2&quot;: &quot;id&quot;})</span>
-<span class="sd">        &gt;&gt;&gt; new_df.show()</span>
-<span class="sd">        +-----+---+</span>
-<span class="sd">        | name| id|</span>
-<span class="sd">        +-----+---+</span>
-<span class="sd">        |Alice|  1|</span>
-<span class="sd">        +-----+---+</span>
+<span class="sd">        &gt;&gt;&gt; df = spark.createDataFrame([(1, &quot;A&quot;), (1, &quot;B&quot;), (2, &quot;A&quot;)], [&quot;id&quot;, &quot;category&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; group_count(df, [&quot;id&quot;]).show()</span>
+<span class="sd">        +---+-----+-------+</span>
+<span class="sd">        | id|count|percent|</span>
+<span class="sd">        +---+-----+-------+</span>
+<span class="sd">        |  1|    2|   66.7|</span>
+<span class="sd">        |  2|    1|   33.3|</span>
+<span class="sd">        +---+-----+-------+</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">dataframe</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a Pyspark dataframe ...&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a dict ...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument must be a list ...&quot;</span><span class="p">)</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
-    <span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">row_count</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;percent&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">row_count</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </code></pre></div></td></tr></table></div>
             </details>

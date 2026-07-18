@@ -495,62 +495,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../kerberos_/" class="md-nav__link">
         
   
@@ -970,7 +914,7 @@
                 <code>prefix</code>
             </td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+                  <code><span title="str">str</span> | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -996,11 +940,11 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="str">str</span>], <span title="pd.DataFrame">DataFrame</span>]</code>
+                  <code><span title="list">list</span>[<span title="str">str</span>] | <span title="pandas.DataFrame">DataFrame</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Union[List[str], pd.DataFrame]: List of file keys or DataFrame containing file keys.
+                <p>list[str] | pd.DataFrame: List of file keys or DataFrame containing file keys.
 If to_dateframe is True, returns DataFrame with 'key' column.
 If to_dateframe is False, returns list of file keys.</p>
               </div>
@@ -1011,11 +955,11 @@ If to_dateframe is False, returns list of file keys.</p>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="n">list_s3_bucket_files</span><span class="p">(</span><span class="s1">&#39;my-bucket&#39;</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="n">list_s3_bucket_files</span><span class="p">(</span><span class="s2">&quot;my-bucket&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
 <span class="go">&lt;class &#39;list&#39;&gt;</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">list_s3_bucket_files</span><span class="p">(</span><span class="s1">&#39;my-bucket&#39;</span><span class="p">,</span> <span class="n">to_dateframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">list_s3_bucket_files</span><span class="p">(</span><span class="s2">&quot;my-bucket&quot;</span><span class="p">,</span> <span class="n">to_dateframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
 </code></pre></div>
@@ -1023,13 +967,7 @@ If to_dateframe is False, returns list of file keys.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/boto3_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
 <span class="normal">134</span>
@@ -1080,29 +1018,35 @@ If to_dateframe is False, returns list of file keys.</p>
 <span class="normal">179</span>
 <span class="normal">180</span>
 <span class="normal">181</span>
-<span class="normal">182</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">list_s3_bucket_files</span><span class="p">(</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">list_s3_bucket_files</span><span class="p">(</span>
     <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">to_dateframe</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">]:</span>
+    <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Lists all files in an S3 bucket.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        bucket (str): Name of the S3 bucket.</span>
 <span class="sd">        to_dateframe (bool, optional): Whether to return results as pandas DataFrame. Defaults to False.</span>
-<span class="sd">        prefix (Optional[str], optional): Filter results to files with this prefix. Defaults to None.</span>
+<span class="sd">        prefix (str | None, optional): Filter results to files with this prefix. Defaults to None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Union[List[str], pd.DataFrame]: List of file keys or DataFrame containing file keys.</span>
+<span class="sd">        list[str] | pd.DataFrame: List of file keys or DataFrame containing file keys.</span>
 <span class="sd">            If to_dateframe is True, returns DataFrame with &#39;key&#39; column.</span>
 <span class="sd">            If to_dateframe is False, returns list of file keys.</span>
 
 <span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; files = list_s3_bucket_files(&#39;my-bucket&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; files = list_s3_bucket_files(&quot;my-bucket&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; type(files)</span>
 <span class="sd">        &lt;class &#39;list&#39;&gt;</span>
 
-<span class="sd">        &gt;&gt;&gt; df = list_s3_bucket_files(&#39;my-bucket&#39;, to_dateframe=True)</span>
+<span class="sd">        &gt;&gt;&gt; df = list_s3_bucket_files(&quot;my-bucket&quot;, to_dateframe=True)</span>
 <span class="sd">        &gt;&gt;&gt; type(df)</span>
 <span class="sd">        &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1330,7 +1274,7 @@ Defaults to 3.</p>
       <tbody>
           <tr class="doc-section-item">
 <td><code>dict</code></td>            <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]]</code>
+                  <code><span title="dict">dict</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>] | None</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1349,13 +1293,7 @@ Defaults to 3.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/boto3_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 21</span>
 <span class="normal"> 22</span>
 <span class="normal"> 23</span>
 <span class="normal"> 24</span>
@@ -1456,17 +1394,23 @@ Defaults to 3.</p>
 <span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
-<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">send_aws_ses_email</span><span class="p">(</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">send_aws_ses_email</span><span class="p">(</span>
     <span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">recipient</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">recipient</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">body_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">body_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">ses_client</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">attachment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">attachment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">max_attachment_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_ATTACHMENT_SIZE</span><span class="p">,</span>
     <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_RETRIES</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sends an email using AWS SES service.</span>
 
 <span class="sd">    Args:</span>
@@ -1530,7 +1474,7 @@ Defaults to 3.</p>
             <span class="c1"># Check file size with parameterized max size</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">attachment</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_attachment_size</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Attachment size exceeds maximum allowed size of </span><span class="si">{</span><span class="n">max_attachment_size</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="si">}</span><span class="s2">MB&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Attachment size exceeds maximum allowed size of </span><span class="si">{</span><span class="n">max_attachment_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">}</span><span class="s2">MB&quot;</span>
                 <span class="p">)</span>
                 <span class="k">return</span> <span class="kc">None</span>
 
@@ -1542,7 +1486,7 @@ Defaults to 3.</p>
                     <span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">attachment</span><span class="p">),</span>
                 <span class="p">)</span>
                 <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing attachment: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
 

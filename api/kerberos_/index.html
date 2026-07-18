@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="../geopandas_/">
+        <link rel="prev" href="../cryptography_/">
       
       
         <link rel="next" href="../mysql_connector_python_/">
@@ -395,62 +395,6 @@
     
   
     cryptography_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../django_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    django_
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../geopandas_/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    geopandas_
   
 
     
@@ -1025,8 +969,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>data_manipulation/kerberos_.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
-<span class="normal">13</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -1100,7 +1043,10 @@
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">keytab_valid</span><span class="p">(</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">keytab_valid</span><span class="p">(</span>
     <span class="n">keytab_filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">principal_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CompletedProcess</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -1129,7 +1075,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Input validation</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keytab_filepath</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">principal_name</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Both keytab_filepath and principal_name must be provided&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Both keytab_filepath and principal_name must be provided&quot;</span>
+        <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">keytab_filepath</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keytab file not found: </span><span class="si">{</span><span class="n">keytab_filepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
