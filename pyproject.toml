@@ -53,3 +53,31 @@ include = ["data_manipulation", "data_manipulation.*"]
 [tool.setuptools_scm]
 version_file = "data_manipulation/_version.py"
 fallback_version = "0.0.0"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",        # pycodestyle
+    "F",        # Pyflakes
+    "UP",       # pyupgrade
+    "B",        # flake8-bugbear
+    "SIM",      # flake8-simplify
+    "I",        # isort
+]
+ignore = [
+    "E402",     # module-import-not-at-top-of-file
+    "E501",     # line-too-long
+    "F401",     # unused-import
+    "F403",     # undefined-local-with-import-star
+    "F405",     # undefined-local-with-import-star-usage
+    "UP018",    # native-literals
+]

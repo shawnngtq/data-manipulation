@@ -16,6 +16,10 @@ function create_update_docs {
     mkdocs build
 }
 
+function deploy_docs {
+    mkdocs gh-deploy
+}
+
 function cleanup {
     rm -rf build
     rm -rf dist

@@ -20,6 +20,19 @@ plugins:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Commands: commands.md
-  - API Reference: api.md
+  - API Reference:
+    - base: api/base.md
+    - beautifulsoup_: api/beautifulsoup_.md
+    - boto3_: api/boto3_.md
+    - cryptography_: api/cryptography_.md
+    - django_: api/django_.md
+    - geopandas_: api/geopandas_.md
+    - kerberos_: api/kerberos_.md
+    - mysql_connector_python_: api/mysql_connector_python_.md
+    - pandas_: api/pandas_.md
+    - polars_: api/polars_.md
+    - postgres_: api/postgres_.md
+    - pyspark_: api/pyspark_.md
+    - smtplib_: api/smtplib_.md
+    - sqlalchemy_: api/sqlalchemy_.md
   - Changelog: changelog.md

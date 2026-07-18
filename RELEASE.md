@@ -34,19 +34,36 @@ The tag must point at the exact commit being released.
 
 ## Publish Documentation
 
-Build the MkDocs documentation:
+Both commands require an environment that provides `mkdocs`, `mkdocs-material`, and
+`mkdocstrings-python` (for example a virtualenv, conda env, or pixi shell). Activate that
+environment before running them.
+
+Build the MkDocs documentation (local preview only):
 
 ```bash
-mkdocs build
+./setup.sh create_update_docs
 ```
 
-Publish the generated HTML to GitHub Pages:
+Deploy to GitHub Pages:
 
 ```bash
-mkdocs gh-deploy
+./setup.sh deploy_docs
 ```
 
 This publishes the contents of `site/` to the `gh-pages` branch.
+
+**Note - documentation and PyPI releases are independent.**
+
+- **Tags are only for PyPI releases.** `setuptools-scm` derives the package
+  version from git tags. Create a tag only when the shipped `data_manipulation/`
+  package changes; tooling- or docs-only changes need no tag.
+- **Docs deploy without a tag.** `deploy_docs` publishes current `master` to the
+  separate `gh-pages` branch, independent of any tag or PyPI release.
+- **Commit and push doc/source changes to `master` before building.** The site
+  renders the working tree, and `create_update_docs` writes only to the
+  gitignored `site/` directory - no tracked files change.
+- **When cutting a release, build docs after tagging** so the published site
+  matches the released commit.
 
 ## Publish To PyPI
 
