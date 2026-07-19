@@ -20,6 +20,16 @@ git status
 
 `git status` should report no changes before continuing.
 
+## Local Development Build
+
+Contributors do not need PyPI credentials or this release flow. To work on the package
+locally, install it editable and build with the standard tooling:
+
+```bash
+pip install -e .
+python -m build          # or: uv build
+```
+
 ## Tag The Release
 
 Use the next release version, for example `0.50`:
@@ -41,13 +51,13 @@ environment before running them.
 Build the MkDocs documentation (local preview only):
 
 ```bash
-./setup.sh create_update_docs
+mkdocs build
 ```
 
 Deploy to GitHub Pages:
 
 ```bash
-./setup.sh deploy_docs
+mkdocs gh-deploy
 ```
 
 This publishes the contents of `site/` to the `gh-pages` branch.
@@ -67,16 +77,23 @@ This publishes the contents of `site/` to the `gh-pages` branch.
 
 ## Publish To PyPI
 
+Build from a **clean checkout of the tagged commit** so the artifacts carry the tag
+version. `setuptools-scm` derives the version from git, so any uncommitted tracked change
+makes it emit the *next* version as `<next>.devN+d<date>` instead of the tag - confirm
+`git status` is clean before building.
+
 Build and validate the distribution artifacts:
 
 ```bash
-./setup.sh cleanup
+rm -rf build dist ./*.egg-info
+python -m build
+python -m twine check --strict dist/*
 ```
 
 Upload the artifacts:
 
 ```bash
-./setup.sh upload
+python -m twine upload dist/*
 ```
 
 When prompted by `twine`, enter the PyPI API token. The token should start with
